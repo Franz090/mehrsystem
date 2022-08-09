@@ -5,7 +5,7 @@
 session_start();
 
 if(!isset($_SESSION['usermail'])){
-   header('location:adminform.php');
+   header('location:adminlogin.php');
 }
 
 ?>
