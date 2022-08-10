@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+.container .content {
+  width: 700px;
+}
+
+.container .content h3 {
+  text-transform: uppercase;
+  font-size: 5vw;
+}
+
+.container .content p {
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+.container .content p span {
+  color: crimson;
+}
+
+.container .content .logout {
+  display: inline-block;
+  padding: 10px 35px;
+  font-size: 20px;
+  margin-top: 10px;
+  background-color: #000;
+  color: #fff;
+}
+
+.container .content .logout:hover {
+  background-color: crimson;
+}
+
+.container.default {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.formcontainer {
+  min-height: 100vh;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+.formcontainer form {
+  width: 500px;
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 20px;
+  text-align: center;
+}
+
+.formcontainer form .title {
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.formcontainer form .box {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 20px;
+  text-transform: none;
+  border: 2px solid #000;
+  margin: 10px 0;
+}
+
+.formcontainer form .form-btn {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.formcontainer form .form-btn:hover {
+  background-color: crimson;
+}
+
+.formcontainer form p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.formcontainer form p a {
+  color: crimson;
+}
+
+.formcontainer form .error-msg {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  margin: 10px 0;
+  background-color: crimson;
+  font-size: 20px;
+  color: #fff;
+}
+
+.table > thead {
+  background-color: rgb(43, 43, 43);
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .formcontainer {
+    margin-left: 0;
+    width: 100%;
+  }
+  #id01 {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* patient dashboard */
+.primary-text {
+  color: var(--main-text-color);
+}
+
+.second-text {
+  color: var(--second-text-color);
+}
+
+.primary-bg {
+  background-color: var(--main-bg-color);
+}
+
+.secondary-bg {
+  background-color: var(--second-bg-color);
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+#wrapper {
+  overflow-x: hidden;
+  background-image: linear-gradient(
+    to right,
+    #baf3d7,
+    #c2f5de,
+    #cbf7e4,
+    #d4f8ea,
+    #ddfaef
+  );
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.6s ease-out;
+  -moz-transition: margin 0.6s ease-out;
+  -o-transition: margin 0.6s ease-out;
+  transition: margin 0.6s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+#menu-toggle {
+  cursor: pointer;
+}
+i {
+  margin-right: 10px;
+  color: white;
+}
+
+.bar {
+  background-color: #f0cac4;
+}
+
+.piechart {
+  background-color: #f0cac4;
+}
+
+.bar > img,
+.piechart > img {
+  height: 200px;
+  width: 300px;
+}
+
+.con1 {
+  height: 320px;
+}
+
+.list-group-item {
+  border: none;
+  padding: 20px 30px;
+}
+
+.list-group-item.active {
+  background-color: transparent;
+  color: var(--main-text-color);
+  font-weight: bold;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+:root {
+  --main-bg-color: #f0cac4;
+  --main-text-color: #ffffff;
+  --second-text-color: #bbbec5;
+  --second-bg-color: #f0cac4;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a,
+.dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover,
+.dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  padding-left: 60px;
+  color: white;
+  z-index: 15;
+  cursor: pointer;
+  align-self: center;
+}
+
+.drop {
+  color: rgb(190, 172, 172);
+  font-family: sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+.drop:hover {
+  color: whitesmoke;
+  font-family: sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+  transition: 0.9s ease-out;
+}
+.fa-caret-down:hover {
+  float: right;
+  padding-right: 8px;
+  color: rgb(150, 144, 144);
+  transition: 0.9s ease-out;
+}
+.fa-minus {
+  color: rgb(204, 196, 196);
+  padding: 0px;
+}
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
