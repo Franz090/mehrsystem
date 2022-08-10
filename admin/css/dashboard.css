@@ -261,13 +261,6 @@ i {
   outline: none;
 }
 /* Column Chart*/
-.columnchart{
- margin:500px;
- background-color: blue;
-  
-
-}
-
 
 
 
@@ -291,6 +284,24 @@ i {
   background-color: green;
   color: white;
 }
+/* table */
+.table{
+  position:relative;
+  bottom: 600px;
+  border-spacing: 5em;
+  
+}
+.columnchart{
+  font-size: 13px;
+  line-height: 80%;
+  width: 500px; 
+  height: 200px;
+  position:relative;
+  bottom: 190px;
+  right:150px;
+  text-align:center;
+}
+
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {

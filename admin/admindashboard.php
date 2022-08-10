@@ -32,7 +32,7 @@ if(!isset($_SESSION['usermail'])){
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Task", "Infant Vaccine Monitoring Chart"],
+          ["Task", "Patient Vaccine Monitoring Chart"],
           ["Available Vaccine", 50],
           ["Vaccinated", 10],
           ["Expired Vaccine", 20],
@@ -40,9 +40,27 @@ if(!isset($_SESSION['usermail'])){
         ]);
 
         var options = {
+          
           backgroundColor: 'transparent',
           is3D: 'true',
-          title: "Infant Vaccine Monitoring Chart",
+          display: 'true',
+          pieSliceTextStyle: {
+            color: 'white',
+          },
+          legendTextStyle: { color: '#000000' },
+          legend: { position: 'bottom' },
+          title: "Patient Vaccine Monitoring Chart",
+          titleTextStyle: { color: '#000000',fontSize: 17,
+            bold: false, italic: false},
+          
+          hAxis: {
+            color: '#000000'},
+            
+            
+            
+
+
+
         };
 
         var chart = new google.visualization.PieChart(
@@ -64,21 +82,27 @@ if(!isset($_SESSION['usermail'])){
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ["Month", "Number of Births", "Legitimate", "Illegitimate"],
+          ["Month", "Number of Patients", "Teenage Pregnancy", "Adolescent Pregnancy"],
           ["April-22", 1000, 400, 200],
           ["May-22", 1170, 460, 250],
           ["June-22", 660, 1120, 300],
           ["July-22", 1030, 540, 350],
         ]);
 
-        var options = {
+         var options = {
+          title: 'Maternity Monthly Report',
+           is3D: 'true',
           backgroundColor: 'transparent',
-          chart: {
+          legendTextStyle: { color: '#303030' },
+           legend: { position: "right", maxLines: 9, alignment:'center'  },
+          titleTextStyle: { color: '#303030', family: "Helvetica Neue",fontSize: 18,lineHeight:'1.8',
+            bold: false, },
+          hAxis: {
+            color: '#303030'}
             
-            title: "Live Births Monthly Report",    
-          },
-        };
-
+          };
+        
+        
         var chart = new google.charts.Bar(
           document.getElementById("columnchart_material")
         );
@@ -163,14 +187,12 @@ if(!isset($_SESSION['usermail'])){
                 <div class="col-md-6 col-sm-12 d-flex justify-content-center">
                   <div
                     id="columnchart_material"
-                    class="columnchart"
-                    style="width: 400px; height: 200px;position:relative;bottom: 200px;right:30px;"
-                  ></div>
+                    class="columnchart"></div>
                 </div>
               </div>
               </div>
               <div class="container default">
-                <table class="table mt-5">
+                <table class="table mt-5 table-striped table-sm "  >
                     <thead class="table-dark">
                       <tr>
                         <th scope="col">#</th>
