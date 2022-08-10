@@ -1,14 +1,4 @@
-<?php
 
-@include 'includes/config.php';
-
-session_start();
-
-if(!isset($_SESSION['usermail'])){
-   header('location:adminlogin.php');
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,71 +11,7 @@ if(!isset($_SESSION['usermail'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-<!-- Pie chart script ito-->
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script type="text/javascript">
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["Task", "Infant Vaccine Monitoring Chart"],
-          ["Available Vaccine", 50],
-          ["Vaccinated", 10],
-          ["Expired Vaccine", 20],
-          ["Upcoming Vaccine", 20],
-        ]);
-
-        var options = {
-          backgroundColor: 'transparent',
-          is3D: 'true',
-          title: "Infant Vaccine Monitoring Chart",
-        };
-
-        var chart = new google.visualization.PieChart(
-          document.getElementById("piechart")
-        );
-
-        chart.draw(data, options);
-      }
-    </script>
-
-    <!-- Column chart script to-->
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script type="text/javascript">
-      google.charts.load("current", { packages: ["bar"] });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["Month", "Number of Births", "Legitimate", "Illegitimate"],
-          ["April-22", 1000, 400, 200],
-          ["May-22", 1170, 460, 250],
-          ["June-22", 660, 1120, 300],
-          ["July-22", 1030, 540, 350],
-        ]);
-
-        var options = {
-          backgroundColor: 'transparent',
-          chart: {
-            
-            title: "Live Births Monthly Report",    
-          },
-        };
-
-        var chart = new google.charts.Bar(
-          document.getElementById("columnchart_material")
-        );
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
     
 <body>
     <div class="d-flex" id="wrapper">
@@ -102,15 +28,16 @@ if(!isset($_SESSION['usermail'])){
                         <div class="dropdown-container" >
                             <div class="merge">
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change Password</a>
-                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add Nurse</a><br>
-                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">View Nurse</a>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add Midwife</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">View Midwife</a>
                     </div>
                 </div>
-                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-thin fa-baby"></i>Midwife<i class="fa fa-caret-down"></i></button>
+                  <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-solid fa-calendar-check"></i>Appointment<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Midwife</a><br>
-                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Midwife</a>
+                           <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add Appointment</a>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Pending Appointment</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Approved Appointment</a>
                          
                         </div>
                 <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
@@ -155,51 +82,18 @@ if(!isset($_SESSION['usermail'])){
                     </ul>
                 </div>
             </nav>
-             <div class="container default">
-              <div class="row mt-5">
+            <div class="container">
+              <div class="row">
                 <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-                  <div id="piechart" class="chart" style="position:relative;right: 90px;bottom:200px;width: 400px;height 200px;"></div>
+                  <div id="piechart" style="width: 400px; height: 200px"></div>
                 </div>
                 <div class="col-md-6 col-sm-12 d-flex justify-content-center">
                   <div
                     id="columnchart_material"
-                    class="columnchart"
-                    style="width: 400px; height: 200px;position:relative;bottom: 200px;right:30px;"
+                    style="width: 400px; height: 200px"
                   ></div>
                 </div>
               </div>
-              </div>
-              <div class="container default">
-                <table class="table mt-5">
-                    <thead class="table-dark">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
               </div>
               <div class="container"><div class="row bg-light m-3 con1"></div></div>
             </div>
@@ -208,7 +102,6 @@ if(!isset($_SESSION['usermail'])){
             
         </div>
     </div>
-          
     <!-- /#page-content-wrapper -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

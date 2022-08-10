@@ -195,6 +195,20 @@ i {
   color: white;
 }
 
+.bar {
+  background-color: #f0cac4;
+}
+
+.piechart {
+  background-color: #f0cac4;
+}
+
+.bar > img,
+.piechart > img {
+  height: 200px;
+  width: 300px;
+}
+
 .con1 {
   height: 320px;
 }
@@ -260,18 +274,6 @@ i {
   cursor: pointer;
   outline: none;
 }
-/* Column Chart*/
-.columnchart{
- margin:500px;
- background-color: blue;
-  
-
-}
-
-
-
-
-
 
 /* On mouse-over */
 .sidenav a:hover,
