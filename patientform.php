@@ -1,64 +1,37 @@
-<?php
-
-@include 'config/config.php';
-
-session_start();
-
-if(isset($_POST['submit'])){
-    
-   $email = mysqli_real_escape_string($conn, $_POST['usermail']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
-
-   $select = " SELECT * FROM patient WHERE email = '$email' && password = '$pass'";
-
-   $result = mysqli_query($conn, $select);
-
-   if(mysqli_num_rows($result) > 0){
-      $error[] = 'user already exist';
-   }else{
-      if($pass != $cpass){
-         $error[] = 'password not mathched!';
-      }else{
-         $insert = "INSERT INTO patient(email, password) VALUES('$email','$pass')";
-         mysqli_query($conn, $insert);
-         header('location:patientform.php');
-      }
-   }
-
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="css/dashboard.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- bootstrap -->
+     <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+      <title>Patient | Sign Up</title>
 </head>
 <body>
+<div class="container">
+ <form id="createAccount" action="" method="post">
+            <h1 class="form__title">Create Account</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" name="password" autofocus placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" name="cpassword" autofocus placeholder="Confirm password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" value="register now" type="submit" name="submit">Register</button>
+            <p class="form__text">
+                <a class="form__link" href="patientlogin.php" id="linkLogin">Already have an account? Sign in</a>
+            </p>
+        </form>
+    <script src="js/main.js"></script>
     
-<div class="formcontainer">
-
-   <form action="" method="post">
-      <h3 class="title">register now</h3>
-      <?php
-         if(isset($error)){
-            foreach($error as $error){
-               echo '<span class="error-msg">'.$error.'</span>';
-            }
-         }
-      ?>
-      <input type="email" name="usermail" placeholder="enter your email" class="box" required>
-      <input type="password" name="password" placeholder="enter your password" class="box" required>
-      <input type="password" name="cpassword" placeholder="confirm your password" class="box" required>
-      <input type="submit" value="register now" class="form-btn" name="submit">
-      <p>already have an account? <a href="patientlogin.php">login now!</a></p>
-   </form>
-
-</div>
-
 </body>
 </html>

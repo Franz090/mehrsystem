@@ -166,7 +166,7 @@ if(!isset($_SESSION['usermail'])){
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                            <a class="nav-link dropdown-toggle second-text fw-bold" style="color: white;" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-duotone fa-user-nurse"></i><strong style="color:white;">Cathy</strong>
                             </a>
@@ -233,6 +233,7 @@ if(!isset($_SESSION['usermail'])){
           
     <!-- /#page-content-wrapper -->
     </div>
+    <script src="active.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var el = document.getElementById("wrapper");

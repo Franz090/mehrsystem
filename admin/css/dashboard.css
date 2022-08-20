@@ -299,9 +299,15 @@ i {
   position:relative;
   bottom: 190px;
   right:150px;
-  text-align:center;
+ 
 }
-
+/* .googleChartTitle {
+    font: bold 11px Arial;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    padding-top: 8px;
+} */
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
