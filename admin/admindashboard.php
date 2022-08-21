@@ -168,7 +168,7 @@ if(!isset($_SESSION['usermail'])){
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" style="color: white;" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-duotone fa-user-nurse"></i><strong style="color:white;">Cathy</strong>
+                                <i class="fas fa-duotone fa-user-nurse"></i><strong style="color:white;">Elmina</strong>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>

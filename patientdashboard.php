@@ -1,15 +1,3 @@
-<?php
-
-@include 'config/config.php';
-
-session_start();
-
-if(!isset($_SESSION['usermail'])){
-   header('location:patientform.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,69 +7,7 @@ if(!isset($_SESSION['usermail'])){
    <link rel="stylesheet" href="css/dashboard.css">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- Pie chart script ito-->
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script type="text/javascript">
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["Task", "Infant Vaccine Monitoring Chart"],
-          ["Available Vaccine", 50],
-          ["Vaccinated", 10],
-          ["Expired Vaccine", 20],
-          ["Upcoming Vaccine", 20],
-        ]);
-
-        var options = {
-          backgroundColor: 'transparent',
-          title: "Infant Vaccine Monitoring Chart",
-        };
-
-        var chart = new google.visualization.PieChart(
-          document.getElementById("piechart")
-        );
-
-        chart.draw(data, options);
-      }
-    </script>
-
-    <!-- Column chart script to-->
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script type="text/javascript">
-      google.charts.load("current", { packages: ["bar"] });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["Month", "Number of Births", "Legitimate", "Illegitimate"],
-          ["April-22", 1000, 400, 200],
-          ["May-22", 1170, 460, 250],
-          ["June-22", 660, 1120, 300],
-          ["July-22", 1030, 540, 350],
-        ]);
-
-        var options = {
-          backgroundColor: 'transparent',
-          chart: {
-            title: "Live Births Monthly Report",    
-          },
-        };
-
-        var chart = new google.charts.Bar(
-          document.getElementById("columnchart_material")
-        );
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
+   
 </head>
 <body>
 
@@ -95,26 +21,27 @@ if(!isset($_SESSION['usermail'])){
                     class="fas fa-solid fa-prescription me-2" href="patientdashboard.php"></i>MEHr</div>
             <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-solid fa-box " ></i>Dashboard</a>
+                        class="fas fa-solid fa-box fa-sm" ></i>Dashboard</a>
                         <button class="dropdown-btn h6  text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-user me"></i>Profile<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-user me fa-sm"></i>Profile<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
                             <div class="merge">
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change Password</a>
                     </div>
                 </div>
                 <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-calendar-check"></i>Appointment<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-solid fa-calendar-check fa-sm"></i>Appointment<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
+                           <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Appointment</a><br>
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Appointment</a>
                         </div>
                 <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-vial"></i>Treatment<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-solid fa-vial fa-sm"></i>Treatment<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Treatment</a>
                         </div>
                 <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-file-prescription"></i>Prescription<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-solid fa-file-prescription fa-sm"></i>Prescription<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Prescription</a>
                         </div>
@@ -141,8 +68,8 @@ if(!isset($_SESSION['usermail'])){
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Angela
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+                                <i class="fas fa-user me-2"></i>Angela 
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -153,51 +80,7 @@ if(!isset($_SESSION['usermail'])){
                     </ul>
                 </div>
             </nav>
-            <div class="container default">
-              <div class="row mt-5">
-                <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-                  <div id="piechart" style="width: 400px; height: 200px"></div>
-                </div>
-                <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-                  <div
-                    id="columnchart_material"
-                    style="width: 400px; height: 200px"
-                  ></div>
-                </div>
-              </div>
-              </div>
-              <div class="container default">
-                <table class="table mt-5">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
+            
               <div class="container"><div class="row bg-light m-3 con1"></div></div>
             </div>
 

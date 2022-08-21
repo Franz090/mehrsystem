@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +20,9 @@
                     class="fas fa-solid fa-prescription me-2" href="patientdashboard.php"></i>MEHr</div>
             <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-solid fa-box " ></i>Dashboard</a>
+                        class="fas fa-solid fa-box fa-sm " ></i>Dashboard</a>
                         <button class="dropdown-btn h6  text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-user me"></i>Profile<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-user me fa-sm"  ></i>Profile<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
                             <div class="merge">
                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change Password</a>
@@ -33,18 +31,36 @@
                     </div>
                 </div>
                   <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-calendar-check"></i>Appointment<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-solid fa-calendar-check fa-sm"></i>Appointment<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
-                           <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add Appointment</a>
+                           <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">New Appointment</a><br>
                          <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Pending Appointment</a><br>
                          <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Approved Appointment</a>
                          
                         </div>
                 <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-regular fa-briefcase-medical"></i>Health Center<i class="fa fa-caret-down"></i></button>
+                        class="fas fa-solid fa-file-medical fa-sm"></i>Medical History<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-container" >
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Barangay</a><br>
-                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Barangay</a>
+                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">New Medical History</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Medical History</a>
+                        </div>
+                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-regular fa-hospital-user fa-sm"></i>Patient<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-container" >
+                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Patient</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Patient</a>
+                        </div>
+                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-solid fa-vial fa-sm"></i>Treatment<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-container" >
+                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">New Treatment Type</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Treatment Type</a>
+                        </div>
+                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-solid fa-file-prescription fa-sm"></i>Prescription<i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-container" >
+                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Prescription</a><br>
+                         <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Prescription</a>
                         </div>
               
             </div>
@@ -70,7 +86,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
                                 <i class="fas fa-duotone fa-user-nurse"></i><strong style="color:white;">Cathy</strong>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
