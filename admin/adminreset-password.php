@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     }
     else {
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $select = "SELECT * FROM admin WHERE email = '$email'";
+        $select = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($conn, $select);
         if(mysqli_num_rows($result) > 0) { 
             // generate and send otp 
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
             setcookie('pin', $random_pin, time() + 60); 
             $random_pin_hashed = md5($random_pin);
             // echo "id: $id_from_db";
-            $update_sql = "UPDATE admin SET otp='$random_pin_hashed' WHERE id='$id_from_db'";
+            $update_sql = "UPDATE users SET otp='$random_pin_hashed' WHERE id='$id_from_db'";
            
             mysqli_query($conn, $update_sql);
             // echo "email: $email_from_db";

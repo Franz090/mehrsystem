@@ -23,12 +23,12 @@ if (isset($_POST['submit'])) {
         $pass = mysqli_real_escape_string($conn, md5($_POST['password'])); 
  
 
-        $select = "SELECT * FROM admin WHERE email = '$email' && otp = '$otp'";
+        $select = "SELECT * FROM users WHERE email = '$email' && otp = '$otp'";
         $result = mysqli_query($conn, $select);
         if(mysqli_num_rows($result) > 0) {  
             foreach($result as $row)  
                 $id_from_db = $row['id'];  
-            $update_sql = "UPDATE admin SET password='$pass', otp='' WHERE id=$id_from_db";
+            $update_sql = "UPDATE users SET password='$pass', otp='' WHERE id=$id_from_db";
 
             if (mysqli_query($conn, $update_sql))  
                 $success = true;
