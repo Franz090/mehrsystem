@@ -30,17 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `otp` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `email`, `password`) VALUES
-(1, 'francisoblepias@gmail.com', '202cb962ac59075b964b07152d234b70'),
-(2, 'francisoblepias@gmail.com', 'c20ad4d76fe97759aa27a0c99bff6710'),
-(3, 'francisoblepias7@gmaill.com', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `admin` (`id`, `email`, `password`,`otp`) VALUES
+(1, 'francisoblepias@gmail.com', '202cb962ac59075b964b07152d234b70',''),
+(2, 'francisoblepias7@gmaill.com', '202cb962ac59075b964b07152d234b70','');
 
 --
 -- Indexes for dumped tables
