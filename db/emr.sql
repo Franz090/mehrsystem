@@ -34,8 +34,10 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+ 
   `status` BOOLEAN NOT NULL,
   `admin` BOOLEAN NOT NULL,
+ 
   `otp` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -43,9 +45,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+ 
 INSERT INTO `users` (`id`, `email`,`first_name`,`mid_initial`,`last_name`, `password`,`otp`,`status`,`admin`) VALUES
 (1, 'francisoblepias@gmail.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1),
 (2, 'francisoblepias7@gmaill.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1);
+ 
 
 --
 -- Indexes for dumped tables

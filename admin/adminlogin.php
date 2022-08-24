@@ -16,7 +16,9 @@ if(isset($_POST['submit'])) {
         $email = mysqli_real_escape_string($conn, $_POST['usermail']);
         $pass = md5(mysqli_real_escape_string($conn,$_POST['password']));
 
+ 
         $select = "SELECT * FROM users WHERE email = '$email' && password = '$pass'";
+ 
 
         $result = mysqli_query($conn, $select);
 

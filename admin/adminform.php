@@ -11,6 +11,7 @@ if(isset($_POST['submit'])) {
    $_POST['submit'] = null;
    $error = '';
 
+
    if (empty($_POST['usermail']) || 
       empty($_POST['password']) || 
       empty($_POST['cpassword']) ||
@@ -28,6 +29,7 @@ if(isset($_POST['submit'])) {
       $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    
       $select = "SELECT * FROM users WHERE email = '$email'";
+
    
       $result = mysqli_query($conn, $select);
    
@@ -49,6 +51,7 @@ if(isset($_POST['submit'])) {
             mysqli_free_result($result);
             $error .= 'Something went wrong inserting into the database.';
          }
+
       }  
    } 
 }
@@ -78,6 +81,7 @@ $conn->close();
             echo '<span class="form__input-error-message">'.$error.'</span>'; 
       ?>
          <h1 class="form__title">Create Account</h1>
+
          <div class="form__input-group">
             <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*">
          </div>
