@@ -115,7 +115,7 @@ $conn->close();
           style="color:whitesmoke;"><i class="fas fa-solid fa-prescription me-2" href="patientdashboard.php"></i>MEHr
         </div>
         <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
-          <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+          <a type='button' class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
               class="fas fa-solid fa-box "></i>Dashboard</a>
           <button
             class="dropdown-btn h6  text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
@@ -123,7 +123,7 @@ $conn->close();
           </button>
           <div class="dropdown-container">
             <div class="merge">
-              <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change
+              <i class="fas fa-light fa-minus"></i><a href="profile/change-password.php" class="drop bg-transparent second-text active ">Change
                 Password</a>
               <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add
                 Nurse</a><br>
@@ -168,7 +168,11 @@ $conn->close();
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle second-text fw-bold" style="color: white;" href="#"
                   id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-duotone fa-user-nurse"></i><strong style="color:white;">Elmina</strong>
+                  <i class="fas fa-duotone fa-user-nurse"></i>
+                  <strong style="color:white;">
+                    <?php echo isset($_SESSION['first_name'])? 
+                      $_SESSION['first_name']." ".$_SESSION['mid_initial']." ".$_SESSION['last_name']:''; ?>
+                  </strong>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Profile</a></li>

@@ -24,9 +24,19 @@ if(isset($_POST['submit'])) {
 
         if(!(mysqli_num_rows($result) > 0)) {
             $error = 'Incorrect password or email.';
+            mysqli_free_result($result);
         }
         else {
+            foreach($result as $row)  
+                $first_name_from_db = $row['first_name'];  
+                $mid_initial_from_db = $row['mid_initial'];  
+                $last_name_from_db = $row['last_name'];  
             $_SESSION['usermail'] = $email;
+            $_SESSION['first_name'] = $first_name_from_db;
+            $_SESSION['mid_initial'] = $mid_initial_from_db;
+            $_SESSION['last_name'] = $last_name_from_db;
+
+            mysqli_free_result($result);
             header('location:admindashboard.php'); 
         } 
     } 
