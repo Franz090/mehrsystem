@@ -24,32 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `users` (
   `id` int(50) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `mid_initial` varchar(255),
+  `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+ 
+  `status` BOOLEAN NOT NULL,
+  `admin` BOOLEAN NOT NULL,
+ 
   `otp` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `admin` (`id`, `email`, `password`,`otp`) VALUES
-(1, 'francisoblepias@gmail.com', '202cb962ac59075b964b07152d234b70',''),
-(2, 'francisoblepias7@gmaill.com', '202cb962ac59075b964b07152d234b70','');
+ 
+INSERT INTO `users` (`id`, `email`,`first_name`,`mid_initial`,`last_name`, `password`,`otp`,`status`,`admin`) VALUES
+(1, 'francisoblepias@gmail.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1),
+(2, 'francisoblepias7@gmaill.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1);
+ 
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `users`
 --
-ALTER TABLE `admin`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -57,9 +66,9 @@ ALTER TABLE `admin`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `admin`
+ALTER TABLE `users`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 

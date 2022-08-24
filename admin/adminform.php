@@ -10,14 +10,26 @@ if (isset($_SESSION['usermail']))
 if(isset($_POST['submit'])) {
    $_POST['submit'] = null;
    $error = '';
-   if (empty($_POST['usermail']) || empty($_POST['password']) || empty($_POST['cpassword']))
-      $error .= 'All input fields are required! ';
+
+
+   if (empty($_POST['usermail']) || 
+      empty($_POST['password']) || 
+      empty($_POST['cpassword']) ||
+      empty($_POST['first_name']) ||
+      empty($_POST['last_name']) ||
+      empty($_POST['status']))
+      $error .= 'Fill up input fields that are required (with * mark)! ';
    else {
       $email = mysqli_real_escape_string($conn, $_POST['usermail']);
+      $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
+      $mid_initial = mysqli_real_escape_string($conn, $_POST['mid_initial']);
+      $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
+      $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
       $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
       $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    
-      $select = "SELECT * FROM admin WHERE email = '$email'";
+      $select = "SELECT * FROM users WHERE email = '$email'";
+
    
       $result = mysqli_query($conn, $select);
    
@@ -29,11 +41,17 @@ if(isset($_POST['submit'])) {
          mysqli_free_result($result);
       } 
       else  {
-         $insert = "INSERT INTO admin(email, password, otp) VALUES('$email','$pass', '')";
-      
-         mysqli_query($conn, $insert);
-         mysqli_free_result($result);
-         header('location:adminform.php');  
+         $insert = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp)
+          VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 1, '')";
+         if (mysqli_query($conn, $insert))  {
+            mysqli_free_result($result);
+            header('location:adminform.php');  
+         }
+         else { 
+            mysqli_free_result($result);
+            $error .= 'Something went wrong inserting into the database.';
+         }
+
       }  
    } 
 }
@@ -63,24 +81,34 @@ $conn->close();
             echo '<span class="form__input-error-message">'.$error.'</span>'; 
       ?>
          <h1 class="form__title">Create Account</h1>
-         <div class="form__message form__message--error"></div>
+
          <div class="form__input-group">
-            <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address">
-            <!-- <div class="form__input-error-message"></div> -->
+            <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*">
          </div>
          <div class="form__input-group">
-            <input type="password" class="form__input" name="password" autofocus placeholder="Password">
-            <!-- <div class="form__input-error-message"></div> -->
-         </div>
+            <input type="text" class="form__input" name="first_name" placeholder="First Name*">
+  
+            <input type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
+         
+            <input type="text" class="form__input" name="last_name" placeholder="Last Name*">
+         </div> 
          <div class="form__input-group">
-            <input type="password" class="form__input" name="cpassword" autofocus placeholder="Confirm password">
-            <!-- <div class="form__input-error-message"></div> -->
+            <label>Status</label>
+            <select class="form__input" name="status">
+               <option value="Inactive" selected>Inactive</option>
+               <option value="Active">Active</option>
+            </select>
+         </div> 
+         <div class="form__input-group">
+            <input type="password" class="form__input" name="password" autofocus placeholder="Password*">
+         
+            <input type="password" class="form__input" name="cpassword" autofocus placeholder="Confirm password*">
          </div>
-         <button class="form__button" value="register now" type="submit" name="submit">Register</button>
-         <p class="form__text">
-            <a class="form__link" href="adminlogin.php" id="linkLogin">Already have an account? Sign in</a>
-         </p>
+         <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
       </form>
+      <p class="form__text">
+         <a class="form__link" href="adminlogin.php" id="linkLogin">Already have an account? Sign in</a>
+      </p>
       <script src="js/main.js"></script>
 </body>
 
