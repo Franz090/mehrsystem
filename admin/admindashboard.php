@@ -123,7 +123,7 @@ $conn->close();
           </button>
           <div class="dropdown-container">
             <div class="merge">
-              <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change
+              <i class="fas fa-light fa-minus"></i><a href="profile/change-password.php" class="drop bg-transparent second-text active ">Change
                 Password</a>
               <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Add
                 Nurse</a><br>
