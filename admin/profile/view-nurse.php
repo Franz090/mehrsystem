@@ -5,11 +5,36 @@
 session_start();
 
 if(!isset($_SESSION['usermail'])) 
-  header('location:../');
- 
+  header('location:../'); 
+
+// fetch nurses 
+$select = "SELECT * FROM users WHERE admin = 1";
+$result = mysqli_query($conn, $select);
+$nurse_list = [];
+
+if(mysqli_num_rows($result))  {
+  foreach($result as $row)  {
+    $id = $row['id'];  
+    $f = $row['first_name'];  
+    $m = $row['mid_initial'];  
+    $l = $row['last_name'];  
+    $s = $row['status'] == 0? 'Inactive' : 'Active';  
+    array_push($nurse_list, array('id' => $id,'name' => ("$f ".($m? "$m. ":'')."$l"), 'status' => $s));
+  } 
+  mysqli_free_result($result);
+  // print_r($nurse_list);
+
+} 
+else  { 
+  mysqli_free_result($result);
+  $error = 'Something went wrong fetching data from the database.'; 
+}  
+
+
 $conn->close(); 
 
 $page = 'view_nurse';
+// $additional_script = '<script defer src="../js/nurse-table.js"></script>';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -23,7 +48,42 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3 con1">view-nurse</div>
+      <div class="row bg-light m-3 ">view-nurse
+         <div class="container default">
+          <table class="table mt-5 table-striped table-sm ">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Midwife Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php 
+                $counter = 1;
+                foreach ($nurse_list as $key => $value) {
+                  $counter++;
+              ?>    
+              <?php  ?>
+                <tr>
+                  <th scope="row"><?php echo $key+1; ?></th>
+                  <td><?php echo $value['name']; ?></td>
+                  <td><?php echo $value['status']; ?></td>
+                  <td>
+                    <button class="edit"><a href="edit-nurse.php?id=<?php echo $value['id'] ?>">Edit</a></button>
+                    <button class="del"><a href="delete-nurse.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
+                  </td>
+                </tr>
+              <?php 
+                }
+              ?>
+              
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
