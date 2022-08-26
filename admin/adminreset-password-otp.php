@@ -5,7 +5,7 @@ session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
     header('Location: ./dashboard/index.php'); 
-// check if there is such user 
+    
 if (isset($_POST['submit'])) {
     $error = '';
     $_POST['submit'] = null;
