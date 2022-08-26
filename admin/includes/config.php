@@ -1,4 +1,5 @@
 <?php
+// echo 'warahel';
 // dev
 $dbhost = 'localhost';
 $dbuser = 'root';

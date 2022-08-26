@@ -5,7 +5,7 @@
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-    header('Location: admindashboard.php');
+    header('Location: ./dashboard/');
    
 //login
 if(isset($_POST['submit'])) {
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
             $_SESSION['last_name'] = $last_name_from_db;
 
             mysqli_free_result($result);
-            header('location:admindashboard.php'); 
+            header('location: ./dashboard/'); 
         } 
     } 
 } 
