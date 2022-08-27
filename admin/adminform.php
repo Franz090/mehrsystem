@@ -5,7 +5,7 @@
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-   header('Location: admindashboard.php');
+   header('Location: ./dashboard/index.php');
 // register
 if(isset($_POST['submit'])) {
    $_POST['submit'] = null;
@@ -107,7 +107,7 @@ $conn->close();
          <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
       </form>
       <p class="form__text">
-         <a class="form__link" href="adminlogin.php" id="linkLogin">Already have an account? Sign in</a>
+         <a class="form__link" href="index.php" id="linkLogin">Already have an account? Sign in</a>
       </p>
       <script src="js/main.js"></script>
 </body>

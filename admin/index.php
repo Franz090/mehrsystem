@@ -5,7 +5,7 @@
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-    header('Location: admindashboard.php');
+    header('Location: ./dashboard/');
    
 //login
 if(isset($_POST['submit'])) {
@@ -27,17 +27,20 @@ if(isset($_POST['submit'])) {
             mysqli_free_result($result);
         }
         else {
-            foreach($result as $row)  
+            foreach($result as $row)  {
                 $first_name_from_db = $row['first_name'];  
                 $mid_initial_from_db = $row['mid_initial'];  
-                $last_name_from_db = $row['last_name'];  
+                $last_name_from_db = $row['last_name']; 
+            }
+
+                
             $_SESSION['usermail'] = $email;
             $_SESSION['first_name'] = $first_name_from_db;
             $_SESSION['mid_initial'] = $mid_initial_from_db;
             $_SESSION['last_name'] = $last_name_from_db;
 
             mysqli_free_result($result);
-            header('location:admindashboard.php'); 
+            header('location: ./dashboard/'); 
         } 
     } 
 } 
@@ -56,7 +59,7 @@ $conn->close();
      <link rel="shortcut icon" href="/assets/favicon.ico">
     <link rel="stylesheet" href="css/main.css">
    
-    <title>Admin</title>
+    <title>Admin Login</title>
 </head>
 <body>
     <div class="container">
@@ -66,7 +69,6 @@ $conn->close();
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
-            <div class="form__message form__message--error"></div>
             <div class="form__input-group">
                 <input type="text" class="form__input" autofocus  name="usermail" 
                 placeholder="Email">

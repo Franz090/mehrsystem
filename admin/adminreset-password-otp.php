@@ -4,8 +4,8 @@ $success = false;
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-    header('Location: admindashboard.php'); 
-// check if there is such user 
+    header('Location: ./dashboard/index.php'); 
+    
 if (isset($_POST['submit'])) {
     $error = '';
     $_POST['submit'] = null;
@@ -92,7 +92,7 @@ include_once('php-templates/admin-head.php');
         
     </form>
     <p class="form__text">
-        <a class="form__link" href="adminlogin.php" id="linkLogin">Sign in</a>
+        <a class="form__link" href="index.php" id="linkLogin">Sign in</a>
     </p> 
     <p class="form__text">
         <a class="form__link" href="adminform.php">Don't have an account? Create account</a>
