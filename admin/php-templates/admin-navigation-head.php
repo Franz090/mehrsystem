@@ -11,11 +11,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <?php echo isset($additional_script) ? $additional_script : ''; ?>
   <style>
+    .container {
+      --color-error: #cc3333;
+    }
     .form {
       --color-primary: #009579;
       --color-primary-dark: #007f67;
       --color-secondary: #252c6a;
-      --color-error: #cc3333;
       --color-success: #4bb544;
       --border-radius: 4px;
     }
@@ -86,7 +88,7 @@
     } 
     .form__text {
       text-align: center;
-    } 
+    }  
   </style>
 </head>
 

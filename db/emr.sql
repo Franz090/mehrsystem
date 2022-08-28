@@ -57,7 +57,7 @@ INSERT INTO `users` (`id`, `email`,`first_name`,`mid_initial`,`last_name`, `pass
 -- 
 CREATE TABLE `details` (
   `id` int(50) NOT NULL AUTO_INCREMENT,
-  `contact_no` int(50) NOT NULL,
+  `contact_no` varchar(255) NOT NULL,
   `b_date` DATE NOT NULL,
   `barangay_id` int(50) NOT NULL,
   `med_history_id` int(50) ,PRIMARY KEY (`id`)
@@ -68,8 +68,8 @@ CREATE TABLE `details` (
 -- 
  
 INSERT INTO `details` (`id`, `contact_no`,`b_date`,`barangay_id`,`med_history_id`) VALUES
-(1, 09081231231, '1999-07-28',1,null),
-(2, 09081231231, '1999-07-28',2,1);
+(1, '0908-123-1231', '1999-07-28',1,null),
+(2, '0908-123-1231', '1999-07-28',2,1);
    
 --
 -- Table structure for table `med_history`

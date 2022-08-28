@@ -43,7 +43,7 @@ if(isset($_POST['submit'])) {
      } 
      else  {
         $insert = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
-         VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 1, '')";
+         VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 1, '',null)";
         if (mysqli_query($conn, $insert))  {
           mysqli_free_result($result);
           echo "<script>alert('Nurse Added!');</script>";

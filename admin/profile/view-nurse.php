@@ -54,16 +54,14 @@ include_once('../php-templates/admin-navigation-head.php');
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Midwife Name</th>
+                <th scope="col">Nurse Name</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <?php 
-                $counter = 1;
                 foreach ($nurse_list as $key => $value) {
-                  $counter++;
               ?>    
               <?php  ?>
                 <tr>
@@ -77,9 +75,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tr>
               <?php 
                 }
-              ?>
-              
-              
+              ?> 
             </tbody>
           </table>
         </div>
