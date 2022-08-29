@@ -5,7 +5,6 @@
 session_start();
  
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-patient.php';
  
  
 // fetch barangays  
@@ -38,7 +37,7 @@ if(isset($_POST['submit'])) {
   // echo $rows;
   $row=mysqli_fetch_row($details);
   $next_details_id = $row[0] + 1;
-  echo $next_details_id;
+  // echo $next_details_id;
   // print_r($next_id);
   // // echo '<script>alert("'.$_POST['barangay_id'].'")</script>';
   $_POST['submit'] = null;

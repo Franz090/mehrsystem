@@ -5,7 +5,6 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-patient.php';
  
 // fetch barangays  
 $select = "SELECT * FROM barangay";
