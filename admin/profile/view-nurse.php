@@ -4,9 +4,9 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../'); 
-
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+ 
 // fetch nurses 
 $select = "SELECT * FROM users WHERE admin = 1";
 $result = mysqli_query($conn, $select);
@@ -34,7 +34,7 @@ else  {
 $conn->close(); 
 
 $page = 'view_nurse';
-// $additional_script = '<script defer src="../js/nurse-table.js"></script>';
+// $additional_script = '<script defer src="../js/nurse-table.js"></script>'; 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -54,16 +54,14 @@ include_once('../php-templates/admin-navigation-head.php');
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Midwife Name</th>
+                <th scope="col">Nurse Name</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <?php 
-                $counter = 1;
                 foreach ($nurse_list as $key => $value) {
-                  $counter++;
               ?>    
               <?php  ?>
                 <tr>
@@ -77,13 +75,11 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tr>
               <?php 
                 }
-              ?>
-              
-              
+              ?> 
             </tbody>
           </table>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </div>

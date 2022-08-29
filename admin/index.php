@@ -17,7 +17,9 @@ if(isset($_POST['submit'])) {
         $pass = md5(mysqli_real_escape_string($conn,$_POST['password']));
 
  
-        $select = "SELECT * FROM users WHERE email = '$email' && password = '$pass'";
+        $select = "SELECT 
+            CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name, admin
+            FROM users WHERE email = '$email' && password = '$pass'";
  
 
         $result = mysqli_query($conn, $select);
@@ -26,18 +28,15 @@ if(isset($_POST['submit'])) {
             $error = 'Incorrect password or email.';
             mysqli_free_result($result);
         }
-        else {
+        else { 
             foreach($result as $row)  {
-                $first_name_from_db = $row['first_name'];  
-                $mid_initial_from_db = $row['mid_initial'];  
-                $last_name_from_db = $row['last_name']; 
-            }
-
-                
+                $name_from_db = $row['name'];    
+                $admin_from_db = $row['admin']; 
+            } 
+            
             $_SESSION['usermail'] = $email;
-            $_SESSION['first_name'] = $first_name_from_db;
-            $_SESSION['mid_initial'] = $mid_initial_from_db;
-            $_SESSION['last_name'] = $last_name_from_db;
+            $_SESSION['name'] = $name_from_db;
+            $_SESSION['admin'] = $admin_from_db;
 
             mysqli_free_result($result);
             header('location: ./dashboard/'); 

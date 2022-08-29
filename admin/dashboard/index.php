@@ -4,9 +4,7 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../index.php');
- 
+@include '../php-templates/redirect/admin-page-setter.php';  
 $conn->close(); 
 
 $page = 'dashbaord';
@@ -106,6 +104,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper" style="background-color: #f0cac4">
     
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
+    <?php echo $admin==1?'Nurse':($admin==0?'Midwife':'Patient') ?>
 
     <div class="container default">
       <div class="row mt-5">

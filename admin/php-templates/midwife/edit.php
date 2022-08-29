@@ -5,11 +5,35 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/nurse-only.php';
+@include '../php-templates/redirect/not-for-patient.php';
  
+// fetch barangays  
+$select = "SELECT * FROM barangay";
+$result_barangay = mysqli_query($conn, $select);
+$barangay_list = [];
+
+if(mysqli_num_rows($result_barangay))  {
+  foreach($result_barangay as $row)  {
+    $id = $row['id'];  
+    $name = $row['health_center'];  
+    array_push($barangay_list, array('id' => $id,'name' => $name));
+  } 
+  mysqli_free_result($result_barangay);
+  // print_r($result_barangay);
+
+} 
+else  { 
+  mysqli_free_result($result_barangay);
+  $error = 'Something went wrong fetching data from the database.'; 
+}  
+
+
 // fetch user 
 $id_from_get = $_GET['id'];
-$user_to_edit = "SELECT * FROM users WHERE id = '$id_from_get'";
+$user_to_edit = "SELECT users.id AS id, first_name, mid_initial, last_name, email, 
+    IF(users.status=0, 'Inactive', 'Active') AS status, details_id, contact_no, b_date, barangay_id  
+  FROM users, details
+  WHERE users.id = $id_from_get AND users.details_id = details.id";
 $user_from_db = mysqli_query($conn, $user_to_edit);
 
 if (mysqli_num_rows($user_from_db) > 0) {
@@ -18,7 +42,11 @@ if (mysqli_num_rows($user_from_db) > 0) {
     $c_first_name = $row['first_name'];  
     $c_mid_initial = $row['mid_initial'];  
     $c_last_name = $row['last_name'];  
-    $c_status = $row['status'] == 0? 'Inactive' : 'Active';   
+    $c_status = $row['status'];   
+    $c_contact = $row['contact_no'];   
+    $c_b_date = $row['b_date'];   
+    $c_barangay = $row['barangay_id'];   
+    $c_details_id = $row['details_id'];   
   }  
   mysqli_free_result($user_from_db);
 } 
@@ -36,6 +64,9 @@ if(isset($_POST['submit'])) {
   if (empty($_POST['usermail']) ||  
     empty($_POST['first_name']) ||
     empty($_POST['last_name']) ||
+    empty($_POST['contact']) ||
+    empty($_POST['b_date']) ||
+    empty($_POST['barangay_id']) ||
     empty($_POST['status']))
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else {
@@ -44,6 +75,11 @@ if(isset($_POST['submit'])) {
     $mid_initial = mysqli_real_escape_string($conn, $_POST['mid_initial']);
     $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
     $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
+    $details_id = mysqli_real_escape_string($conn, $_POST['details_id']);
+
+    $contact = mysqli_real_escape_string($conn, $_POST['contact']);
+    $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
+    $barangay_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
 
     $select = "SELECT * FROM users WHERE email = '$email'";
 
@@ -57,17 +93,25 @@ if(isset($_POST['submit'])) {
     else  {
       foreach($result as $row)   
         $id_from_db = $row['id'];    
-      $up = "UPDATE users SET first_name='$first_name', mid_initial='$mid_initial', last_name='$last_name', 
-      email='$email', status=$status WHERE id=$id_from_db";
-      if (mysqli_query($conn, $up))  {
+      $up1 = "UPDATE users SET first_name='$first_name', mid_initial='$mid_initial', last_name='$last_name', 
+        email='$email',  status=$status WHERE id=$id_from_db";
+      $up2 = "UPDATE details SET contact_no='$contact', b_date='$b_date', barangay_id=$barangay_id
+        WHERE id=$details_id";
+        echo $up2;
+      if (mysqli_query($conn, $up1))  {
         mysqli_free_result($result);
-        echo "<script>alert('Nurse Record Updated!');</script>";
-        $conn->close(); 
-        header('location:view-nurse.php');  
+        if (mysqli_query($conn, $up2)) { 
+          // echo "<script>alert('Midwife Record Updated!');</script>"; 
+          $conn->close(); 
+          header('location:view-midwife.php');  
+        }else {
+          $error .= 'Something went wrong updating details of midwife into the database.';
+        } 
+        
       }
       else { 
         mysqli_free_result($result);
-        $error .= 'Something went wrong updating the record in the database.';
+        $error .= 'Something went wrong updating the record of midwife in the database.';
       } 
     }  
   } 
@@ -75,7 +119,7 @@ if(isset($_POST['submit'])) {
  
 $conn->close(); 
 
-$page = 'edit_nurse';
+$page = 'edit_midwife';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -89,13 +133,14 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3">Update Nurse Record
+      <div class="row bg-light m-3">Update Midwife Record
         <?php
           if (isset($no_user))  
             echo '<span class="form__input-error-message">'.$no_user.'</span>';
           else   {
         ?>   
         <form class="form" action="" method="post">
+          <input type='hidden' name='details_id' value="<?php echo $c_details_id?>"/>
           <?php 
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
@@ -111,13 +156,41 @@ include_once('../php-templates/admin-navigation-head.php');
               <input value="<?php echo $c_last_name?>" type="text" class="form__input" name="last_name" placeholder="Last Name*" required>
           </div> 
           <div class="form__input-group">
+            <input value="<?php echo $c_contact?>"
+              type="tel" name="contact" class="form__input" placeholder="Contact Num* (Format:09XX-XXX-XXXX)" 
+              pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required/>
+          </div>
+          <div class="form__input-group">
+            <label>Birth Date</label>
+            <input value="<?php echo $c_b_date?>"
+            type="date" name="b_date" placeholder="Birth Date*" required class="form__input"/>
+          </div>
+          <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status" >
                   <option value="Inactive" <?php echo $c_status=='Inactive' ? 'selected':''?>>Inactive</option>
                   <option value="Active" <?php echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>  
-          <button class="form__button" value="register now" type="submit" name="submit">Update Nurse Record</button> 
+
+          <div class="form__input-group">
+            <label>Barangay</label>
+            <select class="form__input" name="barangay_id">
+            <?php ?>
+              <?php
+                if (count($barangay_list)>0) {
+                  foreach ($barangay_list as $key => $value) {
+              ?>  
+                <option value="<?php echo $value['id'] ?>" <?php echo $value['id']==$c_barangay?'selected':'' ?>>
+                  <?php echo $value['name'] ?>
+                </option>  
+              <?php
+                  }
+                }
+              ?> 
+            </select>
+          </div> 
+          <button class="form__button" value="register now" type="submit" name="submit">Update Midwife Record</button> 
         </form> 
 
         <?php

@@ -4,10 +4,9 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../');
-
-
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+ 
 // register
 if(isset($_POST['submit'])) {
   $_POST['submit'] = null;
@@ -42,8 +41,8 @@ if(isset($_POST['submit'])) {
         mysqli_free_result($result);
      } 
      else  {
-        $insert = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id)
-         VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 1, '')";
+        $insert = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
+         VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 1, '',null)";
         if (mysqli_query($conn, $insert))  {
           mysqli_free_result($result);
           echo "<script>alert('Nurse Added!');</script>";
@@ -58,7 +57,7 @@ if(isset($_POST['submit'])) {
   } 
 }
 
-
+ 
  
 $conn->close(); 
 
@@ -106,7 +105,7 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
         </form> 
-      </div>
+      </div> 
     </div>
   </div>
 </div>
