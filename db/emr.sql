@@ -211,7 +211,18 @@ INSERT INTO `users` (`id`, `first_name`, `mid_initial`, `last_name`, `email`, `p
 (8, 'd', 'a', 'e', 'd@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 3),
 (14, 'g', '', 'h', 'g@gmail', '202cb962ac59075b964b07152d234b70', 1, 0, '', 4),
 (16, 'h', 'a', 'i', 'h@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 5),
-(19, 'Pa', 'T', 'Ient', 'patient@gmail.com', '202cb962ac59075b964b07152d234b70', 0, -1, '', 6);
+(19, 'Pa', 'T', 'Ient', 'patient@gmail.com', '202cb962ac59075b964b07152d234b70', 0, -1, '', 6),
+(4, 'francisoblepias1@gmail.com','Francis1','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(5, 'francisoblepias2@gmail.com','Francis2','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(6, 'francisoblepias3@gmail.com','Francis3','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(7, 'francisoblepias4@gmail.com','Francis4','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(9, 'francisoblepias6@gmail.com','Francis6','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(11, 'francisoblepias8@gmail.com','Francis8','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
+(12, 'francisoblepias9@gmail.com','Francis9','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
+(13, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
+(15, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
+(17, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
+(18, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null);
 
 -- --------------------------------------------------------
 
