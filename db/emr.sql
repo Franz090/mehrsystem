@@ -207,7 +207,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `mid_initial`, `last_name`, `email`, `password`, `status`, `admin`, `otp`, `details_id`) VALUES
 (1, 'Francis', '', 'Oblepias', 'francisoblepias@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 1, '', NULL),
 (2, 'Francis', '', 'Oblepias', 'francisoblepias7@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 1),
-(3, 'A', '', 'B', 'a@gmail.com', '4297f44b13955235245b2497399d7a93', 0, -1, '', 1),
+(3, 'A', '', 'B', 'a@gmail.com', '4297f44b13955235245b2497399d7a93', 0, -1, '', 2),
 (8, 'd', 'a', 'e', 'd@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 3),
 (14, 'g', '', 'h', 'g@gmail', '202cb962ac59075b964b07152d234b70', 1, 0, '', 4),
 (16, 'h', 'a', 'i', 'h@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 5),
