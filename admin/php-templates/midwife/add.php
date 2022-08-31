@@ -5,6 +5,7 @@
 session_start();
  
 @include '../php-templates/redirect/admin-page-setter.php';
+ 
 @include '../php-templates/redirect/not-for-patient.php';
  
 $barangay_list = [];
@@ -48,7 +49,7 @@ if ($admin==1) {
     $error = 'Something went wrong fetching data from the database.'; 
   }  
 }
-
+ 
 
 
 // register
@@ -73,6 +74,7 @@ if(isset($_POST['submit'])) {
     empty($_POST['last_name']) ||
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
+ 
     empty($_POST['status']))
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else {
@@ -83,6 +85,7 @@ if(isset($_POST['submit'])) {
     $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
     $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
     $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+ 
     // nurse 
     if ($admin==1) { 
       $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
@@ -91,6 +94,7 @@ if(isset($_POST['submit'])) {
     else {
       $bgy_id = mysqli_real_escape_string($conn, $barangay_id_to_be_used);
     }
+ 
     $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
     $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
 
@@ -177,6 +181,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <option value="Active">Active</option>
               </select>
           </div> 
+ 
           <?php 
             if (count($barangay_list)>0 && $admin==1) {
           ?>
@@ -184,12 +189,14 @@ include_once('../php-templates/admin-navigation-head.php');
               <label>Barangay</label>
               <select class="form__input" name="barangay_id"> 
                 <?php 
+ 
                     foreach ($barangay_list as $key => $value) {
                 ?>  
                   <option value="<?php echo $value['id'] ?>" <?php echo $key===0?'selected':'' ?>>
                     <?php echo $value['name'] ?>
                   </option>  
                 <?php
+ 
                   } 
                 ?> 
               </select>
@@ -197,12 +204,15 @@ include_once('../php-templates/admin-navigation-head.php');
           <?php
             } 
           ?> 
+ 
           <div class="form__input-group">
               <input type="password" class="form__input" name="password" placeholder="Password*" required/>
           
               <input type="password" class="form__input" name="cpassword" placeholder="Confirm password*" required/>
           </div>
+ 
           <button class="form__button" type="submit" name="submit">Register Midwife</button> 
+ 
         </form>  
       </div>
     </div>

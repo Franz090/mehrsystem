@@ -26,7 +26,9 @@ if (mysqli_num_rows($details_barangay_check) > 0) {
 mysqli_free_result($details_barangay_check);
 // mysqli_free_result($delete);
 $conn->close();
-echo "<script>alert('".$response."');</script>";
+ 
+echo "<script>alert(".$response.");</script>";
+ 
 
 header("location: view-barangay.php$error");
 

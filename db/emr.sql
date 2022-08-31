@@ -41,6 +41,7 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
+ 
 INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_id`, `medicine_record_id`, `date`, `status`) VALUES
 (1, 3, 2, 1, 1, '2022-08-22', 1);
 
@@ -65,21 +66,23 @@ INSERT INTO `barangay` (`id`, `health_center`, `status`) VALUES
 (5, 'asdf', 0);
 
 -- --------------------------------------------------------
-
+ 
 --
 -- Table structure for table `details`
 --
 
 CREATE TABLE `details` (
+ 
   `id` int(50) NOT NULL,
   `contact_no` varchar(255) NOT NULL,
-  `b_date` date NOT NULL,
+  `b_date` date NOT NULL, 
   `barangay_id` int(50) NOT NULL,
   `med_history_id` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `details`
+ 
 --
 
 INSERT INTO `details` (`id`, `contact_no`, `b_date`, `barangay_id`, `med_history_id`) VALUES
@@ -113,7 +116,7 @@ INSERT INTO `infant_record` (`id`, `name`, `date`, `legitimacy`, `status`) VALUE
 (2, 'Isa Pang Sangol', '2012-02-14', 0, 0);
 
 -- --------------------------------------------------------
-
+ 
 --
 -- Table structure for table `med_history`
 --

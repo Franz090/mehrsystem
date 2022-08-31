@@ -5,8 +5,7 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-patient.php';
-
+ 
 
 // fetch nurses 
 $select = "SELECT u.id AS id, 
@@ -58,6 +57,7 @@ include_once('../php-templates/admin-navigation-head.php');
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
+ 
   <?php include_once('../php-templates/admin-navigation-left.php'); 
   
     // from edit.php 
@@ -66,6 +66,7 @@ include_once('../php-templates/admin-navigation-head.php');
     }   
 
   ?>
+ 
 
   <!-- Page Content -->
   <div id="page-content-wrapper" style="background-color: #f0cac4">
@@ -80,6 +81,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Midwife Name</th>
+ 
                 <?php if ($admin==1) { ?>
                   <th scope="col">Email</th>
                 <?php } ?>
@@ -90,6 +92,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <th scope="col">Birthdate</th>
                   <th scope="col">Barangay</th>
                 <?php } ?>
+ 
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -101,6 +104,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
+ 
                   <?php if ($admin==1) { ?>  
                     <td><?php echo $value['email']; ?></td>
                   <?php } ?>
@@ -115,6 +119,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <?php if ($value['id']!=$_SESSION['id']) { ?>
                       <button class="del"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
                     <?php } ?>
+ 
                   </td>
                 </tr>
               <?php 

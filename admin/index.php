@@ -17,7 +17,8 @@ if(isset($_POST['submit'])) {
         $pass = md5(mysqli_real_escape_string($conn,$_POST['password']));
 
  
-        $select = "SELECT id,
+ 
+        $select = "SELECT id, 
             CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name, admin
             FROM users WHERE email = '$email' && password = '$pass'";
  
@@ -30,17 +31,21 @@ if(isset($_POST['submit'])) {
         }
         else { 
             foreach($result as $row)  {
+ 
                 $id_from_db = $row['id'];    
+ 
                 $name_from_db = $row['name'];    
                 $admin_from_db = $row['admin']; 
             } 
             
+ 
 
             $_SESSION['id'] = $id_from_db;
             $_SESSION['usermail'] = $email;
             $_SESSION['name'] = $name_from_db;
             $_SESSION['admin'] = $admin_from_db;
           
+ 
 
             // if not nurse, get the barangay 
             if ($admin_from_db!=1) {
