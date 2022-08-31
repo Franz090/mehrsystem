@@ -47,11 +47,22 @@ CREATE TABLE `users` (
  
 INSERT INTO `users` (`id`, `email`,`first_name`,`mid_initial`,`last_name`, `password`,`otp`,`status`,`admin`, `details_id`) VALUES
 (1, 'francisoblepias@gmail.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
-(2, 'francisoblepias7@gmail.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,0,null), 
-(3, 'a@gmail.com','A','','B', '202cb962ac59075b964b07152d234b70','',0,-1,1); 
- -- nurse
- -- midwife
- -- patient
+(2, 'francisoblepias7@gmail.com','Francis','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,0,1), 
+(3, 'a@gmail.com','A','','B', '202cb962ac59075b964b07152d234b70','',0,-1,2);
+-- (4, 'francisoblepias1@gmail.com','Francis1','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (5, 'francisoblepias2@gmail.com','Francis2','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (6, 'francisoblepias3@gmail.com','Francis3','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (7, 'francisoblepias4@gmail.com','Francis4','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (8, 'francisoblepias5@gmail.com','Francis5','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (9, 'francisoblepias6@gmail.com','Francis6','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (10, 'francisoblepias7@gmail.com','Francis7','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (11, 'francisoblepias8@gmail.com','Francis8','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null), 
+-- (12, 'francisoblepias9@gmail.com','Francis9','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null),
+-- (13, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null),
+-- (14, 'francisoblepias11@gmail.com','Francis11','','Oblepias', '202cb962ac59075b964b07152d234b70','',1,1,null);
+-- nurse
+-- midwife
+-- patient
 --
 -- Table structure for table `details`
 -- 
