@@ -4,9 +4,9 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../');
- 
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+
 
 // fetch barangays 
 $select = "SELECT id, health_center, IF(barangay.status=0, 'Inactive', 'Active') AS status FROM barangay";

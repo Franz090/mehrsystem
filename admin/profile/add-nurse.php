@@ -4,10 +4,9 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../');
-
-
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+ 
 // register
 if(isset($_POST['submit'])) {
   $_POST['submit'] = null;
@@ -58,7 +57,7 @@ if(isset($_POST['submit'])) {
   } 
 }
 
-
+ 
  
 $conn->close(); 
 
@@ -106,7 +105,7 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
         </form> 
-      </div>
+      </div> 
     </div>
   </div>
 </div>

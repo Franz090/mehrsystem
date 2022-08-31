@@ -15,8 +15,8 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-duotone fa-user-nurse"></i>
             <strong style="color:white;">
-                <?php echo isset($_SESSION['first_name'])? 
-                    $_SESSION['first_name']." ".$_SESSION['mid_initial']." ".$_SESSION['last_name']:''; ?>
+                <?php echo isset($_SESSION['name'])? 
+                    $_SESSION['name']:''; ?>
             </strong>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

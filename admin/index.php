@@ -17,7 +17,9 @@ if(isset($_POST['submit'])) {
         $pass = md5(mysqli_real_escape_string($conn,$_POST['password']));
 
  
-        $select = "SELECT * FROM users WHERE email = '$email' && password = '$pass'";
+        $select = "SELECT id,
+            CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name, admin
+            FROM users WHERE email = '$email' && password = '$pass'";
  
 
         $result = mysqli_query($conn, $select);
@@ -26,21 +28,35 @@ if(isset($_POST['submit'])) {
             $error = 'Incorrect password or email.';
             mysqli_free_result($result);
         }
-        else {
+        else { 
             foreach($result as $row)  {
-                $first_name_from_db = $row['first_name'];  
-                $mid_initial_from_db = $row['mid_initial'];  
-                $last_name_from_db = $row['last_name']; 
-            }
+                $id_from_db = $row['id'];    
+                $name_from_db = $row['name'];    
+                $admin_from_db = $row['admin']; 
+            } 
+            
 
-                
+            $_SESSION['id'] = $id_from_db;
             $_SESSION['usermail'] = $email;
-            $_SESSION['first_name'] = $first_name_from_db;
-            $_SESSION['mid_initial'] = $mid_initial_from_db;
-            $_SESSION['last_name'] = $last_name_from_db;
+            $_SESSION['name'] = $name_from_db;
+            $_SESSION['admin'] = $admin_from_db;
+          
 
+            // if not nurse, get the barangay 
+            if ($admin_from_db!=1) {
+                mysqli_free_result($result);
+                $select = "SELECT barangay_id FROM users,details 
+                    WHERE users.id = $id_from_db && details_id = details.id";  
+                $result = mysqli_query($conn, $select);
+                if((mysqli_num_rows($result) > 0)) {  
+                    foreach($result as $row)  { 
+                        $barangay_id_from_db = $row['barangay_id']; 
+                    } 
+                    $_SESSION['barangay_id'] = $barangay_id_from_db;
+                }
+            }
             mysqli_free_result($result);
-            header('location: ./dashboard/'); 
+            header('location: ./dashboard'); 
         } 
     } 
 } 

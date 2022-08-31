@@ -88,7 +88,7 @@
     } 
     .form__text {
       text-align: center;
-    }  
+    } 
   </style>
 </head>
 

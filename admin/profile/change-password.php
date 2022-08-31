@@ -4,9 +4,8 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../');
-
+@include '../php-templates/redirect/admin-page-setter.php';
+ 
 
 if (isset($_POST['submit'])) {
   $error = '';
@@ -40,27 +39,23 @@ if (isset($_POST['submit'])) {
         }   
         else  {
           $error = 'Something went wrong changing your password.';
-        }
-
-        mysqli_free_result($result);
-
+        } 
+        mysqli_free_result($result); 
     } else { 
         $error = 'Wrong current password.';
     } 
   }
 }
-
+ 
 $conn->close(); 
 
 $page = 'change_password';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
-<div class="d-flex" id="wrapper">
-
+<div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
-
   <!-- Page Content -->
   <div id="page-content-wrapper" style="background-color: #f0cac4">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
@@ -84,11 +79,10 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <button class="form__button" type="submit" name="submit">Update Password</button>
         </form> 
-      </div>
+      </div> 
     </div>
-  </div>
+
+  </div> 
 </div>
  
-<?php 
-include_once('../php-templates/admin-navigation-tail.php');
-?>
+<?php include_once('../php-templates/admin-navigation-tail.php'); ?>

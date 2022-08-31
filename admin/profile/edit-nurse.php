@@ -1,20 +1,12 @@
-<?php
-
-// @include '../includes/config.php';
-
-// $id = $_GET['id'];
-// echo "<script>alert('edit $id');</script>";
-
-// $conn->close();
-// header('location: view-nurse.php'); 
+<?php 
 
 @include '../includes/config.php';
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location: ../');
-
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+ 
 // fetch user 
 $id_from_get = $_GET['id'];
 $user_to_edit = "SELECT * FROM users WHERE id = '$id_from_get'";

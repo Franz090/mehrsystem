@@ -4,9 +4,9 @@
 
 session_start();
 
-if(!isset($_SESSION['usermail'])) 
-  header('location:../'); 
-
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+ 
 // fetch nurses 
 $select = "SELECT * FROM users WHERE admin = 1";
 $result = mysqli_query($conn, $select);
@@ -34,7 +34,7 @@ else  {
 $conn->close(); 
 
 $page = 'view_nurse';
-// $additional_script = '<script defer src="../js/nurse-table.js"></script>';
+// $additional_script = '<script defer src="../js/nurse-table.js"></script>'; 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -70,7 +70,9 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['status']; ?></td>
                   <td>
                     <button class="edit"><a href="edit-nurse.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                    <button class="del"><a href="delete-nurse.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
+                    <?php if ($_SESSION['id'] != $value['id']) { ?> 
+                      <button class="del"><a href="delete-nurse.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
+                    <?php } ?> 
                   </td>
                 </tr>
               <?php 
@@ -79,7 +81,7 @@ include_once('../php-templates/admin-navigation-head.php');
             </tbody>
           </table>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </div>
