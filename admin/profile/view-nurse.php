@@ -104,11 +104,12 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['status']; ?></td>
                   <td>
  
-                    <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-nurse.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                   <?php if ($_SESSION['id'] != $value['id']) { ?> 
-                    
-                    <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-nurse.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
-                     <?php } ?> 
+                    <a href="edit-nurse.php?id=<?php echo $value['id'] ?>">
+                      <button class="edit btn btn-success btn-md btn-inverse">Edit</button></a>
+                    <?php if ($_SESSION['id'] != $value['id']) { ?>  
+                      <a href="delete-nurse.php?id=<?php echo $value['id'] ?>">
+                        <button class="del btn btn-danger btn-md btn-inverse">Delete</button></a>
+                    <?php } ?> 
  
                   </td>
                 </tr>
