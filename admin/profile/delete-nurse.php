@@ -16,7 +16,7 @@ else {
 }
 // mysqli_free_result($delete);
 $conn->close();
-echo "<script>alert('$response');</script>";
+echo "<script>alert('".$response."');</script>";
 
 header('location: view-nurse.php');
 

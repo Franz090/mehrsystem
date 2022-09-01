@@ -6,26 +6,50 @@ session_start();
  
 @include '../php-templates/redirect/admin-page-setter.php';
  
+@include '../php-templates/redirect/not-for-patient.php';
  
-// fetch barangays  
-$select = "SELECT * FROM barangay";
-$result_barangay = mysqli_query($conn, $select);
 $barangay_list = [];
+if ($admin==1) {
+  // fetch barangays  
+  $select_b = "SELECT * FROM barangay";
+  $result_barangay = mysqli_query($conn, $select_b);
 
-if(mysqli_num_rows($result_barangay))  {
-  foreach($result_barangay as $row)  {
-    $id = $row['id'];  
-    $name = $row['health_center'];  
-    array_push($barangay_list, array('id' => $id,'name' => $name));
+
+  if(mysqli_num_rows($result_barangay)>0)  {
+    foreach($result_barangay as $row)  {
+      $id = $row['id'];  
+      $name = $row['health_center'];  
+      array_push($barangay_list, array('id' => $id,'name' => $name));
+    } 
+    mysqli_free_result($result_barangay);
+    // print_r($result_barangay);
+
   } 
-  mysqli_free_result($result_barangay);
-  // print_r($result_barangay);
+  else  { 
+    mysqli_free_result($result_barangay);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
+} else {
+  $session_id = $_SESSION['id'];
+  // echo $session_id;
+  $select_b_id = "SELECT barangay_id FROM users,details WHERE users.id=$session_id AND users.details_id=details.id";
+  $result_barangay_id = mysqli_query($conn, $select_b_id);
+  // echo "print this ";
+  // print_r($result_barangay_id);
+  if(mysqli_num_rows($result_barangay_id)>0)  {
+    foreach($result_barangay_id as $row)  {
+      $barangay_id_to_be_used = $row['barangay_id'];    
+    } 
+    mysqli_free_result($result_barangay_id);
+    // print_r($result_barangay);
 
-} 
-else  { 
-  mysqli_free_result($result_barangay);
-  $error = 'Something went wrong fetching data from the database.'; 
-}  
+  } 
+  else  { 
+    mysqli_free_result($result_barangay_id);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
+}
+ 
 
 
 // register
@@ -50,7 +74,7 @@ if(isset($_POST['submit'])) {
     empty($_POST['last_name']) ||
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
-    empty($_POST['barangay_id']) ||
+ 
     empty($_POST['status']))
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else {
@@ -61,8 +85,16 @@ if(isset($_POST['submit'])) {
     $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
     $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
     $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
-
-    $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
+ 
+    // nurse 
+    if ($admin==1) { 
+      $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
+    }
+    // midwife 
+    else {
+      $bgy_id = mysqli_real_escape_string($conn, $barangay_id_to_be_used);
+    }
+ 
     $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
     $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
 
@@ -149,29 +181,38 @@ include_once('../php-templates/admin-navigation-head.php');
                 <option value="Active">Active</option>
               </select>
           </div> 
+ 
+          <?php 
+            if (count($barangay_list)>0 && $admin==1) {
+          ?>
           <div class="form__input-group">
               <label>Barangay</label>
-              <select class="form__input" name="barangay_id">
-              <?php ?>
-                <?php
-                  if (count($barangay_list)>0) {
+              <select class="form__input" name="barangay_id"> 
+                <?php 
+ 
                     foreach ($barangay_list as $key => $value) {
                 ?>  
                   <option value="<?php echo $value['id'] ?>" <?php echo $key===0?'selected':'' ?>>
                     <?php echo $value['name'] ?>
                   </option>  
                 <?php
-                    }
-                  }
+ 
+                  } 
                 ?> 
               </select>
           </div> 
+          <?php
+            } 
+          ?> 
+ 
           <div class="form__input-group">
               <input type="password" class="form__input" name="password" placeholder="Password*" required/>
           
               <input type="password" class="form__input" name="cpassword" placeholder="Confirm password*" required/>
           </div>
-          <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
+ 
+          <button class="form__button" type="submit" name="submit">Register Midwife</button> 
+ 
         </form>  
       </div>
     </div>

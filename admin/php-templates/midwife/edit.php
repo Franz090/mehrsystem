@@ -6,25 +6,52 @@ session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
  
-// fetch barangays  
-$select = "SELECT * FROM barangay";
-$result_barangay = mysqli_query($conn, $select);
+//@include '../php-templates/redirect/not-for-patient.php';
+
 $barangay_list = [];
+if ($admin==1) { 
 
-if(mysqli_num_rows($result_barangay))  {
-  foreach($result_barangay as $row)  {
-    $id = $row['id'];  
-    $name = $row['health_center'];  
-    array_push($barangay_list, array('id' => $id,'name' => $name));
+  // fetch barangays  
+  $select = "SELECT * FROM barangay";
+  $result_barangay = mysqli_query($conn, $select);
+  $barangay_list = [];
+
+  if(mysqli_num_rows($result_barangay)>0)  {
+    foreach($result_barangay as $row)  {
+      $id = $row['id'];  
+      $name = $row['health_center'];  
+      array_push($barangay_list, array('id' => $id,'name' => $name));
+    } 
+    mysqli_free_result($result_barangay);
+    // print_r($result_barangay);
+
   } 
-  mysqli_free_result($result_barangay);
-  // print_r($result_barangay);
+  else  { 
+    mysqli_free_result($result_barangay);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
+} else {
+  // $session_id = $_SESSION['id'];
+  $barangay_id_to_be_used = $_SESSION['barangay_id'];
+  // echo $session_id;
+  // $select_b_id = "SELECT barangay_id FROM users,details WHERE users.id=$session_id AND users.details_id=details.id";
+  // $result_barangay_id = mysqli_query($conn, $select_b_id);
+  // echo "print this ";
+  // print_r($result_barangay_id);
+  // if(mysqli_num_rows($result_barangay_id)>0)  {
+  //   foreach($result_barangay_id as $row)  {
+  //     $barangay_id_to_be_used = $row['barangay_id'];    
+  //   } 
+  //   mysqli_free_result($result_barangay_id);
+  //   // print_r($result_barangay);
 
-} 
-else  { 
-  mysqli_free_result($result_barangay);
-  $error = 'Something went wrong fetching data from the database.'; 
-}  
+  // } 
+  // else  { 
+  //   mysqli_free_result($result_barangay_id);
+  //   $error = 'Something went wrong fetching data from the database.'; 
+  // }  
+}
+ 
 
 
 // fetch user 
@@ -48,6 +75,11 @@ if (mysqli_num_rows($user_from_db) > 0) {
     $c_details_id = $row['details_id'];   
   }  
   mysqli_free_result($user_from_db);
+ 
+  if ($barangay_id_to_be_used!=$c_barangay) { 
+    header('location: ./view-midwife.php?edit=0');
+  }  
+ 
 } 
 else {
   $no_user = 'No such user.'; 
@@ -65,7 +97,7 @@ if(isset($_POST['submit'])) {
     empty($_POST['last_name']) ||
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
-    empty($_POST['barangay_id']) ||
+ 
     empty($_POST['status']))
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else {
@@ -78,7 +110,17 @@ if(isset($_POST['submit'])) {
 
     $contact = mysqli_real_escape_string($conn, $_POST['contact']);
     $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
-    $barangay_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
+ 
+
+    $barangay_id = mysqli_real_escape_string($conn,  
+      (
+        $admin==1? 
+          $_POST['barangay_id']
+        : 
+          $c_barangay 
+      )
+    );
+ 
 
     $select = "SELECT * FROM users WHERE email = '$email'";
 
@@ -171,24 +213,33 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option value="Active" <?php echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>  
-
+ 
+          <?php
+            if (count($barangay_list)>0 && $admin==1) { 
+          ?>  
+ 
           <div class="form__input-group">
             <label>Barangay</label>
             <select class="form__input" name="barangay_id">
             <?php ?>
               <?php
-                if (count($barangay_list)>0) {
-                  foreach ($barangay_list as $key => $value) {
+ 
+                foreach ($barangay_list as $key => $value) {
+ 
               ?>  
                 <option value="<?php echo $value['id'] ?>" <?php echo $value['id']==$c_barangay?'selected':'' ?>>
                   <?php echo $value['name'] ?>
                 </option>  
               <?php
-                  }
-                }
+ 
+                } 
               ?> 
             </select>
           </div> 
+          <?php 
+              }
+          ?> 
+ 
           <button class="form__button" value="register now" type="submit" name="submit">Update Midwife Record</button> 
         </form> 
 

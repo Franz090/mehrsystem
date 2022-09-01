@@ -57,7 +57,16 @@ include_once('../php-templates/admin-navigation-head.php');
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
-  <?php include_once('../php-templates/admin-navigation-left.php'); ?>
+ 
+  <?php include_once('../php-templates/admin-navigation-left.php'); 
+  
+    // from edit.php 
+    if (isset($_GET['edit']) && $_GET['edit']==0) {
+      echo "<script>alert(\"Can't edit this account!\");</script>";
+    }   
+
+  ?>
+ 
 
   <!-- Page Content -->
   <div id="page-content-wrapper" style="background-color: #f0cac4">
@@ -72,11 +81,18 @@ include_once('../php-templates/admin-navigation-head.php');
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Midwife Name</th>
-                <th scope="col">Email</th>
+ 
+                <?php if ($admin==1) { ?>
+                  <th scope="col">Email</th>
+                <?php } ?>
+
                 <th scope="col">Status</th>
-                <th scope="col">Contact Number</th>
-                <th scope="col">Birthdate</th>
-                <th scope="col">Barangay</th>
+                <?php if ($admin==1) { ?>
+                  <th scope="col">Contact Number</th>
+                  <th scope="col">Birthdate</th>
+                  <th scope="col">Barangay</th>
+                <?php } ?>
+ 
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -88,14 +104,22 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
-                  <td><?php echo $value['email']; ?></td>
+ 
+                  <?php if ($admin==1) { ?>  
+                    <td><?php echo $value['email']; ?></td>
+                  <?php } ?>
                   <td><?php echo $value['status']; ?></td>
-                  <td><?php echo $value['contact']; ?></td>
-                  <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td>
-                  <td><?php echo $value['barangay']; ?></td>
+                  <?php if ($admin==1) { ?>
+                    <td><?php echo $value['contact']; ?></td>
+                    <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td>
+                    <td><?php echo $value['barangay']; ?></td>
+                  <?php } ?>
                   <td>
                     <button class="edit"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                    <button class="del"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
+                    <?php if ($value['id']!=$_SESSION['id']) { ?>
+                      <button class="del"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
+                    <?php } ?>
+ 
                   </td>
                 </tr>
               <?php 
