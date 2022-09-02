@@ -139,13 +139,13 @@
       </button>
       <div class="dropdown-container">
         <i class="fas fa-light fa-minus"></i><a 
-          <?php echo $page == 'add_prescription' ? "type='button'" : 'href="../prescription/add-prescription.php"'?>
-          class="drop">Add Prescription</a><br>
+          <?php echo $page == 'add_medicine' ? "type='button'" : 'href="../prescription/add-medicine.php"'?>
+          class="drop">Add Medicine</a><br>
         <i class="fas fa-light fa-minus"></i><a 
-          <?php echo $page == 'view_prescription' ? "type='button'" : 'href="../prescription/view-prescription.php"'?>
-          class="drop">View Prescriptions</a>
-      </div>
-
+          <?php echo $page == 'view_medicine' ? "type='button'" : 'href="../prescription/view-medicine.php"'?>
+          class="drop">View Medicine</a>
+      </div> 
+      
     <?php
       }
     ?>

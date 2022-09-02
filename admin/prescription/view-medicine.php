@@ -5,24 +5,23 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/nurse-only.php';
+@include '../php-templates/redirect/not-for-nurse.php';
 
 
-// fetch barangays 
-$select = "SELECT id, health_center, IF(status=0, 'Inactive', 'Active') AS status FROM barangay";
+// fetch medicine 
+$select = "SELECT id, name, description, IF(status=0, 'Inactive', 'Active') AS status FROM treat_med WHERE category=0";
 $result = mysqli_query($conn, $select);
-$barangay_list = [];
+$med_list = [];
 
 if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
     $id = $row['id'];  
-    $h_center = $row['health_center'];    
+    $name = $row['name'];    
+    $description = $row['description'];    
     $s = $row['status'];  
-    array_push($barangay_list, array('id' => $id,'health_center' => $h_center, 'status' => $s));
+    array_push($med_list, array('id' => $id,'name' => $name, 'description' => $description, 'status' => $s));
   } 
-  mysqli_free_result($result);
-  // print_r($nurse_list);
-
+  mysqli_free_result($result);  
 } 
 else  { 
   mysqli_free_result($result);
@@ -32,23 +31,22 @@ else  {
 
 $conn->close(); 
 
-$page = 'view_barangay';
+$page = 'view_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
-<div class="d-flex" id="wrapper">
-
+<div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
-  <?php include_once('../php-templates/admin-navigation-left.php'); ?>
-
+  <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
   <div id="page-content-wrapper" style="background-color: #f0cac4">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3">view-barangay
+      <div class="row bg-light m-3">view-medicine
 
         <div class="container default">
+            
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
@@ -58,22 +56,26 @@ include_once('../php-templates/admin-navigation-head.php');
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Barangay</th>
+                <th scope="col">Medicine Name</th>
+                <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               <?php 
-                foreach ($barangay_list as $key => $value) {
+                foreach ($med_list as $key => $value) {
               ?>    
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
-                  <td><?php echo $value['health_center']; ?></td>
+                  <td><?php echo $value['name']; ?></td>
+                  <td><?php echo $value['description']; ?></td>
                   <td><?php echo $value['status']; ?></td>
                   <td>
-                    <button class="edit"><a href="edit-barangay.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                    <button class="del"><a href="delete-barangay.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
+                    <a href="edit-medicine.php?id=<?php echo $value['id'] ?>"><button class="edit">
+                        Edit</button></a>
+                    <a href="delete-medicine.php?id=<?php echo $value['id'] ?>"><button class="del">
+                        Delete</button></a>
                   </td>
                 </tr>
               <?php 
@@ -81,11 +83,11 @@ include_once('../php-templates/admin-navigation-head.php');
               ?> 
             </tbody>
           </table>
-        </div>
-
+        </div> 
 
       </div>
     </div>
+
   </div>
 </div>
  
