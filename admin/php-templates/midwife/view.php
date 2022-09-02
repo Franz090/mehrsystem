@@ -72,7 +72,6 @@ include_once('../php-templates/admin-navigation-head.php');
   .table-condensed {
 width: 100% !important;
 }
-
 </style>
   <!-- Page Content -->
   <div id="page-content-wrapper" >
