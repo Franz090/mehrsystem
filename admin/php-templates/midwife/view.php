@@ -70,7 +70,7 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- style css -->
 <style>
   .table-condensed {
-width: 90% !important;
+width: 100% !important;
 }
 </style>
   <!-- Page Content -->
