@@ -77,20 +77,18 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- Page Content -->
   <div id="page-content-wrapper" style="background-color:#F5F5F5;">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
-
     <div class="container-fluid">
-      <div class="row bg-light m-3"><h3 class="viewnurse">View Nurse</h3>
+      <div class="row bg-light m-3"><h3>View Nurse</h3>
          <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-12 ">
           <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables" >
             <thead class="table-dark" colspan="3">
               <tr>
- 
                 <th scope="col" class="col-sm-2" >#</th>
                 <th scope="col" class="col-md-5" >Nurse Name</th>
                 <th scope="col" class="col-sm-2" >Status</th>
                 <th scope="col" class="col-lg-6" >Actions</th>
- 
+              
               </tr>
             </thead>
             <tbody id="table_body">
@@ -103,13 +101,11 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['name']; ?></td>
                   <td><?php echo $value['status']; ?></td>
                   <td>
- 
                     <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-nurse.php?id=<?php echo $value['id'] ?>">Edit</a></button>
                    <?php if ($_SESSION['id'] != $value['id']) { ?> 
                     
                     <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-nurse.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
                      <?php } ?> 
- 
                   </td>
                 </tr>
               <?php 
@@ -119,7 +115,7 @@ include_once('../php-templates/admin-navigation-head.php');
           </table>
         </div>
       </div> 
- 
+    </div>
     </div>
   </div>
 </div>

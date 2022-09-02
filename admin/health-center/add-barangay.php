@@ -40,12 +40,13 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">add-barangay
- 
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>Add New Barangay</h3>
+      <div class="container default table-responsive p-4">
+          <div class="col-md-8 col-lg-5 ">
         <form class="form" action="" method="post">
  
           <?php
@@ -66,6 +67,8 @@ include_once('../php-templates/admin-navigation-head.php');
         </form>  
       </div>
     </div>
+</div>
+</div>
   </div>
 </div>
  

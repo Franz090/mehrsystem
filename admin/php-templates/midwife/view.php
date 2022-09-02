@@ -67,20 +67,25 @@ include_once('../php-templates/admin-navigation-head.php');
 
   ?>
  
-
+<!-- style css -->
+<style>
+  .table-condensed {
+width: 90% !important;
+}
+</style>
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>View Midwife</h3>
 
-    <div class="container">
-      <div class="row bg-light m-3">view-midwife
-
-        <div class="container default">
-          <table class="table mt-5 table-striped table-sm ">
-            <thead class="table-dark">
+        <div class="container default table-responsive-sm p-4">
+          <div class="col-md-8 col-lg-12 table-responsive-md">
+          <table class="table mt-5 table-striped table-lg table-bordered table-hover table-condensed display" id="datatables">
+            <thead class="table-dark" colspan="3"> 
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Midwife Name</th>
+                <th scope="col" class="col-sm-1">#</th>
+                <th scope="col" class="col-sm2">Midwife Name</th>
  
                 <?php if ($admin==1) { ?>
                   <th scope="col">Email</th>
@@ -115,9 +120,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     <td><?php echo $value['barangay']; ?></td>
                   <?php } ?>
                   <td>
-                    <button class="edit"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
+                    <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
                     <?php if ($value['id']!=$_SESSION['id']) { ?>
-                      <button class="del"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
+                      <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
                     <?php } ?>
  
                   </td>
@@ -133,7 +138,26 @@ include_once('../php-templates/admin-navigation-head.php');
     </div>
   </div>
 </div>
+<script>
+       $(document).ready( function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu":[
+            [10, 25, 30,50, -1],
+            [10, 25, 30,50, "All"]
+          ],
+          destroy: true,
+          fixedColumns: true,
+          responsive: true,
+          language:{
+            search: "_INPUT_",
+            searchPlaceholder: "Search Midwife",
+          }
+        });
+      } );
+  </script>
  
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
+include_once('../php-templates/admin-navigation-head.php');
 ?>

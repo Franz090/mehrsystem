@@ -9,12 +9,14 @@
   <link rel="stylesheet" href="../css/dashboard.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <script src="../js/jquery-3.6.1.min.js" ></script>
   <!-- DATA TABLES -->
   <!-- <link rel="stylesheet" href="../css/jquery.dataTables.min.css"> -->
   <script src="../js/jquery.dataTables.min.js"></script>
   <script src="../js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
+  
   
 
 
@@ -24,9 +26,10 @@
       --color-error: #cc3333;
     }
     .form {
-      --color-primary: #009579;
-      --color-primary-dark: #007f67;
+      --color-primary: #0275d8;
+	    --color-primary-dark: #1871be;
       --color-secondary: #252c6a;
+      --color-info: #5bc0de;
       --color-success: #4bb544;
       --border-radius: 4px;
     }
@@ -61,9 +64,15 @@
       border-radius: var(--border-radius);
       border: 1px solid #dddddd;
       outline: none;
-      background: #eeeeee;
+      background: #e1e1e1;
       transition: background 0.2s, border-color 0.2s;
     } 
+    .form i {
+    margin-left: 390px;
+    cursor: pointer;
+    color: black;
+    
+  }
     .form__input:focus {
       border-color: var(--color-primary);
       background: #ffffff;
@@ -98,6 +107,10 @@
     .form__text {
       text-align: center;
     } 
+    #page-content-wrapper {
+ 	    background-color: #F5F5F5;
+    }
+
   </style> 
 </head>
 

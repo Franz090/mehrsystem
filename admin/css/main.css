@@ -1,9 +1,10 @@
 body {
-	--color-primary: #009579;
-	--color-primary-dark: #007f67;
+	--color-primary: #0275d8;
+	--color-primary-dark: #1871be;;
 	--color-secondary: #252c6a;
 	--color-error: #cc3333;
 	--color-success: #4bb544;
+
 	--border-radius: 4px;
 
 	margin: 0;
@@ -54,8 +55,8 @@ body {
 	margin-bottom: 1rem;
 }
 
-.form__message--success {
-	color: var(--color-success);
+.form__message--secondary {
+	color: var(--color-secondary);
 }
 
 .form__message--error {
@@ -81,6 +82,7 @@ body {
 .form__input:focus {
 	border-color: var(--color-primary);
 	background: #ffffff;
+	transition: 1s ease-out;
 }
 
 .form__input--error {
@@ -128,3 +130,22 @@ body {
 .form__link:hover {
 	text-decoration: underline;
 }
+.form .form__input-group i {
+	margin-left: 370px;
+	cursor: pointer;
+	position: relative;
+	bottom: 33px;
+	transform: translate(0, -50%);
+}
+.bi{
+	font-size:18px;
+	color: black;
+}
+input:focus::placeholder{
+	color: transparent;
+	font-weight: 200;
+	opacity: 1;
+}
+ #page-content-wrapper {
+ 	background-color: #F5F5F5;
+ }
