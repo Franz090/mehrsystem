@@ -83,6 +83,10 @@ include_once('../php-templates/admin-navigation-head.php');
             </thead>
             <tbody>
                 <?php 
+                  if (isset($error)) {
+                    echo '<span class="">'.$error.'</span>'; 
+                  }
+                  else { 
                     foreach ($patient_list as $key => $value) {
                 ?>    
                     <tr>
@@ -94,14 +98,18 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td>
                         <td><?php echo $value['barangay']; ?></td>
                         <td>
-                            <button class="edit"><a href="edit-patient.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                            <button class="del"><a href="delete-patient.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>&med_history_id=<?php echo $value['med_history_id'] ?>">Delete</a></button> 
-                            <hr/>
-                            <button class="med"><a href="med-patient.php?id=<?php echo $value['id'] ?>">View Report</a></button> 
+                          <a href="edit-patient.php?id=<?php echo $value['id'] ?>">
+                            <button class="edit">Edit</button></a>
+                          <a href="delete-patient.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>&med_history_id=<?php echo $value['med_history_id'] ?>">
+                            <button class="del">Delete</button></a>
+                          <hr/>
+                          <a href="med-patient.php?id=<?php echo $value['id'] ?>">
+                            <button class="med">View Report</button></a>
                         </td>
                     </tr>
                 <?php 
                     }
+                  }
                 ?> 
             </tbody>
           </table>

@@ -61,8 +61,6 @@ if(isset($_POST['submit'])) {
     empty($_POST['last_name']) ||
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
-    empty($_POST['barangay_id']) ||
-    empty($_POST['status']) ||
     
     empty($_POST['height']) ||
     empty($_POST['weight']) ||
@@ -105,7 +103,7 @@ if(isset($_POST['submit'])) {
     } 
     else  { 
       $insert1 = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
-        VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, 0, '',$next_details_id);  ";
+        VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, -1, '',$next_details_id);  ";
       $insert2 = "INSERT INTO details(id, contact_no, b_date, barangay_id, med_history_id) 
         VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
       $insert3 = "INSERT INTO med_history(id, height, weight, blood_type, diagnosed_condition, allergies) 
@@ -142,8 +140,8 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3 con1 container">add-patient
-        <form class="form wider" action="" method="post" >
+      <div class="row bg-light m-3 container">add-patient
+        <form class="form" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
@@ -163,8 +161,8 @@ include_once('../php-templates/admin-navigation-head.php');
               pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required/>
           </div>
           <div class="form__input-group">
-            <label>Birth Date</label>
-            <input type="date" name="b_date" placeholder="Birth Date*" required class="form__input"/>
+            <label>Birth Date*</label>
+            <input type="date" name="b_date" required class="form__input"/>
           </div>
           <div class="form__input-group">
               <label>Status</label>

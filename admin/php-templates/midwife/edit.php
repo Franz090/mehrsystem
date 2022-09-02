@@ -14,7 +14,6 @@ if ($admin==1) {
   // fetch barangays  
   $select = "SELECT * FROM barangay";
   $result_barangay = mysqli_query($conn, $select);
-  $barangay_list = [];
 
   if(mysqli_num_rows($result_barangay)>0)  {
     foreach($result_barangay as $row)  {
@@ -138,7 +137,7 @@ if(isset($_POST['submit'])) {
         email='$email',  status=$status WHERE id=$id_from_db";
       $up2 = "UPDATE details SET contact_no='$contact', b_date='$b_date', barangay_id=$barangay_id
         WHERE id=$details_id";
-        echo $up2;
+        // echo $up2;
       if (mysqli_query($conn, $up1))  {
         mysqli_free_result($result);
         if (mysqli_query($conn, $up2)) { 
@@ -202,9 +201,9 @@ include_once('../php-templates/admin-navigation-head.php');
               pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required/>
           </div>
           <div class="form__input-group">
-            <label>Birth Date</label>
+            <label>Birth Date*</label>
             <input value="<?php echo $c_b_date?>"
-            type="date" name="b_date" placeholder="Birth Date*" required class="form__input"/>
+            type="date" name="b_date" required class="form__input"/>
           </div>
           <div class="form__input-group">
               <label>Status</label>
