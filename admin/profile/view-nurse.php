@@ -109,6 +109,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <button class="del btn btn-danger btn-md btn-inverse">Delete</button></a>
                     <?php } ?> 
  
+
                   </td>
                 </tr>
               <?php 
