@@ -146,24 +146,28 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3 con1 container">add-midwife
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>Add New Midwife</h3>
+      <div class="container default table-responsive p-4">
+          <div class="col-md-8 col-lg-5 ">
         <form class="form" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
           <div class="form__input-group">
-            <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*" required/>
+            <input type="email" class="form__input" name="usermail" autofocus placeholder="Email Address*" required/>
           </div>
           <div class="form__input-group">
               <input type="text" class="form__input" name="first_name" placeholder="First Name*" required/>
-    
+              </div>
+           <div class="form__input-group">
               <input type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
-          
+            </div>
+          <div class="form__input-group">
               <input type="text" class="form__input" name="last_name" placeholder="Last Name*" required/>
           </div> 
           <div class="form__input-group">
@@ -207,7 +211,8 @@ include_once('../php-templates/admin-navigation-head.php');
  
           <div class="form__input-group">
               <input type="password" class="form__input" name="password" placeholder="Password*" required/>
-          
+          </div>
+          <div class="form__input-group">
               <input type="password" class="form__input" name="cpassword" placeholder="Confirm password*" required/>
           </div>
  
@@ -216,6 +221,8 @@ include_once('../php-templates/admin-navigation-head.php');
         </form>  
       </div>
     </div>
+          </div>
+          </div>
   </div>
 </div>
  

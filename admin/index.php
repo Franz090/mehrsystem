@@ -79,12 +79,16 @@ $conn->close();
     <!-- bootstrap -->
      <link rel="shortcut icon" href="/assets/favicon.ico">
     <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <script src="../js/jquery-3.6.1.min.js" ></script>
+  <script src="../js/main.js"></script>
    
     <title>Admin Login</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="form__title">Login</h1>
+        <h1 class="form__title">Admin Login</h1>
         <form class="form" id="login" action="" method="post">
             <?php
                 if(isset($error)) 
@@ -98,18 +102,33 @@ $conn->close();
                 <!-- <div class="form__input-error-message"></div> -->
             </div>
             <div class="form__input-group">
-                <input type="password" class="form__input" name="password" autofocus placeholder="Password">
+               <input type="password" class="form__input"  autofocus name="password" id="password" placeholder="Password" required />
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                
                 <!-- <div class="form__input-error-message"></div> -->
             </div>
-            <button class="form__button" type="submit" name="submit">Login</button>
+            <button class="form__button" type="submit" id="submit" name="submit">Login</button>
             <p class="form__text">
-                <a href="adminreset-password.php" class="form__link">Forgot your password?</a>
+                <a href="adminreset-password.php" id="form_link" class="form__link">Forgot your password?</a>
             </p>
             <p class="form__text">
                 <a class="form__link" href="adminform.php">Don't have an account? Create account</a>
             </p>
         </form>
     <script src="js/main.js"></script>
+ 
+        <script>
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+            togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye / eye slash icon
+    this.classList.toggle('bi-eye');
+});s
+        
+    </script>
     
     
 </body>
