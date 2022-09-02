@@ -114,7 +114,7 @@ width: 100% !important;
                 <th scope="col">Status</th>
                 <?php if ($admin==1) { ?>
                   <th scope="col">Contact Number</th>
-                  <th scope="col">Birthdate</th>
+                  <!-- <th scope="col">Birthdate</th> -->
                   <th scope="col">Barangay</th>
                 <?php } ?>
  
@@ -136,7 +136,7 @@ width: 100% !important;
                   <td><?php echo $value['status']; ?></td>
                   <?php if ($admin==1) { ?>
                     <td><?php echo $value['contact']; ?></td>
-                    <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td>
+                    <!-- <td><?php //$dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                     <td><?php echo $value['barangay']; ?></td>
                   <?php } ?>
                   <td>

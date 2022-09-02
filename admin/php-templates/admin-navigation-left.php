@@ -69,11 +69,26 @@
       </button>
       <div class="dropdown-container">
         <i class="fas fa-light fa-minus"></i><a 
-          <?php echo $page == 'add_appointment' ? "type='button'" : 'href="../appointment/add-appointment.php"'?>
-          class="drop">Add Appointment</a><br>
+          <?php echo $page == 'add_appointment' ? "type='button'" : 'href="../appointment/new-appointment.php"'?>
+          class="drop">Add Appointment</a><br/>
+        <?php
+          if ($admin==-1) {
+        ?> 
         <i class="fas fa-light fa-minus"></i><a 
           <?php echo $page == 'view_appointment' ? "type='button'" : 'href="../appointment/view-appointment.php"'?>
           class="drop">View Appointments</a>
+        <?php
+          } else if ($admin==0) {
+        ?> 
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'pending_appointment' ? "type='button'" : 'href="../appointment/pending-appointment.php"'?>
+            class="drop">Pending Appointments</a><br/>
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'approved_appointment' ? "type='button'" : 'href="../appointment/approved-appointment.php"'?>
+            class="drop">Approved Appointments</a>
+        <?php
+          }
+        ?> 
       </div>
       <?php
         if ($admin==0) {

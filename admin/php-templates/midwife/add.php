@@ -146,7 +146,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper"">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
