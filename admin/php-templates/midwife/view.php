@@ -72,6 +72,26 @@ include_once('../php-templates/admin-navigation-head.php');
   .table-condensed {
 width: 100% !important;
 }
+@media only screen and (max-width :700px) {
+  .table {
+    background-color: lightblue;
+    display: block;
+    scroll-direction: horizontal;
+      text-align: center;
+    margin-left: 20px 0;
+    overflow-x: scroll;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .table {
+    background-color: lightblue;
+    display: block;
+    scroll-direction: horizontal;
+    text-align: center;
+    margin-left: 20px 0;
+  }
+}
+
 </style>
   <!-- Page Content -->
   <div id="page-content-wrapper" >
