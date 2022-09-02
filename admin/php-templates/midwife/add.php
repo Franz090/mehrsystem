@@ -151,7 +151,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container">
       <div class="row bg-light m-3 con1 container">add-midwife
-        <form class="form wider" action="" method="post" >
+        <form class="form" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
