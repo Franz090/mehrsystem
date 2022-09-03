@@ -101,7 +101,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
     <?php echo $admin==1?'Nurse':($admin==0?'Midwife':'Patient') ?>
@@ -110,7 +110,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="row mt-5">
         <div class="col-md-6 col-sm-12 d-flex justify-content-center">
           <div id="piechart" class="chart"
-            style="position:relative;right: 90px;bottom:200px;width: 400px;height 200px;"></div>
+            style="bottom:200px;width: 400px;height 200px;"></div>
         </div>
         <div class="col-md-6 col-sm-12 d-flex justify-content-center">
           <div id="columnchart_material" class="columnchart">
