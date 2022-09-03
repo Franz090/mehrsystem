@@ -40,27 +40,68 @@ include_once('../php-templates/admin-navigation-head.php');
 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
+<!-- css style -->
+ <style>
+  .table {
+   margin: auto;
+   width: 100%!important;
+   padding-top: 13px;
+   
+  }
+  .btn{
+    border-radius: 3px;
+    margin: 2px 4px;
+  }
+  
+  h3{
+    font-weight: 900;  
+    background-color: #ececec;  
+    padding-top: 10px;
+    position: relative;
+    top: 8px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  a:hover{
+    color: #e2e5de;
+  }
+  .btn{
+    font-weight: 400;
+    font-size: 15px;
+  }
+   td{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 2;
+    font-family: arial, sans-serif;
+  }
+  th{
+    font-size: 15px;
+  }
 
+  </style>
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">view-barangay
-
-        <div class="container default">
+    <div class="container-fluid ">
+      <div class="row bg-light m-3"><h3>View Barangay</h3>
+        <div class="container default table-responsive p-4">
+           <div class="col-md-8 col-lg-12 ">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-          <table class="table mt-5 table-striped table-sm ">
-            <thead class="table-dark">
+          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables" >
+            <thead class="table-dark" colspan="3">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Barangay</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="col-sm-2">#</th>
+                <th scope="col" class="col-md-5">Barangay</th>
+                <th scope="col" class="col-sm-2" >Status</th>
+                <th scope="col" class="col-lg-6">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -73,8 +114,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['health_center']; ?></td>
                   <td><?php echo $value['status']; ?></td>
                   <td>
-                    <button class="edit"><a href="edit-barangay.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                    <button class="del"><a href="delete-barangay.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
+                    <button class="edit btn btn-success btn-sm btn-inverse"><a href="edit-barangay.php?id=<?php echo $value['id'] ?>">Edit</a></button>
+                    <button class="del btn btn-danger btn-sm btn-inverse"><a href="delete-barangay.php?id=<?php echo $value['id'] ?>">Delete</a></button> 
                   </td>
                 </tr>
               <?php 
@@ -86,10 +127,31 @@ include_once('../php-templates/admin-navigation-head.php');
 
 
       </div>
+    </div<>
     </div>
   </div>
 </div>
+<script>
+       $(document).ready( function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu":[
+            [10, 25, 30,50, -1],
+            [10, 25, 30,50, "All"]
+          ],
+          destroy: true,
+          fixedColumns: true,
+          responsive: true,
+          language:{
+            search: "_INPUT_",
+            searchPlaceholder: "Search Barangay",
+          }
+        });
+      } );
+  </script>
+
  
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
+include_once('../php-templates/admin-navigation-head.php');
 ?>

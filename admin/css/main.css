@@ -65,6 +65,7 @@ body {
 
 .form__input-group {
 	margin-bottom: 1rem;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .form__input {
@@ -136,6 +137,7 @@ body {
 	position: relative;
 	bottom: 33px;
 	transform: translate(0, -50%);
+	font-family: Arial, Helvetica, sans-serif;
 }
 .bi{
 	font-size:18px;

@@ -55,6 +55,7 @@
     } 
     .form__input-group {
       margin-bottom: 1rem;
+      font-family: arial, sans-serif;
     } 
     .form__input {
       display: block;

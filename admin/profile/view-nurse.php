@@ -68,7 +68,18 @@ include_once('../php-templates/admin-navigation-head.php');
   }
   .btn{
     font-weight: 400;
+    font-size: 15px;
   }
+   td{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 2;
+    font-family: arial, sans-serif;
+  }
+  th{
+    font-size: 15px;
+  }
+
   </style>
 
   <!-- Sidebar -->
@@ -103,10 +114,10 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td>
  
                     <a href="edit-nurse.php?id=<?php echo $value['id'] ?>">
-                      <button class="edit btn btn-success btn-md btn-inverse">Edit</button></a>
+                      <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
                     <?php if ($_SESSION['id'] != $value['id']) { ?>  
                       <a href="delete-nurse.php?id=<?php echo $value['id'] ?>">
-                        <button class="del btn btn-danger btn-md btn-inverse">Delete</button></a>
+                        <button class="del btn btn-danger btn-sm btn-inverse">Delete</button></a>
                     <?php } ?> 
  
 
