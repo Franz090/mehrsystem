@@ -23,6 +23,17 @@
             <!-- <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li> -->
             <li><a class="dropdown-item" href="../logout.php" class="logout">Logout</a></li>
+            <style>
+                .dropdown-item{
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: black;
+                    background: whitesmoke;
+                    padding: 1px;
+                }
+                .dropdown-item:hover{
+                    background-color: #0275d8;
+                }
+            </style>
             </ul>
         </li>
         </ul>

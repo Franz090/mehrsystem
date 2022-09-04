@@ -294,6 +294,9 @@ i {
 	bottom: 190px;
 	right: 150px;
 }
+ label {
+ 	font-family: Arial, Helvetica, sans-serif;
+ }
 /* .googleChartTitle {
     font: bold 11px Arial;
     text-align: center;

@@ -151,3 +151,7 @@ input:focus::placeholder{
  #page-content-wrapper {
  	background-color: #F5F5F5;
  }
+
+ .form__input-group {
+ 	font-family: Arial, Helvetica, sans-serif;
+ }

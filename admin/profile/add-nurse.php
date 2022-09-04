@@ -74,6 +74,9 @@ include_once('../php-templates/admin-navigation-head.php');
     position: relative;
     top: 8px;
   }
+   label {
+    font-family: Arial, Helvetica, sans-serif;
+  }  
   
   </style>
 
