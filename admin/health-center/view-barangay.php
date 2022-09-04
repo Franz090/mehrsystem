@@ -71,15 +71,7 @@ include_once('../php-templates/admin-navigation-head.php');
     font-weight: 400;
     font-size: 15px;
   }
-   td{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 2;
-    font-family: arial, sans-serif;
-  }
-  th{
-    font-size: 15px;
-  }
+  
 
   </style>
   <!-- Page Content -->
