@@ -133,7 +133,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <td><?php echo $value['contact']; ?></td>
                     <!-- <td><?php //$dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                     <td><?php echo $value['barangay']; ?></td>
-                  <?php } ?>
+                  <?php } ?> 
                   <?php if ($admin==1) {?>
                     <td>
                       <button class="edit btn btn-success btn-sm btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
@@ -141,7 +141,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <button class="del btn btn-danger btn-sm btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
                       <?php } ?> 
                     </td>
-                  <?php }?>
+                  <?php }?> 
                 </tr>
               <?php 
                 }
