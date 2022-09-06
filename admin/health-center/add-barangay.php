@@ -35,6 +35,11 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
  
 <div class="d-flex" id="wrapper">
+  <style>
+     label {
+    font-family: Arial, Helvetica, sans-serif;
+  }  
+  </style>
 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>

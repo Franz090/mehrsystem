@@ -15,6 +15,8 @@ body {
 	font-size: 18px;
 	background: url(./background.jpg);
 	background-size: cover;
+	font-family: 'Open Sans',
+		sans-serif;
 }
 
 .container {
@@ -65,6 +67,7 @@ body {
 
 .form__input-group {
 	margin-bottom: 1rem;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .form__input {
@@ -136,6 +139,7 @@ body {
 	position: relative;
 	bottom: 33px;
 	transform: translate(0, -50%);
+	font-family: Arial, Helvetica, sans-serif;
 }
 .bi{
 	font-size:18px;
@@ -149,3 +153,17 @@ input:focus::placeholder{
  #page-content-wrapper {
  	background-color: #F5F5F5;
  }
+
+ .form__input-group {
+ 	font-family: Arial, Helvetica, sans-serif;
+ }
+  td {
+  	font-weight: 500;
+  	font-size: 15px;
+  	line-height: 2;
+  	font-family: arial, sans-serif;
+  }
+
+  th {
+  	font-size: 16px;
+  }

@@ -7,10 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
   <link rel="stylesheet" href="../css/dashboard.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="../css/material-design-iconic-font.css">
+  <link rel="stylesheet" href="../css/material-design-iconic-font.min.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <script src="../js/jquery-3.6.1.min.js" ></script>
+  <script>src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- DATA TABLES -->
   <!-- <link rel="stylesheet" href="../css/jquery.dataTables.min.css"> -->
   <script src="../js/jquery.dataTables.min.js"></script>
@@ -24,6 +29,10 @@
   <style>
     .container {
       --color-error: #cc3333;
+    }
+    body{
+      font-family: 'Open Sans',
+		sans-serif;
     }
     .form {
       --color-primary: #0275d8;
@@ -55,6 +64,7 @@
     } 
     .form__input-group {
       margin-bottom: 1rem;
+      font-family: arial, sans-serif;
     } 
     .form__input {
       display: block;
@@ -110,6 +120,16 @@
     #page-content-wrapper {
  	    background-color: #F5F5F5;
     }
+     td{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 2;
+    font-family: arial, sans-serif;
+  }
+  th{
+    font-size: 16px;
+  }
+    
 
   </style> 
 </head>

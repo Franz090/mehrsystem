@@ -117,7 +117,7 @@ $conn->close();
         </form>
     <script src="js/main.js"></script>
  
-        <script>
+        <!-- <script>
             const togglePassword = document.querySelector('#togglePassword');
             const password = document.querySelector('#password');
             togglePassword.addEventListener('click', function (e) {
@@ -129,7 +129,7 @@ $conn->close();
 });s
         
     </script>
-    
+     -->
     
 </body>
 </html>

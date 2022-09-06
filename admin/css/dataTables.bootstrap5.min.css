@@ -523,7 +523,18 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
     top: 8px;
     text-align: left;
 }
+a {
+    text-decoration: none;
+    color: white;
+}
 
+a:hover {
+    color: #e2e5de;
+}
+
+.btn {
+    font-weight: 400;
+}
 
 @media screen and (max-width: 640px) {
 

@@ -68,8 +68,24 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- style css -->
 <style>
   .table-condensed {
-width: 100% !important;
-}
+    width: 100% !important;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+
+  }
+  a:hover{
+    color: #e2e5de;
+  }
+  .btn{
+    font-weight: 400;
+    font-size: 15px;
+    font-family: arial,sans-serif;
+  }
+ 
+
+
 </style>
   <!-- Page Content -->
   <div id="page-content-wrapper" >
@@ -83,15 +99,15 @@ width: 100% !important;
             <thead class="table-dark" colspan="3"> 
               <tr>
                 <th scope="col" class="col-sm-1">#</th>
-                <th scope="col" class="col-sm2">Midwife Name</th>
+                <th scope="col">Midwife Name</th>
  
-                <?php if ($admin==1) { ?>
-                  <th scope="col">Email</th>
-                <?php } ?>
+                <!-- <?php if ($admin==1) { ?>
+                  <th scope="col" >Email</th>
+                <?php } ?> -->
 
                 <th scope="col">Status</th>
                 <?php if ($admin==1) { ?>
-                  <th scope="col">Contact Number</th>
+                  <th scope="col">Contact No</th>
                   <!-- <th scope="col">Birthdate</th> -->
                   <th scope="col">Barangay</th>
                 <?php } ?>
@@ -109,9 +125,9 @@ width: 100% !important;
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
  
-                  <?php if ($admin==1) { ?>  
+                  <!-- <?php if ($admin==1) { ?>  
                     <td><?php echo $value['email']; ?></td>
-                  <?php } ?>
+                  <?php } ?> -->
                   <td><?php echo $value['status']; ?></td>
                   <?php if ($admin==1) { ?>
                     <td><?php echo $value['contact']; ?></td>
@@ -120,9 +136,9 @@ width: 100% !important;
                   <?php } ?>
                   <?php if ($admin==1) {?>
                     <td>
-                      <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
+                      <button class="edit btn btn-success btn-sm btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
                       <?php if ($value['id']!=$_SESSION['id']) { ?>
-                        <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
+                        <button class="del btn btn-danger btn-sm btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
                       <?php } ?> 
                     </td>
                   <?php }?>

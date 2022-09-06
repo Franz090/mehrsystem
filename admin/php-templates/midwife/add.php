@@ -169,7 +169,11 @@ $conn->close();
 $page = 'add_midwife';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- 
+ <style>
+   label {
+    font-family: Arial, Helvetica, sans-serif;
+  }  
+ </style>
 <div class="d-flex" id="wrapper">
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>

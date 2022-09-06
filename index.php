@@ -9,7 +9,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
          <!-- custom css file link  -->
-     <link rel="stylesheet" href="css/index.css">
+     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- header section starts  -->
@@ -353,7 +353,7 @@
     <div class="box">
         <h3>our services</h3>
         <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
+        <a href="#"> <i class="fas fa-chevron-right"></i> Maternity Care</a>
         <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
         <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
         <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
@@ -361,11 +361,9 @@
 
     <div class="box">
         <h3>contact info</h3>
-        <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-        <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-        <a href="#"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
-        <a href="#"> <i class="fas fa-envelope"></i> anasbhai@gmail.com </a>
-        <a href="#"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
+        <a href="#"> <i class="fas fa-phone"></i> (049)501‐0359</a>
+        <a href="#"> <i class="fas fa-envelope"></i> santacruzrhu1@yahoo.com.ph </a>
+        <a href="#"> <i class="fas fa-map-marker-alt"></i> RHU SANTA CRUZ LAG. BARANGAY III (POB.)</a>
     </div>
 
     <div class="box">
@@ -380,7 +378,7 @@
 
 </div>
 
-<div class="credit"> created by <span>mr. web designer</span> | all rights reserved </div>
+<div class="credit"> All right reserved<span>AW09</span> | all rights reserved 2022</div>
 
 </section>
 
