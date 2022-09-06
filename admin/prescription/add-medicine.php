@@ -7,7 +7,7 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/midwife-only.php'; 
 
-// add treatment
+// add medicine
 if(isset($_POST['submit'])) { 
   $_POST['submit'] = null;
   $error = ''; 
@@ -20,20 +20,20 @@ if(isset($_POST['submit'])) {
     $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1)); 
 
     $insert1 = "INSERT INTO treat_med(name, description, category, status) 
-    VALUES('$name', '$description', 1, $status);  ";
+    VALUES('$name', '$description', 0, $status);  ";
     
     if (mysqli_query($conn,"$insert1"))  { 
-    echo "<script>alert('Treatment Added!');</script>"; 
+    echo "<script>alert('Medicine Added!');</script>"; 
     }
     else {  
-        $error .= 'Something went wrong adding the treatment to the database.';
+        $error .= 'Something went wrong adding the medicine to the database.';
     }  
   } 
 }
 
 $conn->close(); 
 
-$page = 'add_treatment';
+$page = 'add_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -45,14 +45,14 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3 container">add-treatment
+      <div class="row bg-light m-3 container">add new medicine
         <form class="form" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
           <div class="form__input-group">
-            <input type="text" class="form__input" name="name" autofocus placeholder="Treatment Type*" required/>
+            <input type="text" class="form__input" name="name" autofocus placeholder="Medicine Name*" required/>
           </div>
           <div class="form__input-group">
               <textarea type="text" class="form__input" name="description" placeholder="Description*" required></textarea>
@@ -64,7 +64,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <option value="Active">Active</option>
               </select>
           </div>  
-          <button class="form__button" type="submit" name="submit">Add Treatment</button> 
+          <button class="form__button" type="submit" name="submit">Add Medicine</button> 
         </form>  
       </div>
     </div>

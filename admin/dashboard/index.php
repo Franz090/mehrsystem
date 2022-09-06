@@ -4,7 +4,70 @@
 
 session_start();
 
-@include '../php-templates/redirect/admin-page-setter.php';  
+@include '../php-templates/redirect/admin-page-setter.php';
+
+$vaccine_list = [];
+$infant_list = [];
+$title = ''; // pie chart title
+
+if ($admin==1) {
+  $title = "Patient Vaccine Monitoring Pie Chart";
+  // fetch vaccines  
+  $select1 = "SELECT * FROM vaccine";
+  $result1 = mysqli_query($conn, $select1);
+
+  if(mysqli_num_rows($result1))  {
+    foreach($result1 as $row)  {
+      $id = $row['id'];  
+      $count = $row['count'];  
+      $type = $row['type'];  
+      $status = $row['status'];  
+      $expiration = $row['expiration'];     
+      array_push($vaccine_list, array('id' => $id,
+      'count' => $count, 
+      'type' => $type, 
+      'status' => $status, 
+      'expiration' => $expiration));
+    } 
+    mysqli_free_result($result1);
+    // print_r($nurse_list);
+  
+  } 
+  else  { 
+    mysqli_free_result($result1);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
+} 
+if ($admin==0) {
+  $title = "Infant Vaccine Monitoring Pie Chart";
+  // fetch infants 
+  
+  $select2 = "SELECT * FROM infant_record";
+  $result2 = mysqli_query($conn, $select2);
+
+  if(mysqli_num_rows($result2))  {
+    foreach($result2 as $row)  {
+      $id = $row['id'];  
+      $name = $row['name'];  
+      $date = $row['date'];  
+      $status = $row['status'];  
+      $legitimacy = $row['legitimacy'];     
+      array_push($infant_list, array('id' => $id,
+      'name' => $name, 
+      'date' => $date, 
+      'status' => $status, 
+      'legitimacy' => $legitimacy));
+    } 
+    mysqli_free_result($result2);
+    // print_r($nurse_list);
+  
+  } 
+  else  { 
+    mysqli_free_result($result2);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
+}
+
 $conn->close(); 
 
 $page = 'dashbaord';
@@ -19,7 +82,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ["Task", "Patient Vaccine Monitoring Chart"],
+      ["Task", "<?php echo $title; ?>"],
       ["Available Vaccine", 50],
       ["Vaccinated", 10],
       ["Expired Vaccine", 20],
@@ -36,7 +99,7 @@ include_once('../php-templates/admin-navigation-head.php');
       },
       legendTextStyle: { color: '#000000' },
       legend: { position: 'bottom' },
-      title: "Patient Vaccine Monitoring Chart",
+      title: "<?php echo $title; ?>",
       titleTextStyle: {
         color: '#000000', fontSize: 17,
         bold: false, italic: false

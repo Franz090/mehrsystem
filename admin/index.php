@@ -84,11 +84,11 @@ $conn->close();
   <script src="../js/jquery-3.6.1.min.js" ></script>
   <script src="../js/main.js"></script>
    
-    <title>Admin Login</title>
+    <title>Login</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="form__title">Admin Login</h1>
+        <h1 class="form__title">Login</h1>
         <form class="form" id="login" action="" method="post">
             <?php
                 if(isset($error)) 

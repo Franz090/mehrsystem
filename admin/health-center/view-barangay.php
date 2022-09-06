@@ -9,7 +9,7 @@ session_start();
 
 
 // fetch barangays 
-$select = "SELECT id, health_center, IF(barangay.status=0, 'Inactive', 'Active') AS status FROM barangay";
+$select = "SELECT id, health_center, IF(status=0, 'Inactive', 'Active') AS status FROM barangay";
 $result = mysqli_query($conn, $select);
 $barangay_list = [];
 
@@ -100,7 +100,6 @@ include_once('../php-templates/admin-navigation-head.php');
               <?php 
                 foreach ($barangay_list as $key => $value) {
               ?>    
-              <?php  ?>
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['health_center']; ?></td>

@@ -2,6 +2,11 @@
 
 @include '../includes/config.php';
 
+session_start();
+
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+
 $id = $_GET['id'];
 
 // check if the barangay is not used 
@@ -27,7 +32,7 @@ mysqli_free_result($details_barangay_check);
 // mysqli_free_result($delete);
 $conn->close();
  
-echo "<script>alert(".$response.");</script>";
+echo "<script>alert('".$response."');</script>";
  
 
 header("location: view-barangay.php$error");
