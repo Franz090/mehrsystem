@@ -17,8 +17,8 @@ if(isset($_POST['submit'])) {
     $health_center = mysqli_real_escape_string($conn, $_POST['health_center']); 
     $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));  
    
-    $insert = "INSERT INTO barangay(health_center, status) 
-      VALUES('$health_center', $status)";
+    $insert = "INSERT INTO barangay(health_center, status, assigned_midwife) 
+      VALUES('$health_center', $status, NULL)";
     if (mysqli_query($conn, $insert))  {
       echo "<script>alert('Barangay Added!');</script>";
     }

@@ -5,7 +5,7 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-nurse.php';
+@include '../php-templates/redirect/midwife-only.php';
 
 
 // fetch medicine 

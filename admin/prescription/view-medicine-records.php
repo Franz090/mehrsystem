@@ -5,21 +5,26 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/midwife-only.php';
+@include '../php-templates/redirect/patient-only.php';
 
+$session_id = $_SESSION['id'];
 
-// fetch treatment 
-$select = "SELECT id, name, description, IF(status=0, 'Inactive', 'Active') AS status FROM treat_med WHERE category=1";
+// fetch treatment records 
+$select = "SELECT name, description, tmr.date 
+    FROM treat_med_record AS tmr, treat_med AS tm, appointment AS a
+    WHERE category=0 && $session_id=patient_id && medicine_record_id=tmr.id && tm.id=tmr.treat_med_id";
 $result = mysqli_query($conn, $select);
-$treatment_list = [];
+// echo $select;
+$medicine_list_record = [];
 
 if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
-    $id = $row['id'];  
     $name = $row['name'];    
     $description = $row['description'];    
-    $s = $row['status'];  
-    array_push($treatment_list, array('id' => $id,'name' => $name, 'description' => $description, 'status' => $s));
+    $date = $row['date'];  
+    array_push($medicine_list_record, 
+      array('name' => $name, 'description' => $description, 'date' => $date)
+    );
   } 
   mysqli_free_result($result);  
 } 
@@ -31,7 +36,7 @@ else  {
 
 $conn->close(); 
 
-$page = 'view_treatment';
+$page = 'view_medicine_record';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -43,40 +48,32 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container">
-      <div class="row bg-light m-3">view-treatment
+      <div class="row bg-light m-3">view-medicine-records
 
         <div class="container default">
             
           <?php
             if (isset($_GET['error']))  
-              echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
-            
+              echo '<span class="form__input-error-message">'.$_GET['error'].'</span>'; 
           ?> 
           <table class="table mt-5 table-striped table-sm ">
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Treatment Type</th>
+                <th scope="col">Medicine Type</th>
                 <th scope="col">Description</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Prescription Date</th>
               </tr>
             </thead>
             <tbody>
               <?php 
-                foreach ($treatment_list as $key => $value) {
+                foreach ($medicine_list_record as $key => $value) {
               ?>    
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
                   <td><?php echo $value['description']; ?></td>
-                  <td><?php echo $value['status']; ?></td>
-                  <td>
-                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button class="edit">
-                        Edit</button></a>
-                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button class="del">
-                        Delete</button></a>
-                  </td>
+                  <td><?php echo $value['date']; ?></td> 
                 </tr>
               <?php 
                 }

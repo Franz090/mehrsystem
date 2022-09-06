@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 02:51 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Sep 06, 2022 at 11:52 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,6 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
- 
 INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_id`, `medicine_record_id`, `date`, `status`) VALUES
 (1, 3, 2, 1, 1, '2022-08-22', 1);
 
@@ -54,44 +53,52 @@ INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_i
 CREATE TABLE `barangay` (
   `id` int(50) NOT NULL,
   `health_center` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `assigned_midwife` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barangay`
 --
 
-INSERT INTO `barangay` (`id`, `health_center`, `status`) VALUES
-(2, 'Barangay 23', 0),
-(5, 'asdf', 0);
+INSERT INTO `barangay` (`id`, `health_center`, `status`, `assigned_midwife`) VALUES
+(2, 'Barangay 23', 0, 23),
+(5, 'asdf', 0, 23),
+(8, 'Pagsawitan Laguna', 1, 27),
+(9, 'Santo Angel Norte', 1, 29),
+(10, 'another barangay', 0, 21),
+(11, 'isa pang brgy', 1, 33);
 
 -- --------------------------------------------------------
- 
+
 --
 -- Table structure for table `details`
 --
 
 CREATE TABLE `details` (
- 
   `id` int(50) NOT NULL,
   `contact_no` varchar(255) NOT NULL,
-  `b_date` date NOT NULL, 
-  `barangay_id` int(50) NOT NULL,
+  `b_date` date NOT NULL,
+  `barangay_id` int(50) DEFAULT NULL,
   `med_history_id` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `details`
- 
 --
 
 INSERT INTO `details` (`id`, `contact_no`, `b_date`, `barangay_id`, `med_history_id`) VALUES
 (1, '0908-123-1231', '1999-07-28', 5, 2),
 (2, '0908-123-1231', '1999-07-28', 2, 1),
-(3, '1234-123-1234', '1999-08-10', 2, NULL),
-(4, '1234-123-1234', '1090-12-12', 2, NULL),
-(5, '1234-123-1234', '1234-03-12', 5, NULL),
-(6, '1234-123-1234', '1234-03-12', 2, 3);
+(3, '1234-123-1234', '1999-08-10', NULL, NULL),
+(4, '1234-123-1234', '1090-12-12', NULL, NULL),
+(5, '1234-123-1234', '1234-03-12', NULL, NULL),
+(6, '1234-123-1234', '1234-03-12', 2, 3),
+(7, '0951-602-7781', '2006-06-08', NULL, NULL),
+(9, '0951-602-7781', '2022-09-30', NULL, NULL),
+(10, '0951-602-7781', '2022-09-02', NULL, NULL),
+(11, '0951-602-7781', '2001-06-05', NULL, NULL),
+(12, '1234-123-1234', '2022-09-16', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,7 +123,7 @@ INSERT INTO `infant_record` (`id`, `name`, `date`, `legitimacy`, `status`) VALUE
 (2, 'Isa Pang Sangol', '2012-02-14', 0, 0);
 
 -- --------------------------------------------------------
- 
+
 --
 -- Table structure for table `med_history`
 --
@@ -205,24 +212,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `mid_initial`, `last_name`, `email`, `password`, `status`, `admin`, `otp`, `details_id`) VALUES
-(1, 'Francis', '', 'Oblepias', 'francisoblepias@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 1, '', NULL),
-(2, 'Francis', '', 'Oblepias', 'francisoblepias7@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 1),
-(3, 'A', '', 'B', 'a@gmail.com', '4297f44b13955235245b2497399d7a93', 0, -1, '', 2),
-(8, 'd', 'a', 'e', 'd@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 3),
-(14, 'g', '', 'h', 'g@gmail', '202cb962ac59075b964b07152d234b70', 1, 0, '', 4),
-(16, 'h', 'a', 'i', 'h@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 5),
-(19, 'Pa', 'T', 'Ient', 'patient@gmail.com', '202cb962ac59075b964b07152d234b70', 0, -1, '', 6),
-(4, 'francisoblepias1@gmail.com','Francis1','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(5, 'francisoblepias2@gmail.com','Francis2','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(6, 'francisoblepias3@gmail.com','Francis3','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(7, 'francisoblepias4@gmail.com','Francis4','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(9, 'francisoblepias6@gmail.com','Francis6','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(11, 'francisoblepias8@gmail.com','Francis8','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null), 
-(12, 'francisoblepias9@gmail.com','Francis9','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
-(13, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
-(15, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
-(17, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null),
-(18, 'francisoblepias10@gmail.com','Francis10','','Oblepias', '202cb962ac59075b964b07152d234b70',1,1,'',null);
+(20, 'Elmina', 'R.', 'Monteza', 'monteza@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 1, '', NULL),
+(21, 'Cathy', 'R.', 'Bulusan', 'cathybulusan@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 7),
+(23, 'Francis', 'Perona', 'Oblepias', 'francisoblepias123@gmaill.com', '202cb962ac59075b964b07152d234b70', 1, 0, '', 9),
+(27, 'Francis', 'R', 'Oblepias', 'francisoblepias@gmaill.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 10),
+(28, 'Francis', 'P', 'Oblepias', 'francisoblepias120@gmaill.com', '202cb962ac59075b964b07152d234b70', 0, 1, '', NULL),
+(29, 'Angela', 'Herradura', 'Oblepias', 'angela1@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 0, '', 11),
+(30, 'Patient', 'C', 'D', 'patient2@gmail.com', '202cb962ac59075b964b07152d234b70', 0, -1, '', 2),
+(31, 'Patient', 'E', 'F', 'patient3@gmaill.com', '202cb962ac59075b964b07152d234b70', 1, -1, '', 6),
+(32, 'Patient', 'A', 'B', 'patient1@gmail.com', '202cb962ac59075b964b07152d234b70', 1, -1, '', 1),
+(33, 'Another Midwife', '', 'Some Surname', 'mw@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 0, '', 12);
 
 -- --------------------------------------------------------
 
@@ -318,13 +317,13 @@ ALTER TABLE `appointment`
 -- AUTO_INCREMENT for table `barangay`
 --
 ALTER TABLE `barangay`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `infant_record`
@@ -354,7 +353,7 @@ ALTER TABLE `treat_med_record`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `vaccine`

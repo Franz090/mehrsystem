@@ -5,15 +5,19 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
- 
+@include '../php-templates/redirect/not-for-patient.php';
 
 // fetch nurses 
-$select = "SELECT u.id AS id, 
-  CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
-  IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,  health_center,
-  details_id 
-  FROM users as u, details as d,
-  barangay as b WHERE u.admin = 0 AND d.id=u.details_id AND d.barangay_id=b.id;";
+$select = "SELECT main.id, name, email, main.status, contact_no, b_date, details_id, health_center
+FROM 
+	(SELECT u.id AS id, 
+      CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
+      IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,
+      details_id 
+      FROM users as u, details as d 
+      WHERE u.admin = 0 AND d.id=u.details_id) as main 
+LEFT JOIN barangay as b
+ON main.id=b.assigned_midwife;";
 $result = mysqli_query($conn, $select);
 $midwife_list = [];
 
@@ -58,14 +62,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
   <!-- Sidebar -->
  
-  <?php include_once('../php-templates/admin-navigation-left.php'); 
-  
-    // from edit.php 
-    if (isset($_GET['edit']) && $_GET['edit']==0) {
-      echo "<script>alert(\"Can't edit this account!\");</script>";
-    }   
-
-  ?>
+  <?php include_once('../php-templates/admin-navigation-left.php'); ?>
  
 <!-- style css -->
 <style>
@@ -97,15 +94,16 @@ width: 100% !important;
                   <!-- <th scope="col">Birthdate</th> -->
                   <th scope="col">Barangay</th>
                 <?php } ?>
- 
-                <th scope="col">Actions</th>
+                <?php if ($admin==1) {?> 
+                  <th scope="col">Actions</th>
+                <?php }?>
               </tr>
             </thead>
             <tbody>
               <?php 
                 foreach ($midwife_list as $key => $value) {
               ?>    
-              <?php  ?>
+              
                 <tr>
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
@@ -119,13 +117,14 @@ width: 100% !important;
                     <!-- <td><?php //$dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                     <td><?php echo $value['barangay']; ?></td>
                   <?php } ?>
-                  <td>
-                    <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                    <?php if ($value['id']!=$_SESSION['id']) { ?>
-                      <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
-                    <?php } ?>
- 
-                  </td>
+                  <?php if ($admin==1) {?>
+                    <td>
+                      <button class="edit btn btn-success btn-md btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
+                      <?php if ($value['id']!=$_SESSION['id']) { ?>
+                        <button class="del btn btn-danger btn-md btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
+                      <?php } ?> 
+                    </td>
+                  <?php }?>
                 </tr>
               <?php 
                 }
