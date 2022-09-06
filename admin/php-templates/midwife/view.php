@@ -7,18 +7,19 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/not-for-patient.php';
 
+$midwife_select = "SELECT u.id AS id, 
+  CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
+  IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,
+  details_id 
+  FROM users as u, details as d 
+  WHERE u.admin = 0 AND d.id=u.details_id";
 // fetch nurses 
 $select = "SELECT main.id, name, email, main.status, contact_no, b_date, details_id, health_center
 FROM 
-	(SELECT u.id AS id, 
-      CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
-      IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,
-      details_id 
-      FROM users as u, details as d 
-      WHERE u.admin = 0 AND d.id=u.details_id) as main 
+	($midwife_select) as main 
 LEFT JOIN barangay as b
 ON main.id=b.assigned_midwife;";
-$result = mysqli_query($conn, $select);
+$result = mysqli_query($conn, $admin==1?$select:$midwife_select);
 $midwife_list = [];
 
 if(mysqli_num_rows($result))  {
@@ -29,7 +30,7 @@ if(mysqli_num_rows($result))  {
     $s = $row['status'];  
     $c_no = $row['contact_no'];  
     $b_date = $row['b_date'];  
-    $bgy = $row['health_center'];  
+    $bgy = $admin==1?$row['health_center']:'';  
     $det_id = $row['details_id'];  
     array_push($midwife_list, array(
       'id' => $id,
