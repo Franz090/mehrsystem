@@ -50,21 +50,13 @@ if(mysqli_num_rows($result))  {
 else  { 
   mysqli_free_result($result);
   $error = 'Something went wrong fetching data from the database.'; 
-}  
-
+}   
 
 $conn->close(); 
 
 $page = 'view_midwife';
 include_once('../php-templates/admin-navigation-head.php');
-?>
- 
-<div class="d-flex" id="wrapper">
-
-  <!-- Sidebar -->
- 
-  <?php include_once('../php-templates/admin-navigation-left.php'); ?>
- 
+?> 
 <!-- style css -->
 <style>
   .table-condensed {
@@ -72,8 +64,7 @@ include_once('../php-templates/admin-navigation-head.php');
   }
   a{
     text-decoration: none;
-    color: white;
-
+    color: white; 
   }
   a:hover{
     color: #e2e5de;
@@ -82,98 +73,92 @@ include_once('../php-templates/admin-navigation-head.php');
     font-weight: 400;
     font-size: 15px;
     font-family: arial,sans-serif;
-  }
- 
-
-
+  } 
 </style>
+
+<div class="d-flex" id="wrapper"> 
+  <!-- Sidebar --> 
+  <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
   <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
+
     <div class="container-fluid">
       <div class="row bg-light m-3"><h3>View Midwife</h3>
 
         <div class="container default table-responsive-sm p-4">
           <div class="col-md-8 col-lg-12 table-responsive-md">
-          <table class="table mt-5 table-striped table-lg table-bordered table-hover table-condensed display" id="datatables">
-            <thead class="table-dark" colspan="3"> 
-              <tr>
-                <th scope="col" class="col-sm-1">#</th>
-                <th scope="col">Midwife Name</th>
- 
-                <!-- <?php if ($admin==1) { ?>
-                  <th scope="col" >Email</th>
-                <?php } ?> -->
-
-                <th scope="col">Status</th>
-                <?php if ($admin==1) { ?>
-                  <th scope="col">Contact No</th>
-                  <!-- <th scope="col">Birthdate</th> -->
-                  <th scope="col">Barangay</th>
-                <?php } ?>
-                <?php if ($admin==1) {?> 
-                  <th scope="col">Actions</th>
-                <?php }?>
-              </tr>
-            </thead>
-            <tbody>
-              <?php 
-                foreach ($midwife_list as $key => $value) {
-              ?>    
-              
+            <table class="table mt-5 table-striped table-lg table-bordered table-hover table-condensed display" id="datatables">
+              <thead class="table-dark" colspan="3"> 
                 <tr>
-                  <th scope="row"><?php echo $key+1; ?></th>
-                  <td><?php echo $value['name']; ?></td>
- 
-                  <!-- <?php if ($admin==1) { ?>  
-                    <td><?php echo $value['email']; ?></td>
-                  <?php } ?> -->
-                  <td><?php echo $value['status']; ?></td>
+                  <th scope="col" class="col-sm-1">#</th>
+                  <th scope="col">Midwife Name</th> 
+                  <th scope="col">Status</th>
                   <?php if ($admin==1) { ?>
-                    <td><?php echo $value['contact']; ?></td>
-                    <!-- <td><?php //$dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
-                    <td><?php echo $value['barangay']; ?></td>
-                  <?php } ?> 
-                  <?php if ($admin==1) {?>
-                    <td>
-                      <button class="edit btn btn-success btn-sm btn-inverse"><a href="edit-midwife.php?id=<?php echo $value['id'] ?>">Edit</a></button>
-                      <?php if ($value['id']!=$_SESSION['id']) { ?>
-                        <button class="del btn btn-danger btn-sm btn-inverse"><a href="delete-midwife.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>">Delete</a></button> 
-                      <?php } ?> 
-                    </td>
-                  <?php }?> 
+                    <th scope="col">Contact No</th>
+                    <!-- <th scope="col">Birthdate</th> -->
+                    <th scope="col">Barangay</th> 
+                    <th scope="col">Actions</th>
+                  <?php }?>
                 </tr>
-              <?php 
-                }
-              ?> 
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <?php 
+                  foreach ($midwife_list as $key => $value) {
+                ?>    
+                
+                  <tr>
+                    <th scope="row"><?php echo $key+1; ?></th>
+                    <td><?php echo $value['name']; ?></td> 
+                    <td><?php echo $value['status']; ?></td>
+                    <?php if ($admin==1) { ?>
+                      <td><?php echo $value['contact']; ?></td>
+                      <td><?php echo $value['barangay']; ?></td> 
+                      <td>
+                        <a href="edit-midwife.php?id=<?php echo $value['id'] ?>">
+                          <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
+                        <?php //if ($value['id']!=$_SESSION['id']) { ?>
+                          <!-- <a href="delete-midwife.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>">  -->
+                            <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
+                            Delete</button> 
+                            <!-- </a>     -->
+                        <?php //} ?> 
+                      </td>
+                    <?php }?>
+                  </tr>
+                <?php 
+                  }
+                ?> 
+              </tbody>
+            </table>
+          </div> 
         </div>
 
       </div>
     </div>
+
   </div>
 </div>
+
 <script>
-       $(document).ready( function () {
-        $('#datatables').DataTable({
-          "pagingType": "full_numbers",
-          "lengthMenu":[
-            [10, 25, 30,50, -1],
-            [10, 25, 30,50, "All"]
-          ],
-          destroy: true,
-          fixedColumns: true,
-          responsive: true,
-          language:{
-            search: "_INPUT_",
-            searchPlaceholder: "Search Midwife",
-          }
-        });
-      } );
-  </script>
+  $(document).ready( function () {
+    $('#datatables').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu":[
+        [10, 25, 30,50, -1],
+        [10, 25, 30,50, "All"]
+      ],
+      destroy: true,
+      fixedColumns: true,
+      responsive: true,
+      language:{
+        search: "_INPUT_",
+        searchPlaceholder: "Search Midwife",
+      }
+    });
+  });
+</script>
  
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
-include_once('../php-templates/admin-navigation-head.php');
 ?>

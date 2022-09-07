@@ -19,6 +19,7 @@ $select = "SELECT u.id AS id,
   details_id, med_history_id
   FROM users as u, details as d, barangay as b, med_history as m
   WHERE u.id=$id_from_get AND d.id=u.details_id AND d.barangay_id=b.id AND m.id=d.med_history_id";
+// echo $select;
 $result = mysqli_query($conn, $select);
 $name = '';
 if(mysqli_num_rows($result) > 0)  {
@@ -46,16 +47,19 @@ else  {
 }  
 
 // only the latest appointment - with the linked treatment record and prescription record 
-$yester_date = date("Y-m-d", strtotime('-1 day'));
+$yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
 // fetch patient appointments
+
+$med_select = "SELECT tmr1.id AS mr_id, tmr1.date, tm1.name, tm1.description, tm1.status
+FROM treat_med_record AS tmr1, treat_med AS tm1
+WHERE tm1.category=0 AND tmr1.treat_med_id=tm1.id";
+
 $select2 = "SELECT a.date AS a_date, tm.name AS t_type, tm.description AS t_description, tmr.date AS t_date, 
     m.name AS m_name, m.description AS m_description, m.date as m_date
-  FROM appointment AS a, treat_med_record AS tmr, treat_med AS tm, 
-	  (SELECT tmr1.id AS mr_id, tmr1.date, tm1.name, tm1.description, tm1.status
-      FROM treat_med_record AS tmr1, treat_med AS tm1
-      WHERE tm1.category=0 AND tmr1.treat_med_id=tm1.id) AS m
-  WHERE $id_from_get=a.patient_id AND a.date>='$yester_date' AND a.treatment_record_id=tmr.id AND tmr.treat_med_id=tm.id AND a.medicine_record_id=m.mr_id 
-ORDER BY a.date DESC LIMIT 1";
+  FROM appointment AS a, treat_med_record AS tmr, treat_med AS tm, ($med_select) AS m
+  WHERE $id_from_get=a.patient_id AND a.date>='$yester_date' AND a.treatment_record_id=tmr.id 
+    AND tmr.treat_med_id=tm.id AND a.medicine_record_id=m.mr_id 
+  ORDER BY a.date DESC LIMIT 1";
 
 // echo $select2; 
 if($result2 = mysqli_query($conn, $select2))  {

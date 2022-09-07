@@ -1,4 +1,13 @@
 
+<!-- TODO: DELETE THIS AFTER FIXING DELETING 
+CONDITIONS AND ADDING A MODAL TO DELETE FUNCTION -->
+<script>
+  function temp_func() {
+    alert('Delete Click - Temporary Lang')
+  }
+</script>
+<!-- END TODO  -->
+
 <script src="../active.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script>

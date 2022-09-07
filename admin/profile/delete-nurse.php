@@ -2,6 +2,11 @@
 
 @include '../includes/config.php';
 
+session_start();
+
+@include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/nurse-only.php';
+
 $id = $_GET['id'];
 
 $sql = "DELETE FROM `users` WHERE `users`.`id` = $id";

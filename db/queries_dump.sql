@@ -18,3 +18,26 @@ FROM appointment AS a, treat_med_record AS tmr, treat_med AS tm,
     WHERE tm1.category=0 AND tmr1.treat_med_id=tm1.id) AS m
 WHERE 3=a.patient_id AND a.date>='2022-07-31' AND a.treatment_record_id=tmr.id AND tmr.treat_med_id=tm.id AND a.medicine_record_id=m.mr_id 
 ORDER BY a.date DESC LIMIT 1
+
+
+
+
+/*
+SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
+WHERE  d.id=u.details_id AND (d.barangay_id=2 OR d.barangay_id=5 ) AND d.barangay_id=b.id  
+*/
+/* 
+
+*/
+
+-- appointments when they match deleted patients 
+
+SELECT (IF(name IS NULL, "Deleted Patient",name)) as name, (IF(email IS NULL, "Deleted Patient", email))as email, (IF(contact_no IS NULL, "Deleted Patient", contact_no)) as contact_no,
+(IF(health_center IS NULL, "Deleted Patient", health_center)) as health_center,
+(IF(details_id IS NULL, "Deleted Patient", details_id)) as details_id,
+(IF(med_history_id IS NULL, "Deleted Patient", med_history_id)) as med_history_id, 
+a.date
+FROM appointment AS a
+LEFT JOIN (SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
+WHERE  d.id=u.details_id AND (d.barangay_id=2 OR d.barangay_id=5 ) AND d.barangay_id=b.id) AS p
+ON a.patient_id=p.id;
