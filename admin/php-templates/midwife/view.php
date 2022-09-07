@@ -92,19 +92,12 @@ include_once('../php-templates/admin-navigation-head.php');
               <thead class="table-dark" colspan="3"> 
                 <tr>
                   <th scope="col" class="col-sm-1">#</th>
-                  <th scope="col">Midwife Name</th>
-  
-                  <!-- <?php if ($admin==1) { ?>
-                    <th scope="col" >Email</th>
-                  <?php } ?> -->
-
+                  <th scope="col">Midwife Name</th> 
                   <th scope="col">Status</th>
                   <?php if ($admin==1) { ?>
                     <th scope="col">Contact No</th>
                     <!-- <th scope="col">Birthdate</th> -->
-                    <th scope="col">Barangay</th>
-                  <?php } ?>
-                  <?php if ($admin==1) {?> 
+                    <th scope="col">Barangay</th> 
                     <th scope="col">Actions</th>
                   <?php }?>
                 </tr>
@@ -116,18 +109,11 @@ include_once('../php-templates/admin-navigation-head.php');
                 
                   <tr>
                     <th scope="row"><?php echo $key+1; ?></th>
-                    <td><?php echo $value['name']; ?></td>
-  
-                    <!-- <?php if ($admin==1) { ?>  
-                      <td><?php echo $value['email']; ?></td>
-                    <?php } ?> -->
+                    <td><?php echo $value['name']; ?></td> 
                     <td><?php echo $value['status']; ?></td>
                     <?php if ($admin==1) { ?>
                       <td><?php echo $value['contact']; ?></td>
-                      <!-- <td><?php //$dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
-                      <td><?php echo $value['barangay']; ?></td>
-                    <?php } ?>
-                    <?php if ($admin==1) {?>
+                      <td><?php echo $value['barangay']; ?></td> 
                       <td>
                         <a href="edit-midwife.php?id=<?php echo $value['id'] ?>">
                           <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
