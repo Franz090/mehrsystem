@@ -99,9 +99,10 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php echo $value['barangay']; ?></td>
                         <td>
                           <a href="edit-patient.php?id=<?php echo $value['id'] ?>">
-                            <button class="edit">Edit</button></a>
-                          <a href="delete-patient.php?id=<?php echo $value['id'] ?>&details_id=<?php echo $value['details_id'] ?>&med_history_id=<?php echo $value['med_history_id'] ?>">
-                            <button class="del">Delete</button></a>
+                            Edit</button></a>  
+                          <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
+                            <button onclick="temp_func()" class="del">Delete</button>
+                          <!-- </a> -->
                           <hr/>
                           <a href="med-patient.php?id=<?php echo $value['id'] ?>">
                             <button class="med">View Report</button></a>
@@ -119,7 +120,7 @@ include_once('../php-templates/admin-navigation-head.php');
     </div>
   </div>
 </div>
- 
+
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

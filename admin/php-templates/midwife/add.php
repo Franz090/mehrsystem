@@ -4,10 +4,10 @@
 
 session_start();
  
-@include '../php-templates/redirect/admin-page-setter.php';
- 
+@include '../php-templates/redirect/admin-page-setter.php'; 
 @include '../php-templates/redirect/nurse-only.php';
-// TODO: update code for having only one midwife assigned to a barangay 
+
+
 $barangay_list = [];
 // if ($admin==1) {
 

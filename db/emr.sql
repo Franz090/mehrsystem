@@ -42,7 +42,7 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_id`, `medicine_record_id`, `date`, `status`) VALUES
-(1, 3, 2, 1, 1, '2022-08-22', 1);
+(1, 30, 23, 1, 2, '2022-09-22', 1);
 
 -- --------------------------------------------------------
 
