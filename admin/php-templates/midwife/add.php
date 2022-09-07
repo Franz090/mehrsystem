@@ -172,7 +172,11 @@ include_once('../php-templates/admin-navigation-head.php');
  <style>
    label {
     font-family: Arial, Helvetica, sans-serif;
-  }  
+  }
+  .bg-primary{
+    background-color:pink;
+  }
+  
  </style>
 <div class="d-flex" id="wrapper">
   <!-- Sidebar -->
@@ -246,7 +250,14 @@ include_once('../php-templates/admin-navigation-head.php');
             </div>
           </div>
         <?php } else { ?>
-          There must be at least one barangay that has no assigned midwife to be able to add a midwife. <a href='../health-center/add-barangay.php'>Add a barangay.</a>
+      
+            <div class="container default ">
+              <div class="col-md-8 col-lg-5 ">
+          <h6 style="text-align: center;" class="mt-5">There must be at least one barangay that has no assigned midwife to be able to add a midwife.</h6> 
+         <button style="color:whitesmoke;" class="form__button btn bg-primary"><a href='../health-center/add-barangay.php'>Add a barangay</a></button>
+        </div>
+        </div>
+       
         <?php }?>
        
       </div>

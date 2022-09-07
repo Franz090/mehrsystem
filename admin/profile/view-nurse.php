@@ -78,7 +78,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color:#F5F5F5;">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
     <div class="container-fluid">
       <div class="row bg-light m-3"><h3>View Nurse</h3>

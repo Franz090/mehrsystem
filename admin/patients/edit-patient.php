@@ -156,16 +156,18 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">Update Patient Record
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>Update Patient Record</h3>
         <?php
           if (isset($no_user))  
             echo '<span class="form__input-error-message">'.$no_user.'</span>';
           else   {
-        ?>   
+        ?> 
+        <div class="container default table-responsive p-4">
+          <div class="col-md-8 col-lg-5 ">  
         <form class="form" action="" method="post">
           <input type='hidden' name='details_id' value="<?php echo $c_details_id?>"/>
           <input type='hidden' name='med_history_id' value="<?php echo $c_med_history_id?>"/>
@@ -178,9 +180,11 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <div class="form__input-group">
               <input value="<?php echo $c_first_name?>" type="text" class="form__input" name="first_name" placeholder="First Name*" required>
-      
+          </div>
+          <div class="form__input-group">     
               <input value="<?php echo $c_mid_initial?>" type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
-          
+          </div>
+          <div class="form__input-group">
               <input value="<?php echo $c_last_name?>" type="text" class="form__input" name="last_name" placeholder="Last Name*" required>
           </div> 
           <div class="form__input-group">
@@ -220,11 +224,21 @@ include_once('../php-templates/admin-navigation-head.php');
               </select> 
           </div>  
           <div class="form__input-group">
-            <div class="form__text"><h3>Medical History</h3></div>
-            <input value="<?php echo $c_height?>" type="text" class="form__input" name="height" placeholder="Height*" required/>    
-            <input value="<?php echo $c_weight?>" type="text" class="form__input" name="weight" placeholder="Weight*" required/>    
-            <input value="<?php echo $c_blood_type?>" type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>    
-            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>    
+            <div class="form__text"><label>Medical History</label></div>
+          </div>
+           <div class="form__input-group">
+            <input value="<?php echo $c_height?>" type="text" class="form__input" name="height" placeholder="Height*" required/>
+          </div>
+          <div class="form__input-group">    
+            <input value="<?php echo $c_weight?>" type="text" class="form__input" name="weight" placeholder="Weight*" required/>
+           </div>
+          <div class="form__input-group">    
+            <input value="<?php echo $c_blood_type?>" type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>
+          </div>
+          <div class="form__input-group">    
+            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>
+          </div>
+          <div class="form__input-group"> 
             <input value="<?php echo $c_allergies?>" type="text" class="form__input" name="allergies" placeholder="Allergies*" required/>    
           </div>
           <button class="form__button" type="submit" name="submit">Update Patient Record</button> 
@@ -233,7 +247,8 @@ include_once('../php-templates/admin-navigation-head.php');
         <?php
           }
         ?>
-        
+        </div>
+        </div>
       </div>
     </div>
   </div>

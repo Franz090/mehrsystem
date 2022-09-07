@@ -38,7 +38,8 @@
       --color-primary: #0275d8;
 	    --color-primary-dark: #1871be;
       --color-secondary: #252c6a;
-      --color-info: #5bc0de;
+      --color-info: #00C0F0;
+      --color-info-dark: #19C6F1;
       --color-success: #4bb544;
       --border-radius: 4px;
     }
@@ -120,15 +121,49 @@
     #page-content-wrapper {
  	    background-color: #F5F5F5;
     }
-     td{
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 2;
-    font-family: arial, sans-serif;
-  }
-  th{
+    td{
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 2;
+      font-family: arial, sans-serif;
+    }
+    th{
     font-size: 16px;
   }
+  .btn{
+    font-family: arial,sans-serif;
+    
+  }
+  .btn{
+    border-radius: 3px;
+    margin: 2px 4px;
+  }
+    .btn-info{
+    background: #0ab1ff;
+    border: none;
+    color: white;
+  }
+  .btn-info:hover{
+    background:  #19abf0;
+    border: none;
+    color: whitesmoke;
+  }
+  .btn-info:focus{
+    color: whitesmoke;
+    background:  #19abf0;
+    border: none;
+  }
+
+  hr{
+   margin-top: 5px;
+   display: block;
+   border-style: inset;
+   border-width: 2px;
+   margin-bottom: 1px;
+  }
+
+
+
     
 
   </style> 
