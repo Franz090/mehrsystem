@@ -148,6 +148,22 @@
 .rounded-full {
 	border-radius: 100%;
 }
+ .btn {
+ 	font-family: arial, sans-serif
+ }
+
+ .btn-info {
+ 	background: #19C6F1;
+ 	border-color: none;
+ 	color: white;
+ }
+
+ .btn-info:hover {
+ 	background: #00C0F0;
+ 	border-color: none;
+ 	color: whitesmoke;
+
+ }
 
 #wrapper {
 	overflow-x: hidden;

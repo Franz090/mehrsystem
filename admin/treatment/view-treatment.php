@@ -34,34 +34,67 @@ $conn->close();
 $page = 'view_treatment';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+<!-- css internal style -->
+  <style>
+  .table {
+   margin: auto;
+   width: 100%!important;
+   padding-top: 13px;
+   
+  }
+  .btn{
+    border-radius: 3px;
+    margin: 2px 4px;
+  }
+  
+  h3{
+    font-weight: 900;  
+    background-color: #ececec;  
+    padding-top: 10px;
+    position: relative;
+    top: 8px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  a:hover{
+    color: #e2e5de;
+  }
+  .btn{
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+
+  </style>
  
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">view-treatment
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>View Treatment</h3>
 
-        <div class="container default">
+        <div class="container default table-responsive">
             
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-          <table class="table mt-5 table-striped table-sm ">
-            <thead class="table-dark">
+          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables" >
+            <thead class="table-dark" colspan="3">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Treatment Type</th>
                 <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
-              </tr>
-            </thead>
+             
             <tbody>
               <?php 
                 foreach ($treatment_list as $key => $value) {

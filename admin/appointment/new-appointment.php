@@ -169,17 +169,32 @@ $conn->close();
 $page = 'add_appointment';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+<style>
+     h3{
+    font-weight: 900;  
+    background-color: #ececec;  
+    padding-top: 10px;
+    position: relative;
+    top: 8px;
+  }
+  label {
+    font-family: Arial, Helvetica, sans-serif;
+  }  
+  
+  </style>
 
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3 container">add-appointment
+    <div class="container-fluid">
+      <div class="row bg-light m-3 "><h3>Add Appointment</h3>
+      <div class="container default table-responsive pt-4 pb-5">
+        <div class="col-md-8 col-lg-5 ">
         
         <?php if (count($_barangay_list)==0) { ?>
             You can't book an appointment because you are not assigned to any barangay.
@@ -230,10 +245,10 @@ include_once('../php-templates/admin-navigation-head.php');
             </div>  
             <?php if($admin==0) { ?>
                 <div class="form__input-group">
-                    <h3>Treatment Record</h3> 
+                
                     <label>Treatment Date*</label> 
                     <input type="date" name="t_date" required class="form__input"/>
-                    <label>Treatment</label> 
+                    <label>Treatment Type</label> 
                     <select class="form__input" name="treatment_id">
                         <?php
                             if (count($treatment_list)>0) {
@@ -247,7 +262,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     </select>
                 </div>  
                 <div class="form__input-group">
-                    <h3>Prescription Record</h3> 
+                 
                     <label>Prescription Date*</label> 
                     <input type="date" name="p_date" required class="form__input"/>
                     <label>Medicine</label> 
@@ -269,10 +284,10 @@ include_once('../php-templates/admin-navigation-head.php');
         <?php }else {  ?>
             There should be at least one patient, medicine, and treatment available in the database.
         <?php }  ?>
-
+        </div>
+        </div>  
       </div>
     </div>
-
   </div>
 </div>
 

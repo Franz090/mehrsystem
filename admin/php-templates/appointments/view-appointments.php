@@ -66,25 +66,58 @@ $conn->close();
 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- 
+
+<style>
+  .table {
+   margin: auto;
+   width: 100%!important;
+   padding-top: 13px;
+   
+  }
+  .btn{
+    border-radius: 3px;
+    margin: 2px 4px;
+  }
+  
+  h3{
+    font-weight: 900;  
+    background-color: #ececec;  
+    padding-top: 10px;
+    position: relative;
+    top: 8px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  a:hover{
+    color: #e2e5de;
+  }
+  .btn{
+    font-weight: 400;
+    font-size: 15px;
+    
+  } 
+</style>
+
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3"><?php echo $pending?'Pending':'Approved'?>-appointments
-
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><?php echo $pending?'Pending':'Approved'?> Appointments
+        <div class="container default table-responsive p-4">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
-      } else { ?>
-        <div class="container default">
-          <table class="table mt-5 table-striped table-sm ">
-            <thead class="table-dark">
+      } else { ?> 
+        <div class="col-md-8 col-lg-12 ">
+          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+            <thead class="table-dark" colspan="3">
               <tr>
-                <th scope="col">#</th>
+                <th scope="col" width="6%">#</th>
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Barangay</th>  
                 <th scope="col">Date and Time</th>
@@ -121,7 +154,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php }else {?> 
                             <td>
                                 <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                                    <button class="">View Report</button></a> 
+                                    <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a> 
                             </td>
                         <?php }?> 
                     </tr>
@@ -131,14 +164,32 @@ include_once('../php-templates/admin-navigation-head.php');
                 ?> 
             </tbody>
           </table>
-        </div>
+        </div>    
       <?php } ?> 
-
+        </div>              
       </div>
     </div>
   </div>
 </div>
- 
+<script>
+  $(document).ready( function () {
+    $('#datatables').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu":[
+        [10, 25, 30,50, -1],
+        [10, 25, 30,50, "All"]
+      ],
+      destroy: true,
+      fixedColumns: true,
+      responsive: true,
+      language:{
+        search: "_INPUT_",
+        searchPlaceholder: "Search <?php echo $pending?'Pending':'Approved' ?>",
+      }
+    });
+  } );
+</script>
+
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

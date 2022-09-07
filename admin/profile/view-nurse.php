@@ -87,8 +87,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <th scope="col" class="col-sm-2" >#</th>
                   <th scope="col" class="col-md-5" >Nurse Name</th>
                   <th scope="col" class="col-sm-2" >Status</th>
-                  <th scope="col" class="col-lg-6" >Actions</th>
-                
+                  <th scope="col" class="col-lg-6" >Actions</th> 
                 </tr>
               </thead>
               <tbody id="table_body">
@@ -100,17 +99,14 @@ include_once('../php-templates/admin-navigation-head.php');
                     <th scope="row"><?php echo $key+1; ?></th>
                     <td><?php echo $value['name']; ?></td>
                     <td><?php echo $value['status']; ?></td>
-                    <td>
-  
+                    <td> 
                       <a href="edit-nurse.php?id=<?php echo $value['id'] ?>">
                         <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
                       <?php if ($_SESSION['id'] != $value['id']) { ?>  
                         <!-- <a href="delete-nurse.php?id=<?php //echo $value['id'] ?>"> -->
                           <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">Delete</button>
                         <!-- </a> -->
-                      <?php } ?> 
-  
-
+                      <?php } ?>  
                     </td>
                   </tr>
                 <?php 

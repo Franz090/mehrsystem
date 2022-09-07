@@ -59,6 +59,7 @@ $conn->close();
 $page = 'edit_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+
  
 <div class="d-flex" id="wrapper">
 
@@ -66,11 +67,13 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">Update Medicine
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>Update Medicine</h3>
+      <div class="container default table-responsive p-4">
+          <div class="col-md-8 col-lg-5 ">
         <?php
           if (isset($no_med))  
             echo '<span class="form__input-error-message">'.$no_med.'</span>';
@@ -100,7 +103,8 @@ include_once('../php-templates/admin-navigation-head.php');
         <?php
           }
         ?>
-        
+        </div>
+        </div>
       </div>
     </div>
   </div>

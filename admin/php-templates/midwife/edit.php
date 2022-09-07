@@ -187,11 +187,13 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
-      <div class="row bg-light m-3">Update Midwife Record
+    <div class="container-fluid">
+      <div class="row bg-light m-3"><h3>Update Midwife Record</h3>
+      <div class="container default table-responsive p-4">
+          <div class="col-md-8 col-lg-5 ">
         <?php
           if (isset($no_user))  
             echo '<span class="form__input-error-message">'.$no_user.'</span>';
@@ -208,9 +210,11 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <div class="form__input-group">
               <input value="<?php echo $c_first_name?>" type="text" class="form__input" name="first_name" placeholder="First Name*" required>
-      
+          </div>
+          <div class="form__input-group">
               <input value="<?php echo $c_mid_initial?>" type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
-          
+          </div>
+          <div class="form__input-group">
               <input value="<?php echo $c_last_name?>" type="text" class="form__input" name="last_name" placeholder="Last Name*" required>
           </div> 
           <div class="form__input-group">
@@ -258,7 +262,8 @@ include_once('../php-templates/admin-navigation-head.php');
         <?php
           }
         ?>
-        
+        </div>
+        </div>
       </div>
     </div>
   </div>
