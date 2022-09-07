@@ -78,10 +78,8 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid">
       <div class="row bg-light m-3"><h3>View Treatment</h3>
-        <div class="container default table-responsive">
-          <div class="col-md-8 col-lg-12 ">
-    
 
+        <div class="container default table-responsive">
             
           <?php
             if (isset($_GET['error']))  
@@ -96,8 +94,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
-              </tr>
-            </thead>
+             
             <tbody>
               <?php 
                 foreach ($treatment_list as $key => $value) {
@@ -108,9 +105,9 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['description']; ?></td>
                   <td><?php echo $value['status']; ?></td>
                   <td>
-                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button class="edit btn btn-success btn-sm btn-inverse">
+                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button class="edit">
                         Edit</button></a>
-                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button class="del btn btn-danger btn-sm btn-inverse">
+                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button class="del">
                         Delete</button></a>
                   </td>
                 </tr>
@@ -119,32 +116,14 @@ include_once('../php-templates/admin-navigation-head.php');
               ?> 
             </tbody>
           </table>
-        
-        </div>
+        </div> 
+
       </div>
-    </div>
     </div>
 
   </div>
 </div>
- <script>
-       $(document).ready( function () {
-        $('#datatables').DataTable({
-          "pagingType": "full_numbers",
-          "lengthMenu":[
-            [10, 25, 30,50, -1],
-            [10, 25, 30,50, "All"]
-          ],
-          destroy: true,
-          fixedColumns: true,
-          responsive: true,
-          language:{
-            search: "_INPUT_",
-            searchPlaceholder: "Search Treatment",
-          }
-        });
-      } );
-  </script>
+ 
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

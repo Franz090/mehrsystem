@@ -88,40 +88,51 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php');  ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" style="background-color: #f0cac4">
+  <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container">
+    <div class="container-fluid">
       <?php
         if(isset($error)) 
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-        <div class="row bg-light m-3 container-fluid">view patient report
-          <div> 
-            <h2>Patient Profile</h2> 
-            <div class='row'>
-              <label class="col-md-3">Patient Name</label>
-              <div class="col-md-3"><?php echo $name ?></div>
-              <label class="col-md-3">Patient ID</label>
-              <div class="col-md-3"><?php echo $id ?></div>
-            </div>
-            <div class='row'>
-              <label class="col-md-3">Barangay</label>
-              <div class="col-md-3"><?php echo $bgy ?></div>
-              <label class="col-md-3">Status</label>
-              <div class="col-md-3"><?php echo $s ?></div>
-            </div>
-            <div class='row'>
-              <label class="col-md-3">Contact Number</label>
-              <div class="col-md-3"><?php echo $c_no ?></div>
-              <label class="col-md-3">Date of Birth</label>
-              <div class="col-md-3"><?php  
+        <div class="row bg-light m-3"><h3>View Patient Report</h3>
+
+        <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables" >
+            <thead class="table-dark text-center" colspan="3">
+            <th scope="col">Patient Profile </th>
+         </tr>
+            </thead>
+            <tbody>
+            <tr class='row'>
+              <td class="col-md-3">Patient Name</td>
+              <td class="col-md-3"><?php echo $name ?></td>
+             
+              <td  class="col-md-3">Patient ID</td>
+              <td  class="col-md-3"><?php echo $id ?></td>
+       
+        </tr>
+            <tr class='row'>
+              <td  class="col-md-3">Barangay</td>
+              <td class="col-md-3"><?php echo $bgy ?></td>
+              <td  class="col-md-3">Status</td>
+              <td  class="col-md-3"><?php echo $s ?></td>
+        </tr>
+            <tr class='row'>
+              <td  class="col-md-3">Contact Number</td>
+              <td  class="col-md-3"><?php echo $c_no ?></td>
+              <td  class="col-md-3">Date of Birth</td>
+              <td class="col-md-3"><?php  
                 $dtf1 = date_create($b_date); 
                 echo date_format($dtf1,"F d, Y");  
-              ?></div>
-            </div>
-          </div> 
+              ?></td>
+              </tr>
+
+        </tbody>
+           </table> 
+       
+        
           <div>
             <h2>Patient Medical History</h2>
             <div class='row'>
