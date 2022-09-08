@@ -85,7 +85,13 @@ $conn->close();
 $page = 'med_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- 
+ <!-- css -->
+ <style>
+  .col-centered{
+    float: none;
+        margin: 0 auto
+  }
+ </style>
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -103,27 +109,32 @@ include_once('../php-templates/admin-navigation-head.php');
       ?>   
         <div class="row bg-light m-3"><h3>View Patient Report</h3>
 
-        <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables" >
+        <div class="container default table-responsive">
+          <div class="col-md-8 col-lg-12 ">
+        <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
             <thead class="table-dark text-center" colspan="3">
+            <tr>
             <th scope="col">Patient Profile </th>
-         </tr>
+        </tr>
             </thead>
             <tbody>
-            <tr class='row'>
+            <tr class="row col-xs-3 col-md-12 col-centered">
               <td class="col-md-3">Patient Name</td>
               <td class="col-md-3"><?php echo $name ?></td>
-             
               <td  class="col-md-3">Patient ID</td>
               <td  class="col-md-3"><?php echo $id ?></td>
-       
         </tr>
-            <tr class='row'>
+       
+       
+            <tr class="row col-xs-3 col-md-12 col-centered">
               <td  class="col-md-3">Barangay</td>
               <td class="col-md-3"><?php echo $bgy ?></td>
               <td  class="col-md-3">Status</td>
               <td  class="col-md-3"><?php echo $s ?></td>
         </tr>
-            <tr class='row'>
+      
+        
+            <tr class="row col-xs-3 col-md-12 col-centered">
               <td  class="col-md-3">Contact Number</td>
               <td  class="col-md-3"><?php echo $c_no ?></td>
               <td  class="col-md-3">Date of Birth</td>
@@ -132,137 +143,167 @@ include_once('../php-templates/admin-navigation-head.php');
                 echo date_format($dtf1,"F d, Y");  
               ?></td>
               </tr>
-
         </tbody>
            </table> 
-       
         
-          <div>
-            <h2>Patient Medical History</h2>
-            <div class='row'>
-              <label class="col-md-3">Height</label>
-              <div class="col-md-3"><?php echo $height ?></div>
-              <label class="col-md-3">Diagnosed Condition</label>
-              <div class="col-md-3"><?php echo $diagnosed_condition ?></div>
-            </div>
-            <div class='row'>
-              <label class="col-md-3">Weight</label>
-              <div class="col-md-3"><?php echo $weight ?></div>
-              <label class="col-md-3">Allergies</label>
-              <div class="col-md-3"><?php echo $allergies ?></div>
-            </div>
-            <div class='row'>
-              <label class="col-md-3">Blood Type</label>
-              <div class="col-md-3"><?php echo $blood_type ?></div> 
-            </div>
-          </div>
-          <div>
-            <h2>Appointment Record</h2> 
+          <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+            <thead class="table-dark text-center" colspan="3">
+            <tr>
+            <th scope="col">Patient Medical History </th>
+        </tr>
+            </thead>
+            <tbody>
+            <tr class="row col-xs-3 col-md-12 col-centered">
+              <td  class="col-md-3">Height</td>
+              <td class="col-md-3"><?php echo $height ?></td>
+              <td  class="col-md-3">Diagnosed Condition</td>
+              <td class="col-md-3"><?php echo $diagnosed_condition ?></td>
+           </tr>
+            <tr class="row col-xs-3 col-md-12 col-centered">
+              <td  class="col-md-3">Weight</td>
+              <td  class="col-md-3"><?php echo $weight ?></td>
+              <td  class="col-md-3">Allergies</td>
+              <td  class="col-md-3"><?php echo $allergies ?></td>
+            </tr >
+            <tr  class="row col-xs-3 col-md-12 col-centered">
+              <td  class="col-md-3">Blood Type</td>
+              <td class="col-md-3"><?php echo $blood_type ?></td> 
+              <tr>
+            </tbody>
+           </table> 
+         
+           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+            <thead class="table-dark text-center" colspan="3">
+            <tr>
+            <th scope="col">Appointment Record</th>
+        </tr>
+            </thead>
+            <tbody>
             <?php if (isset($a_date)) {?> 
-              <div class="row">
-                <div class="col-md-6">
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td class="col-md-6">
                   Appointment Date
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td class="col-md-6">
+                  
                   <?php
                     $dtf2 = date_create($a_date); 
                     echo date_format($dtf2,"F d, Y");  
                   ?>  
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-md-6">
+                </td>
+              <tr class="row col-xs-3 col-md-12 col-centered">
+                <td  class="col-md-6">
                   Appointment Time
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php
                     echo date_format($dtf2,"h:i A");  
                   ?>  
-                </div>
-              </div>  
+                </td>
+            </tr>  
             <?php } else { ?> 
                 No Appointment
             <?php } ?>
-          </div>
-          <div>
-            <h2>Treatment Record</h2> 
+            </tr>
+        </tbody>
+          </table> 
+
+
+          <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+            <thead class="table-dark text-center" colspan="3">
+            <tr>
+            <th scope="col">Treatment Record</th>
+        </tr>
+            </thead>
+            <tbody>
             <?php if (isset($a_date)) {?>
-              <div class="row">
-                <div class="col-md-6">
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td  class="col-md-6">
                   Treatment Type
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php echo $t_type; ?>  
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-md-6">
+                </td>
+              </tr> 
+              <tr class="row col-xs-3 col-md-12 col-centered">
+                <td class="col-md-6">
                   Treatment Date
-                </div>
-                <div class="col-md-6">
+               </td>
+                <td  class="col-md-6">
                   <?php
                     $dtf3 = date_create($t_date); 
                     echo date_format($dtf3,"F d, Y");  
                   ?>  
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-md-6">
+                </td>
+              </td> 
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td class="col-md-6">
                   Treatment Time
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php
                     echo date_format($dtf3,"h:i A");  
                   ?>  
-                </div>
-              </div>  
+                </td>
+              </tr>  
               <?php } else { ?> 
                 No Treatment Record
             <?php } ?>
-          </div>
-          <div>
-            <h2>Prescription Record</h2> 
+          </tbody>
+          </table> 
+
+           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+            <thead class="table-dark text-center" colspan="3">
+            <tr>
+            <th scope="col">Prescription Record</th>
+        </tr>
+            </thead>
+            <tbody>
             <?php if (isset($a_date)) {?>
-              <div class="row">
-                <div class="col-md-6">
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td  class="col-md-6">
                   Prescription Type
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php
                     echo $m_name;  
                   ?>  
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-md-6">
+                </td>
+              </tr> 
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td  class="col-md-6">
                   Prescription Date
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php
                     $dtf4 = date_create($m_date); 
                     echo date_format($dtf4,"F d, Y");  
                   ?>  
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-md-6">
+                </td>
+              </tr> 
+              <tr  class="row col-xs-3 col-md-12 col-centered">
+                <td  class="col-md-6">
                   Prescription Time
-                </div>
-                <div class="col-md-6">
+                </td>
+                <td  class="col-md-6">
                   <?php
                     echo date_format($dtf4,"h:i A");  
                   ?>  
-                </div>
-              </div>  
+                </td>
+              </tr>  
               <?php } else { ?> 
                 No Prescription Record
             <?php } ?>
+            </tbody>
+          </table> 
           </div> 
         </div>     
       <?php
             }
       ?>  
     </div>
+    </div>
+  </div>
 
 
   </div>
