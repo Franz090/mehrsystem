@@ -119,25 +119,25 @@ include_once('../php-templates/admin-navigation-head.php');
             </thead>
             <tbody>
             <tr class="row col-xs-3 col-md-12 col-centered">
-              <td class="col-md-3">Patient Name</td>
+              <td class="col-md-3 fw-bold">Patient Name</td>
               <td class="col-md-3"><?php echo $name ?></td>
-              <td  class="col-md-3">Patient ID</td>
+              <td  class="col-md-3 fw-bold">Patient ID</td>
               <td  class="col-md-3"><?php echo $id ?></td>
         </tr>
        
        
             <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3">Barangay</td>
+              <td  class="col-md-3 fw-bold">Barangay</td>
               <td class="col-md-3"><?php echo $bgy ?></td>
-              <td  class="col-md-3">Status</td>
+              <td  class="col-md-3 fw-bold">Status</td>
               <td  class="col-md-3"><?php echo $s ?></td>
         </tr>
       
         
             <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3">Contact Number</td>
+              <td  class="col-md-3 fw-bold">Contact Number</td>
               <td  class="col-md-3"><?php echo $c_no ?></td>
-              <td  class="col-md-3">Date of Birth</td>
+              <td  class="col-md-3 fw-bold">Date of Birth</td>
               <td class="col-md-3"><?php  
                 $dtf1 = date_create($b_date); 
                 echo date_format($dtf1,"F d, Y");  
@@ -154,19 +154,19 @@ include_once('../php-templates/admin-navigation-head.php');
             </thead>
             <tbody>
             <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3">Height</td>
+              <td  class="col-md-3 fw-bold">Height</td>
               <td class="col-md-3"><?php echo $height ?></td>
-              <td  class="col-md-3">Diagnosed Condition</td>
+              <td  class="col-md-3 fw-bold">Diagnosed Condition</td>
               <td class="col-md-3"><?php echo $diagnosed_condition ?></td>
            </tr>
             <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3">Weight</td>
+              <td  class="col-md-3 fw-bold">Weight</td>
               <td  class="col-md-3"><?php echo $weight ?></td>
-              <td  class="col-md-3">Allergies</td>
+              <td  class="col-md-3 fw-bold">Allergies</td>
               <td  class="col-md-3"><?php echo $allergies ?></td>
             </tr >
             <tr  class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3">Blood Type</td>
+              <td  class="col-md-3 fw-bold">Blood Type</td>
               <td class="col-md-3"><?php echo $blood_type ?></td> 
               <tr>
             </tbody>
@@ -181,7 +181,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <tbody>
             <?php if (isset($a_date)) {?> 
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-6">
+                <td class="col-md-6 fw-bold">
                   Appointment Date
                 </td>
                 <td class="col-md-6">
@@ -192,7 +192,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   ?>  
                 </td>
               <tr class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6">
+                <td  class="col-md-6 fw-bold">
                   Appointment Time
                 </td>
                 <td  class="col-md-6">
@@ -218,7 +218,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <tbody>
             <?php if (isset($a_date)) {?>
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6">
+                <td  class="col-md-6 fw-bold">
                   Treatment Type
                 </td>
                 <td  class="col-md-6">
@@ -226,7 +226,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </td>
               </tr> 
               <tr class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-6">
+                <td class="col-md-6 fw-bold">
                   Treatment Date
                </td>
                 <td  class="col-md-6">
@@ -237,7 +237,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </td>
               </td> 
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-6">
+                <td class="col-md-6 fw-bold">
                   Treatment Time
                 </td>
                 <td  class="col-md-6">
@@ -261,7 +261,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <tbody>
             <?php if (isset($a_date)) {?>
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6">
+                <td  class="col-md-6 fw-bold">
                   Prescription Type
                 </td>
                 <td  class="col-md-6">
@@ -271,7 +271,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </td>
               </tr> 
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6">
+                <td  class="col-md-6 fw-bold">
                   Prescription Date
                 </td>
                 <td  class="col-md-6">
@@ -282,7 +282,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </td>
               </tr> 
               <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6">
+                <td  class="col-md-6 fw-bold">
                   Prescription Time
                 </td>
                 <td  class="col-md-6">
