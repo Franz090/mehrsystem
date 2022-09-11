@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2022 at 11:52 AM
+-- Generation Time: Sep 11, 2022 at 08:49 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,10 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `appointment` (
   `id` int(50) NOT NULL,
   `patient_id` int(50) NOT NULL,
-  `midwife_id` int(50) NOT NULL,
-  `treatment_record_id` int(50) NOT NULL,
-  `medicine_record_id` int(50) NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,8 +38,8 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_id`, `medicine_record_id`, `date`, `status`) VALUES
-(1, 30, 23, 1, 2, '2022-09-22', 1);
+INSERT INTO `appointment` (`id`, `patient_id`, `date`, `status`) VALUES
+(1, 30, '2022-09-22', 1);
 
 -- --------------------------------------------------------
 
@@ -53,7 +50,6 @@ INSERT INTO `appointment` (`id`, `patient_id`, `midwife_id`, `treatment_record_i
 CREATE TABLE `barangay` (
   `id` int(50) NOT NULL,
   `health_center` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL,
   `assigned_midwife` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,13 +57,13 @@ CREATE TABLE `barangay` (
 -- Dumping data for table `barangay`
 --
 
-INSERT INTO `barangay` (`id`, `health_center`, `status`, `assigned_midwife`) VALUES
-(2, 'Barangay 23', 0, 23),
-(5, 'asdf', 0, 23),
-(8, 'Pagsawitan Laguna', 1, 27),
-(9, 'Santo Angel Norte', 1, 29),
-(10, 'another barangay', 0, 21),
-(11, 'isa pang brgy', 1, 33);
+INSERT INTO `barangay` (`id`, `health_center`, `assigned_midwife`) VALUES
+(2, 'Barangay 23', 23),
+(5, 'asdf', 23),
+(8, 'Pagsawitan Laguna', 27),
+(9, 'Santo Angel Norte', 29),
+(10, 'another barangay', 21),
+(11, 'isa pang brgy', 33);
 
 -- --------------------------------------------------------
 
@@ -111,16 +107,19 @@ CREATE TABLE `infant_record` (
   `name` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `legitimacy` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `measles` tinyint(1) NOT NULL, 
+  `penta` tinyint(1) NOT NULL, 
+  `polio` tinyint(1) NOT NULL, 
+  `pneumococcal` tinyint(1) NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `infant_record`
 --
 
-INSERT INTO `infant_record` (`id`, `name`, `date`, `legitimacy`, `status`) VALUES
-(1, 'Baby Sangol', '2012-02-14', 1, 0),
-(2, 'Isa Pang Sangol', '2012-02-14', 0, 0);
+INSERT INTO `infant_record` (`id`, `name`, `date`, `legitimacy`, `measles`, `penta`, `polio`, `pneumococcal`) VALUES
+(1, 'Baby Sangol', '2012-02-14', 1, 1, 0, 1, 0),
+(2, 'Isa Pang Sangol', '2012-02-14', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -130,21 +129,23 @@ INSERT INTO `infant_record` (`id`, `name`, `date`, `legitimacy`, `status`) VALUE
 
 CREATE TABLE `med_history` (
   `id` int(50) NOT NULL,
-  `height` varchar(255) NOT NULL,
-  `weight` varchar(255) DEFAULT NULL,
+  `height_ft` int(50) NOT NULL,
+  `height_in` int(50) NOT NULL,
+  `weight` int(50) NOT NULL,
   `blood_type` varchar(255) NOT NULL,
   `diagnosed_condition` varchar(255) NOT NULL,
-  `allergies` varchar(255) NOT NULL
+  `allergies` varchar(255) NOT NULL,
+  `tetanus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `med_history`
 --
 
-INSERT INTO `med_history` (`id`, `height`, `weight`, `blood_type`, `diagnosed_condition`, `allergies`) VALUES
-(1, '129m', '50kg', 'O', 'None', 'Peanuts'),
-(2, '129m', '50kg', 'B-', 'Oblepias', 'Seafood'),
-(3, '120m', '40kg', 'B+', 'Coco Addiction', 'Coco');
+INSERT INTO `med_history` (`id`, `height_ft`, `height_in`, `weight`, `blood_type`, `diagnosed_condition`, `allergies`) VALUES
+(1, 5, 11, 50, 'O', 'None', 'Peanuts', 1),
+(2, 5, 11, 50, 'B-', 'Oblepias', 'Seafood', 1),
+(3, 5, 11, 40, 'B+', 'Coco Addiction', 'Coco', 1);
 
 -- --------------------------------------------------------
 
@@ -177,16 +178,18 @@ INSERT INTO `treat_med` (`id`, `name`, `description`, `category`, `status`) VALU
 CREATE TABLE `treat_med_record` (
   `id` int(50) NOT NULL,
   `treat_med_id` int(50) NOT NULL,
-  `date` date NOT NULL
+  `date` datetime NOT NULL,
+  `treatment_file` varchar(255) DEFAULT NULL,
+  `patient_id` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `treat_med_record`
 --
 
-INSERT INTO `treat_med_record` (`id`, `treat_med_id`, `date`) VALUES
-(1, 1, '2022-08-22'),
-(2, 2, '2022-08-22');
+INSERT INTO `treat_med_record` (`id`, `treat_med_id`, `date`, `patient_id`) VALUES
+(1, 1, '2022-08-22 09:30:00', 30),
+(2, 2, '2022-08-22 02:59:00', 30);
 
 -- --------------------------------------------------------
 
@@ -229,21 +232,21 @@ INSERT INTO `users` (`id`, `first_name`, `mid_initial`, `last_name`, `email`, `p
 -- Table structure for table `vaccine`
 --
 
-CREATE TABLE `vaccine` (
-  `id` int(50) NOT NULL,
-  `count` int(50) NOT NULL,
-  `type` tinyint(1) NOT NULL,
-  `status` int(50) NOT NULL,
-  `expiration` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE `vaccine` (
+--   `id` int(50) NOT NULL,
+--   `count` int(50) NOT NULL,
+--   `type` tinyint(1) NOT NULL,
+--   `status` int(50) NOT NULL,
+--   `expiration` date NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vaccine`
 --
 
-INSERT INTO `vaccine` (`id`, `count`, `type`, `status`, `expiration`) VALUES
-(1, 2, 1, 0, '2022-12-12'),
-(2, 4, 0, 0, '2022-12-12');
+-- INSERT INTO `vaccine` (`id`, `count`, `type`, `status`, `expiration`) VALUES
+-- (1, 2, 1, 0, '2022-12-12'),
+-- (2, 4, 0, 0, '2022-12-12');
 
 --
 -- Indexes for dumped tables
@@ -300,8 +303,8 @@ ALTER TABLE `users`
 --
 -- Indexes for table `vaccine`
 --
-ALTER TABLE `vaccine`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `vaccine`
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -358,9 +361,9 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
-ALTER TABLE `vaccine`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
+-- ALTER TABLE `vaccine`
+--   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

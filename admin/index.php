@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
 
  
  
-        $select = "SELECT id, 
+        $select = "SELECT id, status,
             CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name, admin
             FROM users WHERE email = '$email' && password = '$pass'";
  
@@ -32,36 +32,41 @@ if(isset($_POST['submit'])) {
         else { 
             foreach($result as $row)  {
  
-                $id_from_db = $row['id'];    
- 
+                $id_from_db = $row['id'];   
                 $name_from_db = $row['name'];    
+                $status_from_db = $row['status'];    
                 $admin_from_db = $row['admin']; 
             } 
             
- 
-
-            $_SESSION['id'] = $id_from_db;
-            $_SESSION['usermail'] = $email;
-            $_SESSION['name'] = $name_from_db;
-            $_SESSION['admin'] = $admin_from_db;
-          
- 
-
-            // if not nurse, get the barangay 
-            if ($admin_from_db!=1) {
+            if ($status_from_db==0) {
+                $error = 'Your account is not activated.';
                 mysqli_free_result($result);
-                $select = "SELECT barangay_id FROM users,details 
-                    WHERE users.id = $id_from_db && details_id = details.id";  
-                $result = mysqli_query($conn, $select);
-                if((mysqli_num_rows($result) > 0)) {  
-                    foreach($result as $row)  { 
-                        $barangay_id_from_db = $row['barangay_id']; 
-                    } 
-                    $_SESSION['barangay_id'] = $barangay_id_from_db;
-                }
             }
-            mysqli_free_result($result);
-            header('location: ./dashboard'); 
+            else {
+                $_SESSION['id'] = $id_from_db;
+                $_SESSION['usermail'] = $email;
+                $_SESSION['name'] = $name_from_db;
+                $_SESSION['admin'] = $admin_from_db;
+                // $_SESSION['status'] = $status_from_db;
+              
+     
+    
+                // if not nurse, get the barangay 
+                if ($admin_from_db!=1) {
+                    mysqli_free_result($result);
+                    $select = "SELECT barangay_id FROM users,details 
+                        WHERE users.id = $id_from_db && details_id = details.id";  
+                    $result = mysqli_query($conn, $select);
+                    if((mysqli_num_rows($result) > 0)) {  
+                        foreach($result as $row)  { 
+                            $barangay_id_from_db = $row['barangay_id']; 
+                        } 
+                        $_SESSION['barangay_id'] = $barangay_id_from_db;
+                    }
+                }
+                mysqli_free_result($result);
+                header('location: ./dashboard'); 
+            } 
         } 
     } 
 } 

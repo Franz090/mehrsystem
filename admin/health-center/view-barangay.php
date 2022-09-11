@@ -9,7 +9,7 @@ session_start();
 
 
 // fetch barangays 
-$select = "SELECT id, health_center, IF(status=0, 'Inactive', 'Active') AS status FROM barangay";
+$select = "SELECT id, health_center  FROM barangay";
 $result = mysqli_query($conn, $select);
 $barangay_list = [];
 
@@ -17,8 +17,7 @@ if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
     $id = $row['id'];  
     $h_center = $row['health_center'];    
-    $s = $row['status'];  
-    array_push($barangay_list, array('id' => $id,'health_center' => $h_center, 'status' => $s));
+    array_push($barangay_list, array('id' => $id,'health_center' => $h_center ));
   } 
   mysqli_free_result($result);
   // print_r($nurse_list);
@@ -91,7 +90,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>
                   <th scope="col" class="col-md-5">Barangay</th>
-                  <th scope="col" class="col-sm-2">Status</th>
+                  <!-- <th scope="col" class="col-sm-2">Status</th> -->
                   <th scope="col" class="col-lg-6">Actions</th>
                 </tr>
               </thead>
@@ -102,13 +101,13 @@ include_once('../php-templates/admin-navigation-head.php');
                   <tr>
                     <th scope="row"><?php echo $key+1; ?></th>
                     <td><?php echo $value['health_center']; ?></td>
-                    <td><?php echo $value['status']; ?></td>
+                    <!-- <td><?php //echo $value['status']; ?></td> -->
                     <td>
                       <a href="edit-barangay.php?id=<?php echo $value['id'] ?>">
                         <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                      <!-- <a href="delete-barangay.php?id=<?php //echo $value['id'] ?>"> -->
+                      <a href="delete-barangay.php?id=<?php echo $value['id'] ?>">
                         <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">Delete</button>
-                      <!-- </a> -->
+                      </a>
                     </td>
                   </tr>
                 <?php 

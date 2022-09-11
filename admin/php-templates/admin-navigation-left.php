@@ -36,7 +36,13 @@
               <?php echo $page == 'view_midwife'? "type='button'":'href="../'.$account_type_midwife.'/view-midwife.php"'?>
               class="drop">View Midwife</a>
           <?php     
-            }
+            } else { 
+          ?>
+           <i class="fas fa-light fa-minus"></i><a 
+              <?php echo $page == 'demo_profile'? "type='button'":'href="../profile/demographic-profile.php"'?>
+              class="drop">Demographic Profile</a>
+          <?php     
+            }  
           ?>
         </div>
       </div>
