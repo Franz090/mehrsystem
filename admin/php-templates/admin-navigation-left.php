@@ -75,7 +75,35 @@
     </div>
     <?php
       } else {
+        if ($admin==0) { 
     ?>
+        <button  
+          class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold">
+          <i class="fas fa-regular fa-briefcase-medical"></i>Treatment Records<i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'add_tr'? "type='button'":'href="../treatment-records/add-treatment-record.php"'?>
+            class="drop">Add Treatment Record</a><br>
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'view_tr'? "type='button'":'href="../treatment-records/view-treatment-records.php"'?>
+            class="drop">View Treatment Records</a>
+        </div>
+        <button  
+          class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold">
+          <i class="fas fa-regular fa-briefcase-medical"></i>Prescription Records<i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'add_pr'? "type='button'":'href="../prescription-records/add-prescription-record.php"'?>
+            class="drop">Add Prescription Record</a><br>
+          <i class="fas fa-light fa-minus"></i><a 
+            <?php echo $page == 'view_pr'? "type='button'":'href="../prescription-records/view-prescription-records.php"'?>
+            class="drop">View Prescription Records</a>
+        </div>
+    <?php 
+        }
+    ?> 
       <button  
         class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
           class="fas fa-regular fa-briefcase-medical"></i>Appointments<i class="fa fa-caret-down"></i>

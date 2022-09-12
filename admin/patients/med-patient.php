@@ -5,16 +5,23 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-nurse.php';
 
-
+$session_id = $_SESSION['id'];
 $id_from_get = $_GET['id'];
+if ($session_id==$id_from_get) {
+  $redirect_condition = "not-for-nurse";
+} else {
+  $redirect_condition = "midwife-only";
+}
+
+@include "../php-templates/redirect/$redirect_condition.php";
+
 
 // fetch patient
 $select = "SELECT u.id AS id, 
   CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, 
   u.email,  
-  IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,  health_center,
+  IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, d.contact_no, d.b_date,  health_center,
   CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies,
   details_id, med_history_id
   FROM users as u, details as d, barangay as b, med_history as m
@@ -26,7 +33,7 @@ if(mysqli_num_rows($result) > 0)  {
     $id = $row['id'];  
     $name = $row['name'];  
     $e = $row['email'];  
-    $s = $row['status'];  
+    $s = $row['tetanus']; 
     $c_no = $row['contact_no'];  
     $b_date = $row['b_date'];  
     $bgy = $row['health_center'];  
@@ -50,7 +57,7 @@ $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
 // fetch patient appointments 
 $select2_a = "SELECT a.date a_date
   FROM appointment a
-  WHERE $id_from_get=a.patient_id AND a.date>='$yester_date'  
+  WHERE $id_from_get=a.patient_id AND a.date>='$yester_date' AND a.status=1 
   ORDER BY a.date DESC LIMIT 1";
 
 // echo $select2; 
@@ -157,7 +164,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <tr class="row col-xs-3 col-md-12 col-centered">
               <td  class="col-md-3 fw-bold">Barangay</td>
               <td class="col-md-3"><?php echo $bgy ?></td>
-              <td  class="col-md-3 fw-bold">Status</td>
+              <td  class="col-md-3 fw-bold">Tetanus Toxoid</td>
               <td  class="col-md-3"><?php echo $s ?></td>
         </tr>
       

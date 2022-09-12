@@ -11,8 +11,8 @@ $session_id = $_SESSION['id'];
 
 // fetch treatment records 
 $select = "SELECT name, description, tmr.date 
-    FROM treat_med_record AS tmr, treat_med AS tm, appointment AS a
-    WHERE category=1 && $session_id=patient_id && treatment_record_id=tmr.id && tm.id=tmr.treat_med_id";
+    FROM treat_med_record AS tmr, treat_med AS tm
+    WHERE category=1 && $session_id=patient_id && tm.id=tmr.treat_med_id";
 $result = mysqli_query($conn, $select);
 // echo $select;
 $treatment_list_record = [];

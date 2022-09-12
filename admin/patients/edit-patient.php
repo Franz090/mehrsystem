@@ -34,7 +34,8 @@ else  {
 $id_from_get = $_GET['id'];
 $user_to_edit = "SELECT first_name, mid_initial, last_name, email, 
     IF(users.status=0, 'Inactive', 'Active') AS status, details_id, contact_no, b_date, barangay_id,
-    height_ft, height_in, weight, blood_type, diagnosed_condition, allergies, med_history_id 
+    height_ft, height_in, weight, blood_type, diagnosed_condition, allergies, med_history_id,
+    tetanus, trimester 
   FROM users, details, med_history
   WHERE users.id = $id_from_get AND users.details_id = details.id AND details.med_history_id = med_history.id";
 $user_from_db = mysqli_query($conn, $user_to_edit);
@@ -59,6 +60,9 @@ if (mysqli_num_rows($user_from_db) > 0) {
     $c_diagnosed_condition = $row['diagnosed_condition'];
     $c_allergies = $row['allergies'];
     $c_med_history_id = $row['med_history_id'];
+
+    $c_tetanus = $row['tetanus'];
+    $c_trimester = $row['trimester'];
 
   }  
   mysqli_free_result($user_from_db);
@@ -115,6 +119,9 @@ if(isset($_POST['submit'])) {
     $diagnosed_condition = mysqli_real_escape_string($conn, $_POST['diagnosed_condition']);
     $allergies = mysqli_real_escape_string($conn, $_POST['allergies']);
 
+    $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
+    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+
     $select2 = "SELECT * FROM users WHERE email = '$email'";
 
   
@@ -132,7 +139,7 @@ if(isset($_POST['submit'])) {
         $up2 = "UPDATE details SET contact_no='$contact', b_date='$b_date', barangay_id=$barangay_id
             WHERE id=$details_id;";
         $up3 = "UPDATE med_history SET height_ft=$height_ft, height_in=$height_in, weight=$weight, 
-          diagnosed_condition='$diagnosed_condition', blood_type='$blood_type', allergies='$allergies'
+          diagnosed_condition='$diagnosed_condition', blood_type='$blood_type', allergies='$allergies', tetanus=$tetanus, trimester=$trimester
           WHERE id=$med_history_id;";
             // echo $up3;
         if (mysqli_multi_query($conn, "$up1 $up2 $up3"))  {
@@ -246,11 +253,26 @@ include_once('../php-templates/admin-navigation-head.php');
             <input value="<?php echo $c_blood_type?>" type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>
           </div>
           <div class="form__input-group">    
-            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>
+            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition* (Write None if there are no conditions)" required/>
           </div>
           <div class="form__input-group"> 
-            <input value="<?php echo $c_allergies?>" type="text" class="form__input" name="allergies" placeholder="Allergies*" required/>    
+            <input value="<?php echo $c_allergies?>" type="text" class="form__input" name="allergies" placeholder="Allergies* (Write None if there are no allergies)" required/>    
           </div>
+          <div class="form__input-group">
+              <label>Tetanus Toxoid Vaccinated</label>
+              <select class="form__input" name="tetanus">
+                <option value="0" <?php echo $c_tetanus==0?'selected':''?> >Unvaccinated</option>
+                <option value="1" <?php echo $c_tetanus==1?'selected':''?> >Vaccinated</option> 
+              </select>
+          </div> 
+          <div class="form__input-group">
+              <label>Nth Trimester</label>
+              <select class="form__input" name="trimester">
+                <option value="1" <?php echo $c_trimester==1?'selected':''?> >1st (0-13 weeks)</option>
+                <option value="2" <?php echo $c_trimester==2?'selected':''?> >2nd (14-27 weeks)</option>
+                <option value="3" <?php echo $c_trimester==3?'selected':''?> >3rd (28-42 weeks)</option>
+              </select>
+          </div> 
           <button class="form__button" type="submit" name="submit">Update Patient Record</button> 
         </form> 
 

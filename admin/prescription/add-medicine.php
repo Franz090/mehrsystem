@@ -17,10 +17,10 @@ if(isset($_POST['submit'])) {
   else {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);   
-    $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1)); 
+    // $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1)); 
 
-    $insert1 = "INSERT INTO treat_med(name, description, category, status) 
-    VALUES('$name', '$description', 0, $status);  ";
+    $insert1 = "INSERT INTO treat_med(name, description, category) 
+    VALUES('$name', '$description', 0);  ";
     
     if (mysqli_query($conn,"$insert1"))  { 
     echo "<script>alert('Medicine Added!');</script>"; 
@@ -59,13 +59,13 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
               <textarea type="text" class="form__input" name="description" placeholder="Description*" required></textarea>
           </div>  
-          <div class="form__input-group">
+          <!-- <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status">
                 <option value="Inactive" selected>Inactive</option>
                 <option value="Active">Active</option>
               </select>
-          </div>  
+          </div>   -->
           <button class="form__button" type="submit" name="submit">Add Medicine</button> 
         </form>  
       </div>

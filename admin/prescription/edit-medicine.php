@@ -11,14 +11,14 @@ session_start();
 
 // fetch medicine 
 $id_from_get = $_GET['id'];
-$medicine_to_edit = "SELECT name, description, IF(status=0, 'Inactive', 'Active') AS status FROM treat_med WHERE id = '$id_from_get'";
+$medicine_to_edit = "SELECT name, description FROM treat_med WHERE id = '$id_from_get'";
 $medicine_from_db = mysqli_query($conn, $medicine_to_edit);
 
 if (mysqli_num_rows($medicine_from_db) > 0) {
   foreach($medicine_from_db as $row)  {
     $c_name = $row['name'];  
     $c_description = $row['description'];  
-    $c_status = $row['status'];   
+    // $c_status = $row['status'];   
   }  
   mysqli_free_result($medicine_from_db);
 } 
@@ -38,10 +38,10 @@ if(isset($_POST['submit'])) {
   else {
     $name = mysqli_real_escape_string($conn, $_POST['name']); 
     $description = mysqli_real_escape_string($conn, $_POST['description']); 
-    $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
+    // $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
 
         
-    $up = "UPDATE treat_med SET name='$name', description='$description', status=$status
+    $up = "UPDATE treat_med SET name='$name', description='$description'
       WHERE id=$id_from_get";
     if (mysqli_query($conn, $up))  {
       echo "<script>alert('Medicine Record Updated!');</script>";
@@ -90,13 +90,13 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
               <textarea type="text" class="form__input" name="description" autofocus placeholder="Description*" required><?php echo $c_description?></textarea>
           </div> 
-          <div class="form__input-group">
+          <!-- <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status" >
-                  <option value="Inactive" <?php echo $c_status=='Inactive' ? 'selected':''?>>Inactive</option>
-                  <option value="Active" <?php echo $c_status=='Active' ? 'selected':''?>>Active</option>
+                  <option value="Inactive" <?php //echo $c_status=='Inactive' ? 'selected':''?>>Inactive</option>
+                  <option value="Active" <?php //echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
-          </div>  
+          </div>   -->
           <button class="form__button" type="submit" name="submit">Update Medicine Record</button> 
         </form> 
 

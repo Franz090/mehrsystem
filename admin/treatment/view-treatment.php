@@ -9,7 +9,7 @@ session_start();
 
 
 // fetch treatment 
-$select = "SELECT id, name, description, IF(status=0, 'Inactive', 'Active') AS status FROM treat_med WHERE category=1";
+$select = "SELECT id, name, description FROM treat_med WHERE category=1";
 $result = mysqli_query($conn, $select);
 $treatment_list = [];
 
@@ -18,8 +18,8 @@ if(mysqli_num_rows($result))  {
     $id = $row['id'];  
     $name = $row['name'];    
     $description = $row['description'];    
-    $s = $row['status'];  
-    array_push($treatment_list, array('id' => $id,'name' => $name, 'description' => $description, 'status' => $s));
+    // $s = $row['status'];  
+    array_push($treatment_list, array('id' => $id,'name' => $name, 'description' => $description));
   } 
   mysqli_free_result($result);  
 } 
@@ -93,7 +93,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <th scope="col">#</th>
                 <th scope="col">Treatment Type</th>
                 <th scope="col">Description</th>
-                <th scope="col">Status</th>
+                <!-- <th scope="col">Status</th> -->
                 <th scope="col">Actions</th>
              
             <tbody>
@@ -104,7 +104,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <th scope="row"><?php echo $key+1; ?></th>
                   <td><?php echo $value['name']; ?></td>
                   <td><?php echo $value['description']; ?></td>
-                  <td><?php echo $value['status']; ?></td>
+                  <!-- <td><?php //echo $value['status']; ?></td> -->
                   <td>
                     <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button class="edit btn btn-success btn-sm btn-inverse">
                         Edit</button></a>

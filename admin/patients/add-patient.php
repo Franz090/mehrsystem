@@ -88,6 +88,8 @@ if(isset($_POST['submit'])) {
     $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
     $diagnosed_condition = mysqli_real_escape_string($conn, $_POST['diagnosed_condition']);
     $allergies = mysqli_real_escape_string($conn, $_POST['allergies']);
+    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+    $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
 
     $select = "SELECT * FROM users WHERE email = '$email'";
 
@@ -109,7 +111,7 @@ if(isset($_POST['submit'])) {
       $insert2 = "INSERT INTO details 
         VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
       $insert3 = "INSERT INTO med_history 
-        VALUES($next_med_history_id,$height_ft,$height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies');  ";
+        VALUES($next_med_history_id, $height_ft, $height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies', $tetanus, $trimester);  ";
       if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3"))  {
         mysqli_free_result($result);
         mysqli_free_result($details);
@@ -219,11 +221,26 @@ include_once('../php-templates/admin-navigation-head.php');
             <input type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>  
           </div>
           <div class="form__input-group">  
-            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>
+            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition* (Write None if there are no conditions)" required/>
           </div>
           <div class="form__input-group">    
-            <input type="text" class="form__input" name="allergies" placeholder="Allergies*" required/>    
+            <input type="text" class="form__input" name="allergies" placeholder="Allergies* (Write None if there are no allergies)" required/>    
           </div>
+          <div class="form__input-group">
+              <label>Tetanus Toxoid Vaccinated</label>
+              <select class="form__input" name="tetanus">
+                <option value="0" selected>Unvaccinated</option>
+                <option value="1">Vaccinated</option> 
+              </select>
+          </div> 
+          <div class="form__input-group">
+              <label>Nth Trimester</label>
+              <select class="form__input" name="trimester">
+                <option value="1" selected>1st (0-13 weeks)</option>
+                <option value="2">2nd (14-27 weeks)</option>
+                <option value="3">3rd (28-42 weeks)</option>
+              </select>
+          </div> 
           <button class="form__button" type="submit" name="submit">Register Patient</button> 
         </form>
           </div>
