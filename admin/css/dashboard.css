@@ -182,22 +182,21 @@ img {
 .rounded-full {
 	border-radius: 100%;
 }
- .btn {
- 	font-family: arial, sans-serif
- }
+.btn {
+	font-family: arial, sans-serif;
+}
 
- .btn-info {
- 	background: #19C6F1;
- 	border-color: none;
- 	color: white;
- }
+.btn-info {
+	background: #19c6f1;
+	border-color: none;
+	color: white;
+}
 
- .btn-info:hover {
- 	background: #00C0F0;
- 	border-color: none;
- 	color: whitesmoke;
-
- }
+.btn-info:hover {
+	background: #00c0f0;
+	border-color: none;
+	color: whitesmoke;
+}
 
 #wrapper {
 	overflow-x: hidden;
@@ -341,12 +340,12 @@ i {
 	width: 500px;
 	height: 200px;
 	position: relative;
-	bottom: 190px;
-	right: 150px;
+	/* bottom: 190px;
+	right: 150px; */
 }
- label {
- 	font-family: Arial, Helvetica, sans-serif;
- }
+label {
+	font-family: Arial, Helvetica, sans-serif;
+}
 /* .googleChartTitle {
     font: bold 11px Arial;
     text-align: center;
@@ -403,5 +402,3 @@ i {
 		font-size: 18px;
 	}
 }
-
-

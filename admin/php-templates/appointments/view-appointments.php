@@ -27,17 +27,18 @@ if (count($_barangay_list)>0) {
   (IF(health_center IS NULL, 'Deleted Patient', health_center)) as health_center,
   (IF(details_id IS NULL, 'Deleted Patient', details_id)) as details_id,
   (IF(med_history_id IS NULL, 'Deleted Patient', med_history_id)) as med_history_id, 
-  a.date
+  a.date, a.id a_id
   FROM appointment AS a
-  LEFT JOIN (SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
-  WHERE  d.id=u.details_id AND ($barangay_select) AND d.barangay_id=b.id) AS p
-  ON a.patient_id=p.id WHERE a.date>='$yester_date' AND a.status=".($pending?0:1).";";
+  RIGHT JOIN (SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
+  WHERE  d.id=u.details_id AND ($barangay_select) AND d.barangay_id=b.id AND b.assigned_midwife=$session_id) AS p
+  ON a.patient_id=p.id WHERE a.date>='$yester_date 00:00:00' AND a.status=".($pending?0:1).";";
   // echo $yester_date; 
 
   // echo $select;
   if($result = mysqli_query($conn, $select))  {
     foreach($result as $row)  {
       $id = $row['id'];  
+      $a_id = $row['a_id'];  
       $name = $row['name'];  
       $e = $row['email'];  
       $c_no = $row['contact_no'];  
@@ -46,6 +47,7 @@ if (count($_barangay_list)>0) {
       $det_id = $row['details_id'];    
       array_push($appointment_list, array(
         'id' => $id,
+        'a_id' => $a_id,
         'name' => $name,  
         'email' => $e,
         'contact' => $c_no,
@@ -146,9 +148,9 @@ include_once('../php-templates/admin-navigation-head.php');
                             </td>
                         <?php } else if ($pending) {?>
                           <td>
-                            <a href="approve-appointment.php?id=<?php echo $value['id'] ?>">
+                            <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>">
                                 <button class="edit">Approve</button></a>
-                            <a href="delete-appointment.php?id=<?php echo $value['id'] ?>">
+                            <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
                                 <button class="del">Delete</button></a>
                           </td> 
                         <?php }else {?> 

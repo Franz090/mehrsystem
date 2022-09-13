@@ -11,8 +11,8 @@ $session_id = $_SESSION['id'];
 
 // fetch treatment records 
 $select = "SELECT name, description, tmr.date 
-    FROM treat_med_record AS tmr, treat_med AS tm, appointment AS a
-    WHERE category=0 && $session_id=patient_id && medicine_record_id=tmr.id && tm.id=tmr.treat_med_id";
+    FROM treat_med_record AS tmr, treat_med AS tm 
+    WHERE category=0 && $session_id=patient_id && tm.id=tmr.treat_med_id";
 $result = mysqli_query($conn, $select);
 // echo $select;
 $medicine_list_record = [];
@@ -93,7 +93,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <thead class="table-dark" colspan="3">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Medicine Type</th>
+                <th scope="col">Medicine Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Prescription Date</th>
               </tr>

@@ -7,14 +7,15 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/midwife-only.php';
 
+$session_id= $_SESSION['id'];
 
 // fetch patients 
 $select = "SELECT u.id AS id, 
   CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
-  IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,  health_center,
+  d.contact_no, d.b_date,  health_center, trimester,
   details_id, med_history_id
-  FROM users as u, details as d, barangay as b
-  WHERE u.admin = -1 AND d.id=u.details_id AND d.barangay_id=b.id;";
+  FROM users as u, details as d, barangay as b, med_history m
+  WHERE u.admin = -1 AND d.id=u.details_id AND d.barangay_id=b.id AND $session_id=b.assigned_midwife AND m.id=d.med_history_id; ";
 $result = mysqli_query($conn, $select);
 $patient_list = [];
 
@@ -23,18 +24,18 @@ if(mysqli_num_rows($result))  {
     $id = $row['id'];  
     $name = $row['name'];  
     $e = $row['email'];  
-    $s = $row['status'];  
     $c_no = $row['contact_no'];  
     // $b_date = $row['b_date'];  
     $bgy = $row['health_center'];  
+    $trimester = $row['trimester'];  
     $det_id = $row['details_id'];   
     $med_id = $row['med_history_id'];   
     array_push($patient_list, array(
       'id' => $id,
       'name' => $name,  
       'email' => $e,
-      'status' => $s,
       'contact' => $c_no,
+      'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':'3rd Trimester'),
       // 'b_date' => $b_date,
       'barangay' => $bgy,
       'details_id' => $det_id,
@@ -106,7 +107,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <th scope="col" width="6%">#</th>
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Email</th>  
-                <th scope="col">Status</th> 
+                <th scope="col">Trimester</th> 
                 <th scope="col">Contact Number</th>
                 <!-- <th scope="col">Birthdate</th> -->
                 <th scope="col">Barangay</th> 
@@ -125,7 +126,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <th scope="row"><?php echo $key+1; ?></th>
                         <td><?php echo $value['name']; ?></td>
                         <td><?php echo $value['email']; ?></td>
-                        <td><?php echo $value['status']; ?></td>
+                        <td><?php echo $value['trimester']; ?></td>
                         <td><?php echo $value['contact']; ?></td>
                         <!-- <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                         <td><?php echo $value['barangay']; ?></td>

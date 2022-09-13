@@ -33,8 +33,9 @@ else  {
 // fetch user 
 $id_from_get = $_GET['id'];
 $user_to_edit = "SELECT first_name, mid_initial, last_name, email, 
-    IF(users.status=0, 'Unvaccinated', 'Vaccinated') AS status, details_id, contact_no, b_date, barangay_id,
-    height, weight, blood_type, diagnosed_condition, allergies, med_history_id 
+    IF(users.status=0, 'Inactive', 'Active') AS status, details_id, contact_no, b_date, barangay_id,
+    height_ft, height_in, weight, blood_type, diagnosed_condition, allergies, med_history_id,
+    tetanus, trimester 
   FROM users, details, med_history
   WHERE users.id = $id_from_get AND users.details_id = details.id AND details.med_history_id = med_history.id";
 $user_from_db = mysqli_query($conn, $user_to_edit);
@@ -52,12 +53,16 @@ if (mysqli_num_rows($user_from_db) > 0) {
     $c_barangay = $row['barangay_id'];   
     $c_details_id = $row['details_id'];   
 
-    $c_height = $row['height'];
+    $c_height_ft = $row['height_ft'];
+    $c_height_in = $row['height_in'];
     $c_weight = $row['weight'];
     $c_blood_type = $row['blood_type'];
     $c_diagnosed_condition = $row['diagnosed_condition'];
     $c_allergies = $row['allergies'];
     $c_med_history_id = $row['med_history_id'];
+
+    $c_tetanus = $row['tetanus'];
+    $c_trimester = $row['trimester'];
 
   }  
   mysqli_free_result($user_from_db);
@@ -85,7 +90,8 @@ if(isset($_POST['submit'])) {
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
 
-    empty($_POST['height']) ||
+    empty($_POST['height_ft']) ||
+    empty($_POST['height_in']) ||
     empty($_POST['weight']) ||
     empty($_POST['blood_type']) ||
     empty($_POST['diagnosed_condition']) ||
@@ -106,11 +112,15 @@ if(isset($_POST['submit'])) {
     
     
     $med_history_id = mysqli_real_escape_string($conn, $_POST['med_history_id']);
-    $height = mysqli_real_escape_string($conn, $_POST['height']);
+    $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+    $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
     $weight = mysqli_real_escape_string($conn, $_POST['weight']);
     $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
     $diagnosed_condition = mysqli_real_escape_string($conn, $_POST['diagnosed_condition']);
     $allergies = mysqli_real_escape_string($conn, $_POST['allergies']);
+
+    $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
+    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
 
     $select2 = "SELECT * FROM users WHERE email = '$email'";
 
@@ -128,9 +138,10 @@ if(isset($_POST['submit'])) {
             email='$email',  status=$status WHERE id=$id_from_db;";
         $up2 = "UPDATE details SET contact_no='$contact', b_date='$b_date', barangay_id=$barangay_id
             WHERE id=$details_id;";
-        $up3 = "UPDATE med_history SET height='$height', weight='$weight', diagnosed_condition='$diagnosed_condition', blood_type='$blood_type', allergies='$allergies'
-            WHERE id=$med_history_id;";
-            echo $up3;
+        $up3 = "UPDATE med_history SET height_ft=$height_ft, height_in=$height_in, weight=$weight, 
+          diagnosed_condition='$diagnosed_condition', blood_type='$blood_type', allergies='$allergies', tetanus=$tetanus, trimester=$trimester
+          WHERE id=$med_history_id;";
+            // echo $up3;
         if (mysqli_multi_query($conn, "$up1 $up2 $up3"))  {
             mysqli_free_result($result2); 
             echo "<script>alert('Patient Record Updated!');</script>"; 
@@ -200,8 +211,8 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status" >
-                  <option value="Unvaccinated" <?php echo $c_status=='Unvaccinated' ? 'selected':''?>>Unvaccinated</option>
-                  <option value="Vaccinated" <?php echo $c_status=='Vaccinated' ? 'selected':''?>>Vaccinated</option>
+                  <option value="Inactive" <?php echo $c_status=='Inactive' ? 'selected':''?>>Inactive</option>
+                  <option value="Active" <?php echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>  
  
@@ -227,20 +238,42 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form__text"><label>Medical History</label></div>
           </div>
            <div class="form__input-group">
-            <input value="<?php echo $c_height?>" type="text" class="form__input" name="height" placeholder="Height*" required/>
+            Height*
+            <input value="<?php echo $c_height_ft?>" min='0' type="number" 
+              class="form__input" name="height_ft" placeholder="Feet*" required/> ft
+            <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
+              class="form__input" name="height_in" placeholder="Inches*" required/> inch(es) 
           </div>
-          <div class="form__input-group">    
-            <input value="<?php echo $c_weight?>" type="text" class="form__input" name="weight" placeholder="Weight*" required/>
+          <div class="form__input-group"> 
+            Weight*   
+            <input value="<?php echo $c_weight?>" type="number" class="form__input" name="weight" 
+              placeholder="Weight*" required min='0'/> kg
            </div>
           <div class="form__input-group">    
             <input value="<?php echo $c_blood_type?>" type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>
           </div>
           <div class="form__input-group">    
-            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>
+            <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition* (Write None if there are no conditions)" required/>
           </div>
           <div class="form__input-group"> 
-            <input value="<?php echo $c_allergies?>" type="text" class="form__input" name="allergies" placeholder="Allergies*" required/>    
+            <input value="<?php echo $c_allergies?>" type="text" class="form__input" name="allergies" placeholder="Allergies* (Write None if there are no allergies)" required/>    
           </div>
+          <div class="form__input-group">
+              <label>Tetanus Toxoid Vaccinated</label>
+              <select class="form__input" name="tetanus">
+                <option value="0" <?php echo $c_tetanus==0?'selected':''?> >Unvaccinated</option>
+                <option value="1" <?php echo $c_tetanus==1?'selected':''?> >Vaccinated</option> 
+              </select>
+          </div> 
+          <div class="form__input-group">
+              <label>Nth Trimester</label>
+              <select class="form__input" name="trimester">
+                <option value="0" <?php echo $c_trimester==0?'selected':''?> >N/A</option>
+                <option value="1" <?php echo $c_trimester==1?'selected':''?> >1st (0-13 weeks)</option>
+                <option value="2" <?php echo $c_trimester==2?'selected':''?> >2nd (14-27 weeks)</option>
+                <option value="3" <?php echo $c_trimester==3?'selected':''?> >3rd (28-42 weeks)</option>
+              </select>
+          </div> 
           <button class="form__button" type="submit" name="submit">Update Patient Record</button> 
         </form> 
 

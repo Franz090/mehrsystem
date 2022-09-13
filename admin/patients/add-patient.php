@@ -6,7 +6,7 @@ session_start();
  
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/midwife-only.php';
- 
+
  
 // fetch barangays  
 $select = "SELECT id, health_center FROM barangay";
@@ -62,7 +62,8 @@ if(isset($_POST['submit'])) {
     empty($_POST['contact']) ||
     empty($_POST['b_date']) ||
     
-    empty($_POST['height']) ||
+    empty($_POST['height_ft']) ||
+    empty($_POST['height_in']) ||
     empty($_POST['weight']) ||
     empty($_POST['blood_type']) ||
     empty($_POST['diagnosed_condition']) ||
@@ -73,7 +74,7 @@ if(isset($_POST['submit'])) {
     $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
     $mid_initial = mysqli_real_escape_string($conn, $_POST['mid_initial']);
     $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
-    $status = mysqli_real_escape_string($conn, ($_POST['status']=='Unvaccinated'?0:1));
+    $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
     $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
     $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
 
@@ -81,11 +82,14 @@ if(isset($_POST['submit'])) {
     $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
     $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
 
-    $height = mysqli_real_escape_string($conn, $_POST['height']);
+    $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+    $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
     $weight = mysqli_real_escape_string($conn, $_POST['weight']);
     $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
     $diagnosed_condition = mysqli_real_escape_string($conn, $_POST['diagnosed_condition']);
     $allergies = mysqli_real_escape_string($conn, $_POST['allergies']);
+    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+    $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
 
     $select = "SELECT * FROM users WHERE email = '$email'";
 
@@ -104,10 +108,10 @@ if(isset($_POST['submit'])) {
     else  { 
       $insert1 = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
         VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, -1, '',$next_details_id);  ";
-      $insert2 = "INSERT INTO details(id, contact_no, b_date, barangay_id, med_history_id) 
+      $insert2 = "INSERT INTO details 
         VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
-      $insert3 = "INSERT INTO med_history(id, height, weight, blood_type, diagnosed_condition, allergies) 
-        VALUES($next_med_history_id,'$height', '$weight', '$blood_type', '$diagnosed_condition' , '$allergies');  ";
+      $insert3 = "INSERT INTO med_history 
+        VALUES($next_med_history_id, $height_ft, $height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies', $tetanus, $trimester);  ";
       if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3"))  {
         mysqli_free_result($result);
         mysqli_free_result($details);
@@ -171,8 +175,8 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status">
-                <option value="Unvaccinated" selected>Unvaccinated</option>
-                <option value="Vaccinated">Vaccinated</option>
+                <option value="Inactive" selected>Inactive</option>
+                <option value="Active">Active</option>
               </select>
           </div> 
           <div class="form__input-group">
@@ -201,21 +205,43 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
             <div class="form__text"><label>Medical History</label></div>
           </div>
-            <div class="form__input-group">
-            <input type="text" class="form__input" name="height" placeholder="Height*" required/> 
+          <div class="form__input-group">
+            Height*
+            <input value="0" min='0' type="number" 
+              class="form__input" name="height_ft" placeholder="Feet*" required/> ft
+            <input value="0" min='0' max='11' type="number" 
+              class="form__input" name="height_in" placeholder="Inches*" required/> inch(es)  
           </div>
           <div class="form__input-group">   
-            <input type="text" class="form__input" name="weight" placeholder="Weight*" required/>   
+            Weight*   
+            <input value="0" type="number" class="form__input" name="weight" placeholder="Weight*" 
+              required min="0"/> kg 
           </div>
           <div class="form__input-group"> 
             <input type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>  
           </div>
           <div class="form__input-group">  
-            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition*" required/>
+            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition* (Write None if there are no conditions)" required/>
           </div>
           <div class="form__input-group">    
-            <input type="text" class="form__input" name="allergies" placeholder="Allergies*" required/>    
+            <input type="text" class="form__input" name="allergies" placeholder="Allergies* (Write None if there are no allergies)" required/>    
           </div>
+          <div class="form__input-group">
+              <label>Tetanus Toxoid Vaccinated</label>
+              <select class="form__input" name="tetanus">
+                <option value="0" selected>Unvaccinated</option>
+                <option value="1">Vaccinated</option> 
+              </select>
+          </div> 
+          <div class="form__input-group">
+              <label>Nth Trimester</label>
+              <select class="form__input" name="trimester">
+                <option value="0" selected>N/A</option>
+                <option value="1" >1st (0-13 weeks)</option>
+                <option value="2">2nd (14-27 weeks)</option>
+                <option value="3">3rd (28-42 weeks)</option>
+              </select>
+          </div> 
           <button class="form__button" type="submit" name="submit">Register Patient</button> 
         </form>
           </div>
