@@ -31,15 +31,16 @@ CREATE TABLE `appointment` (
   `id` int(50) NOT NULL,
   `patient_id` int(50) NOT NULL,
   `date` datetime NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `trimester` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`id`, `patient_id`, `date`, `status`) VALUES
-(1, 30, '2022-09-22', 1);
+INSERT INTO `appointment` (`id`, `patient_id`, `date`, `status`, `trimester`) VALUES
+(1, 30, '2022-09-22', 1, 0);
 
 -- --------------------------------------------------------
 

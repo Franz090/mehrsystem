@@ -15,6 +15,14 @@ $session_id = $_SESSION['id'];
 
 if ($admin==1) {
   // $title = "Patient Vaccine Monitoring Pie Chart"; 
+  // get last 6 months of appointments 
+  $bar_chart_data_multi_d_arr = array();
+  $past_6_months = date("Y-m-d", strtotime('-5 months'));
+  // echo $past_6_months;
+
+
+
+
 } 
 if ($admin==0) {
   $title = "Infant Vaccine Monitoring Pie Chart";

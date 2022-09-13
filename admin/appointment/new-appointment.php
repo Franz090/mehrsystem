@@ -10,33 +10,11 @@ session_start();
 
 $session_id = $_SESSION['id'];
 
-$patient_list = [];  
+$patient_list = [];   
 
 
 
-// user is a patient
-// if ($admin==-1) {
-//     // fetch midwife  
-//     $select0 = "SELECT id, 
-//         CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name
-//         FROM users 
-//         WHERE admin=0";
-//     $result_midiwife = mysqli_query($conn, $select0);
 
-//     if (mysqli_num_rows($result_midiwife)) {
-//         foreach($result_midiwife as $row) {
-//             $id = $row['id'];  
-//             $name = $row['name'];  
-//             array_push($midwife_list, array('id' => $id,'name' => $name));
-//         } 
-//         mysqli_free_result($result_midiwife);
-//     } 
-//     else  { 
-//         mysqli_free_result($result_midiwife);
-//         $error = 'Something went wrong fetching data from the database.'; 
-//     }   
-
-// }
 
 // user is a midwife 
 if ($admin==0) {
@@ -51,17 +29,18 @@ if ($admin==0) {
                 $barangay_select .= "OR ";
             }
         }
-        $select1 = "SELECT users.id, 
+        $select1 = "SELECT users.id, trimester,
             CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name
-            FROM users, details
-            WHERE admin=-1 AND ($barangay_select) AND details.id=users.details_id";
+            FROM users, details, med_history m
+            WHERE admin=-1 AND ($barangay_select) AND details.id=users.details_id AND details.med_history_id=m.id";
         $result_patient = mysqli_query($conn, $select1);
         
         if (mysqli_num_rows($result_patient)) {
             foreach($result_patient as $row) {
             $id = $row['id'];  
             $name = $row['name'];  
-            array_push($patient_list, array('id' => $id,'name' => $name));
+            $trimester = $row['trimester'];  
+            array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
             } 
             mysqli_free_result($result_patient);
             // print_r($result_barangay); 
@@ -71,7 +50,25 @@ if ($admin==0) {
             $error = 'Something went wrong fetching data from the database.'; 
         }    
     } 
-} 
+} // user is patient 
+else {
+    $select_trimester = "SELECT trimester FROM users u, details d, med_history m
+        WHERE u.id=$session_id AND d.id=u.details_id AND d.med_history_id=m.id";
+    $result_trimester = mysqli_query($conn, $select_trimester);
+
+    if (mysqli_num_rows($result_trimester)) {
+        foreach($result_trimester as $row) {  
+        $trimester_from_db = $row['trimester'];  
+        } 
+        mysqli_free_result($result_trimester);
+    } 
+    else  { 
+        mysqli_free_result($result_trimester);
+        $error = 'Something went wrong fetching data from the database.'; 
+    }    
+}
+
+
 $current_user_is_a_midwife = $admin==0;
 // add appointment
 if(isset($_POST['submit'])) {
@@ -81,9 +78,15 @@ if(isset($_POST['submit'])) {
     if (empty($_POST['date']))
         $error .= 'Fill up input fields that are required (with * mark)! ';
     else {   
+        if ($current_user_is_a_midwife) { 
+            $id_trimester_split = explode('AND',$_POST['patient_id_trimester']); 
+            // echo $id_trimester_split[0];
+            // echo $id_trimester_split[1];
+        }
         $status = $current_user_is_a_midwife?1:0; 
         $a_date = mysqli_real_escape_string($conn, $_POST['date']);
-        $patient_id = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$_POST['patient_id']:$session_id));
+        $patient_id = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[0]:$session_id));
+        $trimester = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[1]:$trimester_from_db));
  
         
 
@@ -141,12 +144,12 @@ label {
             <?php if($admin==0) { ?>
             <div class="form__input-group">
                 <label>Patient</label>
-                <select class="form__input" name="patient_id">
+                <select class="form__input" name="patient_id_trimester">
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
                     ?> 
-                        <option value="<?php echo $value['id'];?>" <?php echo $key===0?'selected':'';?>>
+                        <option value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
                             <?php echo $value['name'];?></option>
                     <?php  
                             }    

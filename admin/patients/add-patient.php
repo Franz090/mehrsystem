@@ -236,7 +236,8 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form__input-group">
               <label>Nth Trimester</label>
               <select class="form__input" name="trimester">
-                <option value="1" selected>1st (0-13 weeks)</option>
+                <option value="0" selected>N/A</option>
+                <option value="1" >1st (0-13 weeks)</option>
                 <option value="2">2nd (14-27 weeks)</option>
                 <option value="3">3rd (28-42 weeks)</option>
               </select>
