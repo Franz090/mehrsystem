@@ -50,6 +50,40 @@
 .container .content .logout:hover {
 	background-color: crimson;
 }
+/* LOGO */
+/* #lateral-nav {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100px;
+	background: transparent;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+} */
+
+img {
+	width:  135px;
+	height: 120px;
+	margin-top: 10px;
+	writing-mode: vertical-lr;
+    text-orientation: mixed;
+	background: transparent !important;
+}
+
+/* .lateral-nav a {
+	writing-mode: vertical-lr;
+	text-orientation: mixed;
+	margin: 10px 0;
+}
+
+
+.navbar {
+	margin-top: 1px;
+} */
+/* end */
 
 .formcontainer {
 	min-height: 100vh;
