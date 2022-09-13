@@ -55,7 +55,7 @@ else {
     $select_trimester = "SELECT trimester FROM users u, details d, med_history m
         WHERE u.id=$session_id AND d.id=u.details_id AND d.med_history_id=m.id";
     $result_trimester = mysqli_query($conn, $select_trimester);
-
+// echo $select_trimester;
     if (mysqli_num_rows($result_trimester)) {
         foreach($result_trimester as $row) {  
         $trimester_from_db = $row['trimester'];  
@@ -86,12 +86,12 @@ if(isset($_POST['submit'])) {
         $status = $current_user_is_a_midwife?1:0; 
         $a_date = mysqli_real_escape_string($conn, $_POST['date']);
         $patient_id = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[0]:$session_id));
-        $trimester = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[1]:$trimester_from_db));
+        $trimester_post = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[1]:$trimester_from_db));
  
         
 
-        $insert1 = "INSERT INTO appointment(patient_id, date, status) 
-            VALUES($patient_id, '$a_date', $status);";
+        $insert1 = "INSERT INTO appointment(patient_id, date, status, trimester) 
+            VALUES($patient_id, '$a_date', $status, $trimester_post);";
         if (mysqli_query($conn,"$insert1"))  { 
         echo "<script>alert('Appointment Added!');</script>"; 
         }

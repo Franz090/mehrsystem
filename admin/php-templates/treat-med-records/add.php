@@ -75,12 +75,13 @@ if(isset($_POST['submit'])) {
         $patient_id = mysqli_real_escape_string($conn, ($_POST['patient_id']));
         $tm_id = mysqli_real_escape_string($conn, $_POST['medicine_id']);
         $date = mysqli_real_escape_string($conn, $_POST['date']); 
-        $treatment_file = $pr_page?NULL:mysqli_real_escape_string($conn, $_POST['treatment_file']);
-
-        $insert = "INSERT INTO treat_med_record(patient_id, date, treat_med_id) 
-        VALUES($patient_id, '$date', $tm_id);";
+        // $treatment_file = $pr_page?NULL:mysqli_real_escape_string($conn, $_POST['treatment_file']);
+        $treatment_file = NULL;
+        $alert_str = $pr_page?'Prescription':'Treatment';
+        $insert = "INSERT INTO treat_med_record(patient_id, date, treat_med_id, treatment_file) 
+        VALUES($patient_id, '$date', $tm_id, $treatment_file);";
         if (mysqli_query($conn, $insert))  { 
-            echo "<script>alert('Prescription Added!');</script>"; 
+            echo "<script>alert('$alert_str Added!');</script>"; 
         }
         else {  
             $error .= 'Something went wrong adding the appointment to the database.';
@@ -162,7 +163,8 @@ label {
                 </select> 
                 <?php if (!$pr_page) { ?>
                     <label for='treatment_file'>Treatment File</label> 
-                    <input type="file" id="treatment_file" name="treatment_file" required class="form__input"/>
+                    <!-- TODO: required -->
+                    <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/>
                 <?php } ?>
             </div>   
 

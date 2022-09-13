@@ -93,7 +93,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <thead class="table-dark" colspan="3">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Medicine Type</th>
+                <th scope="col">Medicine Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Prescription Date</th>
               </tr>

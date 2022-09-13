@@ -254,7 +254,10 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="container default ">
               <div class="col-md-8 col-lg-5 ">
           <h6 style="text-align: center;" class="mt-5">There must be at least one barangay that has no assigned midwife to be able to add a midwife.</h6> 
-         <button style="color:whitesmoke;" class="form__button btn bg-primary"><a href='../health-center/add-barangay.php'>Add a barangay</a></button>
+          <a href='../health-center/add-barangay.php'>
+            <button type='button' style="color:whitesmoke;" class="form__button btn bg-primary">
+            Add a barangay</button>
+          </a>
         </div>
         </div>
        

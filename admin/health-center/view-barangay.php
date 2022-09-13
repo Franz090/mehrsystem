@@ -106,7 +106,7 @@ include_once('../php-templates/admin-navigation-head.php');
                       <a href="edit-barangay.php?id=<?php echo $value['id'] ?>">
                         <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
                       <a href="delete-barangay.php?id=<?php echo $value['id'] ?>">
-                        <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">Delete</button>
+                        <button class="del btn btn-danger btn-sm btn-inverse" >Delete</button>
                       </a>
                     </td>
                   </tr>

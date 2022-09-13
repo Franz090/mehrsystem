@@ -30,13 +30,13 @@
               class="drop bg-transparent second-text active ">View
               Nurse</a>
           <?php
-            } else if ($admin==0) {
+            //} else if ($admin==0) {
           ?> 
-            <i class="fas fa-light fa-minus"></i><a 
-              <?php echo $page == 'view_midwife'? "type='button'":'href="../'.$account_type_midwife.'/view-midwife.php"'?>
-              class="drop">View Midwife</a>
+            <!-- <i class="fas fa-light fa-minus"></i><a 
+              <?php //echo $page == 'view_midwife'? "type='button'":'href="../'.$account_type_midwife.'/view-midwife.php"'?>
+              class="drop">View Midwife</a> -->
           <?php     
-            } else { 
+            } else if ($admin==-1) { 
           ?>
            <i class="fas fa-light fa-minus"></i><a 
               <?php echo $page == 'demo_profile'? "type='button'":'href="../profile/demographic-profile.php"'?>

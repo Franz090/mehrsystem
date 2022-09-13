@@ -60,7 +60,8 @@ $barangay_list = [];
   } 
   else  { 
     mysqli_free_result($result_barangay);
-    $error = 'Something went wrong fetching data from the database.'; 
+    $error = 'Please add at least  one barangay to assign the midwife.'; 
+    $add_barangay_button = 1;
   }  
 // } 
 // else {
@@ -200,10 +201,18 @@ include_once('../php-templates/admin-navigation-head.php');
           else   {
         ?>   
         <form class="form" action="" method="post">
-          <input type='hidden' name='details_id' value="<?php echo $c_details_id?>"/>
+          <input type='hidden' name='details_id' value="<?php echo isset($error)?'':$c_details_id?>"/>
           <?php 
-            if (isset($error))  
-              echo '<span class="form__input-error-message">'.$error.'</span>'; 
+            if (isset($error))  { 
+              echo '<span class="form__input-error-message">'
+              .$error.
+              '</span> '.
+              ($add_barangay_button?
+              "<a href='../health-center/add-barangay.php'>
+              <button type='button' style=\"color:whitesmoke;\" class=\"form__button btn bg-primary\">
+              Add a barangay</button></a>":''); 
+            }
+            else { 
           ?> 
           <div class="form__input-group">
               <input value="<?php echo $c_email?>" type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*" required>
@@ -235,7 +244,7 @@ include_once('../php-templates/admin-navigation-head.php');
               </select>
           </div>  
  
-          <?php
+          <?php 
             if (count($barangay_list)>0) { 
           ?>  
  
@@ -253,13 +262,16 @@ include_once('../php-templates/admin-navigation-head.php');
               ?>     
             </fieldset>     
           </div> 
-          <?php 
+          <?php  
               }
           ?>  
           <button class="form__button" value="register now" type="submit" name="submit">Update Midwife Record</button> 
+          <?php 
+            } 
+          ?>  
         </form> 
 
-        <?php
+        <?php 
           }
         ?>
         </div>
