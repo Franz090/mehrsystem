@@ -382,6 +382,7 @@ label {
 	float: right;
 	padding-right: 8px;
 	transition: 0.9s ease-out;
+	margin-right: 2px;
 }
 .fa-caret-down:hover {
 	float: right;
