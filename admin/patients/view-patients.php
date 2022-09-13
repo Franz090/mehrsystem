@@ -16,10 +16,10 @@ $select = "SELECT u.id AS id,
   details_id, med_history_id
   FROM users as u, details as d, barangay as b, med_history m
   WHERE u.admin = -1 AND d.id=u.details_id AND d.barangay_id=b.id AND $session_id=b.assigned_midwife AND m.id=d.med_history_id; ";
-$result = mysqli_query($conn, $select);
+
 $patient_list = [];
 
-if(mysqli_num_rows($result))  {
+if($result = mysqli_query($conn, $select))  {
   foreach($result as $row)  {
     $id = $row['id'];  
     $name = $row['name'];  
@@ -35,7 +35,7 @@ if(mysqli_num_rows($result))  {
       'name' => $name,  
       'email' => $e,
       'contact' => $c_no,
-      'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':'3rd Trimester'),
+      'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A')),
       // 'b_date' => $b_date,
       'barangay' => $bgy,
       'details_id' => $det_id,
