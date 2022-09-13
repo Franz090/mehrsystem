@@ -190,9 +190,9 @@ CREATE TABLE `treat_med_record` (
 -- Dumping data for table `treat_med_record`
 --
 
-INSERT INTO `treat_med_record` (`id`, `treat_med_id`, `date`, `patient_id`) VALUES
-(1, 1, '2022-08-22 09:30:00', 30),
-(2, 2, '2022-08-22 02:59:00', 30);
+INSERT INTO `treat_med_record` (`id`, `treat_med_id`, `date`,`treatment_file`, `patient_id`) VALUES
+(1, 1, '2022-08-22 09:30:00',NULL, 30),
+(2, 2, '2022-08-22 02:59:00',NULL, 30);
 
 -- --------------------------------------------------------
 
@@ -218,8 +218,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `mid_initial`, `last_name`, `email`, `password`, `status`, `admin`, `otp`, `details_id`) VALUES
-(20, 'Elmina', 'R.', 'Monteza', 'monteza@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 1, '', NULL),
-(21, 'Cathy', 'R.', 'Bulusan', 'cathybulusan@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 7),
+(20, 'El', 'R.', 'Mendoza', 'mendoza@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 1, '', NULL),
+(21, 'Kath', 'R.', 'Buls', 'kath@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 7),
 (23, 'Francis', 'Perona', 'Oblepias', 'francisoblepias123@gmaill.com', '202cb962ac59075b964b07152d234b70', 1, 0, '', 9),
 (27, 'Francis', 'R', 'Oblepias', 'francisoblepias@gmaill.com', '202cb962ac59075b964b07152d234b70', 0, 0, '', 10),
 (28, 'Francis', 'P', 'Oblepias', 'francisoblepias120@gmaill.com', '202cb962ac59075b964b07152d234b70', 0, 1, '', NULL),
