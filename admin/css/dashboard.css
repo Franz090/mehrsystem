@@ -50,6 +50,18 @@
 .container .content .logout:hover {
 	background-color: crimson;
 }
+/* LOGO */
+
+img {
+	width:  135px;
+	height: 120px;
+	margin-top: 10px;
+	writing-mode: vertical-lr;
+    text-orientation: mixed;
+	background: transparent !important;
+}
+
+/* end */
 
 .formcontainer {
 	min-height: 100vh;
