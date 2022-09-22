@@ -15,7 +15,7 @@ Midwife <br/>
             <div id="columnchart_material" class="columnchart"> </div>
         </div>
     </div>  
-    <table class="table mt-5 table-striped table-sm col-sm-12">
+    <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
         <thead class="table-dark">
             <tr>
             <th scope="col">#</th>
@@ -61,7 +61,7 @@ Midwife <br/>
         </div> 
     </div>
 </div>
- 
+
 <!-- <div class="container">
     <div class="row bg-light m-3 con1"></div>
 </div> -->

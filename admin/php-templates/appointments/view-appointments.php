@@ -149,9 +149,9 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php } else if ($pending) {?>
                           <td>
                             <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>">
-                                <button class="edit">Approve</button></a>
+                                <button class="edit btn btn-success btn-sm btn-inverse">Approve</button></a>
                             <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
-                                <button class="del">Delete</button></a>
+                                <button class="del btn btn-danger btn-sm btn-inverse">Delete</button></a>
                           </td> 
                         <?php }else {?> 
                             <td>
