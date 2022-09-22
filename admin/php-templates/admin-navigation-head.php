@@ -79,11 +79,11 @@
       transition: background 0.2s, border-color 0.2s;
     } 
     .form i {
-    margin-left: 390px;
-    cursor: pointer;
-    color: black;
-    
-  }
+      margin-left: 390px;
+      cursor: pointer;
+      color: black;
+      
+    }
     .form__input:focus {
       border-color: var(--color-primary);
       background: #ffffff;
@@ -128,39 +128,63 @@
       font-family: arial, sans-serif;
     }
     th{
-    font-size: 16px;
-  }
-  .btn{
-    font-family: arial,sans-serif;
-    
-  }
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
+      font-size: 16px;
+    } 
     .btn-info{
-    background: #0ab1ff;
-    border: none;
-    color: white;
-  }
-  .btn-info:hover{
-    background:  #19abf0;
-    border: none;
-    color: whitesmoke;
-  }
-  .btn-info:focus{
-    color: whitesmoke;
-    background:  #19abf0;
-    border: none;
-  }
+      background: #0ab1ff;
+      border: none;
+      color: white;
+    }
+    .btn-info:hover{
+      background:  #19abf0;
+      border: none;
+      color: whitesmoke;
+    }
+    .btn-info:focus{
+      color: whitesmoke;
+      background:  #19abf0;
+      border: none;
+    }
 
-  hr{
-   margin-top: 5px;
-   display: block;
-   border-style: inset;
-   border-width: 2px;
-   margin-bottom: 1px;
-  }
+    hr{
+    margin-top: 5px;
+    display: block;
+    border-style: inset;
+    border-width: 2px;
+    margin-bottom: 1px;
+    }
+    /* from treatment and prescription records */
+    h3{
+        font-weight: 900;  
+        background-color: #ececec;  
+        padding-top: 10px;
+        position: relative;
+        top: 8px;
+    }
+    label {
+        font-family: Arial, Helvetica, sans-serif;
+    }   
+      /* table  */
+    .table {
+      margin: auto;
+      width: 100%!important;
+      padding-top: 13px; 
+    }
+    .btn {
+      font-family: arial,sans-serif;
+      border-radius: 3px;
+      margin: 2px 4px;
+      font-weight: 400;
+      font-size: 15px;
+    } 
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    a:hover {
+      color: #e2e5de;
+    } 
+    /* end   */
 
 
 
