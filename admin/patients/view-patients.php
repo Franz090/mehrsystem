@@ -10,26 +10,32 @@ session_start();
 $session_id= $_SESSION['id'];
 
 // fetch patients 
-$select = "SELECT u.id AS id, 
-  CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
-  d.contact_no, d.b_date,  health_center, trimester,
-  details_id, med_history_id
-  FROM users as u, details as d, barangay as b, med_history m
-  WHERE u.admin = -1 AND d.id=u.details_id AND d.barangay_id=b.id AND $session_id=b.assigned_midwife AND m.id=d.med_history_id; ";
+$barangay_assigned_midwife_str = $admin==1?"":"AND $session_id=b.assigned_midwife";
 
+$select = "SELECT u.user_id AS user_id, 
+  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name, u.email,  
+  health_center, trimester 
+  FROM users u, user_details as d, barangays as b, patient_details m
+  WHERE u.role = -1 AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id $barangay_assigned_midwife_str AND m.user_id=u.user_id; ";
+// echo $select;
 $patient_list = [];
 
 if($result = mysqli_query($conn, $select))  {
   foreach($result as $row)  {
-    $id = $row['id'];  
+    $id = $row['user_id'];  
     $name = $row['name'];  
     $e = $row['email'];  
-    $c_no = $row['contact_no'];  
+    $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$id AND type=1";
+    if ($result_c_no = mysqli_query($conn, $select_c_no)) {
+      $c_no = '';
+      foreach ($result_c_no as $row2) {
+        $c_no .= '('.$row2['mobile_number'].') '; 
+      }
+    } 
+    // $c_no = $row['contact_no'];  
     // $b_date = $row['b_date'];  
     $bgy = $row['health_center'];  
-    $trimester = $row['trimester'];  
-    $det_id = $row['details_id'];   
-    $med_id = $row['med_history_id'];   
+    $trimester = $row['trimester'];   
     array_push($patient_list, array(
       'id' => $id,
       'name' => $name,  
@@ -37,15 +43,13 @@ if($result = mysqli_query($conn, $select))  {
       'contact' => $c_no,
       'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A')),
       // 'b_date' => $b_date,
-      'barangay' => $bgy,
-      'details_id' => $det_id,
-      'med_history_id' => $med_id
+      'barangay' => $bgy
     ));
   } 
   mysqli_free_result($result);
 } 
 else  { 
-  mysqli_free_result($result);
+  // mysqli_free_result($result);
   $error = 'Something went wrong fetching data from the database.'; 
 }  
 
@@ -56,7 +60,7 @@ $page = 'view_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 <!-- css internal style -->
-  <style>
+<style>
   .table {
    margin: auto;
    width: 100%!important;
@@ -86,7 +90,7 @@ include_once('../php-templates/admin-navigation-head.php');
     font-weight: 400;
     font-size: 15px;
   }
-  </style>
+</style>
  
 <div class="d-flex" id="wrapper">
 
@@ -131,14 +135,17 @@ include_once('../php-templates/admin-navigation-head.php');
                         <!-- <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                         <td><?php echo $value['barangay']; ?></td>
                         <td>
-                          <a href="edit-patient.php?id=<?php echo $value['id'] ?>">
- 
+                        <?php if ($admin===0) {
+                        ?>  
+                          <a href="edit-patient.php?id=<?php echo $value['id'] ?>"> 
                             <button class="edit btn btn-success btn-sm btn-inverse">
                               Edit</button></a>  
                           <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
                             <button onclick="temp_func() " class="del btn btn-danger btn-sm btn-inverse ">Delete</button>
                           <!-- </a> --> 
                           <hr/>
+                        <?php
+                        }?>
                           <a href="med-patient.php?id=<?php echo $value['id'] ?>">
                             <button class="edit btn btn-info btn-sm btn-inverse ">View Report</button></a>
                         </td>
@@ -153,6 +160,7 @@ include_once('../php-templates/admin-navigation-head.php');
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <script>

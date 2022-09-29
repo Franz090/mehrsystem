@@ -236,7 +236,7 @@
         <?php echo isset($footer_contacts)?'<em>Contact Us</em>:<br/>'.$footer_contacts.'<br/><br/>':'' ?>
         <?php echo isset($footer_address)?'<em>Address</em>:<br/>'.$footer_address.'<br/><br/>':'' ?>
         <?php echo isset($footer_availability)?'<em>Schedule</em>:<br/>'.$footer_availability.'<br/><br/>':'' ?>
-        <?php echo isset($footer_fb)?'<em>Follow Us</em>:<br/>'.$footer_fb.'<br/><br/>':'' ?>
+        <?php echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
       </div>
     </footer> 
   </div>  

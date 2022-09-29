@@ -43,9 +43,9 @@ CREATE TABLE `appointments` (
 INSERT INTO `appointments` (`appointment_id`, `patient_id`, `midwife_id`, `date`, `status`, `trimester`) VALUES
 (1, 7, NULL, '2022-09-29 00:00:00', 0, 0),
 (2, 8, NULL, '2022-09-29 00:00:00', -1, 0),
-(3, 6, NULL, '2022-09-29 00:00:00', 1, 0),
-(4, 6, 3, '2022-09-26 00:00:00', 1, 0),
-(5, 6, NULL, '2022-09-29 00:00:00', 0, 0);
+(3, 9, NULL, '2022-09-29 00:00:00', 1, 0),
+(4, 9, 3, '2022-09-26 00:00:00', 1, 0),
+(5, 9, NULL, '2022-09-29 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -93,8 +93,8 @@ CREATE TABLE `consultations` (
 --
 
 INSERT INTO `consultations` (`consultation_id`, `treatment_id`, `prescription_id`, `treatment_file`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
-(1, NULL, 2, NULL, 6, 3, '2022-09-29 00:00:00', 0),
-(2, 1, 2, NULL, 6, 3, '2022-09-28 00:00:00', 0);
+(1, NULL, 2, NULL, 9, 3, '2022-09-29 00:00:00', 0),
+(2, 1, 2, NULL, 9, 3, '2022-09-28 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ CREATE TABLE `patient_details` (
 --
 
 INSERT INTO `patient_details` (`patient_details_id`, `nickname`, `barangay_id`, `b_date`, `address`, `civil_status`, `trimester`, `tetanus`, `diagnosed_condition`, `family_history`, `allergies`, `blood_type`, `weight`, `height_ft`, `height_in`, `user_id`) VALUES
-(1, 'Ed', 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 6),
+(1, 'Ed', 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 9),
 (2, 'Cis', 2, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 7),
 (3, NULL, 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 8);
 
