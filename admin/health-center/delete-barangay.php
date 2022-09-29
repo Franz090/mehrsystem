@@ -10,13 +10,13 @@ session_start();
 $id = $_GET['id'];
 
 // check if the barangay is not used 
-$sql1 = "SELECT id FROM `details` WHERE `barangay_id` = $id";
+$sql1 = "SELECT patient_details_id FROM `patient_details` WHERE `barangay_id` = $id";
 $details_barangay_check = mysqli_query($conn, $sql1); 
 if (mysqli_num_rows($details_barangay_check) > 0) {
     $response = 'Barangay can not be deleted, it is used.'; 
     $error = "?error=$response";
 }else { 
-    $sql2 = "DELETE FROM `barangay` WHERE `barangay`.`id` = $id"; 
+    $sql2 = "DELETE FROM `barangays` WHERE `barangays`.`barangay_id` = $id"; 
     $delete = mysqli_query($conn, $sql2);  
     if ($delete) {
         $response = 'Barangay record deleted successfully.';  

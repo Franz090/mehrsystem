@@ -5,7 +5,7 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/midwife-only.php';
+@include '../php-templates/redirect/not-for-patient.php';
 
 $session_id= $_SESSION['id'];
 

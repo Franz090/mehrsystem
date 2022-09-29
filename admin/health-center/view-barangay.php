@@ -9,18 +9,26 @@ session_start();
 
 
 // fetch barangays 
-$select = "SELECT id, health_center  FROM barangay";
+$select = "SELECT barangay_id, health_center, 
+  IF(assigned_midwife IS NULL, 'None', CONCAT(first_name, 
+    IF(middle_name IS NULL OR middle_name='', '', 
+        CONCAT(' ', SUBSTRING(middle_name, 1, 1), '.')), 
+    ' ', last_name)) midwife
+  FROM barangays 
+  LEFT JOIN users ON assigned_midwife=user_id
+  LEFT JOIN user_details USING(user_id)";
 $result = mysqli_query($conn, $select);
 $barangay_list = [];
 
 if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
-    $id = $row['id'];  
+    $id = $row['barangay_id'];  
     $h_center = $row['health_center'];    
-    array_push($barangay_list, array('id' => $id,'health_center' => $h_center ));
+    $midwife = $row['midwife'];    
+    array_push($barangay_list, array('id' => $id,'health_center' => $h_center, 'midwife' => $midwife));
   } 
   mysqli_free_result($result);
-  // print_r($nurse_list);
+  // print_r($barangay_list);
 
 } 
 else  { 
@@ -34,39 +42,7 @@ $conn->close();
 $page = 'view_barangay';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-
-<!-- css style -->
-<style>
-  .table {
-   margin: auto;
-   width: 100%!important;
-   padding-top: 13px;
-   
-  }
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
-  
-  h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-  }
-  a{
-    text-decoration: none;
-    color: white;
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-  } 
-</style>
+ 
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
@@ -90,6 +66,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>
                   <th scope="col" class="col-md-5">Barangay</th>
+                  <th scope="col" class="col-md-3">Assigned Midwife</th>
                   <!-- <th scope="col" class="col-sm-2">Status</th> -->
                   <th scope="col" class="col-lg-6">Actions</th>
                 </tr>
@@ -101,6 +78,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <tr>
                     <th scope="row"><?php echo $key+1; ?></th>
                     <td><?php echo $value['health_center']; ?></td>
+                    <td><?php echo $value['midwife']; ?></td>
                     <!-- <td><?php //echo $value['status']; ?></td> -->
                     <td>
                       <a href="edit-barangay.php?id=<?php echo $value['id'] ?>">

@@ -5,7 +5,7 @@ if ($admin==0) {
 
 <div class="container-fluid default"> 
 Midwife <br/>
-    <div class="row mt-5 col-sm-12">
+    <!-- <div class="row mt-5 col-sm-12">
         
         <div class="col-md-6 col-sm-12 d-flex justify-content-center">
             <div id="piechart" class="chart"
@@ -14,7 +14,7 @@ Midwife <br/>
         <div class="col-md-6 col-sm-12 d-flex justify-content-center">
             <div id="columnchart_material" class="columnchart"> </div>
         </div>
-    </div>  
+    </div>   -->
     <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
         <thead class="table-dark">
             <tr>

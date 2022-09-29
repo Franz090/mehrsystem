@@ -8,7 +8,7 @@
      <link rel="shortcut icon" href="/assets/favicon.ico">
     <link rel="stylesheet" href="css/main.css">
    
-    <title>Admin</title>
+    <title>System</title>
 </head>
 
 <body>

@@ -41,3 +41,43 @@ FROM appointment AS a
 LEFT JOIN (SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
 WHERE  d.id=u.details_id AND (d.barangay_id=2 OR d.barangay_id=5 ) AND d.barangay_id=b.id) AS p
 ON a.patient_id=p.id;
+
+
+
+-- infant to vaccines 
+-- SELECT CONCAT(first_name, " ", (), " ", last_name) AS name FROM `infant`
+/*
+SELECT CONCAT(first_name, IF(middle_name IS NULL, "", CONCAT(" ", middle_name)), " ", last_name) infant_name, date, type
+FROM infant
+LEFT JOIN vaccinations
+	USING (infant_id);
+*/
+
+-- name measles penta polio pneumococcal 
+SELECT CONCAT(first_name, IF(middle_name IS NULL, "", CONCAT(" ", middle_name)), " ", last_name) infant_name, 
+	me.date measles, pe.date penta, po.date polio, pn.date pneumococcal
+FROM infant 
+LEFT JOIN (SELECT infant_id, date FROM vaccinations WHERE type=1) AS me 
+	USING (infant_id)
+LEFT JOIN (SELECT infant_id, date FROM vaccinations WHERE type=2) AS pe
+	USING (infant_id)
+LEFT JOIN (SELECT infant_id, date FROM vaccinations WHERE type=3) AS po
+	USING (infant_id)
+LEFT JOIN (SELECT infant_id, date FROM vaccinations WHERE type=4) AS pn
+	USING (infant_id)
+
+-- count vaccinations 
+SELECT CONCAT(first_name, IF(middle_name IS NULL, "", CONCAT(" ", middle_name)), " ", last_name) infant_name, c_vaccinations
+FROM infant 
+LEFT JOIN 
+	(SELECT infant_id, COUNT(infant_id) c_vaccinations FROM vaccinations GROUP BY infant_id) c_of_vax
+    USING (infant_id)
+
+SELECT CONCAT(first_name, IF(middle_name IS NULL, "", CONCAT(" ", middle_name)), " ", last_name) infant_name, m.date measles, p.date penta, po.date polio
+FROM infant 
+LEFT JOIN 
+	measles m USING(infant_id)
+LEFT JOIN 
+	penta p USING(infant_id)
+LEFT JOIN 
+	polio po USING(infant_id)
