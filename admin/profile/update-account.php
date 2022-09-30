@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
         if (mysqli_query($conn, $update_sql)) {
 
           $error= '';
-          $_SESSION['usermail'] = $new_email;
+          if (!empty($_POST['new_email'])) $_SESSION['usermail'] = $new_email;
           echo "<script>alert('Accout updated!');</script>";
         }   
         else  {

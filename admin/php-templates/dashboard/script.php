@@ -61,7 +61,7 @@
     ]);
 
     var options = {
-      title: '<?php echo $bar_chart_title; ?>',
+      title: '<?php echo $bar_chart_title; ?> (Last 6 months)',
       is3D: 'true',
       backgroundColor: 'transparent',
       legendTextStyle: { color: '#303030' },

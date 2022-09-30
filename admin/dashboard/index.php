@@ -197,6 +197,17 @@ else {
   else  { 
     $error = 'Something went wrong fetching data from the database.'; 
   }   
+
+  // chart data 
+  $past_6_months = date("Y-m-d", strtotime('-5 months'));
+  $bar_chart_month_list = [];
+  $bar_chart_month_list_label = [];
+  for ($i=5; $i > -1; $i--) { 
+      $str_to_time = strtotime("-$i months");
+      array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
+      array_push($bar_chart_month_list_label,  date("M", $str_to_time));
+  }
+  $bar_chart_data = [];
 }
 
 
@@ -261,8 +272,8 @@ if ($admin!=-1) {
                           <a href="edit-infant.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
                           <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
-                              <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
-                              Delete</button> 
+                              <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
+                              Delete</button>  -->
                           <!-- </a>     -->
                       </td>
                   <?php } ?>  

@@ -1,10 +1,7 @@
 <?php 
 if ($admin==1) { 
-    $bar_chart_title='Consultation Chart (Last 6 Months)';
+    $bar_chart_title='Consultation Chart';
     // generate months to chart
-    $past_6_months = date("Y-m-d", strtotime('-5 months'));
-    $bar_chart_month_list = [];
-    $bar_chart_month_list_label = [];
     for ($i=5; $i > -1; $i--) { 
         $str_to_time = strtotime("-$i months");
         array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
@@ -29,9 +26,7 @@ if ($admin==1) {
     }   
 
     // structure the chart data  
-    $labels = '["Month '.$curr_year.'", "No Trimester", "1st Trimester", "2nd Trimester", "3rd Trimester"],';
-    $bar_chart_data = [ 
-    ];
+    $labels = '["Months ('.$curr_year.')", "No Trimester", "1st Trimester", "2nd Trimester", "3rd Trimester"],';
 
     $count_consul_list = count($consultations_list)-1;
     $key_jump = -1;
