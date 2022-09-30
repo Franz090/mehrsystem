@@ -9,7 +9,7 @@ session_start();
 
  
 // fetch barangays  
-$select = "SELECT id, health_center FROM barangay";
+$select = "SELECT barangay_id id, health_center FROM barangays";
 $result_barangay = mysqli_query($conn, $select);
 $barangay_list = [];
 
@@ -31,22 +31,22 @@ else  {
 // register
 if(isset($_POST['submit'])) {
   // next details id 
-  $select = "SELECT * from details";
-  $details = mysqli_query($conn, $select);
-  $rows = mysqli_num_rows($details)-1;
-  mysqli_data_seek($details,$rows);
-  // echo $rows;
-  $row=mysqli_fetch_row($details);
-  $next_details_id = $row[0] + 1;
+  // $select = "SELECT * from details";
+  // $details = mysqli_query($conn, $select);
+  // $rows = mysqli_num_rows($details)-1;
+  // mysqli_data_seek($details,$rows);
+  // // echo $rows;
+  // $row=mysqli_fetch_row($details);
+  // $next_details_id = $row[0] + 1;
 
-  // next med_history id
-  $select2 = "SELECT * from med_history";
-  $med_history = mysqli_query($conn, $select2);
-  $rows2 = mysqli_num_rows($med_history)-1;
-  mysqli_data_seek($med_history,$rows2);
-  // echo $rows2;
-  $row2=mysqli_fetch_row($med_history);
-  $next_med_history_id = $row2[0] + 1;
+  // // next med_history id
+  // $select2 = "SELECT * from med_history";
+  // $med_history = mysqli_query($conn, $select2);
+  // $rows2 = mysqli_num_rows($med_history)-1;
+  // mysqli_data_seek($med_history,$rows2);
+  // // echo $rows2;
+  // $row2=mysqli_fetch_row($med_history);
+  // $next_med_history_id = $row2[0] + 1;
 
   // echo $next_details_id;
   // print_r($next_id);
@@ -96,35 +96,35 @@ if(isset($_POST['submit'])) {
   
     $result = mysqli_query($conn, $select);
   
-    if(mysqli_num_rows($result) > 0 || $pass != $cpass)  {
-      if (mysqli_num_rows($result) > 0)
-          $error .= 'User already exists. '; 
-      if ($pass != $cpass)
-          $error .= 'Passwords do not match! '; 
-      mysqli_free_result($result);
-      mysqli_free_result($details);
-      mysqli_free_result($med_history);
-    } 
-    else  { 
-      $insert1 = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
-        VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, -1, '',$next_details_id);  ";
-      $insert2 = "INSERT INTO details 
-        VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
-      $insert3 = "INSERT INTO med_history 
-        VALUES($next_med_history_id, $height_ft, $height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies', $tetanus, $trimester);  ";
-      if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3"))  {
-        mysqli_free_result($result);
-        mysqli_free_result($details);
-        mysqli_free_result($med_history); 
-        echo "<script>alert('Patient Added!');</script>"; 
-      }
-      else { 
-          mysqli_free_result($result);
-          mysqli_free_result($details);
-          mysqli_free_result($med_history);
-          $error .= 'Something went wrong inserting patient into the database.';
-      } 
-    }  
+    // if(mysqli_num_rows($result) > 0 || $pass != $cpass)  {
+    //   if (mysqli_num_rows($result) > 0)
+    //       $error .= 'User already exists. '; 
+    //   if ($pass != $cpass)
+    //       $error .= 'Passwords do not match! '; 
+    //   mysqli_free_result($result);
+    //   mysqli_free_result($details);
+    //   mysqli_free_result($med_history);
+    // } 
+    // else  { 
+    //   $insert1 = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
+    //     VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, -1, '',$next_details_id);  ";
+    //   $insert2 = "INSERT INTO details 
+    //     VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
+    //   $insert3 = "INSERT INTO med_history 
+    //     VALUES($next_med_history_id, $height_ft, $height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies', $tetanus, $trimester);  ";
+    //   if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3"))  {
+    //     mysqli_free_result($result);
+    //     mysqli_free_result($details);
+    //     mysqli_free_result($med_history); 
+    //     echo "<script>alert('Patient Added!');</script>"; 
+    //   }
+    //   else { 
+    //       mysqli_free_result($result);
+    //       mysqli_free_result($details);
+    //       mysqli_free_result($med_history);
+    //       $error .= 'Something went wrong inserting patient into the database.';
+    //   } 
+    // }  
   } 
 }
 

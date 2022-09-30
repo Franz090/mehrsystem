@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
     $description = mysqli_real_escape_string($conn, $_POST['description']);   
     // $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1)); 
 
-    $insert1 = "INSERT INTO treat_med(name, description, category) 
+    $insert1 = "INSERT INTO treat_med(name, description, type) 
     VALUES('$name', '$description', 0);  ";
     
     if (mysqli_query($conn,"$insert1"))  { 
