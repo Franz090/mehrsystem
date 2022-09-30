@@ -73,17 +73,7 @@ if ($admin==1) {
 <div class="container-fluid default">
     RHU <br/>
     Total Number of Patients: <?php echo $total_patient_count;?>
-    <div class="row mt-5">
-        <!-- <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-            <div id="piechart" class="chart"
-                style="bottom:200px;width: 400px;height 200px;">
-            </div>
-        </div> -->
-        <div class="col-md-12 col-sm-12 d-flex justify-content-center p-5" >
-            <div id="columnchart_material" class="columnchart" style="min-height:500px; min-width:100%">
-            </div>
-        </div>
-    </div>   
+    <?php include_once('barchart.php');?> 
 </div>
  
 

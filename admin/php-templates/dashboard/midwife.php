@@ -134,12 +134,7 @@ Midwife <br/>
             Tetanus Toxoid Vaccinated Patients: <?php echo $total_vacc ?>  
         </div> 
     </div>
-    <div class="row mt-5"> 
-        <div class="col-md-12 col-sm-12 d-flex justify-content-center p-5" >
-            <div id="columnchart_material" class="columnchart" style="min-height:500px; min-width:100%">
-            </div>
-        </div>
-    </div>   
+    <?php include_once('barchart.php');?>
 </div>
 
 <!-- <div class="container">
