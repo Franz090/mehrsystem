@@ -166,7 +166,7 @@ CREATE TABLE `infants` (
 
 INSERT INTO `infants` (`infant_id`, `first_name`, `middle_name`, `last_name`, `nickname`, `sex`, `b_date`, `blood_type`, `legitimacy`, `user_id`) VALUES
 (1, 'Sanggol 1', 'Ae', 'B', NULL, 'Male', '2021-01-23', 'O+', 1, 8),
-(2, 'Sanggol 2', 'Cs', 'D', NULL, 'Female', '2021-01-23', 'O+', 1, 6),
+(2, 'Sanggol 2', 'Cs', 'D', NULL, 'Female', '2021-01-23', 'O+', 1, 9),
 (3, 'Sanggol 3', 'Ed', 'F', 'Tri', 'Male', '2021-01-23', 'O+', 1, 7);
 
 -- --------------------------------------------------------

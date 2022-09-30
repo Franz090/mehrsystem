@@ -1,9 +1,11 @@
-<div class="bg-dark" id="sidebar-wrapper"> 
+<div class="bg-dark d-flex flex-column" id="sidebar-wrapper"> 
   <div class="sidebar-heading text-center py-2 primary-text fs-4 fw-bold text-uppercase border-bottom"
     style="color:whitesmoke;">
      <a href="../dashboard"><img src="../img/rhu-logo.png" alt="logo"></a>
   </div>
-  <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
+  <div class="d-flex flex-column justify-content-between flex-grow-1">
+    <!-- nav list  -->
+    <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
     <a <?php echo $page == 'dashboard'? "type='button'":"href='../dashboard'"?> class="h6 list-group-item list-group-item-action bg-transparent second-text active"><i
         class="fas fa-solid fa-box fa-md" style="margin-right: 11px;"></i>Dashboard</a>
      
@@ -226,8 +228,10 @@
         </div> 
     <?php
       }
-    ?>  
-    <hr/>   
+    ?>   
+  </div>   
+  <!-- end nav list  -->
+    <hr/>  
     <footer >
       <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent second-text active">
         <i class="fas fa-solid fa-box fa-md" 
@@ -239,7 +243,10 @@
         <?php echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
       </div>
     </footer> 
-  </div>  
+    
+  
+
+  </div> 
 </div>
 
 <?php 
