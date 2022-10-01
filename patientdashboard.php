@@ -10,7 +10,6 @@
    
 </head>
 <body>
-
     
 <body>
     <div class="d-flex" id="wrapper">
@@ -35,11 +34,9 @@
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-door-open"></i>Logout</a>
             </div>
-
         </div>
         
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #f0cac4">
             <nav class="navbar navbar-expand-lg navbar-light bg-dark py-2 px-4" style="padding: 40px 5px 4px 4px;" >
@@ -52,7 +49,6 @@
                     aria-expanded="false" aria-label="Toggle navigation" style="background-color:white;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -71,14 +67,35 @@
                 </div>
             </nav>
             
-              <div class="container"><div class="row bg-light m-3 con1"></div><iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe></div>
-            </div>
+              <div class="container"><div class="row bg-light m-3 con1"></div>
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<section class="boook" id="boook">
 
+<h1 class="headings">Make Appointment</h1>    
+
+<div class="rows">
+
+<div class="images">
+        <img src="image/book-img.svg" alt="">
+    </div>
+
+    <form class="forms" id="forms" action="">
+        <input type="text" placeholder="Enter name" class="box">
+        <input type="number" placeholder="Enter number" class="box">
+        <input type="email" placeholder="Enter email" class="box">
+        <input type="date" class="box">
+        <input type="submit" value="Submit" class="btns">
+    </form>
+
+</div>
+
+</section>
+                    </div>
+                </div>
             </div>
             
         </div>
     </div>
-
     
     <!-- /#page-content-wrapper -->
     </div>
@@ -86,7 +103,6 @@
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");
-
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
@@ -96,7 +112,6 @@
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
-
 for (i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
@@ -109,9 +124,5 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 </script>
-
-
-
 </body>
-
 </html>
