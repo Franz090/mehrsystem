@@ -71,25 +71,6 @@
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 <section class="boook" id="boook">
 
-<h1 class="headings">Make Appointment</h1>    
-
-<div class="rows">
-
-<div class="images">
-        <img src="image/book-img.svg" alt="">
-    </div>
-
-    <form class="forms" id="forms" action="">
-        <input type="text" placeholder="Enter name" class="box">
-        <input type="number" placeholder="Enter number" class="box">
-        <input type="email" placeholder="Enter email" class="box">
-        <input type="date" class="box">
-        <input type="submit" value="Submit" class="btns">
-    </form>
-
-</div>
-
-</section>
                     </div>
                 </div>
             </div>
