@@ -169,3 +169,26 @@ input:focus::placeholder{
   th {
   	font-size: 16px;
   }
+
+  /* nav bar in login */
+  *{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	background-color: black;
+  }
+
+  a, button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 500;
+  	font-size: 15px;
+	color: white;
+	text-decoration: none;
+  }
+
+  header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px 10%;
+  }

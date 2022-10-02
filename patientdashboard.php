@@ -10,66 +10,52 @@
    
 </head>
 <body>
-
     
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-dark" id="sidebar-wrapper" >
-     
-            <div class="sidebar-heading text-center py-2 primary-text fs-4 fw-bold text-uppercase border-bottom" style="color:whitesmoke;"><i
-                    class="fas fa-solid fa-prescription me-2" href="patientdashboard.php"></i>MEHr</div>
+            <div style="color:whitesmoke;"><i
+                    class="logo" href="#"><img src = "../mehrsystem/image/rhu-logo.png" width="150" height="150" style="position=absolute; margin-top:10px; margin-left:45px;"></i></div>
             <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="fas fa-solid fa-box fa-sm" ></i>Dashboard</a>
-                        <button class="dropdown-btn h6  text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-user me fa-sm"></i>Profile<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-container" >
-                            <div class="merge">
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop bg-transparent second-text active ">Change Password</a>
-                    </div>
-                </div>
-                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-calendar-check fa-sm"></i>Appointment<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-container" >
-                           <i class="fas fa-light fa-minus"></i><a href="#" class="drop">Add Appointment</a><br>
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Appointment</a>
-                        </div>
-                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-vial fa-sm"></i>Treatment<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-container" >
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Treatment</a>
-                        </div>
-                <button href="#" class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-solid fa-file-prescription fa-sm"></i>Prescription<i class="fa fa-caret-down"></i></button>
-                        <div class="dropdown-container" >
-                        <i class="fas fa-light fa-minus"></i><a href="#" class="drop">View Prescription</a>
-                        </div>
+                        class="fas fa-solid fa-house-user"></i>Home</a>
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-solid fa-calendar-check fa-sm"></i>My Appointment</a>
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-solid fa-file"></i>My Consultation</a>
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-solid fa-baby"></i>Infant Tracking</a>
+            </div>
+            <div class="border-bottom" style="color:whitesmoke;"></div>
+            <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-solid fa-wrench"></i>Account Settings</a>
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+                        class="fas fa-solid fa-door-open"></i>Logout</a>
             </div>
         </div>
+        
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #f0cac4">
             <nav class="navbar navbar-expand-lg navbar-light bg-dark py-2 px-4" style="padding: 40px 5px 4px 4px;" >
                 <div class="d-flex align-items-center ">
-                    <i class="fas fa-align-left primary-text fs-4 me-3"  id="menu-toggle"></i>
                     <h2 class="fs-2 m-0"></h2>
                 </div>
-
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation" style="background-color:white;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
-                                <i class="fas fa-user me-2"></i>Angela 
+                                <i class="fas fa-user me-2"></i>Hello, User 
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -81,14 +67,16 @@
                 </div>
             </nav>
             
-              <div class="container"><div class="row bg-light m-3 con1"></div></div>
-            </div>
+              <div class="container"><div class="row bg-light m-3 con1"></div>
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<section class="boook" id="boook">
 
+                    </div>
+                </div>
             </div>
             
         </div>
     </div>
-
     
     <!-- /#page-content-wrapper -->
     </div>
@@ -96,7 +84,6 @@
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");
-
         toggleButton.onclick = function () {
             el.classList.toggle("toggled");
         };
@@ -106,7 +93,6 @@
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
-
 for (i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
@@ -119,9 +105,5 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 </script>
-
-
-
 </body>
-
 </html>

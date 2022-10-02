@@ -12,24 +12,6 @@
      <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- header section starts  -->
-
-<header class="header" style="background-color: #333;">
-
-<a href="#" class="logo" style="color:whitesmoke;"> <i class="fas fa-heartbeat"></i> Maternity Electronic Medical Records </a>
-
-<nav class="navbar" >
-    <a href="#home" class="active" >home</a>
-    <a href="#services">services</a>
-    <a href="#about">about</a>
-    <a href="#doctors">doctor</a>
-    <a href="#book">book</a>
-    <a href="#review">review</a>
-    <a href="patientlogin.php">Login</a>
-
-</nav>
-
-<div id="menu-btn" class="fas fa-bars"></div>
 
 </header>
 
@@ -45,7 +27,6 @@
 
 <div class="content">
     <h3>stay safe, stay healthy</h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem sed autem vero? Magnam, est laboriosam!</p>
     <a href="#" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
 </div>
 
