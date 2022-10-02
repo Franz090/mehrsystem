@@ -18,42 +18,54 @@ if (count($_barangay_list)>0) {
   $barangay_select = '';
   $barangay_list_length_minus_1 = count($_barangay_list)-1;
   foreach ($_barangay_list as $key => $value) { 
-    $barangay_select .= "d.barangay_id=$value ";
+    $barangay_select .= "p.barangay_id=$value ";
     if ($key < $barangay_list_length_minus_1) {
       $barangay_select .= "OR ";
     }
   } 
-  $select = "SELECT p.id AS id, (IF(name IS NULL, 'Deleted Patient',name)) as name, (IF(email IS NULL, 'Deleted Patient', email))as email, (IF(contact_no IS NULL, 'Deleted Patient', contact_no)) as contact_no,
-  (IF(health_center IS NULL, 'Deleted Patient', health_center)) as health_center,
-  (IF(details_id IS NULL, 'Deleted Patient', details_id)) as details_id,
-  (IF(med_history_id IS NULL, 'Deleted Patient', med_history_id)) as med_history_id, 
-  a.date, a.id a_id
-  FROM appointment AS a
-  RIGHT JOIN (SELECT u.id AS id, CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email, d.contact_no, health_center,  details_id, med_history_id FROM users as u, details as d, barangay as b 
-  WHERE  d.id=u.details_id AND ($barangay_select) AND d.barangay_id=b.id AND b.assigned_midwife=$session_id) AS p
-  ON a.patient_id=p.id WHERE a.date>='$yester_date 00:00:00' AND a.status=".($pending?0:1).";";
+  $select = "SELECT a.patient_id id, a.appointment_id a_id, CONCAT(i.first_name, 
+  IF(i.middle_name IS NULL OR i.middle_name='', '', 
+      CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
+  ' ', i.last_name) name, health_center, date
+FROM appointments a, user_details i, barangays b, patient_details p
+WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id 
+  AND p.user_id=i.user_id AND a.date>='$yester_date 00:00:00'
+  AND ($barangay_select)  AND b.assigned_midwife=$session_id
+  AND a.status=".($pending?0:1).";";
+  
   // echo $yester_date; 
 
   // echo $select;
   if($result = mysqli_query($conn, $select))  {
     foreach($result as $row)  {
       $id = $row['id'];  
+      $contact_num_select = "SELECT mobile_number FROM contacts WHERE type=1 AND owner_id=$id";
+      if ($result_contact_num_select = mysqli_query($conn, $contact_num_select)) {
+        if (mysqli_num_rows($result_contact_num_select)>0) { 
+          $_contact_num = "";
+          foreach ($result_contact_num_select as $_key=>$__row) {
+              $_contact_num .= ("(".$__row['mobile_number'].") "); 
+          }
+        } 
+      } 
+      $c_no = $_contact_num; 
+     
       $a_id = $row['a_id'];  
       $name = $row['name'];  
-      $e = $row['email'];  
-      $c_no = $row['contact_no'];  
+      // $e = $row['email'];  
+      // $c_no = $row['contact_no'];  
       $date = $row['date'];  
       $bgy = $row['health_center'];  
-      $det_id = $row['details_id'];    
+      // $det_id = $row['details_id'];    
       array_push($appointment_list, array(
         'id' => $id,
         'a_id' => $a_id,
         'name' => $name,  
-        'email' => $e,
+        // 'email' => $e,
         'contact' => $c_no,
         'date' => $date,
         'barangay' => $bgy,
-        'details_id' => $det_id,
+        // 'details_id' => $det_id,
       ));
     } 
     mysqli_free_result($result);
@@ -123,7 +135,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Barangay</th>  
                 <th scope="col">Date and Time</th>
-                <th scope="col">Contact Number</th>
+                <th scope="col">Contact Number(s)</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -156,7 +168,9 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php }else {?> 
                             <td>
                                 <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                                    <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a> 
+                                  <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a>
+                                <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>">
+                                  <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a> 
                             </td>
                         <?php }?> 
                     </tr>

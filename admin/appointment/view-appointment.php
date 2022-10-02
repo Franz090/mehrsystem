@@ -11,10 +11,13 @@ $session_id = $_SESSION['id'];
 $appointment_list = [];
 $yester_date = date("Y-m-d", strtotime('-1 day'));
   
-$select = "SELECT CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, 
-    a.date a_date, health_center, a.status, contact_no, u.id u_id, a.id a_id
-FROM appointment a, details d, users u, med_history m, barangay b
-WHERE b.id=d.barangay_id AND u.details_id=d.id AND d.med_history_id=m.id AND a.date>='$yester_date 00:00:00' AND a.patient_id=u.id AND u.id=$session_id";
+$select = "SELECT CONCAT(d.first_name, 
+  IF(d.middle_name IS NULL OR d.middle_name='', '', 
+      CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
+  ' ', d.last_name) patient, 
+    a.date a_date, health_center, a.status, d.user_id u_id, a.appointment_id a_id
+FROM appointments a, user_details d, patient_details m, barangays b
+WHERE b.barangay_id=m.barangay_id AND a.patient_id=d.user_id AND d.user_id=m.user_id AND a.date>='$yester_date 00:00:00' AND d.user_id=$session_id";
 
 // echo $select;
 
@@ -23,9 +26,9 @@ if($result = mysqli_query($conn, $select))  {
     foreach($result as $row)  {
       $u_id = $row['u_id'];  
       $a_id = $row['a_id'];  
-      $name = $row['name'];  
+      $name = $row['patient'];  
       $a_date = $row['a_date'];  
-      $c_no = $row['contact_no'];  
+      // $c_no = $row['contact_no'];  
       $status = $row['status'];  
       $bgy = $row['health_center'];  
       array_push($appointment_list, array(
@@ -33,7 +36,7 @@ if($result = mysqli_query($conn, $select))  {
         'a_id' => $a_id,
         'name' => $name,  
         'a_date' => $a_date,
-        'contact_no' => $c_no,
+        // 'contact_no' => $c_no,
         'status' => $status,
         'barangay' => $bgy
       ));
@@ -106,7 +109,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Barangay</th>  
                 <th scope="col">Date and Time</th>
-                <th scope="col">Contact Number</th>
+                <!-- <th scope="col">Contact Number</th> -->
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -124,8 +127,8 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php echo $value['barangay']; ?></td>
                         <td><?php $dtf = date_create($value['a_date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                        <td><?php echo $value['contact_no']; ?></td>
-                        <td>
+                        <!-- <td><?php // echo $value['contact_no']; ?></td> -->
+                        <td>  
                             <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
                                 <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a> 
                         <?php if ($value['status']==0)  { ?>

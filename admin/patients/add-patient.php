@@ -28,10 +28,21 @@ else  {
   $error = 'Something went wrong fetching data from the database.'; 
 }   
 
-// register
+// register 
+$valid_contact_exp = '/[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
+
 if(isset($_POST['submit'])) {
-  // next details id 
-  // $select = "SELECT * from details";
+  $_POST['submit'] = null;
+  $error = ''; 
+  // next users id 
+  $select_last_user_id = "SELECT user_id from users ORDER BY user_id DESC LIMIT 1";
+  if ($result_next_user_id = mysqli_query($conn, $select_last_user_id)) {
+    foreach ($result_next_user_id as $row) {
+      $next_user_id = $row['user_id']+1;
+    }
+  }else {
+    $error .= 'Something went wrong inserting patient into the database. (Error fetching next user_id)';
+  }
   // $details = mysqli_query($conn, $select);
   // $rows = mysqli_num_rows($details)-1;
   // mysqli_data_seek($details,$rows);
@@ -51,80 +62,122 @@ if(isset($_POST['submit'])) {
   // echo $next_details_id;
   // print_r($next_id);
   // // echo '<script>alert("'.$_POST['barangay_id'].'")</script>';
-  $_POST['submit'] = null;
-  $error = ''; 
+ 
+
   // if (true)
   if (empty($_POST['usermail']) || 
     empty($_POST['password']) || 
     empty($_POST['cpassword']) ||
     empty($_POST['first_name']) ||
     empty($_POST['last_name']) ||
-    empty($_POST['contact']) ||
-    empty($_POST['b_date']) ||
+    empty($_POST['civil_status']) ||
+    // empty($_POST['contact']) ||
+    // empty($_POST['b_date']) ||
     
     empty($_POST['height_ft']) ||
     empty($_POST['height_in']) ||
     empty($_POST['weight']) ||
-    empty($_POST['blood_type']) ||
-    empty($_POST['diagnosed_condition']) ||
-    empty($_POST['allergies']))
+    empty($_POST['blood_type']) )
     $error .= 'Fill up input fields that are required (with * mark)! ';
-  else {
-    $email = mysqli_real_escape_string($conn, $_POST['usermail']);
-    $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
-    $mid_initial = mysqli_real_escape_string($conn, $_POST['mid_initial']);
-    $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
-    $status = mysqli_real_escape_string($conn, ($_POST['status']=='Inactive'?0:1));
-    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-    $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+  else if ($error=='') {
+    $contact = mysqli_real_escape_string($conn,$_POST['contact']);
 
-    $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
-    $b_date = mysqli_real_escape_string($conn, $_POST['b_date']);
-    $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
+    $contacts = explode('\r\n',$contact);
+    $new_contacts = [];
+    // print_r($contacts);
+    // check numbers  
+    foreach ($contacts as $key => $mob_number) {
+        // echo " mob_number: $mob_number ";
+        $regex_check = preg_match($valid_contact_exp,$mob_number);
+        // echo " regex check: $regex_check ";
+        if ($mob_number==='') {
+            unset($contacts[$key]);
+        }
+        else if ($regex_check===0) {
+            $error .= 'Invalid contact number list provided. Please use the format 09XX-XXX-XXXX where X is a number from 0-9.';
+        } else { 
+            array_push($new_contacts,$mob_number);
+        }
+    }
 
-    $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
-    $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
-    $weight = mysqli_real_escape_string($conn, $_POST['weight']);
-    $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
-    $diagnosed_condition = mysqli_real_escape_string($conn, $_POST['diagnosed_condition']);
-    $allergies = mysqli_real_escape_string($conn, $_POST['allergies']);
-    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
-    $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
-
-    $select = "SELECT * FROM users WHERE email = '$email'";
-
+    if ($error=='') {
+      $email = mysqli_real_escape_string($conn, $_POST['usermail']);
+      $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
+      $mid_name = empty($_POST['mid_name'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['mid_name'])."'";
+      $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
+      $nickname = empty($_POST['nickname'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['nickname'])."'"; 
   
-    $result = mysqli_query($conn, $select);
+      $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+      $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
   
-    // if(mysqli_num_rows($result) > 0 || $pass != $cpass)  {
-    //   if (mysqli_num_rows($result) > 0)
-    //       $error .= 'User already exists. '; 
-    //   if ($pass != $cpass)
-    //       $error .= 'Passwords do not match! '; 
-    //   mysqli_free_result($result);
-    //   mysqli_free_result($details);
-    //   mysqli_free_result($med_history);
-    // } 
-    // else  { 
-    //   $insert1 = "INSERT INTO users(first_name, mid_initial, last_name, email, password, status, admin, otp,details_id) 
-    //     VALUES('$first_name', '$mid_initial', '$last_name', '$email','$pass', $status, -1, '',$next_details_id);  ";
-    //   $insert2 = "INSERT INTO details 
-    //     VALUES($next_details_id,'$c_no', '$b_date', $bgy_id, $next_med_history_id); ";
-    //   $insert3 = "INSERT INTO med_history 
-    //     VALUES($next_med_history_id, $height_ft, $height_in, $weight, '$blood_type', '$diagnosed_condition' , '$allergies', $tetanus, $trimester);  ";
-    //   if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3"))  {
-    //     mysqli_free_result($result);
-    //     mysqli_free_result($details);
-    //     mysqli_free_result($med_history); 
-    //     echo "<script>alert('Patient Added!');</script>"; 
-    //   }
-    //   else { 
-    //       mysqli_free_result($result);
-    //       mysqli_free_result($details);
-    //       mysqli_free_result($med_history);
-    //       $error .= 'Something went wrong inserting patient into the database.';
-    //   } 
-    // }  
+      $civil_status = mysqli_real_escape_string($conn,$_POST['civil_status']);
+  
+      $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
+      $b_date = empty($_POST['b_date'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['b_date'])."'";
+      $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'";
+      // $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
+  
+      
+  
+  
+      $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+      $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
+      $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+      $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
+      $diagnosed_condition = empty($_POST['diagnosed_condition'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['diagnosed_condition'])."'";
+      $family_history = empty($_POST['family_history'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['family_history'])."'";
+      $allergies = empty($_POST['allergies'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['allergies'])."'";
+      $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+      $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
+  
+      $select = "SELECT * FROM users WHERE email = '$email'";
+  
+    
+      $result = mysqli_query($conn, $select);
+    
+      if(mysqli_num_rows($result) > 0 || $pass != $cpass)  {
+        if (mysqli_num_rows($result) > 0)
+            $error .= 'User already exists. '; 
+        if ($pass != $cpass)
+            $error .= 'Passwords do not match! '; 
+        mysqli_free_result($result); 
+        mysqli_free_result($result_next_user_id); 
+      } 
+      else  { 
+        $insert1 = "INSERT INTO users VALUES ($next_user_id, '$email','$pass',NULL,-1); ";
+        $insert2 = "INSERT INTO user_details VALUES (NULL, '$first_name',$mid_name,'$last_name',NULL,$next_user_id); ";
+        $insert3 = "INSERT INTO patient_details 
+          VALUES (NULL, $nickname, $bgy_id, $b_date, $address, '$civil_status', 
+            $trimester, $tetanus, $diagnosed_condition, $family_history, $allergies, 
+            '$blood_type', $weight, $height_ft, $height_in, $next_user_id); ";
+        $add_contact_numbers = "";
+        $contacts_count = count($new_contacts);
+        $contacts_count_minus_one = $contacts_count-1;
+        if ($contacts_count>0) {
+            $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
+            foreach ($new_contacts as $key => $value) { 
+                // echo " v: $value ";
+                $ins = "('".mysqli_real_escape_string($conn, $value)."', $next_user_id, 1)"; 
+                $add_contact_numbers .= $ins;
+                $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
+            }
+        }
+        // echo "$insert1 $insert2 $insert3 $add_contact_numbers";
+        if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3 $add_contact_numbers"))  {
+          mysqli_free_result($result); 
+          mysqli_free_result($result_next_user_id); 
+          echo "<script>alert('Patient Added!');</script>"; 
+        }
+        else { 
+            mysqli_free_result($result); 
+            mysqli_free_result($result_next_user_id); 
+            $error .= 'Something went wrong inserting patient into the database.';
+        } 
+      } 
+
+
+    }
+     
   } 
 }
 
@@ -133,7 +186,15 @@ $conn->close();
 $page = 'add_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- 
+<style>
+    .text_area {
+        width: 100%;
+        height: 100px;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+</style>
+
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -157,28 +218,27 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
           <div class="form__input-group">
               <input type="text" class="form__input" name="first_name" placeholder="First Name*" required/>
-            </div>
-          <div class="form__input-group">
-              <input type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
-            </div>
-          <div class="form__input-group">
+              <input type="text" class="form__input" name="mid_name" placeholder="Middle Name">
               <input type="text" class="form__input" name="last_name" placeholder="Last Name*" required/>
           </div> 
           <div class="form__input-group">
-            <input type="tel" name="contact" class="form__input" placeholder="Contact Num* (Format:09XX-XXX-XXXX)" 
-              pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required/>
-          </div>
-          <div class="form__input-group">
-            <label>Birth Date*</label>
-            <input type="date" name="b_date" required class="form__input"/>
-          </div>
-          <div class="form__input-group">
-              <label>Status</label>
-              <select class="form__input" name="status">
-                <option value="Inactive" selected>Inactive</option>
-                <option value="Active">Active</option>
-              </select>
+              <input type="text" class="form__input" name="nickname" placeholder="Nickname"/>
           </div> 
+          <div class="form__input-group">
+            <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
+            <textarea id="contact" name="contact" class="text_area"></textarea> 
+          </div>
+          <div class="form__input-group">
+            <label>Birth Date</label>
+            <input type="date" name="b_date" class="form__input"/>
+          </div>
+          <div class="form__input-group">
+            <label for="address">Address</label><br/>
+            <textarea id="address" name="address" class="text_area"></textarea> 
+          </div>
+          <div class="form__input-group">
+              <input type="text" class="form__input" name="civil_status" placeholder="Civil Status*"/>
+          </div>  
           <div class="form__input-group">
               <label>Barangay</label>
               <select class="form__input" name="barangay_id">
@@ -206,25 +266,38 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form__text"><label>Medical History</label></div>
           </div>
           <div class="form__input-group">
-            Height*
-            <input value="0" min='0' type="number" 
-              class="form__input" name="height_ft" placeholder="Feet*" required/> ft
-            <input value="0" min='0' max='11' type="number" 
-              class="form__input" name="height_in" placeholder="Inches*" required/> inch(es)  
+            Height* 
+            <div class="d-flex input-group">
+              <input value="0" min='0' type="number" 
+                class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
+              <div class="input-group-postpend">
+                <div class="input-group-text form__input bg-dark text-white">ft</div>
+              </div> 
+              <input value="0" min='0' max='11' type="number" 
+              class="form__input form-control" name="height_in" placeholder="Inches*" required/>
+              <div class="input-group-postpend">
+                <div class="input-group-text form__input bg-dark text-white">inch(es)</div>
+              </div> 
+            </div>
           </div>
           <div class="form__input-group">   
             Weight*   
-            <input value="0" type="number" class="form__input" name="weight" placeholder="Weight*" 
-              required min="0"/> kg 
+            <div class="d-flex input-group">
+              <input value="0" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
+                required min="0"/>
+                <div class="input-group-postpend">
+                  <div class="input-group-text form__input bg-dark text-white">kg</div>
+                </div> 
+            </div>
+             
           </div>
           <div class="form__input-group"> 
             <input type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>  
           </div>
           <div class="form__input-group">  
-            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition* (Write None if there are no conditions)" required/>
-          </div>
-          <div class="form__input-group">    
-            <input type="text" class="form__input" name="allergies" placeholder="Allergies* (Write None if there are no allergies)" required/>    
+            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+            <input type="text" class="form__input" name="family_history" placeholder="Family History"/> 
+            <input type="text" class="form__input" name="allergies" placeholder="Allergies"/>    
           </div>
           <div class="form__input-group">
               <label>Tetanus Toxoid Vaccinated</label>
@@ -237,7 +310,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <label>Nth Trimester</label>
               <select class="form__input" name="trimester">
                 <option value="0" selected>N/A</option>
-                <option value="1" >1st (0-13 weeks)</option>
+                <option value="1">1st (0-13 weeks)</option>
                 <option value="2">2nd (14-27 weeks)</option>
                 <option value="3">3rd (28-42 weeks)</option>
               </select>

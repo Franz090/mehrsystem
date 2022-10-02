@@ -90,19 +90,19 @@
           <i class="fas fa-solid fa-box fa-md" style="margin-right: 11px;"></i>Update Footer</a> 
     <?php
       } else {
-        if ($admin==0) { 
+        // if ($admin==0) { 
     ?>
-      <button  
+      <!-- <button  
         class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
         <i class="fas fa-regular fa-briefcase-medical"></i>Treatment Record<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
           <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'add_tr'? "type='button'":'href="../treatment-records/add-treatment-record.php"'?>
+            <?php //echo $page == 'add_tr'? "type='button'":'href="../treatment-records/add-treatment-record.php"'?>
             class="drop">Add Records</a><br>
           <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'view_tr'? "type='button'":'href="../treatment-records/view-treatment-records.php"'?>
+            <?php //echo $page == 'view_tr'? "type='button'":'href="../treatment-records/view-treatment-records.php"'?>
             class="drop">View Records</a>
         </div>
         </div>
@@ -113,15 +113,15 @@
         <div class="dropdown-container">
            <div class="default " style="width: 210px;padding: 5px;display: block;">
           <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'add_pr'? "type='button'":'href="../prescription-records/add-prescription-record.php"'?>
+            <?php //echo $page == 'add_pr'? "type='button'":'href="../prescription-records/add-prescription-record.php"'?>
             class="drop">Add Records</a><br>
           <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'view_pr'? "type='button'":'href="../prescription-records/view-prescription-records.php"'?>
+            <?php //echo $page == 'view_pr'? "type='button'":'href="../prescription-records/view-prescription-records.php"'?>
             class="drop">View Records</a>
         </div>
-        </div>
+        </div> -->
     <?php 
-        }
+        // }
     ?> 
       <button  
         class="dropdown-btn h6  list-group-item 
@@ -226,6 +226,21 @@
             <?php }?>
           </div> 
         </div> 
+
+        <button  
+        class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
+        <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
+      </button>
+        <div class="dropdown-container">
+           <div class="default " style="width: 210px;padding: 5px;display: block;">
+          <i class="fas fa-minus-square fa-1x"></i><a 
+            <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
+            class="drop">Add Consultation</a><br>
+          <i class="fas fa-minus-square fa-1x"></i><a 
+            <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
+            class="drop">View Consultations</a>
+        </div>
+        </div>
     <?php
       }
     ?>   

@@ -114,11 +114,12 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUES
-(1, '0908-123-1234', 6, 1),
+(1, '0908-123-1234', 9, 1),
 (2, '0908-123-1234', 7, 1),
 (3, '0908-123-1234', 1, 0),
 (4, '0908-123-4321', 1, 0),
-(5, '0908-123-1234', 8, 1);
+(5, '0908-123-3141', 9, 1),
+(6, '0908-123-1234', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -414,7 +415,7 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `footer`

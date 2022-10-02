@@ -6,17 +6,14 @@ session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
 
-// $session_id = $_SESSION['id'];
 $id_from_get = $_GET['id'];
-// if ($session_id==$id_from_get) {
-$redirect_condition = "not-for-patient";
-// } else {
-//   $redirect_condition = "midwife-only";
-// }
+$redirect_condition = "not-for-patient"; 
 
-@include "../php-templates/redirect/$redirect_condition.php";
+@include "../php-templates/redirect/not-for-patient.php";
+$admin_b = $admin==1;
 
 $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
+$midwife_sql = $admin_b?'':"AND b.assigned_midwife=".$_SESSION['id'];
 // fetch patient
 $select = "SELECT  u.user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
@@ -24,9 +21,13 @@ $select = "SELECT  u.user_id,
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
   CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies 
   FROM users as u, user_details as d, barangays as b, patient_details as m
-  WHERE u.user_id=$id_from_get AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id";
+  WHERE u.user_id=$id_from_get AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id $midwife_sql";
 // echo $select; 
 if($result = mysqli_query($conn, $select))  {
+  // user does not exist, go to dashboard
+  if (mysqli_num_rows($result)==0) {
+    header('location: ../'); 
+  }
   foreach($result as $row)  {
     $id = $row['user_id'];  
     $name = $row['name'];  
@@ -55,9 +56,9 @@ else  {
 }  
 
 // all appointments
-$admin_b = $admin==1;
+
 $order = $admin_b?'DESC':'ASC';
-$date = $admin_b?'':"AND $yester_date<a.date";
+$date = $admin_b?'':"AND a.date>'$yester_date' ";
 $appointments_list = [];
 // fetch patient appointments 
 $select2_a = "SELECT a.date a_date, trimester
@@ -126,50 +127,7 @@ if($result2_b = mysqli_query($conn, $select2_b))  {
 } 
 else  { 
   $error = 'Something went wrong fetching data from the database.'; 
-}  
-
-
-// fetch patient treatment records
-
-// $select2_t = "SELECT tmr.date t_date, name t_type, description t_description
-//   FROM treat_med_record tmr,  treat_med tm
-//   WHERE $id_from_get=tmr.patient_id AND tmr.treat_med_id=tm.id AND category=1
-//   ORDER BY t_date DESC LIMIT 1";
-
-// // echo $select2; 
-// if($result2_t = mysqli_query($conn, $select2_t))  {
-//   foreach($result2_t as $row)  {
-//     $t_type = $row['t_type'];   
-//     $t_description = $row['t_description'];   
-//     $t_date = $row['t_date'];    
-//   } 
-//   mysqli_free_result($result2_t);
-// } 
-// else  { 
-//   mysqli_free_result($result2_t);
-//   $error = 'Something went wrong fetching data from the database.'; 
-// }  
-
-// fetch patient prescription records
-
-// $select2_m = "SELECT tmr.date m_date, name m_name, description m_description
-//   FROM treat_med_record tmr, treat_med tm
-//   WHERE $id_from_get=tmr.patient_id AND tmr.treat_med_id=tm.id AND category=0
-//   ORDER BY m_date DESC LIMIT 1";
-
-// // echo $select2; 
-// if($result2_m = mysqli_query($conn, $select2_m))  {
-//   foreach($result2_m as $row)  {  
-//     $m_name = $row['m_name'];   
-//     $m_description = $row['m_description'];   
-//     $m_date = $row['m_date'];    
-//   } 
-//   mysqli_free_result($result2_m);
-// } 
-// else  { 
-//   mysqli_free_result($result2_m);
-//   $error = 'Something went wrong fetching data from the database.'; 
-// }  
+}   
 
 $conn->close(); 
 
@@ -180,7 +138,7 @@ include_once('../php-templates/admin-navigation-head.php');
  <style>
   .col-centered{
     float: none;
-        margin: 0 auto
+    margin: 0 auto
   }
  </style>
 <div class="d-flex" id="wrapper">
@@ -231,7 +189,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <td  class="col-md-3 fw-bold">Date of Birth</td>
               <td class="col-md-3"><?php  
                 $dtf1 = date_create($b_date); 
-                echo date_format($dtf1,"F d, Y");  
+                echo $b_date?date_format($dtf1,"F d, Y"):"No Data";  
               ?></td>
               </tr>
         </tbody>
@@ -441,99 +399,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <?php } ?>
                 </tr>
             </tbody>
-          </table> 
-
-
-          <!-- <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
-            <tr>
-            <th scope="col">Treatment Record</th>
-        </tr>
-            </thead>
-            <tbody>
-            <?php //if (isset($t_date)) {?>
-              <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6 fw-bold">
-                  Treatment Type
-                </td>
-                <td  class="col-md-6">
-                  <?php //echo $t_type; ?>  
-                </td>
-              </tr> 
-              <tr class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-6 fw-bold">
-                  Treatment Date
-               </td>
-                <td  class="col-md-6">
-                  <?php
-                    //$dtf3 = date_create($t_date); 
-                    //echo date_format($dtf3,"F d, Y");  
-                  ?>  
-                </td>
-              </td> 
-              <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-6 fw-bold">
-                  Treatment Time
-                </td>
-                <td  class="col-md-6">
-                  <?php
-                    //echo date_format($dtf3,"h:i A");  
-                  ?>  
-                </td>
-              </tr>  
-            <?php //} else { ?> 
-                No Treatment Record
-            <?php //} ?>
-          </tbody>
-          </table> 
-
-           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
-            <tr>
-            <th scope="col">Prescription Record</th>
-        </tr>
-            </thead>
-            <tbody>
-            <?php //if (isset($m_date)) {?>
-              <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6 fw-bold">
-                  Prescription Type
-                </td>
-                <td  class="col-md-6">
-                  <?php
-                    //echo $m_name;  
-                  ?>  
-                </td>
-              </tr> 
-              <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6 fw-bold">
-                  Prescription Date
-                </td>
-                <td  class="col-md-6">
-                  <?php
-                    //$dtf4 = date_create($m_date); 
-                    //echo date_format($dtf4,"F d, Y");  
-                  ?>  
-                </td>
-              </tr> 
-              <tr  class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-6 fw-bold">
-                  Prescription Time
-                </td>
-                <td  class="col-md-6">
-                  <?php
-                    //echo date_format($dtf4,"h:i A");  
-                  ?>  
-                </td>
-              </tr>  
-              <?php //} else { ?> 
-                No Prescription Record
-            <?php //} ?>
-            </tbody>
-          </table> 
-          </div> 
-        </div>     
-        </div> -->
+          </table>  
       <?php
           }
       ?>  

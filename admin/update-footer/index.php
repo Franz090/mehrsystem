@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
         if ($contacts_count>0) {
             $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
             foreach ($new_contacts as $key => $value) { 
-                echo " v: $value ";
+                // echo " v: $value ";
                 $ins = "('".mysqli_real_escape_string($conn, $value)."', 1, 0)"; 
                 $add_contact_numbers .= $ins;
                 $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
