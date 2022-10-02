@@ -76,6 +76,12 @@ body{
 
 .form-input input:focus, .form-input input:valid{
   border: 1px solid #ebecf0;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+  
 }
 
 .form-input input:focus::placeholder{

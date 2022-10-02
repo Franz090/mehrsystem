@@ -130,7 +130,7 @@ $conn->close();
 </head>
 <body>
   <div class="container">
-    <div class="row px-4" >
+    <div class="row px-4">
       <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
