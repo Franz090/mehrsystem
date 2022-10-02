@@ -1,0 +1,141 @@
+body{
+  height: 100vh;
+  background: #0062E6 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    --color-primary: #0275d8;
+    --color-primary-dark: #1871be;
+    --color-secondary: #252c6a;
+    --color-error: #cc3333;
+    --color-error-dark: #b32525;
+    --color-success: #4bb544;
+    --color-info: #0ab1ff;
+    --color-info-dark: #19abf0;
+    --color-dark: #333333;
+    --color-dark-dark: #202020;
+
+    --border-radius: 4px;
+}
+
+.card{
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.img-left{
+  width: 45%;
+  /* background: url('../img/rhu-logo.png') center; */
+  background-size: cover;
+  background-color: rgb(223, 214, 215);
+}
+.card-body{
+  padding: 2rem;
+  background: lightgray;
+}
+
+.title{
+  margin-bottom: 2rem;
+}
+
+.form-input{
+  position: relative;
+  color: rgb(233, 210, 213);
+  
+}
+
+.form-input input{
+  width: 100%;
+  height: 45px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  box-shadow: none;
+  border:1px solid #00000020;
+  border-radius: 10px;
+  outline: none;
+  background: whitesmoke;
+  transition: -1s ease-in;
+}
+
+.form-input span{
+  position: absolute;
+  top: 10px;
+  padding-left: 15px;
+  color: var(--color-dark);
+}
+.form-input input:focus{
+  background: #ebecf0;
+}
+.form-input input::placeholder{
+  /* color: black; */
+  padding-left: 0px;
+}
+
+.form-input input:focus, .form-input input:valid{
+  border: 1px solid #ebecf0;
+}
+
+.form-input input:focus::placeholder{
+  color: var(--color-dark);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+  background-color: #007bff !important;
+  border: 0px;
+}
+
+.form-box button[type="submit"]{
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  background: var(--color-dark);
+  color: #fff;
+  font-size: 90%;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  transition: 0.5s;
+  padding: 12px;
+}
+
+.form-box button[type="submit"]:hover{
+  background: var(--color-dark-dark);
+}
+
+
+.forget-link{
+  color: red;
+  font-weight: normal;
+  font-size: 15px;
+}
+.register-link{
+  color: var(--color-primary);
+  font-weight: normal;
+  font-size: 15px;
+
+}
+
+.forget-link:hover{
+  color: var(--color-error-dark);
+  text-decoration: none;
+}
+.register-link:hover{
+  color: rgb(8, 94, 253);
+  text-decoration: none;
+
+}
+.form-box .btn-social{
+  color: white !important;
+  border: 0;
+  font-weight: bold;
+}
+
+h4{font-family: 'Roboto', sans-serif; 
+}
+.bi-eye-slash{
+  color: black;
+
+}
