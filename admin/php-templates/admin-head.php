@@ -7,6 +7,11 @@
     <!-- bootstrap -->
      <link rel="shortcut icon" href="/assets/favicon.ico">
     <link rel="stylesheet" href="css/main.css">
+     <!-- fonts -->
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
    
     <title>System</title>
 </head>
