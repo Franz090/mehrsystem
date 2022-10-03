@@ -141,10 +141,12 @@ $conn->close();
             Login 
           </h4>
             <form class="form form-box px-3" id="login" action="" method="post">
+              <div class="text-center">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
+            </div>
             <div class="form-input">
               <input type="email"  name="usermail" autofocus placeholder="Email Address" tabindex="10" required>
             </div>
