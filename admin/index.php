@@ -109,9 +109,10 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Form</title>
+  <title>RHU Login</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/login.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"crossorigin="anonymous">
@@ -124,6 +125,7 @@ $conn->close();
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
   <!-- fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -159,7 +161,7 @@ $conn->close();
             </div>
 
             <div class="mb-3 position-relative ">
-              <button type="submit" name="submit" style="font-family: arial;position:absolute;bottom: -2px;" class="w-100 btn btn-dark-dark pt-2 pb-2 text-capitalize">
+              <button type="submit" name="submit" style="font-family: arial;position:absolute;bottom: -2px;" class="w-100 btn btn-dark-dark  text-capitalize">
                 Log In
               </button>
               <br>
@@ -176,7 +178,7 @@ $conn->close();
 
             <hr class="my-2">
 
-            <div class="text-center mb-2">
+            <div class="text-center mb-2 have-account">
               Don't have an account?
               <a href="adminform.php" class="register-link text-decoration-none">
                 Register here

@@ -1,22 +1,26 @@
 body{
   height: 100vh;
-  background: #0062E6 !important;
+  background: #352e35!important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-    --color-primary: #0275d8;
+    --color-primary: #2a8ad8;
     --color-primary-dark: #1871be;
     --color-secondary: #252c6a;
-    --color-error: #cc3333;
-    --color-error-dark: #b32525;
+    --color-error: #eb3437;
+    --color-error-dark: #dd3b3e;
     --color-success: #4bb544;
     --color-info: #0ab1ff;
     --color-info-dark: #19abf0;
     --color-dark: #333333;
     --color-dark-dark: #202020;
-
+    --color-green: #039b72;
+    --color-green-dark: rgb(52, 158, 130);
+    --text-primary-color: #333333;
+    --text-secondary-color: #FBFDFC;
     --border-radius: 4px;
+    
 }
 
 .card{
@@ -29,11 +33,11 @@ body{
   width: 45%;
   /* background: url('../img/rhu-logo.png') center; */
   background-size: cover;
-  background-color: rgb(223, 214, 215);
+  background-color:lightgray;
 }
 .card-body{
   padding: 2rem;
-  background: lightgray;
+  background: rgb(223, 214, 215);
 }
 
 .title{
@@ -76,7 +80,7 @@ body{
 
 .form-input input:focus, .form-input input:valid{
   border: 1px solid #ebecf0;
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  box-shadow: 0 0 5px #60e9d5;
   -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -85,11 +89,12 @@ body{
 }
 
 .form-input input:focus::placeholder{
-  color: var(--color-dark);
+  color: #352e35!important;
+  
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
-  background-color: #007bff !important;
+  background-color: #60e9d5 !important;
   border: 0px;
 }
 
@@ -98,8 +103,8 @@ body{
   border: none;
   cursor: pointer;
   border-radius: 50px;
-  background: var(--color-dark);
-  color: #fff;
+  background: #039b72;
+  color: var(--text-secondary-color);
   font-size: 90%;
   font-weight: bold;
   letter-spacing: .1rem;
@@ -108,28 +113,32 @@ body{
 }
 
 .form-box button[type="submit"]:hover{
-  background: var(--color-dark-dark);
+  background: var(--color-green-dark);
+}
+.form-box button[type="submit"]:focus {
+  background: #039b72;
 }
 
 
 .forget-link{
-  color: red;
-  font-weight: normal;
+  color: var(--color-primary);
   font-size: 15px;
+ 
+  font-family: 'Open Sans', sans-serif;
 }
 .register-link{
   color: var(--color-primary);
-  font-weight: normal;
   font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
 
 }
 
 .forget-link:hover{
-  color: var(--color-error-dark);
+  color: var(--color-primary-dark);
   text-decoration: none;
 }
 .register-link:hover{
-  color: rgb(8, 94, 253);
+  color: var(--color-primary-dark);
   text-decoration: none;
 
 }
@@ -141,12 +150,17 @@ body{
 .form__input-error-message {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: var(--color-error-dark);
+  color: var(--color-error-dar);
 }
 
 h4{font-family: 'Roboto', sans-serif; 
 }
 .bi-eye-slash{
-  color: black;
+  color: rgb(35, 67, 71);
 
+}
+.have-account{
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-primary-color);
+    font-size: 15px;
 }
