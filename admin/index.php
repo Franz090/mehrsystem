@@ -14,15 +14,21 @@ if(isset($_POST['submit'])) {
         $error = 'All input fields are required!';
     else {
         $email = mysqli_real_escape_string($conn, $_POST['usermail']);
-        $pass = md5(mysqli_real_escape_string($conn,$_POST['password']));
+        $pass = md5(mysqli_real_escape_string($conn,$_POST['password'])); 
+ 
+        // $select = "SELECT user_id, 
+        //     CONCAT(first_name,IF(middle_name IS NULL, '', CONCAT(' ',middle_name)),' ',last_name) AS name, admin
+        //     FROM users WHERE email = '$email' && password = '$pass'";
 
+        
+        $select = "SELECT u.user_id, u.role, 
+            CONCAT(first_name, 
+                IF(middle_name IS NULL OR middle_name='', '', CONCAT(' ', SUBSTRING(middle_name, 1, 1), '.')), 
+                ' ', last_name) name 
+        FROM (SELECT user_id, role FROM users WHERE email = '$email' && password = '$pass') u 
+        LEFT JOIN user_details USING(user_id);";
  
- 
-        $select = "SELECT id, status,
-            CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name, admin
-            FROM users WHERE email = '$email' && password = '$pass'";
- 
-
+        // echo $select;
         $result = mysqli_query($conn, $select);
 
         if(!(mysqli_num_rows($result) > 0)) {
@@ -32,30 +38,30 @@ if(isset($_POST['submit'])) {
         else { 
             foreach($result as $row)  {
  
-                $id_from_db = $row['id'];   
+                $id_from_db = $row['user_id'];   
                 $name_from_db = $row['name'];    
-                $status_from_db = $row['status'];    
-                $admin_from_db = $row['admin']; 
+                // $status_from_db = $row['status'];    
+                $role_from_db = $row['role']; 
             } 
             
-            if ($status_from_db==0) {
-                $error = 'Your account is not activated.';
-                mysqli_free_result($result);
-            }
-            else {
+            // if ($status_from_db==0) {
+            //     $error = 'Your account is not activated.';
+            //     mysqli_free_result($result);
+            // }
+            // else {
                 $_SESSION['id'] = $id_from_db;
                 $_SESSION['usermail'] = $email;
                 $_SESSION['name'] = $name_from_db;
-                $_SESSION['admin'] = $admin_from_db;
+                $_SESSION['role'] = $role_from_db;
                 // $_SESSION['status'] = $status_from_db;
               
      
     
-                // if not nurse, get the barangay 
-                if ($admin_from_db!=1) {
+                // if patient, get the barangay 
+                if ($role_from_db==-1) {
                     mysqli_free_result($result);
-                    $select = "SELECT barangay_id FROM users,details 
-                        WHERE users.id = $id_from_db && details_id = details.id";  
+                    $select = "SELECT barangay_id FROM users, patient_details 
+                        USING (user_id)";  
                     $result = mysqli_query($conn, $select);
                     if((mysqli_num_rows($result) > 0)) {  
                         foreach($result as $row)  { 
@@ -66,7 +72,7 @@ if(isset($_POST['submit'])) {
                 }
                 mysqli_free_result($result);
                 header('location: ./dashboard'); 
-            } 
+            // } 
         } 
     } 
 } 

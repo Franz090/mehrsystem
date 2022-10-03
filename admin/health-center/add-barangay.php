@@ -16,7 +16,7 @@ if(isset($_POST['submit'])) {
   else {
     $health_center = mysqli_real_escape_string($conn, $_POST['health_center']); 
    
-    $insert = "INSERT INTO barangay(health_center, assigned_midwife) 
+    $insert = "INSERT INTO barangays(health_center, assigned_midwife) 
       VALUES('$health_center', NULL)";
     if (mysqli_query($conn, $insert))  {
       echo "<script>alert('Barangay Added!');</script>";
@@ -32,13 +32,7 @@ $conn->close();
 $page = 'add_barangay';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- 
-<style>
-label {
-  font-family: Arial, Helvetica, sans-serif;
-}  
-</style>
-
+  
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->

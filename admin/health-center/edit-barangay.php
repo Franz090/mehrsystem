@@ -11,7 +11,7 @@ session_start();
 
 // fetch user 
 $id_from_get = $_GET['id'];
-$barangay_to_edit = "SELECT health_center FROM barangay WHERE id = '$id_from_get'";
+$barangay_to_edit = "SELECT health_center FROM barangays WHERE barangay_id = '$id_from_get'";
 $barangay_from_db = mysqli_query($conn, $barangay_to_edit);
 
 if (mysqli_num_rows($barangay_from_db) > 0) {
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
     $h_center = mysqli_real_escape_string($conn, $_POST['health_center']); 
 
         
-    $up = "UPDATE barangay SET health_center='$h_center' 
+    $up = "UPDATE barangays SET health_center='$h_center' 
       WHERE id=$id_from_get";
     if (mysqli_query($conn, $up))  {
       echo "<script>alert('Barangay Record Updated!');</script>";
@@ -54,12 +54,7 @@ $conn->close();
 
 $page = 'edit_barangay';
 include_once('../php-templates/admin-navigation-head.php');
-?>
-<style>
-label {
-  font-family: Arial, Helvetica, sans-serif;
-}  
-</style>
+?> 
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->

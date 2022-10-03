@@ -4,4 +4,4 @@
 
 ?>
 
-<?php include_once('../php-templates/treat-med-records/view-file.php'); ?>
+<?php //include_once('../php-templates/treat-med-records/view-file.php'); ?>

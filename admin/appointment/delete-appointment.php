@@ -12,11 +12,11 @@ $id = $_GET['id'];
 $session_id = $_SESSION['id'];
 
 if ($admin==0) {
-    $sql2 = "DELETE FROM `appointment` WHERE `appointment`.`id` = $id;"; 
+    $sql2 = "DELETE FROM `appointments` WHERE `appointments`.`appointment_id` = $id;"; 
     $page_to = "pending-appointment";
 } else {
-    $sql2 = "DELETE FROM `appointment` 
-        WHERE `appointment`.`id` = $id AND `appointment`.`patient_id` = $session_id; ";
+    $sql2 = "DELETE FROM `appointments` 
+        WHERE `appointments`.`appointment_id` = $id AND `appointments`.`patient_id` = $session_id; ";
     $page_to = "view-appointment";
 }
 
