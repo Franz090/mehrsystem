@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-2 px-4" style="padding: 40px 5px 4px 4px;">
-    <div class="d-flex align-items-center ">
+    <div class="d-flex">
         <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-        <h2 class="fs-2 m-0"></h2>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -9,11 +8,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <?php if ($admin!=1) { ?>
+            <img class="ms-auto" style="width:100px;height:100px;border-radius:50%;" 
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"/>
+        <?php } ?>
+        <ul class="navbar-nav mb-2 mb-lg-0 <?php echo ($admin==1)? 
+                    'ms-auto':''; ?>">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle second-text fw-bold" style="color: white;" href="#" id="navbarDropdown"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-duotone fa-user-nurse"></i>
+            <!-- <i class="fas fa-duotone fa-user-nurse"></i> -->
             <strong style="color:white;">
                 <?php echo isset($_SESSION['name'])? 
                     $_SESSION['name']:''; ?>

@@ -8,16 +8,16 @@
 $id = $_GET['id'];
 
 
-$sql = "UPDATE appointments SET status=1 WHERE appointment_id=$id;";
+$sql = "UPDATE appointments SET status=-1 WHERE appointment_id=$id;";
 
 if (mysqli_query($conn, $sql)) {
-    $response = 'Appointment Approved!'; 
+    $response = 'Appointment Canceled!'; 
 }
 else {
-    $response = 'Something went wrong with approving the appointment in the database.'; 
+    $response = 'Something went wrong with canceling the appointment in the database.'; 
     echo "<script>alert('$response');</script>";
 }
 
 $conn->close();
 
-header('location: pending-appointment.php');
+header('location: approved-appointment.php');

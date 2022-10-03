@@ -10,11 +10,7 @@ session_start();
 
 $session_id = $_SESSION['id'];
 
-$patient_list = [];   
-
-
-
-
+$patient_list = [];    
 
 // user is a midwife 
 if ($admin==0) {
@@ -24,23 +20,26 @@ if ($admin==0) {
         $barangay_select = '';
         $barangay_list_length_minus_1 = count($_barangay_list)-1;
         foreach ($_barangay_list as $key => $value) { 
-            $barangay_select .= "details.barangay_id=$value ";
+            $barangay_select .= "p.barangay_id=$value ";
             if ($key < $barangay_list_length_minus_1) {
                 $barangay_select .= "OR ";
             }
         }
-        $select1 = "SELECT users.id, trimester,
-            CONCAT(first_name,IF(mid_initial='', '', CONCAT(' ',mid_initial,'.')),' ',last_name) AS name
-            FROM users, details, med_history m
-            WHERE admin=-1 AND ($barangay_select) AND details.id=users.details_id AND details.med_history_id=m.id";
+        $select1 = "SELECT u.user_id, trimester,
+            CONCAT(ud.first_name, 
+        IF(ud.middle_name IS NULL OR ud.middle_name='', '', 
+            CONCAT(' ', SUBSTRING(ud.middle_name, 1, 1), '.')), 
+        ' ', ud.last_name) name
+            FROM users u, patient_details p, user_details ud
+            WHERE role=-1 AND ($barangay_select) AND p.user_id=u.user_id AND ud.user_id=u.user_id";
         $result_patient = mysqli_query($conn, $select1);
         
         if (mysqli_num_rows($result_patient)) {
             foreach($result_patient as $row) {
-            $id = $row['id'];  
-            $name = $row['name'];  
-            $trimester = $row['trimester'];  
-            array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
+                $id = $row['user_id'];  
+                $name = $row['name'];  
+                $trimester = $row['trimester'];  
+                array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
             } 
             mysqli_free_result($result_patient);
             // print_r($result_barangay); 
@@ -52,8 +51,8 @@ if ($admin==0) {
     } 
 } // user is patient 
 else {
-    $select_trimester = "SELECT trimester FROM users u, details d, med_history m
-        WHERE u.id=$session_id AND d.id=u.details_id AND d.med_history_id=m.id";
+    $select_trimester = "SELECT trimester FROM users u, patient_details p, user_details ud
+        WHERE u.user_id=$session_id AND p.user_id=u.user_id AND ud.user_id=u.user_id";
     $result_trimester = mysqli_query($conn, $select_trimester);
 // echo $select_trimester;
     if (mysqli_num_rows($result_trimester)) {
@@ -90,7 +89,7 @@ if(isset($_POST['submit'])) {
  
         
 
-        $insert1 = "INSERT INTO appointment(patient_id, date, status, trimester) 
+        $insert1 = "INSERT INTO appointments(patient_id, date, status, trimester) 
             VALUES($patient_id, '$a_date', $status, $trimester_post);";
         if (mysqli_query($conn,"$insert1"))  { 
         echo "<script>alert('Appointment Added!');</script>"; 

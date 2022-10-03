@@ -9,7 +9,7 @@ session_start();
 
 
 // fetch medicine 
-$select = "SELECT id, name, description FROM treat_med WHERE category=0";
+$select = "SELECT treat_med_id id, name, description FROM treat_med WHERE type=0";
 $result = mysqli_query($conn, $select);
 $med_list = [];
 

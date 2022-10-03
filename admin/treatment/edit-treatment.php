@@ -11,11 +11,12 @@ session_start();
 
 // fetch treatment 
 $id_from_get = $_GET['id'];
-$treatment_to_edit = "SELECT name, description FROM treat_med WHERE id = '$id_from_get'";
+$treatment_to_edit = "SELECT treat_med_id id, name, description FROM treat_med WHERE treat_med_id = '$id_from_get'";
 $treatment_from_db = mysqli_query($conn, $treatment_to_edit);
 
 if (mysqli_num_rows($treatment_from_db) > 0) {
   foreach($treatment_from_db as $row)  {
+    $c_id = $row['id'];  
     $c_name = $row['name'];  
     $c_description = $row['description'];  
     // $c_status = $row['status'];   
@@ -42,7 +43,7 @@ if(isset($_POST['submit'])) {
 
         
     $up = "UPDATE treat_med SET name='$name', description='$description'
-      WHERE id=$id_from_get";
+      WHERE treat_med_id=$c_id";
     if (mysqli_query($conn, $up))  {
       echo "<script>alert('Treatment Record Updated!');</script>";
       $conn->close(); 

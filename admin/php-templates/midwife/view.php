@@ -7,40 +7,49 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/not-for-patient.php';
 
-$midwife_select = "SELECT u.id AS id, 
-  CONCAT(u.first_name,IF(u.mid_initial='', '', CONCAT(' ',u.mid_initial,'.')),' ',u.last_name) AS name, u.email,  
-  IF(u.status=0, 'Inactive', 'Active') AS status, d.contact_no, d.b_date,
-  details_id 
-  FROM users as u, details as d 
-  WHERE u.admin = 0 AND d.id=u.details_id";
+$midwife_select = "SELECT u.user_id AS user_id, 
+CONCAT(ud.first_name,
+  IF(ud.middle_name='' OR ud.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(ud.middle_name,1,1),'.')),' ',ud.last_name) AS name, u.email 
+FROM users as u, 
+  user_details as ud 
+WHERE u.role=0 AND ud.user_id=u.user_id";
+// echo $midwife_select;
 // fetch nurses 
-$select = "SELECT main.id, name, email, main.status, contact_no, b_date, details_id, health_center
+$select = "SELECT main.user_id id, name, email, health_center
 FROM 
 	($midwife_select) as main 
-LEFT JOIN barangay as b
-ON main.id=b.assigned_midwife;";
+LEFT JOIN barangays as b
+ON main.user_id=b.assigned_midwife;";
+// echo $select;
+
 $result = mysqli_query($conn, $admin==1?$select:$midwife_select);
 $midwife_list = [];
 
 if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
     $id = $row['id'];  
+    //TODO: keep until patients module is done 
+    //TODO: check if there is a much better solution here
+    // $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$id AND type=1";
+    // if ($result_c_no = mysqli_query($conn, $select_c_no)) {
+    //   $c_no = '';
+    //   foreach ($result_c_no as $row2) {
+    //     $c_no .= ' ('.$row2['mobile_number'].') '; 
+    //   }
+    // } 
     $name = $row['name'];  
-    $e = $row['email'];  
-    $s = $row['status'];  
-    $c_no = $row['contact_no'];  
-    $b_date = $row['b_date'];  
+    $e = $row['email'];   
     $bgy = $admin==1?$row['health_center']:'';  
-    $det_id = $row['details_id'];  
+    // $det_id = $row['user_details_id'];  
     array_push($midwife_list, array(
       'id' => $id,
       'name' => $name,  
       'email' => $e,
-      'status' => $s,
-      'contact' => $c_no,
-      'b_date' => $b_date,
+      // 'status' => $s,
+      // 'contact' => $c_no,
+      // 'b_date' => $b_date,
       'barangay' => $bgy,
-      'details_id' => $det_id
+      // 'details_id' => $det_id
     ));
   } 
   mysqli_free_result($result);
@@ -93,12 +102,12 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr>
                   <th scope="col" class="col-sm-1">#</th>
                   <th scope="col">Midwife Name</th> 
-                  <th scope="col">Status</th>
+                  <!-- <th scope="col">Status</th> -->
                   <?php if ($admin==1) { ?>
-                    <th scope="col">Contact No</th>
+                    <!-- <th scope="col">Contact No</th> -->
                     <!-- <th scope="col">Birthdate</th> -->
                     <th scope="col">Barangay</th> 
-                    <th scope="col">Actions</th>
+                    <!-- <th scope="col">Actions</th> -->
                   <?php }?>
                 </tr>
               </thead>
@@ -110,20 +119,20 @@ include_once('../php-templates/admin-navigation-head.php');
                   <tr>
                     <th scope="row"><?php echo $key+1; ?></th>
                     <td><?php echo $value['name']; ?></td> 
-                    <td><?php echo $value['status']; ?></td>
+                    <!-- <td><?php //echo $value['status']; ?></td> -->
                     <?php if ($admin==1) { ?>
-                      <td><?php echo $value['contact']; ?></td>
+                      <!-- <td><?php //echo $value['contact']; ?></td> -->
                       <td><?php echo $value['barangay']; ?></td> 
-                      <td>
-                        <a href="edit-midwife.php?id=<?php echo $value['id'] ?>">
-                          <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
+                      <!-- <td> -->
+                        <!-- <a href="edit-midwife.php?id=<?php //echo $value['id'] ?>">
+                          <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a> -->
                         <?php //if ($value['id']!=$_SESSION['id']) { ?>
                           <!-- <a href="delete-midwife.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>">  -->
-                            <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
-                            Delete</button> 
+                            <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
+                            Delete</button>  -->
                             <!-- </a>     -->
                         <?php //} ?> 
-                      </td>
+                      <!-- </td> -->
                     <?php }?>
                   </tr>
                 <?php 

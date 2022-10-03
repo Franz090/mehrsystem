@@ -1,18 +1,24 @@
 <?php 
 
+@include '../includes/config.php'; 
+
+$page = 'view_consultations';
+
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/midwife-only.php';
 
-$pending = $page=='pending_appointment';
 // get assigned barangay of midwife
-$session_id = $_SESSION['id'];
+
+if ($admin==0) {
+    $session_id = $_SESSION['id'];
+}
 
 @include '../php-templates/midwife/get-assigned-barangays.php';
 
 $appointment_list = [];
-if (count($_barangay_list)>0) { 
+if (count($_barangay_list)>0 && $admin==0 || $admin==-1) { 
   $yester_date = date("Y-m-d", strtotime('-1 day'));
   // fetch appointments 
   $barangay_select = '';
