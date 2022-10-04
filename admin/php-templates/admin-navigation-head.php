@@ -22,6 +22,11 @@
   <script src="../js/jquery.dataTables.min.js"></script>
   <script src="../js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
+   <!-- fonts -->
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
   
   
 

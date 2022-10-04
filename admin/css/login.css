@@ -6,6 +6,7 @@ body{
   align-items: center;
   justify-content: center;
     --color-primary: #2a8ad8;
+    --color-white: #FBFDFC;
     --color-primary-dark: #1871be;
     --color-secondary: #252c6a;
     --color-error: #eb3437;
@@ -60,7 +61,7 @@ body{
   border:1px solid #00000020;
   border-radius: 10px;
   outline: none;
-  background: whitesmoke;
+  background: #FBFDFC;
   transition: -1s ease-in;
 }
 
@@ -150,9 +151,9 @@ body{
 .form__input-error-message {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: var(--color-error-dar);
+  font-family: 'Open Sans', sans-serif;
+  color: var(--color-error-dark);
 }
-
 h4{font-family: 'Roboto', sans-serif; 
 }
 .bi-eye-slash{
