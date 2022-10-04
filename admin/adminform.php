@@ -56,6 +56,9 @@ if(isset($_POST['submit'])) {
    } 
 }
 $conn->close(); 
+
+
+include_once('php-templates/css/black-bg-remover.php');
 ?>
 
 

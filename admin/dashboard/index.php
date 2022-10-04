@@ -123,48 +123,48 @@ if ($admin==0) {
 // patient 
 if ($admin==-1) {
 
-  // $select3 = "SELECT height_ft, height_in, weight
-  //   FROM users u, details d, med_history m
-  //   WHERE u.id=$session_id AND u.details_id=d.id AND d.med_history_id=m.id" ;
-  // $result3 = mysqli_query($conn, $select3);
+  $select3 = "SELECT height_ft, height_in, weight
+    FROM users u, user_details d, patient_details m
+    WHERE u.user_id=$session_id AND u.user_id=d.user_id AND u.user_id=m.user_id" ;
+  
 
-  // if(mysqli_num_rows($result3))  {
-  //   foreach($result3 as $row)  {
-  //     $height_ft = $row['height_ft'];  
-  //     $height_in = $row['height_in'];  
-  //     $weight = $row['weight'];   
-  //   } 
-  //   mysqli_free_result($result3);
-  //   // print_r($nurse_list);
-  //   $in_to_m_conversion = 0.0254;
-  //   $ft_to_in_conversion = 12;
-  //   $m = ($height_ft * $ft_to_in_conversion + $height_in) * $in_to_m_conversion; 
-  //   // echo $m. "<br>";
-  //   // echo $height_ft. "<br>";
-  //   // echo $height_in. "<br>";
-  //   // https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator#:~:text=Body%20Mass%20Index%20is%20a,most%20adults%2018%2D65%20years.
-  //   // BMI = kg/m2
-  //   $bmi = $weight/$m**2;
-  //   // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
-  //   // Underweight = <18.5
-  //   // Normal weight = 18.5–24.9
-  //   // Overweight = 25–29.9
-  //   // Obesity = BMI of 30 or greater
-  //   if ($bmi<=18.5) {
-  //     $bmi_desc = 'Underweight';
-  //   } else if ($bmi<=24.9 && $bmi>18.5) {
-  //     $bmi_desc = 'Normal weight';
-  //   } else if ($bmi<30 && $bmi>24.9) {
-  //     $bmi_desc = 'Overweight';
-  //   } else if ($bmi>=30) {
-  //     $bmi_desc = 'Obese';
-  //   }
+  if($result3 = mysqli_query($conn, $select3))  {
+    foreach($result3 as $row)  {
+      $height_ft = $row['height_ft'];  
+      $height_in = $row['height_in'];  
+      $weight = $row['weight'];   
+    } 
+    mysqli_free_result($result3);
+    // print_r($nurse_list);
+    $in_to_m_conversion = 0.0254;
+    $ft_to_in_conversion = 12;
+    $m = ($height_ft * $ft_to_in_conversion + $height_in) * $in_to_m_conversion; 
+    // echo $m. "<br>";
+    // echo $height_ft. "<br>";
+    // echo $height_in. "<br>";
+    // https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator#:~:text=Body%20Mass%20Index%20is%20a,most%20adults%2018%2D65%20years.
+    // BMI = kg/m2
+    $bmi = $weight/$m**2;
+    // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
+    // Underweight = <18.5
+    // Normal weight = 18.5–24.9
+    // Overweight = 25–29.9
+    // Obesity = BMI of 30 or greater
+    if ($bmi<=18.5) {
+      $bmi_desc = 'Underweight';
+    } else if ($bmi<=24.9 && $bmi>18.5) {
+      $bmi_desc = 'Normal weight';
+    } else if ($bmi<30 && $bmi>24.9) {
+      $bmi_desc = 'Overweight';
+    } else if ($bmi>=30) {
+      $bmi_desc = 'Obese';
+    }
 
-  // } 
-  // else  { 
-  //   mysqli_free_result($result3);
-  //   $error = 'Something went wrong fetching data from the database.'; 
-  // }  
+  } 
+  else  { 
+    mysqli_free_result($result3);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }  
 }
 else {
   $session_id_sql = $admin==1?"":"AND b.assigned_midwife=$session_id";
@@ -238,7 +238,7 @@ if ($admin!=-1) {
       if ($admin==-1) { // patient
     ?> 
       Patient <br/>
-      BMI: <?php //echo round($bmi,2). " ($bmi_desc)"?>  
+      BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
     <?php 
       }
       if ($admin!=-1) {

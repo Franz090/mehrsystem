@@ -126,19 +126,19 @@
       <button  
         class="dropdown-btn h6  list-group-item 
         list-group-item-action bg-transparent  text-white fw-normal" ><i style="margin-right: 13px;"
-         class="fa fa-calendar fa-md" aria-hidden="true"></i>Appointments<i class="fa fa-caret-down"></i>
+         class="fa fa-calendar fa-md" aria-hidden="true"></i>Appointments<?php echo $admin==-1?" and Consultations":""?><i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container default text-start">
         <div class="default " style="width: 210px;padding: 5px;display: block;">
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'add_appointment' ? "type='button'" : 'href="../appointment/new-appointment.php"'?>
-              class="drop">Add Appointments</a><br/>
+              class="drop">Add Appointment</a><br/>
           <?php
             if ($admin==-1) {
           ?> 
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'view_appointment' ? "type='button'" : 'href="../appointment/view-appointment.php"'?>
-              class="drop">View Appointment</a>
+              class="drop">View Appointments</a>
           <?php
             } else if ($admin==0) {
           ?> 
@@ -185,25 +185,24 @@
       <?php
         }  
       ?>
-
+      <?php if ($admin == 0) {?> 
       <button  
         class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal"><i class="fas fa-file-medical-alt fa-md fa-solid" style="margin-right: 12px;"></i>Treatments<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container default text-start">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
-          <?php if ($admin == 0) {?>
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'add_treatment' ? "type='button'" : 'href="../treatment/add-treatment.php"'?>
               class="drop">Add Treatment</a><br>
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'view_treatment' ? "type='button'" : 'href="../treatment/view-treatment.php"'?>
               class="drop">View Treatments</a>
-          <?php }?>  
-          <?php if ($admin == -1) {?>
-            <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
-              <?php echo $page == 'view_treatment_r' ? "type='button'" : 'href="../treatment/view-treatment-records.php"'?>
-              class="drop">View My Treatment</a>
-          <?php }?>
+         
+          <?php //if ($admin == -1) {?>
+            <!-- <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
+              <?php //echo $page == 'view_treatment_r' ? "type='button'" : 'href="../treatment/view-treatment-records.php"'?>
+              class="drop">View My Treatment</a> -->
+          <?php //}?>
           </div>
         </div>
       <button  
@@ -211,36 +210,39 @@
       </button>
         <div class="dropdown-container">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
-            <?php if ($admin == 0) {?>
               <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'add_medicine' ? "type='button'" : 'href="../prescription/add-medicine.php"'?>
                 class="drop">Add Medicine</a><br>
               <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'view_medicine' ? "type='button'" : 'href="../prescription/view-medicine.php"'?>
                 class="drop">View Medicine</a>
-            <?php }?>
-            <?php if ($admin == -1) {?>
-              <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
+            <?php //if ($admin == -1) {?>
+              <!-- <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'view_medicine_r' ? "type='button'" : 'href="../prescription/view-medicine-records.php"'?>
-                class="drop">View My Treatment</a>
-            <?php }?>
+                class="drop">View My Treatment</a> -->
+            <?php //}?>
           </div> 
         </div> 
-
+      <?php }?>  
+      <?php if ($admin == 0) {?>
         <button  
-        class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
-        <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
-      </button>
-        <div class="dropdown-container">
-           <div class="default " style="width: 210px;padding: 5px;display: block;">
-          <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
-            class="drop">Add Consultation</a><br>
-          <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
-            class="drop">View Consultations</a>
-        </div>
-        </div>
+          class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
+          <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
+        </button>
+          <div class="dropdown-container">
+            <div class="default " style="width: 210px;padding: 5px;display: block;">
+              
+                <i class="fas fa-minus-square fa-1x"></i><a 
+                  <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
+                  class="drop">Add Consultation</a><br>
+                <i class="fas fa-minus-square fa-1x"></i><a 
+                  <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
+                  class="drop">View Consultations</a>
+              <?php //} else if ($admin == -1) { ?>  
+              
+            </div>
+          </div>
+        <?php } ?> 
     <?php
       }
     ?>   

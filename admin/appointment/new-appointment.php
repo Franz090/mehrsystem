@@ -10,10 +10,11 @@ session_start();
 
 $session_id = $_SESSION['id'];
 
-$patient_list = [];    
+  
 
 // user is a midwife 
 if ($admin==0) {
+    $patient_list = [];  
     @include '../php-templates/midwife/get-assigned-barangays.php';
     if (count($_barangay_list)>0) {
         // fetch patients  
@@ -91,7 +92,7 @@ if(isset($_POST['submit'])) {
 
         $insert1 = "INSERT INTO appointments(patient_id, date, status, trimester) 
             VALUES($patient_id, '$a_date', $status, $trimester_post);";
-        if (mysqli_query($conn,"$insert1"))  { 
+        if (mysqli_query($conn,$insert1))  { 
         echo "<script>alert('Appointment Added!');</script>"; 
         }
         else {  

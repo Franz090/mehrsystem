@@ -60,7 +60,7 @@ if(isset($_POST['submit'])) {
                 // if patient, get the barangay 
                 if ($role_from_db==-1) {
                     mysqli_free_result($result);
-                    $select = "SELECT barangay_id FROM users, patient_details 
+                    $select = "SELECT barangay_id FROM users LEFT JOIN patient_details 
                         USING (user_id)";  
                     $result = mysqli_query($conn, $select);
                     if((mysqli_num_rows($result) > 0)) {  
