@@ -105,18 +105,7 @@ $conn->close();
 $page = 'add_appointment';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-<style>
-h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-}
-label {
-    font-family: Arial, Helvetica, sans-serif;
-}   
-</style>
+
 
 
 <div class="d-flex" id="wrapper"> 
@@ -127,8 +116,8 @@ label {
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3 "><h3>Add Appointment</h3>
-      <div class="container default table-responsive pt-4 pb-5">
+      <div class="background-head row m-2 my-4"><h4 class="m-2 fw-bolder ">Add Appointment</h4>
+      <div class="container default p-4">
         <div class="col-md-8 col-lg-5">
         
         <?php 
@@ -141,9 +130,10 @@ label {
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <?php if($admin==0) { ?>
-            <div class="form__input-group">
+            <div class="form__select-group">
                 <label>Patient</label>
-                <select class="form__input" name="patient_id_trimester">
+                <div class="form_select">
+                <select class="form__select" name="patient_id_trimester">
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
@@ -155,6 +145,7 @@ label {
                         }
                     ?>  
                 </select>
+                    </div>
             </div> 
             <?php }  
             ?> 

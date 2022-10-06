@@ -239,6 +239,7 @@ img {
 #menu-toggle {
 	cursor: pointer;
 }
+
 i {
 	margin-right: 10px;
 	color: white;
@@ -277,7 +278,7 @@ i {
 :root {
 	--main-bg-color: #f0cac4;
 	--main-text-color: #ffffff;
-	--second-text-color: #bbbec5;
+	--second-text-color: #3e6fe2;
 	--second-bg-color: #f0cac4;
 }
 
@@ -402,5 +403,8 @@ label {
 	.sidenav a {
 		font-size: 18px;
 	}
+}
+.text-color{
+	color: pink;
 }
 

@@ -123,19 +123,36 @@ Midwife <br/>
             <div id="columnchart_material" class="columnchart"> </div>
         </div>
     </div>   --> 
-    <div> 
-        <div>  
+    <div class="col-lg-10 col-sm-7 my-5 mr-5 text-center"> 
+        <div class="row ">  
+            <div class="col">
             Total Number of Patients: <?php echo $total_patients ?>  
         </div>
-        <div>  
+        <div class="col">  
             Appointments Today: <?php echo $appointments_today ?>  
         </div>
-        <div>  
+        <div class="col">  
             Tetanus Toxoid Vaccinated Patients: <?php echo $total_vacc ?>  
         </div> 
-    </div>
-    <?php include_once('barchart.php');?>
+    </div> 
 </div>
+<div class="col-lg-10 col-md-7 my-5 m-5 text-center">
+<?php include_once('barchart.php');?>
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div> -->
 
 <!-- <div class="container">
     <div class="row bg-light m-3 con1"></div>

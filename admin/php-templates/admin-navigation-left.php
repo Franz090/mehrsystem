@@ -1,17 +1,17 @@
-<div class="bg-dark d-flex flex-column" id="sidebar-wrapper"> 
+<div class=" sidebar d-flex flex-column" id="sidebar-wrapper" > 
   <div class="sidebar-heading text-center py-2 primary-text fs-4 fw-bold text-uppercase border-bottom"
     style="color:whitesmoke;">
-     <a href="../dashboard"><img src="../img/rhu-logo.png" alt="logo"></a>
+     <a href="../dashboard"><img style="width: 110px;height:110px;" src="../img/rhu-logo.png" alt="logo"></a>
   </div>
   <div class="d-flex flex-column justify-content-between flex-grow-1">
     <!-- nav list  -->
-    <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
+    <div class="list-group list-group-flush my-3" >
     <a <?php echo $page == 'dashboard'? "type='button'":"href='../dashboard'"?> class="h6 list-group-item list-group-item-action bg-transparent second-text active"><i
         class="fas fa-solid fa-box fa-md" style="margin-right: 11px;"></i>Dashboard</a>
      
     <button
-      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent text-white fw-normal"><i
-        class="fas fa-user me fa-md " style="margin-right: 13px;"></i>Profile<i class="fa fa-caret-down"></i>
+      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent ">
+      <i class="fas fa-user me fa-md " style="margin-right: 13px;"></i>Profile<i class="fa fa-caret-down"></i>
     </button>
 
       <div class="dropdown-container default text-start">
@@ -54,7 +54,7 @@
       if($admin==1) {  
     ?>
     <button   
-      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal"><i
+      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent "><i
         class="fas fa-md  fa-thin fa-baby" style="margin-right: 15px;"></i>Midwife<i class="fa fa-caret-down"></i>
     </button>
     
@@ -69,7 +69,7 @@
         </div>
       </div>
     <button  
-      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal"><i
+      class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent"><i
         class="fas fa-md fa-briefcase-medical" style="margin-right: 12px;"></i>Health Center<i class="fa fa-caret-down"></i>
     </button>
       <div class="dropdown-container default text-start">
@@ -83,10 +83,10 @@
         </div>
       </div>  
       <a <?php echo $page == 'view_patient'? "type='button'":"href=\"../patients/view-patients.php\""?> 
-        class="h6 list-group-item list-group-item-action bg-transparent second-text active">
+        class="h6 list-group-item list-group-item-action bg-transparent ">
           <i class="fas fa-solid fa-box fa-md" style="margin-right: 11px;"></i>View Patients</a> 
       <a <?php echo $page == 'update_footer'? "type='button'":"href='../update-footer'"?> 
-        class="h6 list-group-item list-group-item-action bg-transparent second-text active">
+        class="h6 list-group-item list-group-item-action bg-transparent ">
           <i class="fas fa-solid fa-box fa-md" style="margin-right: 11px;"></i>Update Footer</a> 
     <?php
       } else {
@@ -125,7 +125,7 @@
     ?> 
       <button  
         class="dropdown-btn h6  list-group-item 
-        list-group-item-action bg-transparent  text-white fw-normal" ><i style="margin-right: 13px;"
+        list-group-item-action bg-transparent " ><i style="margin-right: 13px;"
          class="fa fa-calendar fa-md" aria-hidden="true"></i>Appointments<i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container default text-start">
@@ -169,7 +169,7 @@
             class="drop">View Medical Records</a>
         </div> -->
       <button  
-        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal" ><i class="fas fa-sharp fa-solid fa-hospital-user fa-md " style="margin-right: 7px;"></i>Patients<i class="fa fa-caret-down"></i>
+        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent" ><i class="fas fa-sharp fa-solid fa-hospital-user fa-md " style="margin-right: 7px;"></i>Patients<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container default text-start">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
@@ -187,7 +187,7 @@
       ?>
 
       <button  
-        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal"><i class="fas fa-file-medical-alt fa-md fa-solid" style="margin-right: 12px;"></i>Treatments<i class="fa fa-caret-down"></i>
+        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent "><i class="fas fa-file-medical-alt fa-md fa-solid" style="margin-right: 12px;"></i>Treatments<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container default text-start">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
@@ -207,7 +207,7 @@
           </div>
         </div>
       <button  
-        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  text-white fw-normal"><i class="fas fa-solid fa-file-prescription fa-md " style="margin-right: 13px;margin-left: 2px;"></i>Prescriptions<i class="fa fa-caret-down"></i>
+        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent  "><i class="fas fa-solid fa-file-prescription fa-md " style="margin-right: 13px;margin-left: 2px;"></i>Prescriptions<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
@@ -228,7 +228,7 @@
         </div> 
 
         <button  
-        class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
+        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent">
         <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container">
@@ -248,7 +248,7 @@
   <!-- end nav list  -->
     <hr/>  
     <footer >
-      <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent second-text active">
+      <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent">
         <i class="fas fa-solid fa-box fa-md" 
         style="margin-right: 11px;"></i>Logout</a>  
       <div class='p-2 text-white'>

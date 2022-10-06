@@ -72,42 +72,59 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Update Account</h3>
-        <div class="container default table-responsive p-4">
+    <div class="container-fluid default" >
+      <div class="background-head row m-2 my-4" ><h4 class="m-2 fw-bolder ">Update Account</h4>
+        <div class="container default p-4 ">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form" action="" method="post">
+        <form class="form form-box px-3"  action="" method="post">
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
           ?> 
-          Put your current password to authorize the change(s)
-          <div class="form__input-group">
+          
+          <!-- <div class="form__input-group">
               <input type="password" class="form__input" autofocus  name="current" required
               placeholder="Current Password"> 
-          </div>
-          Leave blank if you do not want to change the email
-          <div class="form__input-group">
+          </div> -->
+          Put your current password to authorize the change(s)
+          <div class="form-input">
+              <input type="password" class="form__input"  name="current" autofocus placeholder="Current Password" tabindex="10" required>
+            </div>
+          
+          <!-- <div class="form__input-group">
               <input type="email" class="form__input"  name="new_email" 
               placeholder="New Email"> 
-          </div>
-          Leave blank if you do not want to change the password
-          <div class="form__input-group">
+          </div> -->
+          Leave blank if you do not want to change the email
+          <div class="form-input">
+              <input type="email" class="form__input"  name="new_email" autofocus placeholder="New Email" tabindex="10" required>
+            </div>
+
+          
+          <!-- <div class="form__input-group">
               <input type="password" class="form__input"  name="new" 
               placeholder="New Password"> 
-          </div>
-          <div class="form__input-group">
+          </div> -->
+          Leave blank if you do not want to change the password
+          <div class="form-input">
+              <input type="password" class="form__input"  name="new" autofocus placeholder="New Password" tabindex="10" required>
+            </div>
+          <!-- <div class="form__input-group">
               <input type="password" class="form__input"  name="cnew" 
               placeholder="Confirm New Password"> 
-          </div>
-          <button class="form__button" type="submit" name="submit">Update Account</button>
+          </div> -->
+           <div class="form-input">
+              <input type="password" class="form__input"  name="cnew" autofocus placeholder="Confirm New Password" tabindex="10" required>
+            </div>
+          <button style="font-family: arial; cursor: pointer;" class="w-100 btn btn-dark-dark  text-capitalize" type="submit" name="submit">Update Account</button>
         </form> 
       </div>
     </div>
       </div> 
     </div>
-
   </div> 
 </div>
+
+
  
 <?php include_once('../php-templates/admin-navigation-tail.php'); ?>
