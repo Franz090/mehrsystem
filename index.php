@@ -22,297 +22,15 @@
 <section class="home" id="home">
 
 <div class="image">
-    <img src="image/maternitypic.png" alt="">
+    <img src="image/buntis.jpg" alt="">
 </div>
 
 <div class="content">
     <h3>stay safe, stay healthy</h3>
-    <a href="#" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
+    <a href="#" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>
-
-<!-- home section ends -->
-
-<!-- icons section starts  -->
-
-<section class="icons-container">
-
-<div class="icons">
-    <i class="fas fa-user-md"></i>
-    <h3>140+</h3>
-    <p>doctors at work</p>
-</div>
-
-<div class="icons">
-    <i class="fas fa-users"></i>
-    <h3>1040+</h3>
-    <p>satisfied patients</p>
-</div>
-
-<div class="icons">
-    <i class="fas fa-procedures"></i>
-    <h3>500+</h3>
-    <p>bed facility</p>
-</div>
-
-<div class="icons">
-    <i class="fas fa-hospital"></i>
-    <h3>80+</h3>
-    <p>available hospitals</p>
-</div>
-
-</section>
-
-<!-- icons section ends -->
-
-<!-- services section starts  -->
-
-<section class="services" id="services">
-
-<h1 class="heading"> our <span>services</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <i class="fas fa-notes-medical"></i>
-        <h3>free checkups</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-ambulance"></i>
-        <h3>24/7 ambulance</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-user-md"></i>
-        <h3>expert doctors</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-pills"></i>
-        <h3>medicines</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-procedures"></i>
-        <h3>bed facility</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-heartbeat"></i>
-        <h3>total care</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-</div>
-
-</section>
-
-<!-- services section ends -->
-
-<!-- about section starts  -->
-
-<section class="about" id="about">
-
-<h1 class="heading"> <span>about</span> us </h1>
-
-<div class="row">
-
-    <div class="image">
-        <img src="image/about-img.svg" alt="">
-    </div>
-
-    <div class="content">
-        <h3>we take care of your healthy life</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-</div>
-
-</section>
-
-<!-- about section ends -->
-
-<!-- doctors section starts  -->
-
-<section class="doctors" id="doctors">
-
-<h1 class="heading"> our <span>doctors</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <img src="image/doc-1.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-    <div class="box">
-        <img src="image/doc-2.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-    <div class="box">
-        <img src="image/doc-3.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-    <div class="box">
-        <img src="image/doc-4.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-    <div class="box">
-        <img src="image/doc-5.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-    <div class="box">
-        <img src="image/doc-6.jpg" alt="">
-        <h3>john deo</h3>
-        <span>expert doctor</span>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-        </div>
-    </div>
-
-</div>
-
-</section>
-
-<!-- doctors section ends -->
-
-<!-- booking section starts   -->
-
-<section class="book" id="book">
-
-<h1 class="heading"> <span>book</span> now </h1>    
-
-<div class="row">
-
-    <div class="image">
-        <img src="image/book-img.svg" alt="">
-    </div>
-
-    <form action="">
-        <h3>book appointment</h3>
-        <input type="text" placeholder="your name" class="box">
-        <input type="number" placeholder="your number" class="box">
-        <input type="email" placeholder="your email" class="box">
-        <input type="date" class="box">
-        <input type="submit" value="book now" class="btn">
-    </form>
-
-</div>
-
-</section>
-
-<!-- booking section ends -->
-
-<!-- review section starts  -->
-
-<section class="review" id="review">
-
-<h1 class="heading"> client's <span>review</span> </h1>
-
-<div class="box-container">
-
-    <div class="box">
-        <img src="image/pic-1.png" alt="">
-        <h3>john deo</h3>
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-        </div>
-        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
-    </div>
-
-    <div class="box">
-        <img src="image/pic-2.png" alt="">
-        <h3>john deo</h3>
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-        </div>
-        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
-    </div>
-
-    <div class="box">
-        <img src="image/pic-3.png" alt="">
-        <h3>john deo</h3>
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-        </div>
-        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
-    </div>
-
-</div>
-
-</section>
-
-<!-- review section ends -->
-
 
 <!-- footer section starts  -->
 
@@ -321,40 +39,27 @@
 <div class="box-container">
 
     <div class="box">
-        <h3>quick links</h3>
-        <a href="#"> <i class="fas fa-chevron-right"></i> home </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> services </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> about </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> doctors </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> book </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> review </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> blogs </a>
+        <h3>Contact Us</h3>
+        <a href="#"> <i class="fas fa-solid fa-envelope"></i> rhusantacruz2@gmail.com </a>
+        <a href="#"> <i class="fas fa-solid fa-phone"></i> (0967) 362 2845 </a>
+        <a href="#"> <i class="fas fa-solid fa-phone"></i> (049)501‐0359 </a>
     </div>
 
     <div class="box">
-        <h3>our services</h3>
-        <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> Maternity Care</a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
-        <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
+        <h3>Address</h3>
+        <a href="#"> <i class="fas fa-solid fa-location-arrow"></i> Cailles St. Barangay Poblarcion III Santa Cruz, Laguna </a>
     </div>
 
     <div class="box">
-        <h3>contact info</h3>
-        <a href="#"> <i class="fas fa-phone"></i> (049)501‐0359</a>
-        <a href="#"> <i class="fas fa-envelope"></i> santacruzrhu1@yahoo.com.ph </a>
-        <a href="#"> <i class="fas fa-map-marker-alt"></i> RHU SANTA CRUZ LAG. BARANGAY III (POB.)</a>
+        <h3>Opening Hours</h3>
+        <a href="#"> <i class="fas fa-phone"></i> Mon - Sun 8:00am - 5:00pm</a>
     </div>
 
     <div class="box">
-        <h3>follow us</h3>
+        <h3>Follow us</h3>
         <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
         <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
-        <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
         <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-        <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-        <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
     </div>
 
 </div>

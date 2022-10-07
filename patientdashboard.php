@@ -27,9 +27,9 @@
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-baby"></i>Infant Tracking</a>
             </div>
-            <div class="border-bottom" style="color:whitesmoke;"></div>
+            <hr style="color:white; margin-top: 100px" ></hr>
             <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
-            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active mt-5"><i
                         class="fas fa-solid fa-wrench"></i>Account Settings</a>
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-door-open"></i>Logout</a>
@@ -70,7 +70,6 @@
               <div class="container"><div class="row bg-light m-3 con1"></div>
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 <section class="boook" id="boook">
-
                     </div>
                 </div>
             </div>
