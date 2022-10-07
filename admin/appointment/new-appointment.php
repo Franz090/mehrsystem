@@ -124,16 +124,16 @@ include_once('../php-templates/admin-navigation-head.php');
             if ($admin==0 && count($_barangay_list)==0) { ?>
             You can't book an appointment because you are not assigned to any barangay.
         <?php } else if ($admin==0 && count($patient_list)>0 || $admin==-1) { ?>
-        <form class="form" action="" method="post" >
+        <form class="form form-box px-3" style="bottom:100px; action="" method="post" >
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <?php if($admin==0) { ?>
-            <div class="form__select-group">
+            <div class="form_select-group">
                 <label>Patient</label>
                 <div class="form_select">
-                <select class="form__select" name="patient_id_trimester">
+                <select class="form_select_focus" autofocus name="patient_id_trimester">
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
@@ -149,12 +149,14 @@ include_once('../php-templates/admin-navigation-head.php');
             </div> 
             <?php }  
             ?> 
-            <div class="form__input-group">
+            <div class="form__select-group">
                 <label>Appointment Date and Time*</label> 
-                <input type="datetime-local" name="date" required class="form__input"/>
+                <div class="form-input">
+                <input type="datetime-local" name="date" required />
+                    </div>
             </div>  
            
-            <button class="form__button" type="submit" name="submit">Add Appointment</button> 
+            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Appointment</button> 
         </form> 
         <?php }else {
             if ($admin==0)  ?>

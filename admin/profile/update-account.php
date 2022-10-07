@@ -76,7 +76,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4" ><h4 class="m-2 fw-bolder ">Update Account</h4>
         <div class="container default p-4 ">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form form-box px-3"  action="" method="post">
+        <form class="form form-box px-3" style="bottom:100px;position:relative;"  action="" method="post">
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
@@ -88,7 +88,7 @@ include_once('../php-templates/admin-navigation-head.php');
           </div> -->
           Put your current password to authorize the change(s)
           <div class="form-input">
-              <input type="password" class="form__input"  name="current" autofocus placeholder="Current Password" tabindex="10" required>
+              <input type="password" class="form-input"  name="current" autofocus placeholder="Current Password" tabindex="10" required>
             </div>
           
           <!-- <div class="form__input-group">
@@ -97,7 +97,7 @@ include_once('../php-templates/admin-navigation-head.php');
           </div> -->
           Leave blank if you do not want to change the email
           <div class="form-input">
-              <input type="email" class="form__input"  name="new_email" autofocus placeholder="New Email" tabindex="10" required>
+              <input type="email" class="form-input"  name="new_email" autofocus placeholder="New Email" tabindex="10" required>
             </div>
 
           
@@ -107,16 +107,16 @@ include_once('../php-templates/admin-navigation-head.php');
           </div> -->
           Leave blank if you do not want to change the password
           <div class="form-input">
-              <input type="password" class="form__input"  name="new" autofocus placeholder="New Password" tabindex="10" required>
+              <input type="password" class="form-input"  name="new" autofocus placeholder="New Password" tabindex="10" required>
             </div>
           <!-- <div class="form__input-group">
               <input type="password" class="form__input"  name="cnew" 
               placeholder="Confirm New Password"> 
           </div> -->
            <div class="form-input">
-              <input type="password" class="form__input"  name="cnew" autofocus placeholder="Confirm New Password" tabindex="10" required>
+              <input type="password" class="form-input"  name="cnew" autofocus placeholder="Confirm New Password" tabindex="10" required>
             </div>
-          <button style="font-family: arial; cursor: pointer;" class="w-100 btn btn-dark-dark  text-capitalize" type="submit" name="submit">Update Account</button>
+          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Account</button>
         </form> 
       </div>
     </div>

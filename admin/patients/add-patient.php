@@ -187,14 +187,22 @@ $page = 'add_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 <style>
-    .text_area {
-        width: 100%;
-        height: 100px;
-        border-radius: 5px;
-        padding: 1rem;
-    }
+.form-control:focus{
+  border: 1px solid #ebecf0;
+	box-shadow: 0 0 5px #60e9d5;
+  font-family: 'Open Sans',sans-serif;
+	-webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+} 
+.has-error .form-control:focus{
+  box-shadow: none; 
+  -webkit-box-shadow: none;}
+.form-control{
+  border-radius: 10px;
+}
 </style>
-
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -208,40 +216,47 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><h4 class="m-2 fw-bolder ">Add Patient</h4>
        <div class="container default table-responsive p-4">
             <div class="col-md-8 col-lg-5 ">
-        <form class="form" action="" method="post" >
+        <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form__input-group">
+          <!-- <div class="form__input-group">
             <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*" required/>
-          </div>
-          <div class="form__input-group">
-              <input type="text" class="form__input" name="first_name" placeholder="First Name*" required/>
-              <input type="text" class="form__input" name="mid_name" placeholder="Middle Name">
-              <input type="text" class="form__input" name="last_name" placeholder="Last Name*" required/>
+          </div> -->
+           <div class="form-input">
+              <input type="email" class="form-input"  name="usermail" autofocus placeholder="Email Address*" tabindex="10" required>
+            </div>
+          <!-- <div class="form__input-group">
+              <input type="text" class="form__input" name="first_name" placeholder="First Name*" required/> -->
+           <div class="form-input">
+              <input type="text" class="form-input"  name="first_name" autofocus placeholder="First Name*" tabindex="10" required>
+              <input type="text" class="form-input" name="mid_name" autofocus placeholder="Middle Name" tabindex="10" required>
+              <input type="text" class="form-input" name="last_name" autofocus placeholder="Last Name*" tabindex="10" required required/>
           </div> 
-          <div class="form__input-group">
-              <input type="text" class="form__input" name="nickname" placeholder="Nickname"/>
+          <div class="form-input">
+              <input type="text" class="form-input" name="nickname" autofocus  placeholder="Nickname" tabindex="10" required/>
           </div> 
-          <div class="form__input-group">
+          <div class="form-input">
             <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-            <textarea id="contact" name="contact" class="text_area"></textarea> 
-          </div>
-          <div class="form__input-group">
+            <textarea id="contact" name="contact" class="form-control form-control-md w-100"></textarea> 
+          </div><br>
+          <div class="form-input">
             <label>Birth Date</label>
-            <input type="date" name="b_date" class="form__input"/>
+            <div class="form-input">
+            <input type="date" name="b_date" required/>
+        </div>
           </div>
-          <div class="form__input-group">
+          <div class="form-input">
             <label for="address">Address</label><br/>
-            <textarea id="address" name="address" class="text_area"></textarea> 
-          </div>
-          <div class="form__input-group">
-              <input type="text" class="form__input" name="civil_status" placeholder="Civil Status*"/>
+            <textarea id="address" name="address" class="form-control form-control-md w-100"></textarea> 
+          </div><br>
+          <div class="form-input">
+              <input type="text"  class="form-input" name="civil_status" autofocus  tabindex="10" placeholder="Civil Status*" required/>
           </div>  
-          <div class="form__input-group">
+          <div class="form_select">
               <label>Barangay</label>
-              <select class="form__input" name="barangay_id">
+              <select class="form_select_focus" name="barangay_id">
               <?php ?>
                 <?php
                   if (count($barangay_list)>0) {
@@ -256,66 +271,65 @@ include_once('../php-templates/admin-navigation-head.php');
                 ?> 
               </select>
           </div> 
-          <div class="form__input-group">
-              <input type="password" class="form__input" name="password" placeholder="Password*" required/>
+          <div class="form-input">
+              <input type="password" class="form-input" name="password" placeholder="Password*" required/>
                 </div>
-            <div class="form__input-group">
-              <input type="password" class="form__input" name="cpassword" placeholder="Confirm password*" required/>
+            <div class="form-input">
+              <input type="password" class="form-input" name="cpassword" placeholder="Confirm password*" required/>
           </div>
-          <div class="form__input-group">
+          <div class="form-input">
             <div class="form__text"><label>Medical History</label></div>
           </div>
-          <div class="form__input-group">
+          <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
             Height* 
             <div class="d-flex input-group">
               <input value="0" min='0' type="number" 
                 class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
               <div class="input-group-postpend">
-                <div class="input-group-text form__input bg-dark text-white">ft</div>
+                <div id="weight-height" class="input-group-text form__input text-white">ft</div>
               </div> 
               <input value="0" min='0' max='11' type="number" 
               class="form__input form-control" name="height_in" placeholder="Inches*" required/>
               <div class="input-group-postpend">
-                <div class="input-group-text form__input bg-dark text-white">inch(es)</div>
+                <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
               </div> 
             </div>
           </div>
-          <div class="form__input-group">   
+          <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
             Weight*   
             <div class="d-flex input-group">
               <input value="0" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
                 required min="0"/>
                 <div class="input-group-postpend">
-                  <div class="input-group-text form__input bg-dark text-white">kg</div>
+                  <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
                 </div> 
             </div>
-             
+          </div><br>
+          <div class="form-input"> 
+            <input type="text" class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
           </div>
-          <div class="form__input-group"> 
-            <input type="text" class="form__input" name="blood_type" placeholder="Blood Type*" required/>  
+          <div class="form-input">  
+            <input type="text" class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition" required/> 
+            <input type="text" class="form__input" name="family_history" placeholder="Family History" required/> 
+            <input type="text" class="form__input" name="allergies" placeholder="Allergies " required/>    
           </div>
-          <div class="form__input-group">  
-            <input type="text" class="form__input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-            <input type="text" class="form__input" name="family_history" placeholder="Family History"/> 
-            <input type="text" class="form__input" name="allergies" placeholder="Allergies"/>    
-          </div>
-          <div class="form__input-group">
+          <div class="form_select">
               <label>Tetanus Toxoid Vaccinated</label>
-              <select class="form__input" name="tetanus">
+              <select class="form_select_focus" name="tetanus">
                 <option value="0" selected>Unvaccinated</option>
                 <option value="1">Vaccinated</option> 
               </select>
           </div> 
-          <div class="form__input-group">
+          <div class="form_select">
               <label>Nth Trimester</label>
-              <select class="form__input" name="trimester">
+              <select class="form_select_focus" name="trimester">
                 <option value="0" selected>N/A</option>
                 <option value="1">1st (0-13 weeks)</option>
                 <option value="2">2nd (14-27 weeks)</option>
                 <option value="3">3rd (28-42 weeks)</option>
               </select>
           </div> 
-          <button class="form__button" type="submit" name="submit">Register Patient</button> 
+          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Register Patient</button> 
         </form>
           </div>
         </div>  

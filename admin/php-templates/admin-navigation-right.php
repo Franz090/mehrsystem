@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light py-2 px-4" style="padding: 40px 5px 4px 4px;background-color: #f3f9e8; ">
+<nav class="navbar navbar-expand-lg navbar-light py-2 px-4" style="padding: 40px 5px 4px 4px;background-color: #eeeeee; ">
     <div class="d-flex">
         <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle" style="color:#352e35;"></i>
     </div>
