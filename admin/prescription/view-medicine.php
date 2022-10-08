@@ -34,6 +34,7 @@ $conn->close();
 $page = 'view_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+
  
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
@@ -42,17 +43,17 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>View Medicine</h3>
-        <div class="container default table-responsive">
-           <div class="col-md-8 col-lg-12 ">
+    <div class="container-fluid " >
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Medicine</h4><hr>
+        <div class="table-padding table-responsive">
+           <div class="col-md-8 col-lg-12" id="table-position">
             
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+          <table  class="text-center table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
             <thead class="table-dark" colspan="3">
               <tr>
                 <th scope="col">#</th>

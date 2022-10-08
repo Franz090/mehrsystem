@@ -8,6 +8,7 @@
 .container-fluid{
 	font-family: 'Open Sans',
 		sans-serif;
+
 }
 
 body {
@@ -216,6 +217,10 @@ form{
 	color: var(--text-primary-color);
 
 }
+ textarea:focus::placeholder {
+ 	color: var(--text-primary-color);
+ }
+
 .form_select_focus:focus, .form_select_focus:invalid {
     border: 1px solid #ebecf0;
 	box-shadow: 0 0 5px #60e9d5;
@@ -251,10 +256,9 @@ form{
 	/* color: black; */
 	padding-left: 0px;
 	font-family:'Open Sans',
-		sans-serif;
-		
-
+		sans-serif;	
 }
+
 .form_select-group .form_input-group .form_textarea-group{
 	margin-bottom: 1rem;
 	font-family: 'Open Sans',
@@ -375,40 +379,6 @@ h3 {
 label {
 	font-family: Arial, Helvetica, sans-serif;
 }
-
-/* table  */
-.table {
-	margin: auto;
-	width: 100% !important;
-	padding-top: 13px;
-}
-
-.btn {
-	font-family: arial, sans-serif;
-	border-radius: 3px;
-	margin: 2px 4px;
-	font-weight: 400;
-	font-size: 15px;
-}
-
-a {
-	text-decoration: none;
-	color: white;
-}
-
-a:hover {
-	color: #e2e5de;
-}
-
-.background-head{
-	background-color: #18bb92;
-}
-h4{
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 800;
-	color: #f3f9f8;
-}
-
 .sidebar{
 	background-color: #0abe97;
 }
@@ -419,6 +389,15 @@ h4{
 		height: 100%;
 	font-weight: 400;
 }
+ /* #table-position {
+ 	position: absolute;
+ 	top: -203px;
+ }
+
+ #table-position {
+ 	position: relative;
+ 	width: 100%;
+ } */
 
 /* old edit */
 .form__input,
