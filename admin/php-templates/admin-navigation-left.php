@@ -126,7 +126,7 @@
       <button  
         class="dropdown-btn h6  list-group-item 
         list-group-item-action bg-transparent  text-white fw-normal" ><i style="margin-right: 13px;"
-         class="fa fa-calendar fa-md" aria-hidden="true"></i>Appointments<?php echo $admin==-1?" and Consultations":""?><i class="fa fa-caret-down"></i>
+         class="fa fa-calendar fa-md" aria-hidden="true"></i>Appointments<i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container default text-start">
         <div class="default " style="width: 210px;padding: 5px;display: block;">
@@ -223,29 +223,26 @@
             <?php //}?>
           </div> 
         </div> 
-      <?php }?>  
-      <?php if ($admin == 0) {?>
+      <?php }?>   
         <button  
           class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
           <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
         </button>
           <div class="dropdown-container">
             <div class="default " style="width: 210px;padding: 5px;display: block;">
-              
+              <?php if ($admin == 0) {?> 
                 <i class="fas fa-minus-square fa-1x"></i><a 
                   <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
                   class="drop">Add Consultation</a><br>
+              <?php } ?>   
                 <i class="fas fa-minus-square fa-1x"></i><a 
                   <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
                   class="drop">View Consultations</a>
               <?php //} else if ($admin == -1) { ?>  
               
             </div>
-          </div>
-        <?php } ?> 
-    <?php
-      }
-    ?>   
+          </div> 
+    <?php } ?>   
   </div>   
   <!-- end nav list  -->
     <hr/>  
@@ -253,12 +250,12 @@
       <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent second-text active">
         <i class="fas fa-solid fa-box fa-md" 
         style="margin-right: 11px;"></i>Logout</a>  
-      <div class='p-2 text-white'>
-        <?php echo isset($footer_contacts)?'<em>Contact Us</em>:<br/>'.$footer_contacts.'<br/><br/>':'' ?>
-        <?php echo isset($footer_address)?'<em>Address</em>:<br/>'.$footer_address.'<br/><br/>':'' ?>
-        <?php echo isset($footer_availability)?'<em>Schedule</em>:<br/>'.$footer_availability.'<br/><br/>':'' ?>
-        <?php echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
-      </div>
+      <!-- <div class='p-2 text-white'>
+        <?php //echo isset($footer_contacts)?'<em>Contact Us</em>:<br/>'.$footer_contacts.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_address)?'<em>Address</em>:<br/>'.$footer_address.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_availability)?'<em>Schedule</em>:<br/>'.$footer_availability.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
+      </div> -->
     </footer> 
     
   
