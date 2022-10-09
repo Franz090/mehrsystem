@@ -36,6 +36,25 @@ $conn->close();
 $page = 'add_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+<style>
+.form-control:focus{
+  border: 1px solid #ebecf0;
+	box-shadow: 0 0 5px #60e9d5;
+  font-family: 'Open Sans',sans-serif;
+	-webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+} 
+.has-error .form-control:focus{
+  box-shadow: none; 
+  -webkit-box-shadow: none;
+}
+.form-control{
+  border-radius: 10px;
+  padding-left: 15px;
+}
+</style>
  
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
@@ -44,20 +63,20 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Add New Medicine</h3>
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add New Medicine</h4><hr>
       <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form" action="" method="post" >
+        <form class="form form-box px-3" style="bottom:100px;position:relative;" action="" method="post" >
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form__input-group">
-            <input type="text" class="form__input" name="name" autofocus placeholder="Medicine Name*" required/>
+          <div class="form-input">
+            <input type="text" class="form-input" name="name" autofocus placeholder="Medicine Name*" required/>
           </div>
-          <div class="form__input-group">
-              <textarea type="text" class="form__input" name="description" placeholder="Description*" required></textarea>
+          <div class="form-input">
+              <textarea type="text" class="form-control form-control-md w-100" name="description" placeholder="Description*" required></textarea>
           </div>  
           <!-- <div class="form__input-group">
               <label>Status</label>
@@ -66,7 +85,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <option value="Active">Active</option>
               </select>
           </div>   -->
-          <button class="form__button" type="submit" name="submit">Add Medicine</button> 
+          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Medicine</button> 
         </form>  
       </div>
     </div>

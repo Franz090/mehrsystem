@@ -201,6 +201,7 @@ include_once('../php-templates/admin-navigation-head.php');
   -webkit-box-shadow: none;}
 .form-control{
   border-radius: 10px;
+  padding-left: 15px;
 }
 </style>
 <div class="d-flex" id="wrapper">

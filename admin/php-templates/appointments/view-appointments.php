@@ -82,24 +82,12 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 <style>
-  .table {
-   margin: auto;
-   width: 100%!important;
-   padding-top: 13px;
-   
-  }
+
   .btn{
     border-radius: 3px;
     margin: 2px 4px;
   }
   
-  h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-  }
   a{
     text-decoration: none;
     color: white;
@@ -121,14 +109,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3><?php echo $pending?'Pending':'Approved'?> Appointments</h3>
-        <div class="container default table-responsive p-4">
+    <div class="container-fluid default">
+      <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4><hr>
+        <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
-        <div class="col-md-8 col-lg-12 ">
-          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+        <div class="col-md-8 col-lg-12" id="table-position">
+           <table  class="text-center table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
             <thead class="table-dark" colspan="3">
               <tr>
                 <th scope="col" width="6%">#</th>
@@ -195,6 +183,7 @@ include_once('../php-templates/admin-navigation-head.php');
         [10, 25, 30,50, -1],
         [10, 25, 30,50, "All"]
       ],
+      responsive: true,
       destroy: true,
       fixedColumns: true,
       responsive: true,

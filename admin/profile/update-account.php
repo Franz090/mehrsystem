@@ -73,9 +73,9 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default" >
-      <div class="background-head row m-2 my-4" ><h4 class="m-2 fw-bolder ">Update Account</h4>
+      <div class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder ">Update Account</h4><hr>
         <div class="container default p-4 ">
-          <div class="col-md-8 col-lg-5 ">
+          <div class="col-md-8 col-lg-5">
         <form class="form form-box px-3" style="bottom:100px;position:relative;"  action="" method="post">
           <?php
             if(isset($error)) 
