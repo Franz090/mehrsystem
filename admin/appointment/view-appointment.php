@@ -60,7 +60,7 @@ include_once('../php-templates/admin-navigation-head.php');
   .table {
    margin: auto;
    width: 100%!important;
-   padding-top: 13px;
+   padding-top: 2px;
    
   }
   .btn{

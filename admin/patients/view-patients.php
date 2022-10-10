@@ -61,12 +61,7 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 <!-- css internal style -->
 <style>
-  .table {
-   margin: auto;
-   width: 100%!important;
-   padding-top: 13px;
-   
-  }
+  
   .btn{
     border-radius: 3px;
     margin: 2px 4px;
@@ -86,10 +81,7 @@ include_once('../php-templates/admin-navigation-head.php');
   a:hover{
     color: #e2e5de;
   }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-  }
+  
 </style>
  
 <div class="d-flex" id="wrapper">
@@ -101,21 +93,21 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>View Patient</h3>
-        <div class="container default table-responsive p-4">
-          <div class="col-md-8 col-lg-12 ">
-          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient</h4><hr>
+        <div class="table-padding table-responsive">
+          <div class="col-md-8 col-lg-12" id="table-position">
+           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
             <thead class="table-dark" colspan="3">
               <tr>
-                <th scope="col" width="6%">#</th>
+                <th scope="col" >#</th>
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Email</th>  
                 <th scope="col">Trimester</th> 
                 <th scope="col">Contact Number</th>
                 <!-- <th scope="col">Birthdate</th> -->
                 <th scope="col">Barangay</th> 
-                <th scope="col" width="13%">Actions</th>
+                <th scope="col" >Actions</th>
               </tr>
             </thead>
             <tbody>

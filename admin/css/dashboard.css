@@ -12,13 +12,16 @@
 
 .container {
 	min-height: 100vh;
-	background-color: #eee;
+	background-color: #eeeeee;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	padding-bottom: 80px;
+	
+	padding-top: 100px;
+
 }
+
 
 .container .content {
 	width: 700px;
@@ -63,7 +66,43 @@
 	justify-content: flex-start;
 	align-items: center;
 } */
+.background-head {
+	background-color: #eeeeee;
+	border-top-left-radius: 13px;
+	border-top-right-radius: 13px;
+	padding-bottom: 20px;
+	border-bottom-left-radius: 13px;
+	border-bottom-right-radius: 13px;
+	box-shadow:0 0 3px #c8cbce;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 100px;
+	padding-left: 1px;
+}
+.table-padding{
+	padding-top:10px;
+}
+h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 800;
+	color: #352e35;
+	
+}
+hr{
+	position: absolute;
+	padding-right: 0px;
+	margin-left: 0px;
+	color: #352e35;
+	
+	top: -22px;
 
+}
+hr{
+	position: relative;
+	
+	
+}
 img {
 	width:  135px;
 	height: 120px;
@@ -239,6 +278,7 @@ img {
 #menu-toggle {
 	cursor: pointer;
 }
+
 i {
 	margin-right: 10px;
 	color: white;
@@ -277,7 +317,7 @@ i {
 :root {
 	--main-bg-color: #f0cac4;
 	--main-text-color: #ffffff;
-	--second-text-color: #bbbec5;
+	--second-text-color: #3e6fe2;
 	--second-bg-color: #f0cac4;
 }
 
@@ -402,5 +442,8 @@ label {
 	.sidenav a {
 		font-size: 18px;
 	}
+}
+.text-color{
+	color: pink;
 }
 

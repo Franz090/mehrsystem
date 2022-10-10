@@ -106,18 +106,7 @@ $conn->close();
 $page = 'add_appointment';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-<style>
-h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-}
-label {
-    font-family: Arial, Helvetica, sans-serif;
-}   
-</style>
+
 
 
 <div class="d-flex" id="wrapper"> 
@@ -128,23 +117,24 @@ label {
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3 "><h3>Add Appointment</h3>
-      <div class="container default table-responsive pt-4 pb-5">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Appointment</h4><hr>
+      <div class="container default p-4">
         <div class="col-md-8 col-lg-5">
         
         <?php 
             if ($admin==0 && count($_barangay_list)==0) { ?>
             You can't book an appointment because you are not assigned to any barangay.
         <?php } else if ($admin==0 && count($patient_list)>0 || $admin==-1) { ?>
-        <form class="form" action="" method="post" >
+        <form class="form form-box px-3" style="bottom:100px; action="" method="post" >
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <?php if($admin==0) { ?>
-            <div class="form__input-group">
+            <div class="form_select-group">
                 <label>Patient</label>
-                <select class="form__input" name="patient_id_trimester">
+                <div class="form_select">
+                <select class="form_select_focus" autofocus name="patient_id_trimester">
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
@@ -156,15 +146,18 @@ label {
                         }
                     ?>  
                 </select>
+                    </div>
             </div> 
             <?php }  
             ?> 
-            <div class="form__input-group">
+            <div class="form__select-group">
                 <label>Appointment Date and Time*</label> 
-                <input type="datetime-local" name="date" required class="form__input"/>
+                <div class="form-input">
+                <input type="datetime-local" name="date" required />
+                    </div>
             </div>  
            
-            <button class="form__button" type="submit" name="submit">Add Appointment</button> 
+            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Appointment</button> 
         </form> 
         <?php }else {
             if ($admin==0)  ?>
