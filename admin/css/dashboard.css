@@ -221,21 +221,7 @@ img {
 .rounded-full {
 	border-radius: 100%;
 }
-.btn {
-	font-family: arial, sans-serif;
-}
 
-.btn-info {
-	background: #19c6f1;
-	border-color: none;
-	color: white;
-}
-
-.btn-info:hover {
-	background: #00c0f0;
-	border-color: none;
-	color: whitesmoke;
-}
 
 #wrapper {
 	overflow-x: hidden;
