@@ -75,10 +75,10 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['description']; ?></td>
                   <!-- <td><?php //echo $value['status']; ?></td> -->
                   <td>
-                    <div class="p-2">
-                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button  class="me-1 btn btn-success btn-sm btn-inverse">
+                    <div class="p-1">
+                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
                         Edit</button></a>
-                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button  class="btn btn-danger btn-sm btn-inverse">
+                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button  type="button" class="me-1 btn btn-danger btn-sm btn-inverse">
                         Delete</button></a>
                 </div>
                   </td>

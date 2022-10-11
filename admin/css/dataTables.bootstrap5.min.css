@@ -482,11 +482,11 @@ div.dataTables_scrollFoot>.dataTables_scrollFootInner>table {
 
 
     }
-    .table div.dataTables_info, div.dataTables_wrapper{
+    /* .table div.dataTables_info, div.dataTables_wrapper{
         margin-top: 100px;
         height: 30%;
 
-    }
+    } */
 
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         justify-content: center !important

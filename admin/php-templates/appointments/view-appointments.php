@@ -81,26 +81,6 @@ $conn->close();
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 
-<style>
-
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
-  
-  a{
-    text-decoration: none;
-    color: white;
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-    
-  } 
-</style>
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
@@ -117,7 +97,7 @@ include_once('../php-templates/admin-navigation-head.php');
       } else { ?> 
         <div class="col-md-8 col-lg-12" id="table-position">
            <table  class="text-center table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3">
+            <thead class="table-primary" colspan="3">
               <tr>
                 <th scope="col" width="6%">#</th>
                 <th scope="col">Patient Name</th> 

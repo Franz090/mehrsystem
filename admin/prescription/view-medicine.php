@@ -34,6 +34,19 @@ $conn->close();
 $page = 'view_medicine';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
+<!-- <style>
+  .table-primary {
+    --bs-table-bg: red!important;
+    --bs-table-striped-bg: #c2ded7;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #b8d3cb;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #bdd8d1;
+    --bs-table-hover-color: #000;
+    color: #000;
+    border-color: #b8d3cb
+}
+</style> -->
 
  
 <div class="d-flex" id="wrapper"> 
@@ -54,7 +67,7 @@ include_once('../php-templates/admin-navigation-head.php');
             
           ?> 
           <table  class="text-center table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3">
+            <thead class="table-light table-striped table-striped-color table-hover-bg" colspan="3">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Medicine Name</th>
@@ -73,10 +86,12 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['description']; ?></td>
                   <!-- <td><?php //echo $value['status']; ?></td> -->
                   <td>
-                    <a href="edit-medicine.php?id=<?php echo $value['id'] ?>"><button class="edit btn btn-success btn-sm btn-inverse">
+                    <div class="p-1">
+                    <a href="edit-medicine.php?id=<?php echo $value['id'] ?>"><button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
                         Edit</button></a>
-                    <a href="delete-medicine.php?id=<?php echo $value['id'] ?>"><button class="del btn btn-danger btn-sm btn-inverse">
+                    <a href="delete-medicine.php?id=<?php echo $value['id'] ?>"><button type="button" class="me-1 btn btn-danger btn-sm btn-inverse">
                         Delete</button></a>
+                </div>
                   </td>
                 </tr>
               <?php 
