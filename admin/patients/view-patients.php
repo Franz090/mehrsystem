@@ -60,7 +60,7 @@ $page = 'view_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 <!-- css internal style -->
-<style>
+<!-- <style>
   
   .btn{
     border-radius: 3px;
@@ -82,7 +82,7 @@ include_once('../php-templates/admin-navigation-head.php');
     color: #e2e5de;
   }
   
-</style>
+</style> -->
  
 <div class="d-flex" id="wrapper">
 
@@ -130,16 +130,18 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php if ($admin===0) {
                         ?>  
                           <a href="edit-patient.php?id=<?php echo $value['id'] ?>"> 
-                            <button class="edit btn btn-success btn-sm btn-inverse">
+                        <div class="p-2">
+                            <button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
                               Edit</button></a>  
                           <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
-                            <button onclick="temp_func() " class="del btn btn-danger btn-sm btn-inverse ">Delete</button>
+                            <button onclick="temp_func() " type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button>
                           <!-- </a> --> 
                           <hr/>
                         <?php
                         }?>
                           <a href="med-patient.php?id=<?php echo $value['id'] ?>">
-                            <button class="edit btn btn-info btn-sm btn-inverse ">View Report</button></a>
+                            <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
+                      </div>
                         </td>
                     </tr>
                 <?php 

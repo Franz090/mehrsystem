@@ -1,6 +1,6 @@
 
 .container {
-	--color-error: #cc3333;
+	
 	font-family: 'Open Sans',
 			sans-serif;
 			min-height: 800px;
@@ -14,6 +14,7 @@
 body {
 	font-family: 'Open Sans',
 		sans-serif;
+		    --color-error: #cc3333;
 		    --color-primary: #2a8ad8;
 			--color-white: #FBFDFC;
 			--color-primary-dark: #1871be;
@@ -340,24 +341,6 @@ td {
 
 th {
 	font-size: 16px;
-}
-
-.btn-info {
-	background: #0ab1ff;
-	border: none;
-	color: white;
-}
-
-.btn-info:hover {
-	background: #19abf0;
-	border: none;
-	color: whitesmoke;
-}
-
-.btn-info:focus {
-	color: whitesmoke;
-	background: #19abf0;
-	border: none;
 }
 
 hr {

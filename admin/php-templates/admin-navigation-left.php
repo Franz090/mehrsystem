@@ -225,7 +225,7 @@
         </div> 
       <?php }?>   
         <button  
-          class="dropdown-btn h6 text-light list-group-item list-group-item-action bg-transparent text-white fw-normal">
+          class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent">
           <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
         </button>
           <div class="dropdown-container">

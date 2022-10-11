@@ -35,35 +35,10 @@ $page = 'view_treatment';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 <!-- css internal style -->
-  <style>
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
-  
-  h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-  }
-  a{
-    text-decoration: none;
-    color: white;
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-  }
-  
+<style></style>
 
-  </style>
- 
 <div class="d-flex" id="wrapper"> 
+  
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
@@ -100,10 +75,12 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td><?php echo $value['description']; ?></td>
                   <!-- <td><?php //echo $value['status']; ?></td> -->
                   <td>
-                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button class="edit btn btn-success btn-sm btn-inverse">
+                    <div class="p-1">
+                    <a href="edit-treatment.php?id=<?php echo $value['id'] ?>"><button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
                         Edit</button></a>
-                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button class="del btn btn-danger btn-sm btn-inverse">
+                    <a href="delete-treatment.php?id=<?php echo $value['id'] ?>"><button  type="button" class="me-1 btn btn-danger btn-sm btn-inverse">
                         Delete</button></a>
+                </div>
                   </td>
                 </tr>
               <?php 
