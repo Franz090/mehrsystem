@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
-  <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/dashboard.css"> 
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/theme.css"> 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="../css/material-design-iconic-font.css">
   <link rel="stylesheet" href="../css/material-design-iconic-font.min.css"> -->

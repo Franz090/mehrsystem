@@ -48,49 +48,55 @@ if ($admin==0) {
     }   
     //TODO: change to infant vacc records 
     // get infant vaccination records 
-    $consultations_list = [];
-    $select_consultations = "SELECT date, trimester FROM consultations WHERE date>='$past_6_months 00:00:00' ORDER BY date ASC";
-    if($result_consultations = mysqli_query($conn, $select_consultations))  {
-        foreach($result_consultations as $row)  { 
+    $infant_vacc_list = [];
+    $select_infant_vacc = "SELECT date, type 
+    FROM infant_vac_records ivr, users u, infants i, patient_details p, barangays b 
+    WHERE date>='$past_6_months 00:00:00' AND u.user_id=i.user_id AND i.infant_id=ivr.infant_id 
+        AND u.user_id=p.user_id AND p.barangay_id=b.barangay_id AND b.assigned_midwife=$session_id 
+    ORDER BY date ASC";
+
+    // echo $select_infant_vacc;
+    if($result_infant_vacc = mysqli_query($conn, $select_infant_vacc))  {
+        foreach($result_infant_vacc as $row)  { 
             $date = $row['date'];  
-            $trimester = $row['trimester'];  
-            array_push($consultations_list, array(
+            $type = $row['type'];  
+            array_push($infant_vacc_list, array(
                 'date' => substr($date,0,7),
-                'trimester' => $trimester
+                'type' => $type
             ));
         } 
-        mysqli_free_result($result_consultations); 
+        mysqli_free_result($result_infant_vacc); 
     } 
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
 
     // structure the chart data  
-    $labels = '["Months ('.$curr_year.')", "Measles", "Polio", "Penta", "Pneumococcal"],';
+    $labels = '["Months ('.$curr_year.')", "Measles, Mumps, & Rubelia", "Polio", "Pentavalent", "Pneumococcal Conjugate"],';
    
 
-    $count_consul_list = count($consultations_list)-1;
+    $count_infant_vacc_list = count($infant_vacc_list)-1;
     $key_jump = -1;
     foreach ($bar_chart_month_list as $key1 => $value1) {
         $temp_arr = [$bar_chart_month_list_label[$key1]];
-        $temp0 = 0;
-        $temp1 = 0;
-        $temp2 = 0;
-        $temp3 = 0;
-        foreach ($consultations_list as $key2 => $value2) {
+        $type0 = 0;
+        $type1 = 0;
+        $type2 = 0;
+        $type3 = 0;
+        foreach ($infant_vacc_list as $key2 => $value2) {
             if ($key_jump>$key2) continue; 
 
             if ($value1==$value2['date']) {
-                if ($value2['trimester']==0)  {$temp0 += 1;}
-                if ($value2['trimester']==1)  {$temp1 += 1;}
-                if ($value2['trimester']==2)  {$temp2 += 1;}
-                if ($value2['trimester']==3)  {$temp3 += 1;} 
-                if ($key2==$count_consul_list) {
-                    $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
+                if ($value2['type']==1)  {$type0 += 1;}
+                if ($value2['type']==2)  {$type1 += 1;}
+                if ($value2['type']==3)  {$type2 += 1;}
+                if ($value2['type']==4)  {$type3 += 1;} 
+                if ($key2==$count_infant_vacc_list) {
+                    $temp_arr = array_merge($temp_arr,[$type0,$type1,$type2,$type3]);
                 }
             } else {
                 $key_jump = $key2;
-                $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
+                $temp_arr = array_merge($temp_arr,[$type0,$type1,$type2,$type3]);
                 break;
             }
         }

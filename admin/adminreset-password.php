@@ -48,8 +48,11 @@ if (isset($_POST['submit'])) {
 }
 $conn->close();  
 
-include_once('php-templates/admin-head.php');
-?> 
+include_once('php-templates/admin-head.php'); 
+include_once('php-templates/css/black-bg-remover.php');
+?>  
+
+
 <div class="container">
     <h1 class="form__title">Reset Password</h1>
     <form class="form" id="login" action="" method="post">

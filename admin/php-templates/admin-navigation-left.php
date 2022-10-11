@@ -132,13 +132,13 @@
         <div class="default " style="width: 210px;padding: 5px;display: block;">
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'add_appointment' ? "type='button'" : 'href="../appointment/new-appointment.php"'?>
-              class="drop">Add Appointments</a><br/>
+              class="drop">Add Appointment</a><br/>
           <?php
             if ($admin==-1) {
           ?> 
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'view_appointment' ? "type='button'" : 'href="../appointment/view-appointment.php"'?>
-              class="drop">View Appointment</a>
+              class="drop">View Appointments</a>
           <?php
             } else if ($admin==0) {
           ?> 
@@ -185,25 +185,24 @@
       <?php
         }  
       ?>
-
+      <?php if ($admin == 0) {?> 
       <button  
         class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent "><i class="fas fa-file-medical-alt fa-md fa-solid" style="margin-right: 12px;"></i>Treatments<i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-container default text-start">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
-          <?php if ($admin == 0) {?>
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'add_treatment' ? "type='button'" : 'href="../treatment/add-treatment.php"'?>
               class="drop">Add Treatment</a><br>
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'view_treatment' ? "type='button'" : 'href="../treatment/view-treatment.php"'?>
               class="drop">View Treatments</a>
-          <?php }?>  
-          <?php if ($admin == -1) {?>
-            <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
-              <?php echo $page == 'view_treatment_r' ? "type='button'" : 'href="../treatment/view-treatment-records.php"'?>
-              class="drop">View My Treatment</a>
-          <?php }?>
+         
+          <?php //if ($admin == -1) {?>
+            <!-- <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
+              <?php //echo $page == 'view_treatment_r' ? "type='button'" : 'href="../treatment/view-treatment-records.php"'?>
+              class="drop">View My Treatment</a> -->
+          <?php //}?>
           </div>
         </div>
       <button  
@@ -211,39 +210,40 @@
       </button>
         <div class="dropdown-container">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
-            <?php if ($admin == 0) {?>
               <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'add_medicine' ? "type='button'" : 'href="../prescription/add-medicine.php"'?>
                 class="drop">Add Medicine</a><br>
               <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'view_medicine' ? "type='button'" : 'href="../prescription/view-medicine.php"'?>
                 class="drop">View Medicine</a>
-            <?php }?>
-            <?php if ($admin == -1) {?>
-              <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
+            <?php //if ($admin == -1) {?>
+              <!-- <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
                 <?php echo $page == 'view_medicine_r' ? "type='button'" : 'href="../prescription/view-medicine-records.php"'?>
-                class="drop">View My Treatment</a>
-            <?php }?>
+                class="drop">View My Treatment</a> -->
+            <?php //}?>
           </div> 
         </div> 
-
+      <?php }?>   
         <button  
-        class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent">
-        <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
-      </button>
-        <div class="dropdown-container">
-           <div class="default " style="width: 210px;padding: 5px;display: block;">
-          <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
-            class="drop">Add Consultation</a><br>
-          <i class="fas fa-minus-square fa-1x"></i><a 
-            <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
-            class="drop">View Consultations</a>
-        </div>
-        </div>
-    <?php
-      }
-    ?>   
+ 
+          class="dropdown-btn h6  list-group-item list-group-item-action bg-transparent">
+          <i class="fas fa-regular fa-briefcase-medical"></i>Consultations<i class="fa fa-caret-down"></i>
+        </button>
+          <div class="dropdown-container">
+            <div class="default " style="width: 210px;padding: 5px;display: block;">
+              <?php if ($admin == 0) {?> 
+                <i class="fas fa-minus-square fa-1x"></i><a 
+                  <?php echo $page == 'add_consultation'? "type='button'":'href="../consultations/add-consultation.php"'?>
+                  class="drop">Add Consultation</a><br>
+              <?php } ?>   
+                <i class="fas fa-minus-square fa-1x"></i><a 
+                  <?php echo $page == 'view_consultations'? "type='button'":'href="../consultations/view-consultations.php"'?>
+                  class="drop">View Consultations</a>
+              <?php //} else if ($admin == -1) { ?>  
+              
+            </div>
+          </div> 
+    <?php } ?>    
   </div>   
   <!-- end nav list  -->
     <hr/>  
@@ -251,12 +251,12 @@
       <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent">
         <i class="fas fa-solid fa-box fa-md" 
         style="margin-right: 11px;"></i>Logout</a>  
-      <div class='p-2 text-white'>
-        <?php echo isset($footer_contacts)?'<em>Contact Us</em>:<br/>'.$footer_contacts.'<br/><br/>':'' ?>
-        <?php echo isset($footer_address)?'<em>Address</em>:<br/>'.$footer_address.'<br/><br/>':'' ?>
-        <?php echo isset($footer_availability)?'<em>Schedule</em>:<br/>'.$footer_availability.'<br/><br/>':'' ?>
-        <?php echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
-      </div>
+      <!-- <div class='p-2 text-white'>
+        <?php //echo isset($footer_contacts)?'<em>Contact Us</em>:<br/>'.$footer_contacts.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_address)?'<em>Address</em>:<br/>'.$footer_address.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_availability)?'<em>Schedule</em>:<br/>'.$footer_availability.'<br/><br/>':'' ?>
+        <?php //echo isset($footer_fb)?'<em>Follow Us</em>:<br/><a href="'.$footer_fb.'" target="_blank">Facebook</a><br/><br/>':'' ?>
+      </div> -->
     </footer> 
     
   

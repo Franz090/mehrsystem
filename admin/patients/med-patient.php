@@ -9,11 +9,10 @@ session_start();
 $id_from_get = $_GET['id'];
 $redirect_condition = "not-for-patient"; 
 
-@include "../php-templates/redirect/not-for-patient.php";
 $admin_b = $admin==1;
 
 $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
-$midwife_sql = $admin_b?'':"AND b.assigned_midwife=".$_SESSION['id'];
+$midwife_sql = $admin==-1?'':($admin_b?'':"AND b.assigned_midwife=".$_SESSION['id']);
 // fetch patient
 $select = "SELECT  u.user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
@@ -106,7 +105,7 @@ if($result2_b = mysqli_query($conn, $select2_b))  {
     $trimester = $row['trimester'];  
     $treatment = $row['treatment'];  
     $t_desc = $row['t_desc'];  
-    $treatment_file = $row['treatment_file'];  
+    $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);
     $midwife = $row['midwife'];  
     $prescription = $row['prescription'];  
     $p_desc = $row['p_desc'];  
@@ -134,13 +133,15 @@ $conn->close();
 $page = 'med_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
- <!-- css -->
- <style>
+
+<!-- css -->
+<style>
   .col-centered{
     float: none;
     margin: 0 auto
   }
- </style>
+</style>
+
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -365,9 +366,9 @@ include_once('../php-templates/admin-navigation-head.php');
                             Treatment File
                           </td>
                           <td  class="col-md-6">
-                            <?php
-                              echo $value['treatment_file'];  
-                            ?>  
+                            <a target="_blank" style="color:#000;"
+                              href="../consultations/view-treatment-file.php?id=<?php echo $value['treatment_file']?>">
+                              View Photo</a>  
                           </td>
                         <?php }?>
                       <?php }?>
