@@ -5,8 +5,10 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="css/dashboard.css">
+   <link rel="stylesheet" href="fullcalendar/lib/main.min.css">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="./fullcalendar/lib/main.min.js"></script>
    
 </head>
 <body>
@@ -14,10 +16,10 @@
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-dark" id="sidebar-wrapper" >
-            <div style="color:whitesmoke;"><i
+        <div id="sidebar-wrapper" style="background-color:#0abe97;">
+            <div style="background-color:#0abe97;"><i
                     class="logo" href="#"><img src = "../mehrsystem/image/rhu-logo.png" width="150" height="150" style="position=absolute; margin-top:10px; margin-left:45px;"></i></div>
-            <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
+            <div class="list-group list-group-flush my-3" style="background-color:#0abe97;">
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-house-user"></i>Home</a>
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
@@ -27,9 +29,9 @@
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-baby"></i>Infant Tracking</a>
             </div>
-            <div class="border-bottom" style="color:whitesmoke;"></div>
-            <div class="list-group list-group-flush my-3" style="color:whitesmoke;">
-            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
+            <hr style="color:white; margin-top: 100px" ></hr>
+            <div class="list-group list-group-flush my-3" style="background-color:#0abe97;">
+            <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active mt-5"><i
                         class="fas fa-solid fa-wrench"></i>Account Settings</a>
             <a href="#" class="h6 text-light list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-door-open"></i>Logout</a>
@@ -38,8 +40,8 @@
         
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
-        <div id="page-content-wrapper" style="background-color: #f0cac4">
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark py-2 px-4" style="padding: 40px 5px 4px 4px;" >
+        <div id="page-content-wrapper" style="background-color: #0abe97;">
+            <nav class="navbar navbar-expand-lg navbar-light py-2 px-4" style="padding: 40px 5px 4px 4px;" >
                 <div class="d-flex align-items-center ">
                     <h2 class="fs-2 m-0"></h2>
                 </div>
@@ -67,10 +69,8 @@
                 </div>
             </nav>
             
-              <div class="container"><div class="row bg-light m-3 con1"></div>
+            <div class="container"><div class="row bg-light m-3 con1" ></div>
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=UTC&showNav=1&showDate=1&showPrint=0&showTz=1&showCalendars=0&showTabs=1&title=Appointment&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-<section class="boook" id="boook">
-
                     </div>
                 </div>
             </div>
