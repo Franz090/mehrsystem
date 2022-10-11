@@ -16,10 +16,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
-
-	padding-top: 100px;
+	text-align: center;  
+	padding-top: 100px; 
 }
+
 
 .container .content {
 	width: 700px;
@@ -70,14 +70,14 @@
 	border-top-right-radius: 13px;
 	padding-bottom: 20px;
 	border-bottom-left-radius: 13px;
-	border-bottom-right-radius: 13px;
-	box-shadow: 0 0 5px #c8cbce;
+	border-bottom-right-radius: 13px; 
+	box-shadow: 0 0 5px #c8cbce; 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-top: 100px;
 	padding-left: 1px;
-}
+} 
 .table-padding {
 	padding-top: 10px;
 }
@@ -86,16 +86,16 @@ h4 {
 	font-weight: 800;
 	color: #352e35;
 }
-hr {
+hr { 
 	position: absolute;
 	padding-right: 0px;
 	margin-left: 0px;
-	color: #352e35;
+	color: #352e35; 
 
 	top: -22px;
 }
 hr {
-	position: relative;
+	position: relative; 
 }
 img {
 	width: 135px;
@@ -214,7 +214,7 @@ img {
 
 .rounded-full {
 	border-radius: 100%;
-}
+} 
 
 #wrapper {
 	overflow-x: hidden;
@@ -421,7 +421,7 @@ label {
 	.sidenav a {
 		font-size: 18px;
 	}
-}
+} 
 .text-color {
 	color: pink;
-}
+} 
