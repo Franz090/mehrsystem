@@ -159,22 +159,24 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3 "><h3>Create Consultation Record</h3>
-      <div class="container default table-responsive pt-4 pb-5">
-        <div class="col-md-8 col-lg-5">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Create Consultation Record</h4><hr>
+      <div class="container default table-responsive p-4">
+            <div class="col-md-8 col-lg-5 ">
         
         <?php 
             if (count($_barangay_list)==0) { ?>
             You can't give consultations because you are not assigned to any barangay.
         <?php } else if (count($patient_list)>0) { ?>
-        <form class="form" action="" method="post" enctype="multipart/form-data">
+        <form class="form form-box px-3" action="" method="post" enctype="multipart/form-data">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <div class="form__input-group">
+                <div class="form_select">
                 <label>Patient</label>
-                <select class="form__input" name="patient_id">
+                <select class="form_select_focus" name="patient_id">
+        </div>
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
@@ -187,11 +189,13 @@ include_once('../php-templates/admin-navigation-head.php');
                     ?>  
                 </select>
             </div> 
-            <div class="form__input-group">
+            <div class="form-input">
                 <label>Consultation Date and Time*</label> 
-                <input type="datetime-local" name="date" required class="form__input"/>
+                <input type="datetime-local" name="date" required />
+                    </div>
+            <div class="form_select">     
                 <label>Prescription</label> 
-                <select class="form__input" name="prescription_id">
+                <select class="form__select_focus" name="prescription_id">
                     <option value="" selected>None</option>
                     <?php
                         if (count($prescription_list)>0) {
@@ -203,6 +207,8 @@ include_once('../php-templates/admin-navigation-head.php');
                         }  
                     ?>  
                 </select> 
+                    </div>
+              <div class="form_select">             
                 <label>Treatment</label> 
                 <select class="form__input" name="treatment_id">
                     <option value="" selected>None</option>
@@ -218,10 +224,11 @@ include_once('../php-templates/admin-navigation-head.php');
                 </select> 
                 <!-- <label for='treatment_file'>Treatment File</label> 
                 <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/> -->
+                    </div>
             </div>   
 
           
-            <button class="form__button" type="submit" name="submit">Create Consultation Record</button> 
+            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Create Consultation Record</button> 
         </form> 
         <?php } else {   ?>
             There should be at least one patient (under your assigned barangay) available in the database.

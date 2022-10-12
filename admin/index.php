@@ -78,7 +78,8 @@ if(isset($_POST['submit'])) {
 } 
 
 $conn->close(); 
-
+include_once('php-templates/admin-head.php'); 
+include_once('php-templates/css/black-bg-remover.php');
 ?>
 
 <!-- comment ni francis <!DOCTYPE html>
@@ -112,30 +113,6 @@ $conn->close();
     
 </body>
 </html> -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>RHU Login</title>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/login.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-  
-  
-
-  <!-- script -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-  <!-- fonts -->
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-</head>
 <body>
   <div class="container">
     <div class="row px-4">
@@ -174,18 +151,12 @@ $conn->close();
               </button>
               <br>
             </div>
-
             <div class="text-center">
               <a href="adminreset-password.php" class="forget-link text-decoration-none">
                 Forget your Password?
               </a>
             </div>
-
-          
-     
-
             <hr class="my-2">
-
             <div class="text-center mb-2 have-account">
               Don't have an account?
               <a href="adminform.php" class="register-link text-decoration-none">
@@ -198,20 +169,9 @@ $conn->close();
     </div>
   </div>
 </body>
-</html>
-<script>
-    //  toggle eye
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#id_password');
-
-    togglePassword.addEventListener('click', function () {
-      // toggle the type attribute
-      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-      password.setAttribute('type', type);
-      // toggle the eye slash icon
-      this.classList.toggle('bi-eye');
-    });
-</script>
-
-
+</htmL>
+<script src="js/toggle-eye.js"></script>
+<?php 
+    include_once('php-templates/admin-tail.php');
+?>
 

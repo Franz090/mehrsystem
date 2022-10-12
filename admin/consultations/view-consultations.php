@@ -88,7 +88,7 @@ $conn->close();
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 
-<style>
+<!-- <style>
   .table {
    margin: auto;
    width: 100%!important;
@@ -119,7 +119,7 @@ include_once('../php-templates/admin-navigation-head.php');
     font-size: 15px;
     
   } 
-</style>
+</style> -->
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
@@ -129,16 +129,16 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Consultations</h3>
-        <div class="container default table-responsive p-4">
+       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4><hr>
+        <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
-        <div class="col-md-8 col-lg-12 ">
-          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3">
+         <div class="col-md-8 col-lg-12" id="table-position">
+          <table  class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+            <thead class="table-light" colspan="3">
               <tr>
-                <th scope="col" width="6%">#</th>
+                <th scope="col" >#</th>
                 <?php if ($admin==0) { ?>  
                   <th scope="col">Patient Name</th> 
                 <?php } ?>  
@@ -180,11 +180,13 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php } ?> 
                         <td>
                           <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>">
+                           <div class="p-1">
                             <button class="edit btn btn-success btn-sm btn-inverse">Update</button></a>
                           <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                            <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a>
+                            <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
                             <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
                               <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
+                        </div>
                         </td>
                     </tr>
                 <?php 

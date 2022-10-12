@@ -56,8 +56,14 @@ include_once('php-templates/css/black-bg-remover.php');
 
 
 <div class="container">
-    <h1 class="form__title">Reset Password</h1>
-    <form class="form" action="" method="post">
+    <div class="row px-4">
+      <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
+        <div class="img-left d-none col-sm-7 d-md-flex"></div>
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+           Reset Password
+          </h4>
+    <form class="form form-box px-3" action="" method="post">
         <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>';   
@@ -71,36 +77,39 @@ include_once('php-templates/css/black-bg-remover.php');
             } else {
         ?>
 
-        <p class="form__text">The OTP is sent to your email upon reset password request.
-            <a class="form__link" href="adminreset-password.php"> Don't have an OTP? Request here.</a>
-        </p>
-        <div class="form__input-group">
-            <input type="text" class="form__input" autofocus name="email" placeholder="Email">
+        <div class="text-center mb-2 have-account" style="position:relative;bottom: 12px;">The OTP is sent to your email upon reset password request.
+            <a class="register-link text-decoration-none" href="adminreset-password.php"> Don't have an OTP? Request here.</a>
+      </div>
+        <div class="form-input">
+            <input type="text" autofocus name="email" placeholder="Email" tabindex="10" required>
         </div>
-        <div class="form__input-group">
-            <input type="password" class="form__input" name="password" autofocus placeholder="New Password">
+        <div class="form-input">
+            <input type="password" name="password" autofocus placeholder="New Password" tabindex="10" required>
         </div>
-        <div class="form__input-group">
-            <input type="password" class="form__input" name="cpassword" autofocus placeholder="Confirm New Password">
+        <div class="form-input">
+            <input type="password"  name="cpassword" autofocus placeholder="Confirm New Password" tabindex="10" required>
         </div>
-        <div class="form__input-group">
-            <input type="number" class="form__input" autofocus name="otp" placeholder="One Time Pin">
+        <div class="form-input">
+            <input type="number" autofocus name="otp" placeholder="One Time Pin" tabindex="10" required>
         </div>
-        <button class="form__button" type="submit" name="submit">Update Password</button>
-        <p class="form__text">
-            <a class="form__link" href="adminreset-password.php">Don't have an OTP? Request here.</a>
-        </p> 
+    <div class="mb-3 position-relative ">
+        <button class="w-100 btn btn-dark-dark  text-capitalize" style="font-family: arial;position:absolute;bottom: -35px;" type="submit" name="submit">Update Password</button>
+            </div>
+     
         <?php    
             }  
         ?>  
-        
+     <hr class="my-2" style="position:relative;top: 40px;">
+       <div class="text-center mb-2 have-account" style="position:relative;top: 50px;">Don't have an account? 
+        <a class="register-link text-decoration-none" href="adminform.php">Create account</a>
+    <div>
+    
+
     </form>
-    <p class="form__text">
-        <a class="form__link" href="index.php" id="linkLogin">Sign in</a>
-    </p> 
-    <p class="form__text">
-        <a class="form__link" href="adminform.php">Don't have an account? Create account</a>
-    </p>
+  
+  </div>
+</div>
+</div>
 </div>
 <?php 
     include_once('php-templates/admin-tail.php');

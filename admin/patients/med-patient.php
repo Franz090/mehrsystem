@@ -162,7 +162,7 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
         <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
+            <thead class="table-light text-center" colspan="3">
             <tr>
             <th scope="col">Patient Profile </th>
         </tr>
@@ -197,7 +197,7 @@ include_once('../php-templates/admin-navigation-head.php');
            </table> 
         
           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
+            <thead class="table-light text-center" colspan="3">
             <tr>
             <th scope="col">Patient Medical History </th>
         </tr>
@@ -223,7 +223,7 @@ include_once('../php-templates/admin-navigation-head.php');
            </table> 
          
           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
+            <thead class="table-light text-center" colspan="3">
               <tr>
                   <th scope="col"><?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?></th>
               </tr>
@@ -305,7 +305,7 @@ include_once('../php-templates/admin-navigation-head.php');
             </tbody>
           </table> 
           <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
-            <thead class="table-dark text-center" colspan="3">
+            <thead class="table-light text-center" colspan="3">
               <tr>
                   <th scope="col">Consultation Records</th>
               </tr>

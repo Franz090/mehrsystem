@@ -27,7 +27,7 @@
 
 <div class="content">
     <h3>stay safe, stay healthy</h3>
-    <a href="#" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
+    <a href="../mehrsystem/admin" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>

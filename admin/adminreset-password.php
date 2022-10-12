@@ -54,29 +54,47 @@ include_once('php-templates/css/black-bg-remover.php');
 
 
 <div class="container">
-    <h1 class="form__title">Reset Password</h1>
-    <form class="form" id="login" action="" method="post">
+    <div class="row px-4">
+      <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
+        <div class="img-left d-none col-sm-7 d-md-flex"></div>
+
+        <div class="card-body">
+          <h4 class="title text-center mt-4">
+           Reset Password
+          </h4>
+    <form class="form form-box px-3" id="login" action="" method="post">
+         <div class="text-center">
         <?php
             if(isset($error) ) 
                 echo '<span class="form__input-error-message">'.$error.'</span>';   
         ?> 
-        <div class="form__input-group">
-            <input type="text" class="form__input" autofocus  name="email" 
-                placeholder="Email"> 
+        </div>
+        <div  class="form-input">
+            <input type="text"  autofocus  name="email" 
+                placeholder="Email" tabindex="10" required>  
         </div> 
-        <button class="form__button" type="submit" name="submit" >Reset Password</button>
-       
-        <p class="form__text">
-            <a class="form__link" href="adminreset-password-otp.php">Already have an OTP? Change your password here.</a>
-        </p>
-        <p class="form__text">
-            <a class="form__link" href="index.php" id="linkLogin">Sign in</a>
-        </p>
-        <p class="form__text">
-            <a class="form__link" href="adminform.php">Don't have an account? Create account</a>
-        </p>
+   <div class="mb-3 position-relative ">
+        <button class="w-100 btn btn-dark-dark  text-capitalize" style="font-family: arial;position:absolute;bottom: -2px;" type="submit" name="submit" >Reset Password</button>
+        <br>
+        <br>
+    </div>
+       <div class="text-center">Already have an OTP?
+            <a class="forget-link text-decoration-none" href="adminreset-password-otp.php"> Change your password here.</a>
+        </div>
+   
+         <div class="text-center">
+            <a class="forget-link text-decoration-none"  href="index.php">Sign in</a>
+        </div>
+        <hr class="my-2">
+         <div class="text-center mb-2 have-account">Don't have an account? 
+            <a class="register-link text-decoration-none" href="adminform.php">Create account
+            </a>
+          </div>
     </form> 
-</div> 
+   </div> 
+   </div>
+  </div>
+</div>
 <?php 
     include_once('php-templates/admin-tail.php');
 ?>
