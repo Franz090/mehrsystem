@@ -152,14 +152,14 @@ include_once('php-templates/css/black-bg-remover.php');
               <br>
             </div>
             <div class="text-center">
-              <a href="adminreset-password.php" class="forget-link text-decoration-none">
+              <a href="reset-password.php" class="forget-link text-decoration-none">
                 Forget your Password?
               </a>
             </div>
             <hr class="my-2">
             <div class="text-center mb-2 have-account">
               Don't have an account?
-              <a href="adminform.php" class="register-link text-decoration-none">
+              <a href="register-form.php" class="register-link text-decoration-none">
                 Register here
               </a>
             </div>
