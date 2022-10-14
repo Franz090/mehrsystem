@@ -22,7 +22,7 @@
     <a href="#" class="logo"> <img class="rhu-logo" src="image/rhu-logo.png" alt="rhu logo"> 
   
 
-    <nav class="navbar"> <h2 >Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
+    <nav class="navbar"> <h2>Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
        
         <a href="#home">home</a>
         <a href="#services">services</a>

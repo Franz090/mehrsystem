@@ -545,9 +545,8 @@ section:nth-child(even){
     section{
         padding:2rem;
     }
-    h2{
-        padding: 2rem;
-    }
+   
+    
 
 }
 
@@ -557,7 +556,7 @@ section:nth-child(even){
         display: initial;
     }
 
-    .header h2 .navbar{
+    .header .navbar{
         position: absolute;
         top:115%; right: 2rem;
         border-radius: .5rem;
@@ -571,17 +570,18 @@ section:nth-child(even){
         transition: none;
     }
 
-    .header h2 .navbar.active{
+    .header .navbar.active{
         transform: scale(1);
         opacity: 1;
         transition: .2s ease-out;
     }
 
-    .header .navbar a h2{
+    .header .navbar a {
         font-size: 2rem;
         display: block;
         margin:2.5rem;
     }
+    
 
 }
 
