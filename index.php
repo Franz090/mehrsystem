@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maternity Health Monitoring Record in Santa Cruz Laguna</title>
+    <link rel="icon" href="./image/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
      <!-- font awesome cdn link  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -22,7 +23,7 @@
     <a href="#" class="logo"> <img class="rhu-logo" src="image/rhu-logo.png" alt="rhu logo"> 
   
 
-    <nav class="navbar"> <h2>Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
+    <nav class="navbar"> <h2 style="position:relative;bottom: 15px;">Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
        
         <a href="#home">home</a>
         <a href="#services">services</a>
@@ -51,8 +52,6 @@
 </section>
 
 <!-- footer section starts  -->
-
-
 <?php include_once("php-templates/footer.php")?>
 <script src="js/script.js"></script>
     
