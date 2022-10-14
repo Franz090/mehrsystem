@@ -64,7 +64,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Update Barangay Record</h3>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Barangay Record</h4><hr>
 
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
@@ -73,13 +73,13 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="form__input-error-message">'.$no_bgy.'</span>';
           else   {
         ?>   
-        <form class="form" action="" method="post">
+        <form class="form form-box px-3" action="" method="post">
           <?php 
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form__input-group">
-              <input value="<?php echo $c_health_center?>" type="text" class="form__input" name="health_center" autofocus placeholder="Health Center*" required>
+          <div class="form-input">
+              <input value="<?php echo $c_health_center?>" type="text"  name="health_center" autofocus placeholder="Health Center*" required>
           </div> 
           <!-- <div class="form__input-group">
               <label>Status</label>
@@ -88,7 +88,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option value="Active" <?php// echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>   -->
-          <button class="form__button" value="register now" type="submit" name="submit">Update Barangay Record</button> 
+          <button class="w-100 btn  text-capitalize" value="register now" type="submit" name="submit">Update Barangay Record</button> 
         </form>  
         <?php
           }
