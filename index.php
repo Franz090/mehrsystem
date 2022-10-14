@@ -45,7 +45,7 @@
 
 <div class="content">
     <h3>stay safe, stay healthy</h3>
-    <a href="./admin" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
+    <a href="./app" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>
