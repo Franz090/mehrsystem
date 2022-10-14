@@ -13,6 +13,7 @@
 </head>
 <body>
 
+<header>
 </header>
 
 <!-- header section ends -->
@@ -44,47 +45,15 @@
 
 <div class="content">
     <h3>stay safe, stay healthy</h3>
-    <a href="../mehrsystem/admin" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
+    <a href="./admin" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>
 
 <!-- footer section starts  -->
 
-<section class="footer">
 
-<div class="box-container">
-
-    <div class="box">
-        <h3>Contact Us</h3>
-        <a href="#"> <i class="fas fa-solid fa-envelope"></i> rhusantacruz2@gmail.com </a>
-        <a href="#"> <i class="fas fa-solid fa-phone"></i> (0967) 362 2845 </a>
-        <a href="#"> <i class="fas fa-solid fa-phone"></i> (049)501‐0359 </a>
-    </div>
-
-    <div class="box">
-        <h3>Address</h3>
-        <a href="#"> <i class="fas fa-solid fa-location-arrow"></i> Cailles St. Barangay Poblarcion III Santa Cruz, Laguna </a>
-    </div>
-
-    <div class="box">
-        <h3>Opening Hours</h3>
-        <a href="#"> <i class="fas fa-phone"></i> Mon - Sun 8:00am - 5:00pm</a>
-    </div>
-
-    <div class="box">
-        <h3>Follow us</h3>
-        <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
-        <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
-        <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-    </div>
-
-</div>
-
-<div class="credit"> All right reserved<span>AW09</span> | all rights reserved 2022</div>
-
-</section>
-
+<?php include_once("php-templates/footer.php")?>
 <script src="js/script.js"></script>
     
 </body>

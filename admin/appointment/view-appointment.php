@@ -95,14 +95,15 @@ include_once('../php-templates/admin-navigation-head.php');
                         <!-- <td><?php // echo $value['contact_no']; ?></td> -->
                         <td>  
                             <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
-                           
-                                <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
-                        <?php if ($value['status']==0)  { ?>
-                           
-                            <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
-                              <button type="button" class=" btn btn-danger btn-sm btn-inverse ">Delete</button></a>
-                        <?php } ?>
-                       
+ 
+                             
+                            <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
+
+                            <?php if ($value['status']==0)  { ?> 
+                              <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>"> 
+                                <button type="button" class=" btn btn-danger btn-sm btn-inverse ">
+                                  Delete</button></a>
+                            <?php } ?> 
                         </td>   
                     </tr>
                 <?php 

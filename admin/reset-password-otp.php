@@ -78,7 +78,7 @@ include_once('php-templates/css/black-bg-remover.php');
         ?>
 
         <div class="text-center mb-2 have-account" style="position:relative;bottom: 12px;">The OTP is sent to your email upon reset password request.
-            <a class="register-link text-decoration-none" href="adminreset-password.php"> Don't have an OTP? Request here.</a>
+            <a class="register-link text-decoration-none" href="reset-password.php"> Don't have an OTP? Request here.</a>
       </div>
         <div class="form-input">
             <input type="text" autofocus name="email" placeholder="Email" tabindex="10" required>
@@ -101,7 +101,7 @@ include_once('php-templates/css/black-bg-remover.php');
         ?>  
      <hr class="my-2" style="position:relative;top: 40px;">
        <div class="text-center mb-2 have-account" style="position:relative;top: 50px;">Don't have an account? 
-        <a class="register-link text-decoration-none" href="adminform.php">Create account</a>
+        <a class="register-link text-decoration-none" href="register-form.php">Create account</a>
     <div>
     
 

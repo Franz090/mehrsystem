@@ -79,7 +79,7 @@ include_once('php-templates/css/black-bg-remover.php');
         <br>
     </div>
        <div class="text-center">Already have an OTP?
-            <a class="forget-link text-decoration-none" href="adminreset-password-otp.php"> Change your password here.</a>
+            <a class="forget-link text-decoration-none" href="reset-password-otp.php"> Change your password here.</a>
         </div>
    
          <div class="text-center">
@@ -87,7 +87,7 @@ include_once('php-templates/css/black-bg-remover.php');
         </div>
         <hr class="my-2">
          <div class="text-center mb-2 have-account">Don't have an account? 
-            <a class="register-link text-decoration-none" href="adminform.php">Create account
+            <a class="register-link text-decoration-none" href="register-form.php">Create account
             </a>
           </div>
     </form> 
