@@ -41,19 +41,19 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Add New Barangay</h3>
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add New Barangay</h4><hr>
 
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form" action="" method="post">
+        <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
  
           <?php
             if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form__input-group">
-            <input type="text" class="form__input" name="health_center" autofocus placeholder="Barangay Health Center*" required>
+          <div class="form-input">
+            <input type="text" class="form-input" name="health_center" autofocus placeholder="Barangay Health Center*" required>
           </div> 
           <!-- <div class="form__input-group">
               <label>Status</label>
@@ -62,7 +62,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <option value="Active">Active</option>
               </select>
           </div>   -->
-          <button class="form__button" type="submit" name="submit">Register Barangay</button> 
+          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Register Barangay</button> 
         </form>  
           </div>
         </div>

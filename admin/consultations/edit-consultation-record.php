@@ -195,15 +195,15 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3 "><h3>Update Consultation Record of <?php echo $m_name?></h3>
-      <div class="container default table-responsive pt-4 pb-5">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <?php echo $m_name?></h4><hr>
+      <div class="container default table-responsive p-4">
         <div class="col-md-8 col-lg-5">
         
         <?php 
             if (count($_barangay_list)==0 && $admin==0) { ?>
             You can't give consultations because you are not assigned to any barangay.
         <?php } else if (count($patient_list)>0 && $admin==0 || $admin==-1) { ?>
-        <form class="form" action="" method="post" enctype="multipart/form-data">
+        <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post" enctype="multipart/form-data">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
@@ -225,10 +225,13 @@ include_once('../php-templates/admin-navigation-head.php');
             </div>  -->
             <div class="form__input-group">
                 <?php if ($admin==0) { ?> 
+                <div class="form-input">
                 <label>Consultation Date and Time*</label> 
-                <input type="datetime-local" name="date" required class="form__input" value="<?php echo $m_date?>"/>
+                <input type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
+                </div>
+            <div class="form_select">
                 <label>Prescription</label> 
-                <select class="form__input" name="prescription_id">
+                <select class="form_select_focus" name="prescription_id">
                     <option value="" selected>None</option>
                     <?php
                         if (count($prescription_list)>0) {
@@ -242,9 +245,11 @@ include_once('../php-templates/admin-navigation-head.php');
                             }    
                         }  
                     ?>  
-                </select> 
+                </select>
+                    </div>
+              <div class="form_select"> 
                 <label>Treatment</label> 
-                <select class="form__input" name="treatment_id">
+                <select class="form_select_focus" name="treatment_id">
                     <option value="" selected>None</option>
                     <?php
                         if (count($treatment_list)>0) {
@@ -257,15 +262,17 @@ include_once('../php-templates/admin-navigation-head.php');
                             }    
                         }  
                     ?>  
-                </select> 
-
+                </select>
+            </div>
+             <div class="form_select"> 
                 <label>Trimester</label>   
-                <select class="form__input" name="trimester">
+                <select class="form_select_focus" name="trimester">
                     <option value="0" <?php echo 0==$m_trimester?"selected":"" ?>>N/A</option>
                     <option value="1" <?php echo 1==$m_trimester?"selected":"" ?>>1st (0-13 weeks)</option>
                     <option value="2" <?php echo 2==$m_trimester?"selected":"" ?>>2nd (14-27 weeks)</option>
                     <option value="3" <?php echo 3==$m_trimester?"selected":"" ?>>3rd (28-42 weeks)</option>
                 </select> 
+                    </div>
                 <?php } ?>  
                 <?php if ($m_treatment_file!='') { ?> 
                     <label for='treatment_file'>Treatment File</label>
@@ -277,7 +284,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/>
                 <?php }  ?> 
             </div> 
-            <button class="form__button" type="submit" name="submit">
+            <button  class="w-100 btn  text-capitalize" type="submit" name="submit">
                 Update <?php echo $admin==0?"Consultation Record":"Treatment File" ?>  
             </button> 
         </form> 

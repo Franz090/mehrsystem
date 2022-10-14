@@ -57,62 +57,57 @@ if(isset($_POST['submit'])) {
 }
 $conn->close(); 
 
-
+include_once('php-templates/admin-head.php');
 include_once('php-templates/css/black-bg-remover.php');
 ?>
 
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- bootstrap -->
-   <link rel="shortcut icon" href="/assets/favicon.ico">
-   <link rel="stylesheet" href="css/main.css">
-   <title>Admin | Sign Up</title>
-</head>
-
-<body>
-   <div class="container">
-      <form id="createAccount" action="" method="post">
+<div class="container">
+    <div class="row px-4">
+      <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
+        <div class="img-left d-none col-sm-7 d-md-flex"></div>
+        <div class="card-body">
+          <h4 class="title text-center mt-1">
+           Create Account
+          </h4>
+    
+      <form class="form form-box px-3 " action="" method="post">
+         <div class="text-center">
          <?php
          if(isset($error)) 
             echo '<span class="form__input-error-message">'.$error.'</span>'; 
       ?>
-         <h1 class="form__title">Create Account</h1>
-
-         <div class="form__input-group">
-            <input type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*">
          </div>
-         <div class="form__input-group">
-            <input type="text" class="form__input" name="first_name" placeholder="First Name*">
-  
-            <input type="text" class="form__input" name="mid_initial" placeholder="Middle Initial">
-         
-            <input type="text" class="form__input" name="last_name" placeholder="Last Name*">
+         <div class="form-input">
+            <input type="text"  name="usermail" autofocus placeholder="Email Address*"  tabindex="10" required>
+         </div>
+         <div class="form-input mb-1">
+            <input class="mb-1" type="text" name="first_name" placeholder="First Name*" tabindex="10" required>
+            <input class="mb-1" type="text" name="mid_initial" placeholder="Middle Initial" tabindex="10" required>
+            <input type="text" class="form__input" name="last_name" placeholder="Last Name*" tabindex="10" required>
          </div> 
-         <div class="form__input-group">
-            <label>Status</label>
-            <select class="form__input" name="status">
-               <option value="Inactive" selected>Inactive</option>
+         <div class="form_select" style="position: relative;bottom: 10px;">
+            <select  class="form_select_focus" id="selectCenter" name="status">
+               <option value="" disabled selected hidden>Status</option>
+               <option value="Inactive">Inactive</option>
                <option value="Active">Active</option>
             </select>
-         </div> 
-         <div class="form__input-group">
-            <input type="password" class="form__input" name="password" autofocus placeholder="Password*">
-         
-            <input type="password" class="form__input" name="cpassword" autofocus placeholder="Confirm password*">
+           </div>
+         <div class="form-input"  style="position: relative;bottom: 19px;"> 
+            <input class="mb-1" type="password" name="password" autofocus placeholder="Password*" tabindex="10" required>
+            <input class="mb-1" type="password"  name="cpassword" autofocus placeholder="Confirm password*" tabindex="10" required>
          </div>
-         <button class="form__button" value="register now" type="submit" name="submit">Register Nurse</button> 
+         <button style="position: relative; bottom: 25px;" class="w-100 btn  text-capitalize" value="register now" type="submit" name="submit">Register Nurse</button> 
       </form>
-      <p class="form__text">
-         <a class="form__link" href="index.php" id="linkLogin">Already have an account? Sign in</a>
-      </p>
-      <script src="js/main.js"></script>
-</body>
+      <div class="text-center mb-2 have-account" style="position:relative;bottom: 20px;">Already have an account?
+         <a class="register-link text-decoration-none" href="index.php" id="linkLogin"> Sign in</a>
+     </div>
+      
+    </div>
+  </div>
+</div>
+</div>
 
-</html>
+<?php 
+    include_once('php-templates/admin-tail.php');
+?>

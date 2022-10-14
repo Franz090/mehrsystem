@@ -56,40 +56,6 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 
-<style>
-  .table {
-   margin: auto;
-   width: 100%!important;
-   padding-top: 2px;
-   
-  }
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
-  
-  h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-  }
-  a{
-    text-decoration: none;
-    color: white;
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-    
-  } 
-</style>
-
-
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
@@ -97,15 +63,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="row bg-light m-3">Appointments
-        <div class="container default table-responsive p-4">
-     
-        <div class="col-md-8 col-lg-12 ">
-          <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3">
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Appointments</h4><hr>
+        <div class="table-padding table-responsive">
+          <div class="col-md-8 col-lg-12" id="table-position">
+           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+            <thead class="table-light" colspan="3">
               <tr>
-                <th scope="col" width="6%">#</th>
+                <th scope="col">#</th>
                 <th scope="col">Patient Name</th> 
                 <th scope="col">Barangay</th>  
                 <th scope="col">Date and Time</th>
@@ -130,12 +95,14 @@ include_once('../php-templates/admin-navigation-head.php');
                         <!-- <td><?php // echo $value['contact_no']; ?></td> -->
                         <td>  
                             <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
-                                <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a> 
+                            <div class="p-2">
+                                <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
                         <?php if ($value['status']==0)  { ?>
                             <hr/>
                             <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
-                              <button class="del btn btn-danger btn-sm btn-inverse">Delete</button></a>
+                              <button type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button></a>
                         <?php } ?>
+                        </div>
                         </td>   
                     </tr>
                 <?php 

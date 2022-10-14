@@ -186,24 +186,7 @@ $conn->close();
 $page = 'add_patient';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-<style>
-.form-control:focus{
-  border: 1px solid #ebecf0;
-	box-shadow: 0 0 5px #60e9d5;
-  font-family: 'Open Sans',sans-serif;
-	-webkit-transition: all 0.30s ease-in-out;
-  -moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
-} 
-.has-error .form-control:focus{
-  box-shadow: none; 
-  -webkit-box-shadow: none;}
-.form-control{
-  border-radius: 10px;
-  padding-left: 15px;
-}
-</style>
+
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -213,8 +196,8 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="m-2 fw-bolder ">Add Patient</h4>
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Patient</h4><hr>
        <div class="container default table-responsive p-4">
             <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post" >
