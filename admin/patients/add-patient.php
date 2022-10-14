@@ -7,26 +7,42 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/midwife-only.php';
 
+$session_id = $_SESSION['id'];
+@include '../php-templates/midwife/get-assigned-barangays.php';
  
 // fetch barangays  
-$select = "SELECT barangay_id id, health_center FROM barangays";
-$result_barangay = mysqli_query($conn, $select);
-$barangay_list = [];
+if (count($_barangay_list)>0) {
 
-if(mysqli_num_rows($result_barangay))  {
-  foreach($result_barangay as $row)  {
-    $id = $row['id'];  
-    $name = $row['health_center'];  
-    array_push($barangay_list, array('id' => $id,'name' => $name));
+  $barangay_select = '';
+  $barangay_list_length_minus_1 = count($_barangay_list)-1;
+  foreach ($_barangay_list as $key => $value) { 
+    
+    $barangay_select .= "barangay_id=$value ";
+   
+    if ($key < $barangay_list_length_minus_1) {
+      $barangay_select .= "OR ";
+    }  
   } 
-  mysqli_free_result($result_barangay);
-  // print_r($result_barangay);
+$select = "SELECT barangay_id id, health_center FROM barangays WHERE $barangay_select";
+echo $select;
+}
+// $result_barangay = mysqli_query($conn, $select);
+// $barangay_list = [];
 
-} 
-else  { 
-  mysqli_free_result($result_barangay);
-  $error = 'Something went wrong fetching data from the database.'; 
-}   
+// if(mysqli_num_rows($result_barangay))  {
+//   foreach($result_barangay as $row)  {
+//     $id = $row['id'];  
+//     $name = $row['health_center'];  
+//     array_push($barangay_list, array('id' => $id,'name' => $name));
+//   } 
+//   mysqli_free_result($result_barangay);
+//   // print_r($result_barangay);
+
+// } 
+// else  { 
+//   mysqli_free_result($result_barangay);
+//   $error = 'Something went wrong fetching data from the database.'; 
+// }   
 
 // register 
 $valid_contact_exp = '/[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
@@ -197,7 +213,10 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Patient</h4><hr>
+      <?php if (count($_barangay_list) > 0) {
+                 
+         ?>
+  <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Patient</h4><hr>
        <div class="container default table-responsive p-4">
             <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post" >
@@ -318,6 +337,9 @@ include_once('../php-templates/admin-navigation-head.php');
           </div>
         </div>  
       </div>
+      <?php } else { //print_r($_barangay_list);?>
+        <span class="">You can not add a patient. There are no barangays assigned to you.</span>
+      <?php } ?>
     </div>
   </div>
 </div>
