@@ -213,10 +213,8 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <?php if (count($_barangay_list) > 0) {
-                 
-         ?>
-  <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Patient</h4><hr>
+      <?php if (count($_barangay_list) > 0) { ?>
+        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Patient</h4><hr>
        <div class="container default table-responsive p-4">
             <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post" >

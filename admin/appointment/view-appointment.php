@@ -66,8 +66,8 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Appointments</h4><hr>
         <div class="table-padding table-responsive">
-          <div class="col-md-8 col-lg-12" id="table-position">
-           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+          <div class="pagination-sm col-md-8 col-lg-12" id="table-position">
+           <table class=" text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col">#</th>
@@ -95,14 +95,15 @@ include_once('../php-templates/admin-navigation-head.php');
                         <!-- <td><?php // echo $value['contact_no']; ?></td> -->
                         <td>  
                             <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
-                            <div class="p-2">
-                                <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
-                        <?php if ($value['status']==0)  { ?>
-                            <hr/>
-                            <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
-                              <button type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button></a>
-                        <?php } ?>
-                        </div>
+ 
+                             
+                            <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
+
+                            <?php if ($value['status']==0)  { ?> 
+                              <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>"> 
+                                <button type="button" class=" btn btn-danger btn-sm btn-inverse ">
+                                  Delete</button></a>
+                            <?php } ?> 
                         </td>   
                     </tr>
                 <?php 

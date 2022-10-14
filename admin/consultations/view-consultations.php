@@ -134,7 +134,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
-         <div class="col-md-8 col-lg-12" id="table-position">
+         <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
           <table  class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
