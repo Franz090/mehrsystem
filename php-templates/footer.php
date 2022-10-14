@@ -1,6 +1,6 @@
 <?php 
 
-@include 'admin/includes/config.php';
+@include 'app/includes/config.php';
 
 $select_footer_data = "SELECT * FROM footer WHERE footer_id=1";
 if ($result = mysqli_query($conn, $select_footer_data)) {
