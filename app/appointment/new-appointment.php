@@ -8,12 +8,12 @@ session_start();
 @include '../php-templates/redirect/not-for-nurse.php';
 
 
-$session_id = $_SESSION['id'];
+$session_id = $_SESSION['id']; 
 
-  
+$current_user_is_a_midwife = $admin==0;
 
-// user is a midwife 
-if ($admin==0) {
+// user is a midwife  
+if ($current_user_is_a_midwife) {
     $patient_list = [];  
     @include '../php-templates/midwife/get-assigned-barangays.php';
     if (count($_barangay_list)>0) {
@@ -69,7 +69,6 @@ else {
 }
 
 
-$current_user_is_a_midwife = $admin==0;
 // add appointment
 if(isset($_POST['submit'])) {
     $_POST['submit'] = null;
