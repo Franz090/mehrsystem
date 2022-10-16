@@ -3,9 +3,9 @@ if ($admin==0) {
     $bar_chart_title = "Infant Vaccinations Chart";
     // total patients 
     $select_total_patients = "SELECT COUNT(u.user_id) c 
-    FROM users u, patient_details pd, barangays b 
-    WHERE role=-1 AND u.user_id=pd.user_id 
-        AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id";
+        FROM users u, patient_details pd, barangays b 
+        WHERE role=-1 AND u.user_id=pd.user_id 
+            AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id";
     // echo $select_total_patients;
     if($result_total_patients = mysqli_query($conn, $select_total_patients))  {
         foreach($result_total_patients as $row)  { 
@@ -72,31 +72,56 @@ if ($admin==0) {
     }   
 
     // structure the chart data  
-    $labels = '["Months ('.$curr_year.')", "Measles, Mumps, & Rubelia", "Polio", "Pentavalent", "Pneumococcal Conjugate"],';
-   
+    $labels = '["Months ('.$curr_year.')", "BCG", "Hepatitis B", "Pentavalent", "Oral Polio", "Inactivated Polio", "Pnueumococcal Conjugate", "Measles, Mumps, and Rubelia"],';
+//    echo $labels;
 
     $count_infant_vacc_list = count($infant_vacc_list)-1;
     $key_jump = -1;
     foreach ($bar_chart_month_list as $key1 => $value1) {
         $temp_arr = [$bar_chart_month_list_label[$key1]];
-        $type0 = 0;
-        $type1 = 0;
-        $type2 = 0;
-        $type3 = 0;
+
+        $BCG = 0;
+        $hepatitis_B = 0;
+        $pentavalent = 0;
+        $oral_polio = 0;
+
+        $inactivated_polio = 0;
+        $pnueumococcal_conjugate = 0;
+        $measles_mumps_rubelia = 0;
         foreach ($infant_vacc_list as $key2 => $value2) {
             if ($key_jump>$key2) continue; 
 
             if ($value1==$value2['date']) {
-                if ($value2['type']==1)  {$type0 += 1;}
-                if ($value2['type']==2)  {$type1 += 1;}
-                if ($value2['type']==3)  {$type2 += 1;}
-                if ($value2['type']==4)  {$type3 += 1;} 
+                if ($value2['type']==1)  {$BCG += 1;}
+                if ($value2['type']==2)  {$hepatitis_B += 1;}
+                if ($value2['type']==3)  {$pentavalent += 1;}
+                if ($value2['type']==4)  {$oral_polio += 1;} 
+
+                if ($value2['type']==5)  {$inactivated_polio += 1;}
+                if ($value2['type']==6)  {$pnueumococcal_conjugate += 1;}
+                if ($value2['type']==7)  {$measles_mumps_rubelia += 1;}
                 if ($key2==$count_infant_vacc_list) {
-                    $temp_arr = array_merge($temp_arr,[$type0,$type1,$type2,$type3]);
+                    $temp_arr = array_merge($temp_arr,[
+                        $BCG,
+                        $hepatitis_B,
+                        $pentavalent,
+                        $oral_polio,
+                        $inactivated_polio,
+                        $pnueumococcal_conjugate,
+                        $measles_mumps_rubelia
+                    ]);
                 }
             } else {
                 $key_jump = $key2;
-                $temp_arr = array_merge($temp_arr,[$type0,$type1,$type2,$type3]);
+                $temp_arr = array_merge($temp_arr,[
+                    $BCG,
+                    $hepatitis_B,
+                    $pentavalent,
+                    $oral_polio,
+                    $inactivated_polio,
+                    $pnueumococcal_conjugate,
+                    $measles_mumps_rubelia
+                ]);
                 break;
             }
         }

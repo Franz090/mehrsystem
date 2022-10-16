@@ -51,7 +51,14 @@
     var data = google.visualization.arrayToDataTable([
       <?php echo $labels;
         foreach ($bar_chart_data as $key => $value) { 
-          echo "[`".$value[0]."`,".$value[1].",".$value[2].",".$value[3].",".$value[4]." ],";
+          echo "[`".$value[0]."`,
+            ".$value[1].",
+            ".$value[2].",
+            ".$value[3].",
+            ".$value[4].",
+            ".$value[5].",
+            ".$value[6].",
+            ".$value[7]." ],";
         }
       ?>
       // ["April-22", 1000, 400, 200, 300],
