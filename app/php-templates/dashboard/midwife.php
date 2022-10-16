@@ -188,7 +188,11 @@ Midwife <br/>
 <!-- <div class="container">
     <div class="row bg-light m-3 con1"></div>
 </div> -->
-
+    <div>
+        <a href="../infant/add-infant.php"><button>
+            Add Infant
+        </button> </a>
+    </div>
 <?php 
 }
 ?>
