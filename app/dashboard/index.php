@@ -189,7 +189,7 @@ else {
         'id' => $id,
         'name' => $name, 
         'status' => ($c_vaccinations==$complete_shots_of_vaccines
-          ?'Completed':'Uncompleted')));
+          ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
     } 
     mysqli_free_result($result2);
     // print_r($nurse_list);
@@ -271,13 +271,17 @@ if ($admin!=-1) {
                   <td><?php echo $value['status'];?></td>
                   <?php if ($admin==0) { ?> 
                       <td>
-                          <?php if ($value['status']=="Uncompleted") { ?>
+                          <?php if ($value['status']!="Complete") { ?>
                             <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
                           <?php } ?>
                           <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                          <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
+                          <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $value['id']?>">
+                            <button class="btn btn-dark btn-sm btn-inverse">
+                            See Vaccination Record</button></a>
+                          
+                              <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
                               <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
                               Delete</button>  -->
                           <!-- </a>     -->
