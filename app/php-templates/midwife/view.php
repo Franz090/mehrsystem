@@ -5,7 +5,7 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-patient.php';
+@include '../php-templates/redirect/nurse-only.php';
 
 $midwife_select = "SELECT u.user_id AS user_id, 
 CONCAT(ud.first_name,
@@ -27,16 +27,7 @@ $midwife_list = [];
 
 if(mysqli_num_rows($result))  {
   foreach($result as $row)  {
-    $id = $row['id'];  
-    //TODO: keep until patients module is done 
-    //TODO: check if there is a much better solution here
-    // $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$id AND type=1";
-    // if ($result_c_no = mysqli_query($conn, $select_c_no)) {
-    //   $c_no = '';
-    //   foreach ($result_c_no as $row2) {
-    //     $c_no .= ' ('.$row2['mobile_number'].') '; 
-    //   }
-    // } 
+    $id = $row['id'];   
     $name = $row['name'];  
     $e = $row['email'];   
     $bgy = $admin==1?$row['health_center']:'';  
@@ -107,7 +98,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <!-- <th scope="col">Contact No</th> -->
                     <!-- <th scope="col">Birthdate</th> -->
                     <th scope="col">Barangay</th> 
-                    <!-- <th scope="col">Actions</th> -->
+                    <th scope="col">Actions</th>
                   <?php }?>
                 </tr>
               </thead>
@@ -123,16 +114,16 @@ include_once('../php-templates/admin-navigation-head.php');
                     <?php if ($admin==1) { ?>
                       <!-- <td><?php //echo $value['contact']; ?></td> -->
                       <td><?php echo $value['barangay']; ?></td> 
-                      <!-- <td> -->
-                        <!-- <a href="edit-midwife.php?id=<?php //echo $value['id'] ?>">
-                          <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a> -->
+                      <td>
+                        <a href="edit-midwife.php?id=<?php echo $value['id'] ?>">
+                          <button class="edit btn btn-success btn-sm btn-inverse">Assign Barangays</button></a>
                         <?php //if ($value['id']!=$_SESSION['id']) { ?>
                           <!-- <a href="delete-midwife.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>">  -->
                             <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
                             Delete</button>  -->
                             <!-- </a>     -->
                         <?php //} ?> 
-                      <!-- </td> -->
+                      </td>
                     <?php }?>
                   </tr>
                 <?php 
