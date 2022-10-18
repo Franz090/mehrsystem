@@ -12,6 +12,7 @@ $title = ''; // pie chart title
 $curr_date = date("Y-m-d");
 $curr_year = substr($curr_date,0,4);
 // echo "curr yewar: $curr_year";
+$complete_shots_of_vaccines = 15;
 
 $session_id = $_SESSION['id'];
 
@@ -187,7 +188,7 @@ else {
       array_push($infant_list, array(
         'id' => $id,
         'name' => $name, 
-        'status' => ($c_vaccinations==4
+        'status' => ($c_vaccinations==$complete_shots_of_vaccines
           ?'Completed':'Uncompleted')));
     } 
     mysqli_free_result($result2);
@@ -202,6 +203,7 @@ else {
   $past_6_months = date("Y-m-d", strtotime('-5 months'));
   $bar_chart_month_list = [];
   $bar_chart_month_list_label = [];
+  // generate months to chart
   for ($i=5; $i > -1; $i--) { 
       $str_to_time = strtotime("-$i months");
       array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
@@ -269,7 +271,11 @@ if ($admin!=-1) {
                   <td><?php echo $value['status'];?></td>
                   <?php if ($admin==0) { ?> 
                       <td>
-                          <a href="edit-infant.php?id=<?php echo $value['id'] ?>">
+                          <?php if ($value['status']=="Uncompleted") { ?>
+                            <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
+                              <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
+                          <?php } ?>
+                          <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
                           <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
                               <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">

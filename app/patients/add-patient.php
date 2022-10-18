@@ -1,5 +1,5 @@
 <?php
-
+// header('location:../');
 @include '../includes/config.php';
 
 session_start();
@@ -11,8 +11,7 @@ $session_id = $_SESSION['id'];
 @include '../php-templates/midwife/get-assigned-barangays.php';
  
 // fetch barangays  
-if (count($_barangay_list)>0) {
-
+if (count($_barangay_list)>0) { 
   $barangay_select = '';
   $barangay_list_length_minus_1 = count($_barangay_list)-1;
   foreach ($_barangay_list as $key => $value) { 
@@ -23,29 +22,28 @@ if (count($_barangay_list)>0) {
       $barangay_select .= "OR ";
     }  
   } 
-$select = "SELECT barangay_id id, health_center FROM barangays WHERE $barangay_select";
-echo $select;
-}
-// $result_barangay = mysqli_query($conn, $select);
-// $barangay_list = [];
+  $select = "SELECT barangay_id id, health_center FROM barangays WHERE $barangay_select";
 
-// if(mysqli_num_rows($result_barangay))  {
-//   foreach($result_barangay as $row)  {
-//     $id = $row['id'];  
-//     $name = $row['health_center'];  
-//     array_push($barangay_list, array('id' => $id,'name' => $name));
-//   } 
-//   mysqli_free_result($result_barangay);
-//   // print_r($result_barangay);
+  $barangay_list = [];
+  $result_barangay = mysqli_query($conn, $select);
+  if(mysqli_num_rows($result_barangay))  {
+    foreach($result_barangay as $row)  {
+      $id = $row['id'];  
+      $name = $row['health_center'];  
+      array_push($barangay_list, array('id' => $id,'name' => $name));
+    } 
+    mysqli_free_result($result_barangay);
+    // print_r($result_barangay);
 
-// } 
-// else  { 
-//   mysqli_free_result($result_barangay);
-//   $error = 'Something went wrong fetching data from the database.'; 
-// }   
+  } 
+  else  { 
+    mysqli_free_result($result_barangay);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }   
+} 
 
 // register 
-$valid_contact_exp = '/[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
+$valid_contact_exp = '/[0][9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
 
 if(isset($_POST['submit'])) {
   $_POST['submit'] = null;
@@ -58,42 +56,18 @@ if(isset($_POST['submit'])) {
     }
   }else {
     $error .= 'Something went wrong inserting patient into the database. (Error fetching next user_id)';
-  }
-  // $details = mysqli_query($conn, $select);
-  // $rows = mysqli_num_rows($details)-1;
-  // mysqli_data_seek($details,$rows);
-  // // echo $rows;
-  // $row=mysqli_fetch_row($details);
-  // $next_details_id = $row[0] + 1;
+  }  
 
-  // // next med_history id
-  // $select2 = "SELECT * from med_history";
-  // $med_history = mysqli_query($conn, $select2);
-  // $rows2 = mysqli_num_rows($med_history)-1;
-  // mysqli_data_seek($med_history,$rows2);
-  // // echo $rows2;
-  // $row2=mysqli_fetch_row($med_history);
-  // $next_med_history_id = $row2[0] + 1;
-
-  // echo $next_details_id;
-  // print_r($next_id);
-  // // echo '<script>alert("'.$_POST['barangay_id'].'")</script>';
- 
-
-  // if (true)
   if (empty($_POST['usermail']) || 
     empty($_POST['password']) || 
     empty($_POST['cpassword']) ||
     empty($_POST['first_name']) ||
     empty($_POST['last_name']) ||
-    empty($_POST['civil_status']) ||
-    // empty($_POST['contact']) ||
-    // empty($_POST['b_date']) ||
-    
+    empty($_POST['civil_status']) ||  
     empty($_POST['height_ft']) ||
     empty($_POST['height_in']) ||
     empty($_POST['weight']) ||
-    empty($_POST['blood_type']) )
+    empty($_POST['blood_type']))
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else if ($error=='') {
     $contact = mysqli_real_escape_string($conn,$_POST['contact']);
@@ -130,11 +104,7 @@ if(isset($_POST['submit'])) {
   
       $bgy_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);
       $b_date = empty($_POST['b_date'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['b_date'])."'";
-      $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'";
-      // $c_no = mysqli_real_escape_string($conn, $_POST['contact']);
-  
-      
-  
+      $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'"; 
   
       $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
       $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
@@ -146,9 +116,7 @@ if(isset($_POST['submit'])) {
       $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
       $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
   
-      $select = "SELECT * FROM users WHERE email = '$email'";
-  
-    
+      $select = "SELECT * FROM users WHERE email = '$email'"; 
       $result = mysqli_query($conn, $select);
     
       if(mysqli_num_rows($result) > 0 || $pass != $cpass)  {
@@ -172,13 +140,11 @@ if(isset($_POST['submit'])) {
         if ($contacts_count>0) {
             $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
             foreach ($new_contacts as $key => $value) { 
-                // echo " v: $value ";
                 $ins = "('".mysqli_real_escape_string($conn, $value)."', $next_user_id, 1)"; 
                 $add_contact_numbers .= $ins;
                 $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
             }
         }
-        // echo "$insert1 $insert2 $insert3 $add_contact_numbers";
         if (mysqli_multi_query($conn,"$insert1 $insert2 $insert3 $add_contact_numbers"))  {
           mysqli_free_result($result); 
           mysqli_free_result($result_next_user_id); 
