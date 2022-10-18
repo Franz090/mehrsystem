@@ -1,12 +1,6 @@
 <?php 
 if ($admin==1) { 
-    $bar_chart_title='Consultation Chart';
-    // generate months to chart
-    for ($i=5; $i > -1; $i--) { 
-        $str_to_time = strtotime("-$i months");
-        array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
-        array_push($bar_chart_month_list_label,  date("M", $str_to_time));
-    }
+    $bar_chart_title='Consultation Chart'; 
     // get consultaitons 
     $consultations_list = [];
     $select_consultations = "SELECT date, trimester FROM consultations WHERE date>='$past_6_months 00:00:00' ORDER BY date ASC";
@@ -24,12 +18,12 @@ if ($admin==1) {
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
-
     // structure the chart data  
     $labels = '["Months ('.$curr_year.')", "No Trimester", "1st Trimester", "2nd Trimester", "3rd Trimester"],';
 
     $count_consul_list = count($consultations_list)-1;
     $key_jump = -1;
+
     foreach ($bar_chart_month_list as $key1 => $value1) {
         $temp_arr = [$bar_chart_month_list_label[$key1]];
         $temp0 = 0;

@@ -46,7 +46,6 @@ if ($admin==0) {
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
-    //TODO: change to infant vacc records 
     // get infant vaccination records 
     $infant_vacc_list = [];
     $select_infant_vacc = "SELECT date, type 

@@ -1,3 +1,4 @@
+ 
 <!-- Pie chart script ito-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -49,16 +50,12 @@
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      <?php echo $labels;
+      <?php 
+        $midwife = $admin==0;  
+        echo $labels;
         foreach ($bar_chart_data as $key => $value) { 
-          echo "[`".$value[0]."`,
-            ".$value[1].",
-            ".$value[2].",
-            ".$value[3].",
-            ".$value[4].",
-            ".$value[5].",
-            ".$value[6].",
-            ".$value[7]." ],";
+          echo "[`".$value[0]."`, ".$value[1].", ".$value[2].", ".$value[3].", ".$value[4].
+          ($midwife?(", ".$value[5].", ".$value[6].", ".$value[7]):"") ." ],";
         }
       ?>
       // ["April-22", 1000, 400, 200, 300],
