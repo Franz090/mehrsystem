@@ -78,7 +78,7 @@ include_once('php-templates/css/black-bg-remover.php');
          <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
          <div class="card-body">
-            <h4 class="title text-center mt-1">
+            <h4 class="title text-center">
             Create Midwife Account
             </h4>
     
@@ -93,23 +93,29 @@ include_once('php-templates/css/black-bg-remover.php');
                   <input type="text"  name="usermail" autofocus placeholder="Email Address*"  
                      tabindex="10" required>
                </div>
-               <div class="form-input mb-1">
+               <div class="form-input">
                   <input class="mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="10" required>
+                    
+               </div>
+                <div class="form-input">
                   <input class="mb-1" type="text" name="mid_name" placeholder="Middle Name" 
-                     tabindex="10">
+                     tabindex="10" required>
+                 </div>
+                  <div class="form-input">
                   <input type="text" class="form__input" name="last_name" placeholder="Last Name*" 
                      tabindex="10" required>
                </div>  
-               <div class="form-input"  style="position: relative;bottom: 19px;"> 
+               <div class="form-input"  > 
                   <input class="mb-1" type="password" name="password" autofocus placeholder="Password*" tabindex="10" required>
                   <input class="mb-1" type="password"  name="cpassword" autofocus placeholder="Confirm password*" tabindex="10" required>
                </div>
-               <button style="position: relative; bottom: 25px;" class="w-100 btn text-capitalize" 
+               
+               <button style="position: relative; top: 3px;" class="w-100 btn text-capitalize" 
                   value="register now" type="submit" name="submit">Register Midwife</button> 
             </form>
-
-            <div class="text-center mb-2 have-account" style="position:relative;bottom: 20px;">
+           <hr class="my-2" style="position:relative;top: 10px;">
+            <div class="text-center mb-2 have-account" style="position:relative;top: 10px;">
                Already have an account?
                <a class="register-link text-decoration-none" href="index.php" id="linkLogin">
                   Sign in</a>
