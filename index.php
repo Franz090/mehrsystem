@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maternity Health Monitoring Record in Santa Cruz Laguna</title>
     <link rel="icon" href="./image/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
+    
      <!-- font awesome cdn link  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -23,7 +24,7 @@
     <a href="#" class="logo"> <img class="rhu-logo" src="image/rhu-logo.png" alt="rhu logo"> 
   
 
-    <nav class="navbar"> <h2 style="position:relative;bottom: 15px;">Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
+    <nav class="navbar"> <h2 style="position:relative;bottom: 15px;color: #169f84;">Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
        
         <a href="#home">home</a>
         <a href="#services">services</a>
@@ -45,8 +46,8 @@
 </div>
 
 <div class="content">
-    <h3>stay safe, stay healthy</h3>
-    <a href="./app" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
+    <!-- <h1>login, here</h1> -->
+    <a href="./app" class="btn"> Login Here <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>
