@@ -32,12 +32,13 @@ session_start();
 
 // fetch user 
 $id_from_get = $_GET['id'];
-$user_to_edit = "SELECT  user_id id, family_history, civil_status, 
+$user_to_edit = "SELECT  u.user_id id, family_history, civil_status, 
     height_ft, height_in, weight, blood_type, diagnosed_condition, allergies,
     tetanus, trimester 
    FROM users u, user_details ud, patient_details pd
    WHERE u.user_id = $id_from_get AND u.user_id = ud.user_id AND u.user_id = pd.user_id";
  
+//  echo $user_to_edit;
 
 if ($user_from_db = mysqli_query($conn, $user_to_edit)) {
   foreach($user_from_db as $row)  {
@@ -49,6 +50,7 @@ if ($user_from_db = mysqli_query($conn, $user_to_edit)) {
     $c_weight = $row['weight'];
     $c_blood_type = $row['blood_type'];
     $c_diagnosed_condition = $row['diagnosed_condition'];
+    $c_family_history = $row['family_history'];
     $c_allergies = $row['allergies'];
 
     $c_tetanus = $row['tetanus'];
@@ -107,23 +109,23 @@ if(isset($_POST['submit'])) {
       allergies=$allergies, trimester=$trimester, tetanus=$tetanus
       WHERE user_id=$c_id ; "; 
 
-    $delete_contact_numbers = "DELETE FROM contacts 
-      WHERE owner_id=$c_id;"; 
+    // $delete_contact_numbers = "DELETE FROM contacts 
+    //   WHERE owner_id=$c_id;"; 
 
-    $add_contact_numbers = "";
-    $contacts_count = count($new_contacts);
-    $contacts_count_minus_one = $contacts_count-1;
-    if ($contacts_count>0) {
-      $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
-      foreach ($new_contacts as $key => $value) { 
-        // echo " v: $value ";
-        $ins = "('".mysqli_real_escape_string($conn, $value)."', $c_id, 1)"; 
-        $add_contact_numbers .= $ins;
-        $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
-      }
-    }
+    // $add_contact_numbers = "";
+    // $contacts_count = count($new_contacts);
+    // $contacts_count_minus_one = $contacts_count-1;
+    // if ($contacts_count>0) {
+    //   $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
+    //   foreach ($new_contacts as $key => $value) { 
+    //     // echo " v: $value ";
+    //     $ins = "('".mysqli_real_escape_string($conn, $value)."', $c_id, 1)"; 
+    //     $add_contact_numbers .= $ins;
+    //     $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
+    //   }
+    // }
 
-    if (mysqli_multi_query($conn, "$up $delete_contract_numbers $add_contact_numbers"))  {
+    if (mysqli_query($conn, "$up"))  {
         // echo "<script>alert('Patient Record Updated!');</script>"; 
         $conn->close(); 
         header('location:view-patients.php');  
