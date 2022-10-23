@@ -1,5 +1,5 @@
 <?php
-// header('location:../');
+header('location:../');
 @include '../includes/config.php';
 
 session_start();

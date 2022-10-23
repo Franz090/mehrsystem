@@ -211,7 +211,7 @@ include_once('../php-templates/admin-navigation-head.php');
            </tr>
             <tr class="row col-xs-3 col-md-12 col-centered">
               <td  class="col-md-3 fw-bold">Weight</td>
-              <td  class="col-md-3"><?php echo $weight ?></td>
+              <td  class="col-md-3"><?php echo $weight ?> kg</td>
               <td  class="col-md-3 fw-bold">Allergies</td>
               <td  class="col-md-3"><?php echo $allergies ?></td>
             </tr >

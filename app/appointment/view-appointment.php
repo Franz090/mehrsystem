@@ -5,8 +5,9 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/patient-status-checker.php';
 @include '../php-templates/redirect/patient-only.php';
-
+ 
 $session_id = $_SESSION['id'];
 $appointment_list = [];
 $yester_date = date("Y-m-d", strtotime('-1 day'));

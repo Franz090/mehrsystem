@@ -173,9 +173,9 @@
       </button>
         <div class="dropdown-container default text-start">
           <div class="default " style="width: 210px;padding: 5px;display: block;">
-            <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
-              <?php echo $page == 'add_patient' ? "type='button'" : 'href="../patients/add-patient.php"'?>
-              class="drop">Add Patient</a><br>
+            <!-- <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
+              <?php //echo $page == 'add_patient' ? "type='button'" : 'href="../patients/add-patient.php"'?>
+              class="drop">Add Patient</a><br> -->
               
             <i class="fas fa-minus-square fa-1x" aria-hidden="true"></i><a 
               <?php echo $page == 'view_patient' ? "type='button'" : 'href="../patients/view-patients.php"'?>
