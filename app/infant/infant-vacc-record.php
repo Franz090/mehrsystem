@@ -128,9 +128,9 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php echo $value['type']; ?></td>  
                         <td><?php echo $value['date']; ?></td> 
                         <td> 
-                            <a href="delete-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>">   
-                                <button class="del btn btn-danger btn-sm btn-inverse">
-                                Delete</button>
+                            <a href="update-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>">   
+                                <button class="del btn btn-warning btn-sm btn-inverse">
+                                Update</button>
                             </a>    
                         </td>
                     </tr>
