@@ -774,7 +774,7 @@ progress {
 }
 
 .table-light {
-    --bs-table-bg: #dadada!important;
+    --bs-table-bg: #fdf8fc!important;
     --bs-table-striped-bg: #2ec290!important;
     --bs-table-striped-color: rgb(219, 43, 43)!important;
     --bs-table-active-bg: #e0e4e3!important;
@@ -6791,7 +6791,7 @@ fieldset:disabled .btn {
 }
 
 .text-secondary {
-    color: #6c757d !important
+    color: #6c757d!important;
 }
 
 .text-success {
@@ -6803,7 +6803,7 @@ fieldset:disabled .btn {
 }
 
 .text-warning {
-    color: #ffc107 !important
+    color: #ffc107!important;
 }
 
 .text-danger {

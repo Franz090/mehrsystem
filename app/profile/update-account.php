@@ -221,7 +221,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <div class="form-input">
                   First Name
                   <input type="text" value="<?php echo $c_first_name?>"
-                    class="form-input"  name="first_name" placeholder="First Name*" required>
+                      name="first_name" placeholder="First Name*" required>
                   Middle Name
                   <input type="text" value="<?php echo $c_middle_name?>"
                     class="form-input" name="middle_name" placeholder="Middle Name">
@@ -332,16 +332,16 @@ include_once('../php-templates/admin-navigation-head.php');
               
               Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
               <div class="form-input">
-                  <input type="email" class="form-input"  name="new_email" placeholder="New Email" tabindex="11" >
+                  <input type="email" class="form-input"  name="new_email" placeholder="New Email" tabindex="11" required>
                 </div>
 
               
               Leave blank if you do not want to change the password
               <div class="form-input">
-                  <input type="password" class="form-input"  name="new" placeholder="New Password" tabindex="12" />
+                  <input type="password" class="form-input"  name="new" placeholder="New Password" tabindex="12" required/>
                 </div> 
               <div class="form-input">
-                  <input type="password" class="form-input"  name="cnew" placeholder="Confirm New Password" tabindex="13" />
+                  <input type="password" class="form-input"  name="cnew" placeholder="Confirm New Password" tabindex="13" required/>
                 </div>
               <button class="w-100 btn  text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
             </form> 

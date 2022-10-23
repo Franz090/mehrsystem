@@ -133,7 +133,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option value="Active" <?php echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>  
-          <button class="form__button" value="register now" type="submit" name="submit">Update Nurse Record</button> 
+          <button class="w-100 btn  text-capitalize" value="register now" type="submit" name="submit">Update Nurse Record</button> 
         </form> 
 
         <?php

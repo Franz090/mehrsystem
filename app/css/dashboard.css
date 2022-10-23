@@ -12,7 +12,7 @@
 
 .container {
 	min-height: 100vh;
-	background-color: #eeeeee;
+	background-color: #fdf8fc!important;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -65,7 +65,7 @@
 	align-items: center;
 } */
 .background-head {
-	background-color: #eeeeee;
+	background-color: #fdf8fc;
 	border-top-left-radius: 13px;
 	border-top-right-radius: 13px;
 	padding-bottom: 20px;
