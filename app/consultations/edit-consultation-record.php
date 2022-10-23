@@ -13,7 +13,7 @@ $session_id_str = ($admin==0?"c.midwife_appointed=":"u.user_id=") . $session_id;
 $id_from_get = $_GET['id'];
 $select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id, treatment_file,
     CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
-    c.trimester, date, treatment_id, prescription_id
+    date, treatment_id, prescription_id
 FROM users u, user_details d, patient_details p, consultations c
 WHERE u.user_id=d.user_id AND c.consultation_id=$id_from_get AND 
     c.patient_id=u.user_id AND $session_id_str";
@@ -23,7 +23,7 @@ if ($result_c_to_edit = mysqli_query($conn, $select_c_to_edit)) {
         $m_name = $row['name'];   
         $m_u_id = $row['u_id'];   
         $m_c_id = $row['c_id'];   
-        $m_trimester = $row['trimester'];   
+        // $m_trimester = $row['trimester'];   
         $m_treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15); 
         $m_date = $row['date'];   
         $m_treatment_id = $row['treatment_id'];   
@@ -264,15 +264,15 @@ include_once('../php-templates/admin-navigation-head.php');
                     ?>  
                 </select>
             </div>
-             <div class="form_select"> 
-                <label>Trimester</label>   
-                <select class="form_select_focus" name="trimester">
-                    <option value="0" <?php echo 0==$m_trimester?"selected":"" ?>>N/A</option>
-                    <option value="1" <?php echo 1==$m_trimester?"selected":"" ?>>1st (0-13 weeks)</option>
-                    <option value="2" <?php echo 2==$m_trimester?"selected":"" ?>>2nd (14-27 weeks)</option>
-                    <option value="3" <?php echo 3==$m_trimester?"selected":"" ?>>3rd (28-42 weeks)</option>
-                </select> 
-                    </div>
+                <!-- <div class="form_select"> 
+                    <label>Trimester</label>   
+                    <select class="form_select_focus" name="trimester">
+                        <option value="0" <?php //echo 0==$m_trimester?"selected":"" ?>>N/A</option>
+                        <option value="1" <?php //echo 1==$m_trimester?"selected":"" ?>>1st (0-13 weeks)</option>
+                        <option value="2" <?php //echo 2==$m_trimester?"selected":"" ?>>2nd (14-27 weeks)</option>
+                        <option value="3" <?php //echo 3==$m_trimester?"selected":"" ?>>3rd (28-42 weeks)</option>
+                    </select> 
+                </div> -->
                 <?php } ?>  
                 <?php if ($m_treatment_file!='') { ?> 
                     <label for='treatment_file'>Treatment File</label>
