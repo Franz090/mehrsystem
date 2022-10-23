@@ -15,8 +15,8 @@ if (mysqli_query($conn, $sql)) {
 }
 else {
     $response = 'Something went wrong with canceling the appointment in the database.'; 
-    echo "<script>alert('$response');</script>";
 }
+echo "<script>alert('$response');</script>";
 
 $conn->close();
 

@@ -37,15 +37,17 @@ function vaccine_name($num) {
 
 $id_from_get = $_GET['id'];
 $infant_select = "SELECT infant_id id, CONCAT(i.first_name,
-IF(i.middle_name='' OR i.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(i.middle_name,1,1),'.')),' ',i.last_name) 
-  AS name FROM infants i WHERE infant_id=$id_from_get";
+  IF(i.middle_name='' OR i.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(i.middle_name,1,1),'.')),' ',i.last_name) 
+  AS name 
+  FROM infants i WHERE infant_id=$id_from_get";
 
 if($infant_result = mysqli_query($conn, $infant_select))  { 
-    foreach($infant_result as $row)  
-        $infant_id = $row['id'];   
-        $infant_name = $row['name'];   
-} else  { 
-    mysqli_free_result($infant_result);
+  foreach($infant_result as $row)  { 
+    $infant_id = $row['id'];   
+    $infant_name = $row['name'];   
+  }
+  mysqli_free_result($infant_result);
+} else  {  
     $error = 'Something went wrong fetching data from the database.'; 
 }   
 $vacc_rec_select = "SELECT type, date, infant_vac_rec_id id
@@ -126,10 +128,10 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php echo $value['type']; ?></td>  
                         <td><?php echo $value['date']; ?></td> 
                         <td> 
-                            <!-- <a href="delete-infant-vaccination-record.php?id=<?php //echo $value['id'] ?>">    -->
+                            <a href="delete-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>">   
                                 <button class="del btn btn-danger btn-sm btn-inverse">
                                 Delete</button>
-                            <!-- </a>     -->
+                            </a>    
                         </td>
                     </tr>
                 <?php 

@@ -15,6 +15,7 @@ $curr_year = substr($curr_date,0,4);
 $complete_shots_of_vaccines = 15;
 
 $session_id = $_SESSION['id'];
+$current_user_is_a_patient = $admin==-1; 
 
 if ($admin==1) {
   // $title = "Patient Vaccine Monitoring Pie Chart"; 
@@ -122,9 +123,9 @@ if ($admin==0) {
   // }  
 }
 // patient 
-if ($admin==-1) {
+if ($current_user_is_a_patient) {
 
-  $select3 = "SELECT height_ft, height_in, weight
+  $select3 = "SELECT height_ft, height_in, weight, status
     FROM users u, user_details d, patient_details m
     WHERE u.user_id=$session_id AND u.user_id=d.user_id AND u.user_id=m.user_id" ;
   
@@ -133,39 +134,83 @@ if ($admin==-1) {
     foreach($result3 as $row)  {
       $height_ft = $row['height_ft'];  
       $height_in = $row['height_in'];  
-      $weight = $row['weight'];   
+      $weight = $row['weight'];  
+      $_SESSION['status'] = $row['status'];  
     } 
-    mysqli_free_result($result3);
-    // print_r($nurse_list);
-    $in_to_m_conversion = 0.0254;
-    $ft_to_in_conversion = 12;
-    $m = ($height_ft * $ft_to_in_conversion + $height_in) * $in_to_m_conversion; 
-    // echo $m. "<br>";
-    // echo $height_ft. "<br>";
-    // echo $height_in. "<br>";
-    // https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator#:~:text=Body%20Mass%20Index%20is%20a,most%20adults%2018%2D65%20years.
-    // BMI = kg/m2
-    $bmi = $weight/$m**2;
-    // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
-    // Underweight = <18.5
-    // Normal weight = 18.5–24.9
-    // Overweight = 25–29.9
-    // Obesity = BMI of 30 or greater
-    if ($bmi<=18.5) {
-      $bmi_desc = 'Underweight';
-    } else if ($bmi<=24.9 && $bmi>18.5) {
-      $bmi_desc = 'Normal weight';
-    } else if ($bmi<30 && $bmi>24.9) {
-      $bmi_desc = 'Overweight';
-    } else if ($bmi>=30) {
-      $bmi_desc = 'Obese';
-    }
 
+    mysqli_free_result($result3);
+    $status = $_SESSION['status']; 
+
+    if ($status) {
+      // print_r($nurse_list);
+      $in_to_m_conversion = 0.0254;
+      $ft_to_in_conversion = 12;
+      $m = ($height_ft * $ft_to_in_conversion + $height_in) * $in_to_m_conversion; 
+      // echo $m. "<br>";
+      // echo $height_ft. "<br>";
+      // echo $height_in. "<br>";
+      // https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator#:~:text=Body%20Mass%20Index%20is%20a,most%20adults%2018%2D65%20years.
+      // BMI = kg/m2
+      $bmi = $weight/$m**2;
+      // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
+      // Underweight = <18.5
+      // Normal weight = 18.5–24.9
+      // Overweight = 25–29.9
+      // Obesity = BMI of 30 or greater
+      if ($bmi<=18.5) {
+        $bmi_desc = 'Underweight';
+      } else if ($bmi<25 && $bmi>18.5) {
+        $bmi_desc = 'Normal weight';
+      } else if ($bmi<30 && $bmi>=25) {
+        $bmi_desc = 'Overweight';
+      } else if ($bmi>=30) {
+        $bmi_desc = 'Obese';
+      }
+    }
   } 
   else  { 
     mysqli_free_result($result3);
     $error = 'Something went wrong fetching data from the database.'; 
   }  
+
+  $select_get_current_user = 
+    "SELECT * 
+    FROM users u 
+    LEFT JOIN user_details ud USING(user_id)
+    LEFT JOIN patient_details pd USING(user_id) WHERE u.user_id=$session_id";
+
+  if ($result_current_user = mysqli_query($conn, $select_get_current_user)) {
+    foreach($result_current_user as $row)  {
+      $c_first_name = $row['first_name'];
+      $c_middle_name = $row['middle_name']==null?'':$row['middle_name'];
+      $c_last_name = $row['last_name'];
+      $c_nickname = $row['nickname']==null?'':$row['nickname'];
+      $c_b_date = $row['b_date']==null?'':$row['b_date'];
+      $c_address = $row['address']==null?'':$row['address'];
+      $c_civil_status = $row['civil_status'];
+      $c_trimester = $row['trimester'];
+      $c_tetanus = $row['tetanus'];
+      $c_diagnosed_condition = $row['diagnosed_condition']==null?'':$row['diagnosed_condition'];
+      $c_family_history = $row['family_history']==null?'':$row['family_history'];
+      $c_allergies = $row['allergies']==null?'':$row['allergies'];
+      $c_blood_type = $row['blood_type'];
+      $c_weight = $row['weight'];
+      $c_height_ft = $row['height_ft'];
+      $c_height_in = $row['height_in'];
+      
+      $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$session_id AND type=1";
+      if ($result_c_no = mysqli_query($conn, $select_c_no)) {
+        $c_no = '';
+        foreach ($result_c_no as $row2) {
+          $c_no .= ($row2['mobile_number']."\r\n"); 
+        }
+      } 
+    }
+    mysqli_free_result($result_current_user);
+  } else {
+    $error = 'Something went wrong fetching data from the database.'; 
+  } 
+
 }
 else {
   $session_id_sql = $admin==1?"":"AND b.assigned_midwife=$session_id";
@@ -189,7 +234,7 @@ else {
         'id' => $id,
         'name' => $name, 
         'status' => ($c_vaccinations==$complete_shots_of_vaccines
-          ?'Completed':'Uncompleted')));
+          ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
     } 
     mysqli_free_result($result2);
     // print_r($nurse_list);
@@ -205,16 +250,96 @@ else {
   $bar_chart_month_list_label = [];
   // generate months to chart
   for ($i=5; $i > -1; $i--) { 
-      $str_to_time = strtotime("-$i months");
-      array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
-      array_push($bar_chart_month_list_label,  date("M", $str_to_time));
+    $str_to_time = strtotime("-$i months");
+    array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
+    array_push($bar_chart_month_list_label,  date("M", $str_to_time));
   }
   $bar_chart_data = [];
 }
 
+ 
+$valid_contact_exp = '/[0][9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
+if (isset($_POST['submit'])) {
+  $error = '';
+  $_POST['submit'] = null;
 
+  $submit_profile_condition = 
+    empty(trim($_POST['civil_status'])) || empty(trim($_POST['weight'])) || 
+    empty(trim($_POST['height_ft'])) && empty(trim($_POST['height_in'])) ||
+    empty(trim($_POST['blood_type']));
+  if ($submit_profile_condition) {
+    $error = 'Fill up input fields that are required (with * mark)! '; 
+  } else {
+    $contact = mysqli_real_escape_string($conn,$_POST['contact']);
 
+    $contacts = explode('\r\n',$contact);
+    $new_contacts = [];
 
+    foreach ($contacts as $key => $mob_number) {
+      $regex_check = preg_match($valid_contact_exp,$mob_number);
+      if ($mob_number==='') {
+          unset($contacts[$key]);
+      }
+      else if ($regex_check===0) {
+          $error .= 'Invalid contact number list provided. Please use the format 09XX-XXX-XXXX where X is a number from 0-9.';
+      } else { 
+          array_push($new_contacts,$mob_number);
+      }
+    }
+
+    if ($error == '') {
+      $nickname = empty($_POST['nickname'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['nickname'])."'"; 
+      
+      $civil_status = mysqli_real_escape_string($conn,$_POST['civil_status']);
+
+      $b_date = empty($_POST['b_date'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['b_date'])."'";
+      $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'"; 
+      
+      $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+      $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
+      $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+
+      $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
+      $diagnosed_condition = empty($_POST['diagnosed_condition'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['diagnosed_condition'])."'";
+      $family_history = empty($_POST['family_history'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['family_history'])."'";
+      $allergies = empty($_POST['allergies'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['allergies'])."'";
+      $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+      $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
+
+      $update = '';
+      // $update .= "UPDATE user_details SET first_name='$first_name', middle_name=$mid_name, last_name='$last_name'
+      //   WHERE user_id=$session_id; ";
+      $update .= "UPDATE patient_details SET nickname=$nickname, civil_status='$civil_status', 
+        b_date=$b_date, address=$address, height_ft=$height_ft, height_in=$height_in, weight=$weight,
+        blood_type='$blood_type', diagnosed_condition=$diagnosed_condition, family_history=$family_history,
+        allergies=$allergies, trimester=$trimester, tetanus=$tetanus
+        WHERE user_id=$session_id; ";
+      $delete_contact_numbers = "DELETE FROM contacts 
+        WHERE owner_id=$session_id;";
+      $add_contact_numbers = "";
+      $contacts_count = count($new_contacts);
+      $contacts_count_minus_one = $contacts_count-1;
+      if ($contacts_count>0) {
+        $add_contact_numbers .= "INSERT INTO contacts(mobile_number, owner_id, type) VALUES ";
+        foreach ($new_contacts as $key => $value) { 
+          // echo " v: $value ";
+          $ins = "('".mysqli_real_escape_string($conn, $value)."', $session_id, 1)"; 
+          $add_contact_numbers .= $ins;
+          $add_contact_numbers .= ($key===$contacts_count_minus_one)?";":",";
+        }
+      }
+      // echo $update;
+      if (mysqli_multi_query($conn, "$update $delete_contact_numbers $add_contact_numbers")) {
+        $conn->close(); 
+        header('location:../profile/demographic-profile.php');  
+      }else {
+        $error .= 'Something went wrong updating your account in the database.';
+      }    
+    }
+
+  }
+}
+ 
 $page = 'dashbaord';
 include_once('../php-templates/admin-navigation-head.php');
 
@@ -232,16 +357,112 @@ if ($admin!=-1) {
     <?php include_once('../php-templates/admin-navigation-right.php');  
    
       if (isset($error)) {
-        echo '<span class="">'.$error.'</span>'; 
+        echo '<span class="p-5" style="color:red;">'.$error.'</span>'; 
       }  
       include_once('../php-templates/dashboard/nurse.php'); 
       include_once('../php-templates/dashboard/midwife.php');
       //include_once('../php-templates/dashboard/patient.php');
-      if ($admin==-1) { // patient
-    ?> 
-      Patient <br/>
-      BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
+      if ($current_user_is_a_patient) { // patient
+        if ($status) {
+    ?>
+          Patient <br/>
+          BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
+    <?php
+        } else {
+    ?>  
+          
+          <form method="post" action="" class="form form-box p-5">
+            <h1 style="font-size:2rem">
+              Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.
+            </h1>
+            <div class="form-input">
+              Nickname
+              <input type="text" value="<?php echo $c_nickname?>"
+                  class="form-input" name="nickname"  placeholder="Nickname"/>
+            </div> 
+            <div class="form-input">
+              <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
+              <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
+            </div><br>
+            <div class="form-input">
+              <label>Birth Date</label>
+              <div class="form-input">
+                <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+              </div>
+            </div>
+            <div class="form-input">
+              <label for="address">Address</label><br/>
+              <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
+            </div><br>
+            Civil Status*
+            <div class="form-input">
+                <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+            </div>  
+
+            <div class="form-input">
+              <div class="form__text"><label>Medical History</label></div>
+            </div>
+            <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+              Height* 
+              <div class="d-flex input-group">
+                <input value="<?php echo $c_height_ft?>" min='0' type="number" 
+                  class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
+                <div class="input-group-postpend">
+                  <div id="weight-height" class="input-group-text form__input text-white">ft</div>
+                </div> 
+                <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
+                class="form__input form-control" name="height_in" placeholder="Inches*" required/>
+                <div class="input-group-postpend">
+                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
+                </div> 
+              </div>
+            </div>
+            <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
+              Weight*   
+              <div class="d-flex input-group">
+                <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
+                  required min="0"/>
+                  <div class="input-group-postpend">
+                    <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
+                  </div> 
+              </div>
+            </div><br>
+            Blood Type*
+            <div class="form-input"> 
+              <input type="text" value="<?php echo $c_blood_type?>"
+                class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
+            </div>
+            <div class="form-input">  
+              Diagnosed Condition
+              <input type="text" value="<?php echo $c_diagnosed_condition?>"
+                class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+              Family History
+              <input type="text" value="<?php echo $c_family_history?>"
+                class="form__input" name="family_history" placeholder="Family History"/> 
+              Allergies
+              <input type="text" value="<?php echo $c_allergies?>"
+                class="form__input" name="allergies" placeholder="Allergies"/>    
+            </div>
+            <div class="form_select">
+              <label>Tetanus Toxoid Vaccinated</label>
+              <select class="form_select_focus" name="tetanus">
+                <option value="0" <?php echo $c_tetanus==0?'selected':''?>>Unvaccinated</option>
+                <option value="1" <?php echo $c_tetanus==1?'selected':''?>>Vaccinated</option> 
+              </select>
+            </div> 
+            <div class="form_select">
+              <label>Nth Trimester</label>
+              <select class="form_select_focus" name="trimester">
+                <option value="0" <?php echo $c_trimester==0?'selected':''?>>N/A</option>
+                <option value="1" <?php echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
+                <option value="2" <?php echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
+                <option value="3" <?php echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
+              </select>
+            </div> 
+            <button type="submit" name="submit">Update Profile</button>
+          </form> 
     <?php 
+        }
       }
       if ($admin!=-1) {
     ?> 
@@ -271,13 +492,17 @@ if ($admin!=-1) {
                   <td><?php echo $value['status'];?></td>
                   <?php if ($admin==0) { ?> 
                       <td>
-                          <?php if ($value['status']=="Uncompleted") { ?>
+                          <?php if ($value['status']!="Complete") { ?>
                             <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
                           <?php } ?>
                           <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
                               <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                          <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
+                          <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $value['id']?>">
+                            <button class="btn btn-dark btn-sm btn-inverse">
+                            See Vaccination Record</button></a>
+                          
+                              <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
                               <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
                               Delete</button>  -->
                           <!-- </a>     -->

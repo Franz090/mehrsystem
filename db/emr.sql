@@ -215,17 +215,18 @@ CREATE TABLE `patient_details` (
   `weight` int(11) NOT NULL,
   `height_ft` int(11) NOT NULL,
   `height_in` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `patient_details`
 --
 
-INSERT INTO `patient_details` (`patient_details_id`, `nickname`, `barangay_id`, `b_date`, `address`, `civil_status`, `trimester`, `tetanus`, `diagnosed_condition`, `family_history`, `allergies`, `blood_type`, `weight`, `height_ft`, `height_in`, `user_id`) VALUES
-(1, 'Ed', 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 9),
-(2, 'Cis', 2, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 7),
-(3, NULL, 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 8);
+INSERT INTO `patient_details` (`patient_details_id`, `nickname`, `barangay_id`, `b_date`, `address`, `civil_status`, `trimester`, `tetanus`, `diagnosed_condition`, `family_history`, `allergies`, `blood_type`, `weight`, `height_ft`, `height_in`, `user_id`, `status`) VALUES
+(1, 'Ed', 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 9, 1),
+(2, 'Cis', 2, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 7, 1),
+(3, NULL, 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 8, 1);
 
 -- --------------------------------------------------------
 

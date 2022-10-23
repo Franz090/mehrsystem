@@ -7,8 +7,9 @@ $page = 'view_consultations';
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
+@include '../php-templates/redirect/patient-status-checker.php';
 @include '../php-templates/redirect/not-for-nurse.php';
-
+ 
 // get assigned barangay of midwife
  
 $session_id = $_SESSION['id']; 
@@ -215,7 +216,7 @@ include_once('../php-templates/admin-navigation-head.php');
       responsive: true,
       language:{
         search: "_INPUT_",
-        searchPlaceholder: "Search <?php echo $pending?'Pending':'Approved' ?>",
+        searchPlaceholder: "Search Consultation",
       }
     });
   } );

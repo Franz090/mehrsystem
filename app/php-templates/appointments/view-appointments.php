@@ -130,17 +130,18 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td>
                             <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>">
                                 <button class="edit btn btn-success btn-sm btn-inverse">Approve</button></a>
-                            <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>">
+                            <!-- <a href="delete-appointment.php?id=<?php //echo $value['a_id'] ?>">
                                 <button class="del btn btn-danger btn-sm btn-inverse">Delete</button></a>
-                          </td> 
+                          </td>  -->
                         <?php }else {?> 
                             <td>
                                 <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
                                   <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a>
-                                <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>">
-                                  <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a> 
-                            </td>
+                               
                         <?php }?> 
+                            <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>">
+                                  <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a> 
+                          </td>
                     </tr>
                 <?php 
                     }

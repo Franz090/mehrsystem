@@ -14,7 +14,7 @@ $barangay_assigned_midwife_str = $admin==1?"":"AND $session_id=b.assigned_midwif
 
 $select = "SELECT u.user_id AS user_id, 
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name, u.email,  
-  health_center, trimester 
+  health_center, trimester, m.status 
   FROM users u, user_details as d, barangays as b, patient_details m
   WHERE u.role = -1 AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id $barangay_assigned_midwife_str AND m.user_id=u.user_id; ";
 // echo $select;
@@ -32,7 +32,7 @@ if($result = mysqli_query($conn, $select))  {
         $c_no .= '('.$row2['mobile_number'].') '; 
       }
     } 
-    // $c_no = $row['contact_no'];  
+    $status = $row['status'];  
     // $b_date = $row['b_date'];  
     $bgy = $row['health_center'];  
     $trimester = $row['trimester'];   
@@ -42,7 +42,7 @@ if($result = mysqli_query($conn, $select))  {
       'email' => $e,
       'contact' => $c_no,
       'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A')),
-      // 'b_date' => $b_date,
+      'status' => $status,
       'barangay' => $bgy
     ));
   } 
@@ -127,21 +127,29 @@ include_once('../php-templates/admin-navigation-head.php');
                         <!-- <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
                         <td><?php echo $value['barangay']; ?></td>
                         <td>
-                        <?php if ($admin===0) {
-                        ?>  
-                          <a href="edit-patient.php?id=<?php echo $value['id'] ?>"> 
-                        <div class="p-2">
-                            <button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
-                              Edit</button></a>  
-                          <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
-                            <button onclick="temp_func() " type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button>
-                          <!-- </a> --> 
-                          <hr/>
-                        <?php
-                        }?>
+                          <div class="p-2">
+                            <?php if ($admin==0) { 
+                              if ($value['status']==0) {?> 
+                               <a href="approve-patient.php?id=<?php echo $value['id'] ?>">  
+                                  <button type="button" class="me-1 btn btn-primary btn-sm btn-inverse">
+                                    Approve</button></a>  
+                               <a href="reject-patient.php?id=<?php echo $value['id'] ?>">  
+                                  <button type="button" class="me-1 btn btn-danger btn-sm btn-inverse">
+                                    Reject</button></a>  
+
+                              <?php } else { ?>
+                                <a href="edit-patient.php?id=<?php echo $value['id'] ?>">  
+                                  <button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
+                                    Update</button></a>  
+                                <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
+                                  <!-- <button onclick="temp_func() " type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button> -->
+                                <!-- </a> --> 
+                                <!-- <hr/> -->
+                              <?php }
+                            }?>
                           <a href="med-patient.php?id=<?php echo $value['id'] ?>">
                             <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
-                      </div>
+                          </div>
                         </td>
                     </tr>
                 <?php 
