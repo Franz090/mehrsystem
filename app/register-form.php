@@ -142,7 +142,7 @@ include_once('php-templates/css/black-bg-remover.php');
                   <input type="text"  name="usermail" autofocus placeholder="Email Address*"  
                      tabindex="10" required>
                </div>
-               <div class="form-input mb-1">
+               <div class="form-input">
                   <input class="mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
                   <input class="mb-1" type="text" name="mid_name" placeholder="Middle Name" 

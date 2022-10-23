@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maternity Electronic Health Records</title>
+    <title>Maternity Health Monitoring Record in Santa Cruz Laguna</title>
+    <link rel="icon" href="./image/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
+    
      <!-- font awesome cdn link  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -17,18 +19,18 @@
 </header>
 
 <!-- header section ends -->
+
 <header class="header">
+    <a href="#" class="logo"> <img class="rhu-logo" src="image/rhu-logo.png" alt="rhu logo"> 
+  
 
-    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> medcare. </a>
-
-    <nav class="navbar">
+    <nav class="navbar"> <h2 style="position:relative;bottom: 15px;color: #169f84;">Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
+       
         <a href="#home">home</a>
         <a href="#services">services</a>
         <a href="#about">about</a>
-        <a href="#doctors">doctors</a>
-        <a href="#book">book</a>
         <a href="#review">review</a>
-        <a href="#blogs">blogs</a>
+    
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -44,15 +46,13 @@
 </div>
 
 <div class="content">
-    <h3>stay safe, stay healthy</h3>
-    <a href="./app" class="btn"> Login <span class="fas fa-chevron-right"></span> </a>
+    <!-- <h1>login, here</h1> -->
+    <a href="./app" class="btn"> Login Here <span class="fas fa-chevron-right"></span> </a>
 </div>
 
 </section>
 
 <!-- footer section starts  -->
-
-
 <?php include_once("php-templates/footer.php")?>
 <script src="js/script.js"></script>
     
