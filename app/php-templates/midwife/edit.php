@@ -206,7 +206,7 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="form__input-error-message">'.$no_user.'</span>';
           else   {
         ?>   
-        <form class="form form-box px-3" style="bottom:100px;position:relative; action="" method="post">
+        <form class="form form-box px-3" style="" method="post">
           <?php 
             if (isset($error))  { 
               echo '<span class="form__input-error-message">'
@@ -219,40 +219,13 @@ include_once('../php-templates/admin-navigation-head.php');
             }
             else { 
           ?> 
-            <!-- <div class="form__input-group">
-                <input value="<?php //echo $c_email?>" type="text" class="form__input" name="usermail" autofocus placeholder="Email Address*" required>
-            </div>
-            <div class="form__input-group">
-                <input value="<?php //echo $c_first_name?>" type="text" class="form__input" name="first_name" placeholder="First Name*" required>
-            </div>
-            <div class="form__input-group">
-                <input value="<?php //echo $c_middle_name?>" type="text" class="form__input" name="mid_name" placeholder="Middle Name">
-            </div>
-            <div class="form__input-group">
-                <input value="<?php //echo $c_last_name?>" type="text" class="form__input" name="last_name" placeholder="Last Name*" required>
-            </div>  -->
-            <!-- <div class="form__input-group">
-              <input value="<?php //echo $c_contact?>"
-                type="tel" name="contact" class="form__input" placeholder="Contact Num* (Format:09XX-XXX-XXXX)" 
-                pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required/>
-            </div> -->
-            <!-- <div class="form__input-group">
-                  <label for="contact">
-                    Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*
-                  </label><br/>
-                  <textarea id="contact" name="contact" class=" text_area"><?php //echo ($c_no)?></textarea> 
-              </div> -->
-            <!-- <div class="form__input-group">
-              <label>Birth Date*</label>
-              <input value="<?php //echo $c_b_date?>"
-              type="date" name="b_date" required class="form__input"/>
-            </div> -->  
+            
             <?php 
               if (count($barangay_list)>0) { 
             ?>   
               <div class="form__input-group">
-                <label>Barangay</label>
-                <fieldset>      
+                <label>List of Barangays</label> 
+                <fieldset style="text-align:left; border:1px solid #333; padding:1rem; border-radius:5px;">      
                   <?php  
                     foreach ($barangay_list as $key => $value) {
                   ?>  

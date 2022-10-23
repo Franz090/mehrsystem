@@ -13,7 +13,7 @@ $session_id_str = ($admin==0?"c.midwife_appointed=":"u.user_id=") . $session_id;
 $id_from_get = $_GET['id'];
 $select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id, treatment_file,
     CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
-    date, treatment_id, prescription_id
+    date, treatment, prescription
 FROM users u, user_details d, patient_details p, consultations c
 WHERE u.user_id=d.user_id AND c.consultation_id=$id_from_get AND 
     c.patient_id=u.user_id AND $session_id_str";
@@ -26,8 +26,8 @@ if ($result_c_to_edit = mysqli_query($conn, $select_c_to_edit)) {
         // $m_trimester = $row['trimester'];   
         $m_treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15); 
         $m_date = $row['date'];   
-        $m_treatment_id = $row['treatment_id'];   
-        $m_prescription_id = $row['prescription_id'];    
+        $m_treatment = $row['treatment'];   
+        $m_prescription = $row['prescription'];    
     } 
     mysqli_free_result($result_c_to_edit);
 } 
@@ -36,8 +36,6 @@ else  {
 }   
 
 $patient_list = [];  
-$treatment_list = []; 
-$prescription_list = []; 
  
 @include '../php-templates/midwife/get-assigned-barangays.php';
 if (count($_barangay_list)>0) {
@@ -62,9 +60,9 @@ if (count($_barangay_list)>0) {
             $trimester = $row['trimester'];  
             $name = $row['name'];  
             array_push($patient_list, array('id' => $id,
-            'name' => $name,
-            'trimester' => $trimester
-        ));
+                'name' => $name,
+                'trimester' => $trimester
+            ));
         } 
         mysqli_free_result($result_patient);
     } 
@@ -72,38 +70,7 @@ if (count($_barangay_list)>0) {
         $error = 'Something went wrong fetching data from the database.'; 
     }   
 
-    // fetch medicine
-    $select2 = "SELECT treat_med_id id, name
-        FROM treat_med 
-        WHERE type=0;";  
-
-    if ($result_m = mysqli_query($conn, $select2)) {
-        foreach($result_m as $row) {
-            $id = $row['id'];  
-            $name = $row['name'];  
-            array_push($prescription_list, array('id' => $id,'name' => $name));
-        } 
-        mysqli_free_result($result_m);
-    } 
-    else  {  
-        $error = 'Something went wrong fetching data from the database.'; 
-    }    
-    // fetch treatment
-    $select3 = "SELECT treat_med_id id, name
-        FROM treat_med 
-        WHERE type=1;";  
-
-    if ($result_t = mysqli_query($conn, $select3)) {
-        foreach($result_t as $row) {
-            $id = $row['id'];  
-            $name = $row['name'];  
-            array_push($treatment_list, array('id' => $id,'name' => $name));
-        } 
-        mysqli_free_result($result_t);
-    } 
-    else  {  
-        $error = 'Something went wrong fetching data from the database.'; 
-    }    
+    
 }  
 // update
 if(isset($_POST['submit'])) {
@@ -112,14 +79,14 @@ if(isset($_POST['submit'])) {
 
     if ((empty($_POST['date']) && $admin==0))
         $error .= 'Fill up input fields that are required (with * mark)! ';
-    else {    
+    else {
         // $patient_arr = explode("AND",$_POST['patient_id']);
         // $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
         if ($admin==0) {
-            $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+            // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
             
-            $treatment_id = mysqli_real_escape_string($conn, empty($_POST['treatment_id'])?'NULL':$_POST['treatment_id']);
-            $prescription_id = mysqli_real_escape_string($conn, empty($_POST['prescription_id'])?'NULL':$_POST['prescription_id']);
+            $treatment = empty($_POST['treatment'])?'NULL':("'".mysqli_real_escape_string($conn, $_POST['treatment'])."'");
+            $prescription = empty($_POST['prescription'])?'NULL':("'".mysqli_real_escape_string($conn, $_POST['prescription'])."'");
             $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
         }
         else {
@@ -137,7 +104,7 @@ if(isset($_POST['submit'])) {
                         // 5MB max file size 
                         if ($tp_treatment_file['size']<=5000000) {
                             $destination_path = getcwd().DIRECTORY_SEPARATOR;
-                            $new_file_name = 'treatment_file-'. $date_arr[0] . $m_u_id.$m_treatment_id.'.'.$file_ext ;
+                            $new_file_name = 'treatment_file-'. $date_arr[0] . $m_u_id.$m_treatment.'.'.$file_ext ;
                             $treatment_file = "'". mysqli_real_escape_string($conn, $new_file_name) . "'";
                             $file_destination = "uploaded treatment files/" . $new_file_name;
                             move_uploaded_file($tp_treatment_file['tmp_name'], $file_destination);
@@ -161,8 +128,8 @@ if(isset($_POST['submit'])) {
        
         if ($error==='') {
             if ($admin==0)
-                $up = "UPDATE consultations SET trimester=$trimester, treatment_id=$treatment_id, 
-                    prescription_id=$prescription_id, date='$date' WHERE consultation_id=$m_c_id;";
+                $up = "UPDATE consultations SET trimester=$trimester, treatment=$treatment, 
+                    prescription=$prescription, date='$date' WHERE consultation_id=$m_c_id;";
             else 
                 $up = "UPDATE consultations SET treatment_file=$treatment_file WHERE consultation_id=$m_c_id;";
             // $alert_str = $pr_page?'Prescription':'Treatment';
@@ -197,7 +164,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="container-fluid">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <?php echo $m_name?></h4><hr>
       <div class="container default table-responsive p-4">
-        <div class="col-md-8 col-lg-5">
+        <div class="col-md-8 col-lg-5">  
         
         <?php 
             if (count($_barangay_list)==0 && $admin==0) { ?>
@@ -208,62 +175,24 @@ include_once('../php-templates/admin-navigation-head.php');
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
-            <!-- <div class="form__input-group">
-                <label>Patient</label>
-                <select class="form__input" name="patient_id">
-                    <?php
-                        // if (count($patient_list)>0) {
-                        //     foreach ($patient_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php //echo $value['id'];?>AND<?php //echo $value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
-                            <?php //echo $value['name'];?></option>
-                    <?php  
-                        //     }    
-                        // }
-                    ?>  
-                </select>
-            </div>  -->
+            
             <div class="form__input-group">
                 <?php if ($admin==0) { ?> 
                 <div class="form-input">
-                <label>Consultation Date and Time*</label> 
-                <input type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
+                    <label>Consultation Date and Time*</label> 
+                    <input type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
                 </div>
-            <div class="form_select">
-                <label>Prescription</label> 
-                <select class="form_select_focus" name="prescription_id">
-                    <option value="" selected>None</option>
-                    <?php
-                        if (count($prescription_list)>0) {
-                            foreach ($prescription_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php echo $value['id'];?>" 
-                            <?php echo $value['id']==$m_prescription_id?"selected":"" ?>>
-                            <?php echo $value['name'];?>
-                        </option>
-                    <?php  
-                            }    
-                        }  
-                    ?>  
-                </select>
-                    </div>
-              <div class="form_select"> 
-                <label>Treatment</label> 
-                <select class="form_select_focus" name="treatment_id">
-                    <option value="" selected>None</option>
-                    <?php
-                        if (count($treatment_list)>0) {
-                            foreach ($treatment_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php echo $value['id'];?>"
-                            <?php echo $value['id']==$m_treatment_id?"selected":"" ?>>
-                        <?php echo $value['name'];?></option>
-                    <?php  
-                            }    
-                        }  
-                    ?>  
-                </select>
-            </div>
+                <div class="form-input">     
+                    <label>Prescription</label>
+                    <input type="text" name="prescription" value="<?php echo $m_prescription?>" 
+                    placeholder="Prescription"/>  
+                </div>
+                <div class="form-input">     
+                    <label>Treatment</label>
+                    <input type="text" name="treatment" value="<?php echo $m_treatment?>" 
+                    placeholder="Treatment"/>  
+                </div>
+                <?php } ?> 
                 <!-- <div class="form_select"> 
                     <label>Trimester</label>   
                     <select class="form_select_focus" name="trimester">
@@ -273,7 +202,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <option value="3" <?php //echo 3==$m_trimester?"selected":"" ?>>3rd (28-42 weeks)</option>
                     </select> 
                 </div> -->
-                <?php } ?>  
+                 
                 <?php if ($m_treatment_file!='') { ?> 
                     <label for='treatment_file'>Treatment File</label>
                     <a target="_blank" style="color:#000;"

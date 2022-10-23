@@ -28,8 +28,8 @@ if ($current_user_is_a_patient) {
       $c_b_date = $row['b_date']==null?'':$row['b_date'];
       $c_address = $row['address']==null?'':$row['address'];
       $c_civil_status = $row['civil_status'];
-      $c_trimester = $row['trimester'];
-      $c_tetanus = $row['tetanus'];
+      // $c_trimester = $row['trimester'];
+      // $c_tetanus = $row['tetanus'];
       $c_diagnosed_condition = $row['diagnosed_condition']==null?'':$row['diagnosed_condition'];
       $c_family_history = $row['family_history']==null?'':$row['family_history'];
       $c_allergies = $row['allergies']==null?'':$row['allergies'];
@@ -99,16 +99,16 @@ if (isset($_POST['submit_profile'])) {
       $diagnosed_condition = empty($_POST['diagnosed_condition'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['diagnosed_condition'])."'";
       $family_history = empty($_POST['family_history'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['family_history'])."'";
       $allergies = empty($_POST['allergies'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['allergies'])."'";
-      $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
-      $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
-
+      // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+      // $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
+      //, trimester=$trimester, tetanus=$tetanus
       $update = '';
       $update .= "UPDATE user_details SET first_name='$first_name', middle_name=$mid_name, last_name='$last_name'
         WHERE user_id=$session_id; ";
       $update .= "UPDATE patient_details SET nickname=$nickname, civil_status='$civil_status', 
         b_date=$b_date, address=$address, height_ft=$height_ft, height_in=$height_in, weight=$weight,
         blood_type='$blood_type', diagnosed_condition=$diagnosed_condition, family_history=$family_history,
-        allergies=$allergies, trimester=$trimester, tetanus=$tetanus
+        allergies=$allergies
         WHERE user_id=$session_id; ";
       $delete_contact_numbers = "DELETE FROM contacts 
         WHERE owner_id=$session_id;";
@@ -297,22 +297,22 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input type="text" value="<?php echo $c_allergies?>"
                     class="form__input" name="allergies" placeholder="Allergies"/>    
                 </div>
-                <div class="form_select">
+                <!-- <div class="form_select">
                   <label>Tetanus Toxoid Vaccinated</label>
                   <select class="form_select_focus" name="tetanus">
-                    <option value="0" <?php echo $c_tetanus==0?'selected':''?>>Unvaccinated</option>
-                    <option value="1" <?php echo $c_tetanus==1?'selected':''?>>Vaccinated</option> 
+                    <option value="0" <?php //echo $c_tetanus==0?'selected':''?>>Unvaccinated</option>
+                    <option value="1" <?php //echo $c_tetanus==1?'selected':''?>>Vaccinated</option> 
                   </select>
                 </div> 
                 <div class="form_select">
                   <label>Nth Trimester</label>
                   <select class="form_select_focus" name="trimester">
-                    <option value="0" <?php echo $c_trimester==0?'selected':''?>>N/A</option>
-                    <option value="1" <?php echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
-                    <option value="2" <?php echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
-                    <option value="3" <?php echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
+                    <option value="0" <?php //echo $c_trimester==0?'selected':''?>>N/A</option>
+                    <option value="1" <?php //echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
+                    <option value="2" <?php //echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
+                    <option value="3" <?php //echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
                   </select>
-                </div> 
+                </div>  -->
                 <button class="w-100 btn  text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
               </form> 
               
@@ -332,16 +332,18 @@ include_once('../php-templates/admin-navigation-head.php');
               
               Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
               <div class="form-input">
-                  <input type="email" class="form-input"  name="new_email" placeholder="New Email" tabindex="11" required>
+                  <input type="email" class="form-input"  name="new_email" placeholder="New Email" tabindex="11" >
                 </div>
 
               
               Leave blank if you do not want to change the password
               <div class="form-input">
-                  <input type="password" class="form-input"  name="new" placeholder="New Password" tabindex="12" required/>
+                  <input type="password" class="form-input"  
+                    name="new" placeholder="New Password" tabindex="12" />
                 </div> 
               <div class="form-input">
-                  <input type="password" class="form-input"  name="cnew" placeholder="Confirm New Password" tabindex="13" required/>
+                  <input type="password" class="form-input"  
+                    name="cnew" placeholder="Confirm New Password" tabindex="13" />
                 </div>
               <button class="w-100 btn  text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
             </form> 

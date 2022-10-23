@@ -5,7 +5,7 @@
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-    header('Location: ./dashboard/index.php'); 
+    header('Location: ./dashboard/'); 
 // check if there is such user 
 if (isset($_POST['submit'])) {
     $error = '';
@@ -18,32 +18,24 @@ if (isset($_POST['submit'])) {
     else {
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $select = "SELECT * FROM users WHERE email = '$email'"; 
-        $result = mysqli_query($conn, $select);
-        if(mysqli_num_rows($result) > 0) { 
+        if($result = mysqli_query($conn, $select)) { 
             // generate and send otp 
             foreach($result as $row) {
                 // print_r($row);
-                $id_from_db = $row['id'];
+                $id_from_db = $row['user_id'];
                 $email_from_db = $row['email']; 
             } 
-            $random_pin = rand(1000,9999);
-            // TODO: remove this cookie from production
-            setcookie('pin', $random_pin, time() + 60); 
-            $random_pin_hashed = md5($random_pin);
-            // echo "id: $id_from_db";
-            $update_sql = "UPDATE users SET otp='$random_pin_hashed' WHERE id='$id_from_db'";
- 
-           
-            mysqli_query($conn, $update_sql);
-            // echo "email: $email_from_db";
-            // TODO: email otp to $email_from_db
-
-            mysqli_free_result($result);
-
-            header('Location: adminreset-password-otp.php'); 
-  
-        } else  
+            $random_pin = rand(1000,9999);  
+            $random_pin_hashed = mysqli_real_escape_string($conn, md5($random_pin)); 
+            $update_sql = "UPDATE users SET otp='$random_pin_hashed' WHERE user_id=$id_from_db";
+            include '../phpmailer/reset-mail.php';
+            
+            mysqli_query($conn, $update_sql);  
+            mysqli_free_result($result); 
+            // header('Location: reset-password-otp.php');  
+        } else  { 
             $error = 'User does not exist.'; 
+        }
     }
 }
 $conn->close();  

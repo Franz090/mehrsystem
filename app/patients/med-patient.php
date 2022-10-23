@@ -7,7 +7,7 @@ session_start();
 @include '../php-templates/redirect/admin-page-setter.php';
 
 $id_from_get = $_GET['id'];
-$redirect_condition = "not-for-patient"; 
+// $redirect_condition = "not-for-patient"; 
 
 $admin_b = $admin==1;
 
@@ -86,14 +86,10 @@ else  {
 // $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
 $consultations_list = [];
 // fetch patient consultations 
-$select2_b = "SELECT c.date, t.name treatment, t.description t_desc, treatment_file, 
+$select2_b = "SELECT c.date, prescription, treatment, treatment_file, consultation_id id,
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
-  p.name prescription, p.description p_desc, trimester
-  FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c
-  LEFT JOIN (SELECT * FROM treat_med WHERE type=1) t
-    ON c.treatment_id=t.treat_med_id
-  LEFT JOIN (SELECT * FROM treat_med WHERE type=0) p
-    ON c.prescription_id=p.treat_med_id
+   trimester
+  FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c 
   LEFT JOIN users u
     ON u.user_id=c.midwife_appointed
   LEFT JOIN user_details d
@@ -102,24 +98,21 @@ $select2_b = "SELECT c.date, t.name treatment, t.description t_desc, treatment_f
 // echo $select2_b;  
 if($result2_b = mysqli_query($conn, $select2_b))  {
   foreach($result2_b as $row)  {
+    $id = $row['id'];  
     $date = $row['date'];  
     $trimester = $row['trimester'];  
     $treatment = $row['treatment'];  
-    $t_desc = $row['t_desc'];  
     $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);
     $midwife = $row['midwife'];  
     $prescription = $row['prescription'];  
-    $p_desc = $row['p_desc'];  
     $trimester = $row['trimester'];  
     array_push($consultations_list, array(
+      'id' => $id,
       'date' => $date,
       'treatment' => $treatment,
-      't_desc' => $t_desc,
       'midwife' => $midwife,
       'treatment_file' => $treatment_file,
       'prescription' => $prescription,
-      'p_desc' => $p_desc,
-      'date' => $date,
       'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A'))
     ));
   } 
@@ -341,27 +334,17 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php
                           echo $value['trimester'];  
                         ?>  
-                      </td>
-                      <!-- details  -->
+                      </td> 
                       <?php if ($value['treatment']!='') {?>
-                      <?php }?>
-                      <?php if ($value['treatment']!='') {?>
-                        <td class="col-md-3 fw-bold">
+                        <td class="col-md-6 fw-bold">
                           Treatment
                         </td>
-                        <td  class="col-md-3">
+                        <td  class="col-md-6">
                           <?php
                             echo $value['treatment'];  
                           ?>  
                         </td>
-                        <td class="col-md-3 fw-bold">
-                          Description
-                        </td>
-                        <td  class="col-md-3">
-                          <?php
-                            echo $value['t_desc'];  
-                          ?>  
-                        </td>
+                         
                         <?php if ($value['treatment_file']!='') {?> 
                           <td class="col-md-6 fw-bold">
                             Treatment File
@@ -371,27 +354,23 @@ include_once('../php-templates/admin-navigation-head.php');
                               href="../consultations/view-treatment-file.php?id=<?php echo $value['treatment_file']?>">
                               View Photo</a>  
                           </td>
-                        <?php }?>
+
+                        <?php } ?>
+                       
                       <?php }?>
                       <?php if ($value['prescription']!='') {?>
-                        <td class="col-md-3 fw-bold">
+                        <td class="col-md-6 fw-bold">
                           Prescription
                         </td>
-                        <td  class="col-md-3">
+                        <td  class="col-md-6">
                           <?php
                             echo $value['prescription'];  
                           ?>  
-                        </td>
-                        <td class="col-md-3 fw-bold">
-                          Description
-                        </td>
-                        <td  class="col-md-3">
-                          <?php
-                            echo $value['p_desc'];  
-                          ?>  
-                        </td>
+                        </td> 
                       <?php }?>
-                     
+                      <td class="col-md-12 fw-bold">
+                        <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
+                      </td>
                     </tr>   
               <?php 
                   } //foreach

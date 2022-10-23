@@ -4,7 +4,7 @@ $success = false;
 session_start();
 // redirect if there is a logged in user
 if (isset($_SESSION['usermail'])) 
-    header('Location: ./dashboard/index.php'); 
+    header('Location: ./dashboard/'); 
  
 if (isset($_POST['submit'])) {
     $error = '';
@@ -29,21 +29,20 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $select);
         if(mysqli_num_rows($result) > 0) {  
             foreach($result as $row)  
-                $id_from_db = $row['id'];  
+                $id_from_db = $row['user_id'];  
  
-            $update_sql = "UPDATE users SET password='$pass', otp='' WHERE id=$id_from_db";
+            $update_sql = "UPDATE users SET password='$pass', otp=NULL WHERE user_id=$id_from_db";
  
 
             if (mysqli_query($conn, $update_sql))  
                 $success = true;
             else  
-                $success = false;
-
-            mysqli_free_result($result);
-
+                $success = false; 
         } else {
+            
             $error = 'User does not exist.';
         } 
+        mysqli_free_result($result);
     }
 }
 // $success = 'otp sent! Please check your email';
@@ -100,6 +99,7 @@ include_once('php-templates/css/black-bg-remover.php');
             }  
         ?>  
      <hr class="my-2" style="position:relative;top: 40px;">
+        <a class="register-link text-decoration-none" href="../app"  style="position:relative;top: 50px;">Sign in</a>
        <div class="text-center mb-2 have-account" style="position:relative;top: 50px;">Don't have an account? 
         <a class="register-link text-decoration-none" href="register-form.php">Create account</a>
     <div>
