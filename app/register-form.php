@@ -8,26 +8,26 @@ session_start();
 if (isset($_SESSION['usermail'])) 
    header('Location: ./dashboard');
 
-// $page_for_midwife = isset($_GET['type']) && $_GET['type']=="midwife";
+$page_for_midwife = isset($_GET['type']) && $_GET['type']=="midwife";
 
-// if (!$page_for_midwife) { 
-//    $barangay_list = [];
-//    $select_brgy = "SELECT barangay_id id, health_center FROM barangays";
-//    $result_barangay = mysqli_query($conn, $select_brgy);
-//    if(mysqli_num_rows($result_barangay)>0)  {
-//       foreach($result_barangay as $row)  {
-//          $id = $row['id'];  
-//          $name = $row['health_center'];  
-//          array_push($barangay_list, array('id' => $id,'name' => $name));
-//       } 
-//       mysqli_free_result($result_barangay); 
+if (!$page_for_midwife) { 
+   $barangay_list = [];
+   $select_brgy = "SELECT barangay_id id, health_center FROM barangays";
+   $result_barangay = mysqli_query($conn, $select_brgy);
+   if(mysqli_num_rows($result_barangay)>0)  {
+      foreach($result_barangay as $row)  {
+         $id = $row['id'];  
+         $name = $row['health_center'];  
+         array_push($barangay_list, array('id' => $id,'name' => $name));
+      } 
+      mysqli_free_result($result_barangay); 
    
-//    } 
-//    else  { 
-//       mysqli_free_result($result_barangay);
-//       $error = 'Something went wrong fetching data from the database.'; 
-//    }   
-// }
+   } 
+   else  { 
+      mysqli_free_result($result_barangay);
+      $error = 'Something went wrong fetching data from the database.'; 
+   }   
+}
 
 // register
 if(isset($_POST['submit'])) { 
@@ -61,13 +61,14 @@ if(isset($_POST['submit'])) {
       $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
       $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
       $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword'])); 
-      // if (!$page_for_midwife) { 
-      //    $civil_status = mysqli_real_escape_string($conn, $_POST['civil_status']); 
-      //    $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']); 
-      //    $weight = mysqli_real_escape_string($conn, $_POST['weight']); 
-      //    $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']); 
-      //    $height_in = mysqli_real_escape_string($conn, $_POST['height_in']); 
-      // }
+      if (!$page_for_midwife) { 
+         $civil_status = mysqli_real_escape_string($conn, ""); 
+         $blood_type = mysqli_real_escape_string($conn, ""); 
+         $weight = mysqli_real_escape_string($conn, 0); 
+         $height_ft = mysqli_real_escape_string($conn, 0); 
+         $height_in = mysqli_real_escape_string($conn, 0); 
+         $barangay_id = mysqli_real_escape_string($conn, $_POST['barangay_id']);  
+      }
 
       $select = "SELECT user_id FROM users WHERE email = '$email'";  
       $result = mysqli_query($conn, $select);
@@ -81,14 +82,15 @@ if(isset($_POST['submit'])) {
       } 
       else  {
          $insert = "";
-         $insert .= "INSERT INTO users(user_id, email, password, role)
-            VALUES($next_user_id, '$email','$pass', 0); ";
+         $insert .= ("INSERT INTO users(user_id, email, password, role)
+         VALUES($next_user_id, '$email','$pass', ". ($page_for_midwife?"0":"-1")."); ");
          $insert .= "INSERT INTO user_details(user_id, first_name, middle_name, last_name)
             VALUES($next_user_id, '$first_name', '$mid_name', '$last_name'); ";
-         // if (!$page_for_midwife) { 
-         //    $insert .= "INSERT INTO patient_details(user_id, civil_status, blood_type, weight, height_ft, height_in)
-         //    VALUES($next_user_id, '$civil_status', '$blood_type', $weight, $height_ft, $height_in); ";
-         // }
+         if (!$page_for_midwife) { 
+            $insert .= "INSERT INTO patient_details(user_id, civil_status, blood_type, weight, height_ft, height_in, barangay_id, status)
+            VALUES($next_user_id, '$civil_status', '$blood_type', $weight, $height_ft, $height_in, $barangay_id, 0); ";
+         }
+         // echo $insert;
          if (mysqli_multi_query($conn, $insert))  {
             mysqli_free_result($result);
             header('location:index.php');  
@@ -107,7 +109,7 @@ $conn->close();
 include_once('php-templates/admin-head.php');
 include_once('php-templates/css/black-bg-remover.php');
 ?>
-<!-- <style>
+<style>
    #weight-height{
       background: #039b72;
       font-family: 'Open Sans',
@@ -115,7 +117,7 @@ include_once('php-templates/css/black-bg-remover.php');
          height: 100%;
       font-weight: 400;
    }
-</style> -->
+</style>
 
 <div class="container">
    <div class="row px-4"> 
@@ -123,12 +125,13 @@ include_once('php-templates/css/black-bg-remover.php');
 
          <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
-         <div class="card-body d-flex flex-column">
+         <div class="card-body d-flex flex-column ">
             <h4 class="title text-center mt-1">
-            Create Midwife<?php //echo $page_for_midwife?"Midwife":"Patient"; ?> Account
+               Create <?php echo $page_for_midwife?"Midwife":"Patient"; ?> Account
             </h4>
     
-            <form class="form form-box px-3 " action="" method="post">
+            <form class="form form-box px-3 d-flex flex-column" action="" method="post">
+               
                <div class="text-center">
                <?php
                   if(isset($error)) 
@@ -154,21 +157,21 @@ include_once('php-templates/css/black-bg-remover.php');
                      placeholder="Confirm password*" tabindex="15" required>
                </div>
                <hr/>
-               <?php //if (!$page_for_midwife) {?>
-                  <!-- <div class="form-input"  style=""> 
+               <?php if (!$page_for_midwife) {?>
+                  <div class="form-input"  style=""> 
                      <div class="form_select">
                         <label style="color:#333;">Barangay</label>
                         <select class="" name="barangay_id" tabindex="16">
-                           <?php //if (count($barangay_list)>0) {
-                              //foreach ($barangay_list as $key => $value) { ?>  
-                                 <option value="<?php //echo $value['id'] ?>" <?php //echo $key===0?'selected':'' ?>>
-                                    <?php //echo $value['name'] ?>
+                           <?php if (count($barangay_list)>0) {
+                              foreach ($barangay_list as $key => $value) { ?>  
+                                 <option value="<?php echo $value['id'] ?>" <?php echo $key===0?'selected':'' ?>>
+                                    <?php echo $value['name'] ?>
                                  </option>  
-                              <?php //}
-                           //} ?> 
+                              <?php }
+                           } ?> 
                         </select>
                      </div> 
-                     <div class="form_select">
+                     <!-- <div class="form_select">
                         <label style="color:#333;">Tetanus Toxoid Vaccinated</label>
                         <select class="form_select_focus" name="tetanus">
                            <option value="0" selected>Unvaccinated</option>
@@ -184,7 +187,7 @@ include_once('php-templates/css/black-bg-remover.php');
                            <option value="3">3rd (28-42 weeks)</option>
                         </select>
                      </div> 
-                     <input class="mb-1" type="text" name="civil_status" 
+                    <input class="mb-1" type="text" name="civil_status" 
                         placeholder="Civil Status*" tabindex="17" required>
                      <input class="mb-1" type="text"  name="blood_type" 
                         placeholder="Blood Type*" tabindex="18" required>
@@ -212,13 +215,15 @@ include_once('php-templates/css/black-bg-remover.php');
                               <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
                            </div> 
                         </div>
-                     </div>
-                  </div> -->
-               <?php //}?>
+                     </div> -->
+                  </div>
+               <?php }?>
 
                <button style="" class="w-100 btn text-capitalize" 
                   value="register now" type="submit" name="submit">
-                  Register Midwife<?php //echo $page_for_midwife?"Midwife":"Patient"; ?></button> 
+                  Register <?php echo $page_for_midwife?"Midwife":"Patient"; ?></button> 
+
+               
             </form>
 
             <div class="text-center mb-2 have-account" style="">

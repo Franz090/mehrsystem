@@ -1,5 +1,20 @@
 <?php 
 if ($admin==1) { 
+    // tetanus vaccinated
+    $select_total_vacc = "SELECT COUNT(u.user_id) c 
+    FROM users u, patient_details pd
+    WHERE role=-1 AND u.user_id=pd.user_id AND pd.tetanus=1 AND pd.status=1";
+    // echo $select_total_vacc;
+    if($result_total_vacc = mysqli_query($conn, $select_total_vacc))  {
+        foreach($result_total_vacc as $row)  { 
+            $total_vacc = $row['c'];   
+        } 
+        mysqli_free_result($result_total_vacc); 
+    } 
+    else  { 
+        $error = 'Something went wrong fetching data from the database.'; 
+    }   
+
     $bar_chart_title='Consultation Chart'; 
     // get consultaitons 
     $consultations_list = [];
@@ -50,7 +65,8 @@ if ($admin==1) {
         array_push($bar_chart_data,$temp_arr);
     }
     // fetch patients
-    $sql_all_patients = "SELECT COUNT(user_id) c FROM users WHERE role=-1";
+    $sql_all_patients = "SELECT COUNT(u.user_id) c FROM users u, patient_details p WHERE role=-1 AND p.status=1 
+        AND u.user_id=p.user_id";
     if($result_all_patients = mysqli_query($conn, $sql_all_patients))  {
         foreach($result_all_patients as $row)    
             $total_patient_count = $row['c'];    
@@ -65,8 +81,13 @@ if ($admin==1) {
 ?>
 
 <div class="container-fluid default">
-    RHU <br/>
-    Total Number of Patients: <?php echo $total_patient_count;?>
+    RHU  
+    <div class="col"> 
+        Total Number of Patients: <?php echo $total_patient_count;?>
+    </div> 
+    <div class="col">  
+        Tetanus Toxoid Vaccinated Patients: <?php echo $total_vacc ?>  
+    </div> 
     <?php include_once('barchart.php');?> 
 </div>
  
