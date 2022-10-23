@@ -20,7 +20,8 @@ $select = "SELECT  u.user_id,
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
   CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies 
   FROM users as u, user_details as d, barangays as b, patient_details as m
-  WHERE u.user_id=$id_from_get AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id $midwife_sql";
+  WHERE u.user_id=$id_from_get AND d.user_id=u.user_id 
+    AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id AND b.archived=0 $midwife_sql";
 // echo $select; 
 if($result = mysqli_query($conn, $select))  {
   // user does not exist, go to dashboard

@@ -12,7 +12,7 @@ $page_for_midwife = isset($_GET['type']) && $_GET['type']=="midwife";
 
 if (!$page_for_midwife) { 
    $barangay_list = [];
-   $select_brgy = "SELECT barangay_id id, health_center FROM barangays";
+   $select_brgy = "SELECT barangay_id id, health_center FROM barangays WHERE archived=0";
    $result_barangay = mysqli_query($conn, $select_brgy);
    if(mysqli_num_rows($result_barangay)>0)  {
       foreach($result_barangay as $row)  {
@@ -141,8 +141,11 @@ include_once('php-templates/css/black-bg-remover.php');
                <div class="form-input" style="position: relative;top: 10px;">
                   <input type="text"  name="usermail" autofocus placeholder="Email Address*"  
                      tabindex="10" required>
-               </div>
-               <div class="form-input mb-1" style="position: relative;top: 1px;">
+               </div> 
+ 
+               <!-- <div class="form-input"> --> 
+               <div class="form-input mb-1" style="position: relative;top: 1px;"> 
+ 
                   <input class="mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
                   <input class="mb-1" type="text" name="mid_name" placeholder="Middle Name" 

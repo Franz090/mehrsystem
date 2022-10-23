@@ -50,7 +50,7 @@ $barangay_list = [];
 // if ($admin==1) { 
 
   // fetch barangays  
-  $select = "SELECT * FROM barangays WHERE assigned_midwife=$c_id OR assigned_midwife IS NULL";
+  $select = "SELECT * FROM barangays WHERE (assigned_midwife=$c_id OR assigned_midwife IS NULL) AND archived=0; ";
   // echo $select;
   $result_barangay = mysqli_query($conn, $select);
 
@@ -147,11 +147,11 @@ if(isset($_POST['submit'])) {
       $update_brgy = '';
       for ($i=0; $i < count($barangay_list); $i++) { 
         $b_id = $barangay_list[$i]['id'];
-        $null_update_str = "UPDATE barangays SET assigned_midwife=NULL WHERE barangay_id=$b_id;";
+        $null_update_str = "UPDATE barangays SET assigned_midwife=NULL WHERE barangay_id=$b_id ;";
         if (isset($_POST['barangay_id'])) {
           // check barangay id is in the post  
           if (in_array($b_id, $_POST['barangay_id'])) {
-            $update_brgy .= "UPDATE barangays SET assigned_midwife=$c_id WHERE barangay_id=$b_id;";
+            $update_brgy .= "UPDATE barangays SET assigned_midwife=$c_id WHERE barangay_id=$b_id ;";
             // echo "bid: $b_id";
           } else { 
             $update_brgy .= $null_update_str;

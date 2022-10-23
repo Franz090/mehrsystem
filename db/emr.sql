@@ -56,20 +56,21 @@ INSERT INTO `appointments` (`appointment_id`, `patient_id`, `midwife_id`, `date`
 CREATE TABLE `barangays` (
   `barangay_id` int(11) NOT NULL,
   `health_center` varchar(255) NOT NULL,
-  `assigned_midwife` int(11) DEFAULT NULL
+  `assigned_midwife` int(11) DEFAULT NULL,
+  `archived` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barangays`
 --
 
-INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`) VALUES
-(1, 'Pagsawitan Laguna', 3),
-(2, 'Santo Angel Norte', 4),
-(3, 'Barangay 23', 3),
-(4, 'asdf', 2),
-(5, 'another barangay', 5),
-(6, 'isa pang brgy', NULL);
+INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`,`archived`) VALUES
+(1, 'Pagsawitan Laguna', 3, 0),
+(2, 'Santo Angel Norte', 4, 0),
+(3, 'Barangay 23', 3, 0),
+(4, 'asdf', 2, 0),
+(5, 'another barangay', 5, 0),
+(6, 'isa pang brgy', NULL, 0);
 
 -- --------------------------------------------------------
 

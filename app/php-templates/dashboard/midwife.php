@@ -5,7 +5,8 @@ if ($admin==0) {
     $select_total_patients = "SELECT COUNT(u.user_id) c 
         FROM users u, patient_details pd, barangays b 
         WHERE role=-1 AND u.user_id=pd.user_id 
-            AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1" ;
+            AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1
+            AND b.archived=0" ;
     // echo $select_total_patients;
     if($result_total_patients = mysqli_query($conn, $select_total_patients))  {
         foreach($result_total_patients as $row)  { 
@@ -20,7 +21,8 @@ if ($admin==0) {
     $select_appointments_today = "SELECT COUNT(a.appointment_id) c 
     FROM users u, patient_details pd, barangays b, appointments a 
     WHERE role=-1 AND u.user_id=pd.user_id AND a.patient_id=u.user_id AND (a.date BETWEEN '$curr_date 00:00:00' AND '$curr_date 23:59:59')
-        AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND a.status=1 AND pd.status=1";
+        AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND a.status=1 
+        AND pd.status=1 AND b.archived=0";
     // echo $select_appointments_today;
     if($result_appointments_today = mysqli_query($conn, $select_appointments_today))  {
         foreach($result_appointments_today as $row)  { 
@@ -37,7 +39,9 @@ if ($admin==0) {
     $select_infant_vacc = "SELECT date, type 
     FROM infant_vac_records ivr, users u, infants i, patient_details p, barangays b 
     WHERE date>='$past_6_months 00:00:00' AND u.user_id=i.user_id AND i.infant_id=ivr.infant_id 
-        AND u.user_id=p.user_id AND p.barangay_id=b.barangay_id AND b.assigned_midwife=$session_id AND p.status=1
+        AND u.user_id=p.user_id AND p.barangay_id=b.barangay_id 
+        AND b.assigned_midwife=$session_id AND p.status=1
+        AND b.archived=0
     ORDER BY date ASC";
 
     // echo $select_infant_vacc;

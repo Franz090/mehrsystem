@@ -16,7 +16,9 @@ $select = "SELECT u.user_id AS user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name, u.email,  
   health_center, trimester, m.status 
   FROM users u, user_details as d, barangays as b, patient_details m
-  WHERE u.role = -1 AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id $barangay_assigned_midwife_str AND m.user_id=u.user_id; ";
+  WHERE u.role = -1 AND d.user_id=u.user_id 
+    AND m.barangay_id=b.barangay_id $barangay_assigned_midwife_str AND m.user_id=u.user_id
+    AND b.archived=0; ";
 // echo $select;
 $patient_list = [];
 
