@@ -7,7 +7,6 @@ drop table consultations;
 drop table infant_vac_records; 
 drop table footer; 
 drop table infants;
-drop table treat_med;
 drop table users;
 
 CREATE TABLE `users` (
@@ -214,3 +213,34 @@ INSERT INTO `contacts` VALUES
 -- 'Patient', 'Ed', 'F',
 -- 'Patient', 'Ae', 'B',
 -- 'Another Midwife', '', 'Some Surname',
+
+INSERT INTO `barangays` (`health_center`, `archived`) VALUES 
+('Alipit', 0),
+('Bagumbayan', 0),
+('Bubukal', 0),
+('Calios', 0),
+('Duhat', 0),
+('Gatid', 0),
+('Jasaan', 0),
+('Labuin', 0),
+('Malinao', 0),
+('Oogong', 0),
+('Pagsawitan', 0),
+('Palasan', 0),
+('Patimbao', 0),
+('Poblacion I', 0),
+('Poblacion II', 0),
+('Poblacion III', 0),
+('Poblacion IV', 0),
+('Poblacion V', 0),
+('Poblacion VI New', 0),
+('Poblacion VII New', 0),
+('Poblacion VIII New', 0),
+('San Jose', 0),
+('San Juan', 0),
+('San Pablo Norte', 0),
+('San Pablo Sur', 0),
+('Santisima Cruz', 0),
+('Santo Angel Central', 0),
+('Santo Angel Norte', 0),
+('Santo Angel Sur', 0);

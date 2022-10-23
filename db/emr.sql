@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 07:43 AM
+-- Generation Time: Oct 23, 2022 at 06:48 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,13 +64,36 @@ CREATE TABLE `barangays` (
 -- Dumping data for table `barangays`
 --
 
-INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`,`archived`) VALUES
-(1, 'Pagsawitan Laguna', 3, 0),
-(2, 'Santo Angel Norte', 4, 0),
-(3, 'Barangay 23', 3, 0),
-(4, 'asdf', 2, 0),
-(5, 'another barangay', 5, 0),
-(6, 'isa pang brgy', NULL, 0);
+INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`, `archived`) VALUES
+(1, 'Alipit', 2, 0),
+(2, 'Bagumbayan', 3, 0),
+(3, 'Bubukal', 3, 0),
+(4, 'Calios', 4, 0),
+(5, 'Duhat', 4, 0),
+(6, 'Gatid', 5, 0),
+(7, 'Jasaan', 6, 0),
+(8, 'Labuin', 10, 0),
+(9, 'Malinao', NULL, 0),
+(10, 'Oogong', NULL, 0),
+(11, 'Pagsawitan', NULL, 0),
+(12, 'Palasan', NULL, 1),
+(13, 'Patimbao', NULL, 1),
+(14, 'Poblacion I', NULL, 1),
+(15, 'Poblacion II', NULL, 1),
+(16, 'Poblacion III', NULL, 1),
+(17, 'Poblacion IV', NULL, 1),
+(18, 'Poblacion V', NULL, 1),
+(19, 'Poblacion VI New', NULL, 1),
+(20, 'Poblacion VII New', NULL, 1),
+(21, 'Poblacion VIII New', NULL, 1),
+(22, 'San Jose', NULL, 1),
+(23, 'San Juan', NULL, 1),
+(24, 'San Pablo Norte', NULL, 1),
+(25, 'San Pablo Sur', NULL, 1),
+(26, 'Santisima Cruz', NULL, 1),
+(27, 'Santo Angel Central', NULL, 1),
+(28, 'Santo Angel Norte', NULL, 1),
+(29, 'Santo Angel Sur', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -80,8 +103,8 @@ INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`,`arc
 
 CREATE TABLE `consultations` (
   `consultation_id` int(50) NOT NULL,
-  `treatment_id` int(50) DEFAULT NULL,
-  `prescription_id` int(50) DEFAULT NULL,
+  `treatment` varchar(255) DEFAULT NULL,
+  `prescription` varchar(255) DEFAULT NULL,
   `treatment_file` varchar(255) DEFAULT NULL,
   `patient_id` int(50) NOT NULL,
   `midwife_appointed` int(50) NOT NULL,
@@ -93,9 +116,9 @@ CREATE TABLE `consultations` (
 -- Dumping data for table `consultations`
 --
 
-INSERT INTO `consultations` (`consultation_id`, `treatment_id`, `prescription_id`, `treatment_file`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
-(1, NULL, 2, NULL, 9, 3, '2022-09-29 00:00:00', 0),
-(2, 1, 2, NULL, 9, 3, '2022-09-28 00:00:00', 0);
+INSERT INTO `consultations` (`consultation_id`, `treatment`, `prescription`, `treatment_file`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
+(1, 'A treatment', 'A prescription', NULL, 9, 3, '2022-09-29 00:00:00', 0),
+(2, NULL, 'Another Prescription', NULL, 9, 3, '2022-09-28 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -120,7 +143,13 @@ INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUE
 (3, '0908-123-1234', 1, 0),
 (4, '0908-123-4321', 1, 0),
 (5, '0908-123-3141', 9, 1),
-(6, '0908-123-1234', 8, 1);
+(6, '0908-123-1234', 8, 1),
+(7, '0908-123-0001', 2, 1),
+(8, '0908-123-0002', 3, 1),
+(9, '0908-123-0003', 4, 1),
+(10, '0908-123-0004', 5, 1),
+(11, '0908-123-0005', 6, 1),
+(12, '0908-123-0006', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -167,9 +196,9 @@ CREATE TABLE `infants` (
 --
 
 INSERT INTO `infants` (`infant_id`, `first_name`, `middle_name`, `last_name`, `nickname`, `sex`, `b_date`, `blood_type`, `legitimacy`, `user_id`) VALUES
-(1, 'Sanggol 1', 'Ae', 'B', NULL, 'Male', '2021-01-23', 'O+', 1, 8),
-(2, 'Sanggol 2', 'Cs', 'D', NULL, 'Female', '2021-01-23', 'O+', 1, 9),
-(3, 'Sanggol 3', 'Ed', 'F', 'Tri', 'Male', '2021-01-23', 'O+', 1, 7);
+(1, 'Boy', 'Aga', 'Riva', NULL, 'Male', '2021-01-23', 'O+', 1, 8),
+(2, 'Reina', NULL, 'Bana', NULL, 'Female', '2021-01-23', 'O+', 1, 9),
+(3, 'Bang', 'Cruz', 'Dana', 'Tri', 'Male', '2021-01-23', 'O+', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -225,30 +254,9 @@ CREATE TABLE `patient_details` (
 --
 
 INSERT INTO `patient_details` (`patient_details_id`, `nickname`, `barangay_id`, `b_date`, `address`, `civil_status`, `trimester`, `tetanus`, `diagnosed_condition`, `family_history`, `allergies`, `blood_type`, `weight`, `height_ft`, `height_in`, `user_id`, `status`) VALUES
-(1, 'Ed', 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 9, 1),
-(2, 'Cis', 2, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 7, 1),
-(3, NULL, 1, '1999-09-12', NULL, 'Single', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 8, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `treat_med`
---
-
-CREATE TABLE `treat_med` (
-  `treat_med_id` int(50) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `type` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `treat_med`
---
-
-INSERT INTO `treat_med` (`treat_med_id`, `name`, `description`, `type`) VALUES
-(1, 'Treatment 1', 'This is te first treatment.', 1),
-(2, 'Medicine 1', 'This is te first medicine.', 0);
+(1, 'Shen', 1, '1999-09-12', NULL, 'Married', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 9, 1),
+(2, 'B', 2, '1999-09-12', NULL, 'Married', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 7, 1),
+(3, NULL, 1, NULL, NULL, 'Married', 0, 0, NULL, NULL, NULL, 'O+', 60, 5, 11, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +268,7 @@ CREATE TABLE `users` (
   `user_id` int(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `otp` int(50) DEFAULT NULL,
+  `otp` varchar(255) DEFAULT NULL,
   `role` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -275,9 +283,9 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `otp`, `role`) VALUES
 (4, 'francisoblepias@gmaill.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (5, 'francisoblepias120@gmaill.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (6, 'angela1@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
-(7, 'patient2@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
-(8, 'patient3@gmaill.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
-(9, 'patient1@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(7, 'shane@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(8, 'bea@gmaill.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(9, 'angel@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (10, 'mw@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0);
 
 -- --------------------------------------------------------
@@ -305,10 +313,10 @@ INSERT INTO `user_details` (`user_details_id`, `first_name`, `middle_name`, `las
 (3, 'Francis', 'Ra', 'Oblepias', NULL, 4),
 (4, 'Francis', 'Pe', 'Oblepias', NULL, 5),
 (5, 'Angela', 'Herradura', 'Oblepias', NULL, 6),
-(6, 'Patient', 'Cs', 'D', NULL, 7),
-(7, 'Patient', 'Ed', 'F', NULL, 8),
-(8, 'Patient', 'Ae', 'B', NULL, 9),
-(9, 'Another Midwife', '', 'Some Surname', NULL, 10);
+(6, 'Shane', 'Cruz', 'Dana', NULL, 7),
+(7, 'Bea', 'Edo', 'Facundo', NULL, 8),
+(8, 'Angel', 'Aga', 'Riva', NULL, 9),
+(9, 'Rey', NULL, 'Bana', NULL, 10);
 
 --
 -- Indexes for dumped tables
@@ -335,9 +343,7 @@ ALTER TABLE `barangays`
 ALTER TABLE `consultations`
   ADD PRIMARY KEY (`consultation_id`),
   ADD KEY `patient_id` (`patient_id`),
-  ADD KEY `midwife_appointed` (`midwife_appointed`),
-  ADD KEY `treatment_id` (`treatment_id`),
-  ADD KEY `prescription_id` (`prescription_id`);
+  ADD KEY `midwife_appointed` (`midwife_appointed`);
 
 --
 -- Indexes for table `contacts`
@@ -373,12 +379,6 @@ ALTER TABLE `patient_details`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `treat_med`
---
-ALTER TABLE `treat_med`
-  ADD PRIMARY KEY (`treat_med_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -405,7 +405,7 @@ ALTER TABLE `appointments`
 -- AUTO_INCREMENT for table `barangays`
 --
 ALTER TABLE `barangays`
-  MODIFY `barangay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `barangay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `consultations`
@@ -417,7 +417,7 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `footer`
@@ -442,12 +442,6 @@ ALTER TABLE `infant_vac_records`
 --
 ALTER TABLE `patient_details`
   MODIFY `patient_details_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `treat_med`
---
-ALTER TABLE `treat_med`
-  MODIFY `treat_med_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -483,9 +477,7 @@ ALTER TABLE `barangays`
 --
 ALTER TABLE `consultations`
   ADD CONSTRAINT `consultations_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `consultations_ibfk_2` FOREIGN KEY (`midwife_appointed`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `consultations_ibfk_3` FOREIGN KEY (`treatment_id`) REFERENCES `treat_med` (`treat_med_id`),
-  ADD CONSTRAINT `consultations_ibfk_4` FOREIGN KEY (`prescription_id`) REFERENCES `treat_med` (`treat_med_id`);
+  ADD CONSTRAINT `consultations_ibfk_2` FOREIGN KEY (`midwife_appointed`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `infants`
