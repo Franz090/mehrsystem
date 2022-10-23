@@ -47,37 +47,37 @@ if (count($_barangay_list)>0) {
     }   
 
     // fetch medicine
-    $select2 = "SELECT treat_med_id id, name
-        FROM treat_med 
-        WHERE type=0;";  
+    // $select2 = "SELECT treat_med_id id, name
+    //     FROM treat_med 
+    //     WHERE type=0;";  
 
-    if ($result_m = mysqli_query($conn, $select2)) {
-        foreach($result_m as $row) {
-            $id = $row['id'];  
-            $name = $row['name'];  
-            array_push($prescription_list, array('id' => $id,'name' => $name));
-        } 
-        mysqli_free_result($result_m);
-    } 
-    else  {  
-        $error = 'Something went wrong fetching data from the database.'; 
-    }    
+    // if ($result_m = mysqli_query($conn, $select2)) {
+    //     foreach($result_m as $row) {
+    //         $id = $row['id'];  
+    //         $name = $row['name'];  
+    //         array_push($prescription_list, array('id' => $id,'name' => $name));
+    //     } 
+    //     mysqli_free_result($result_m);
+    // } 
+    // else  {  
+    //     $error = 'Something went wrong fetching data from the database.'; 
+    // }    
     // fetch treatment
-    $select3 = "SELECT treat_med_id id, name
-        FROM treat_med 
-        WHERE type=1;";  
+    // $select3 = "SELECT treat_med_id id, name
+    //     FROM treat_med 
+    //     WHERE type=1;";  
 
-    if ($result_t = mysqli_query($conn, $select3)) {
-        foreach($result_t as $row) {
-            $id = $row['id'];  
-            $name = $row['name'];  
-            array_push($treatment_list, array('id' => $id,'name' => $name));
-        } 
-        mysqli_free_result($result_t);
-    } 
-    else  {  
-        $error = 'Something went wrong fetching data from the database.'; 
-    }    
+    // if ($result_t = mysqli_query($conn, $select3)) {
+    //     foreach($result_t as $row) {
+    //         $id = $row['id'];  
+    //         $name = $row['name'];  
+    //         array_push($treatment_list, array('id' => $id,'name' => $name));
+    //     } 
+    //     mysqli_free_result($result_t);
+    // } 
+    // else  {  
+    //     $error = 'Something went wrong fetching data from the database.'; 
+    // }    
 }  
 // add  
 if(isset($_POST['submit'])) {
@@ -91,8 +91,8 @@ if(isset($_POST['submit'])) {
         $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
         $patient_trimester = mysqli_real_escape_string($conn, ($patient_arr[1]));
 
-        $t_id = mysqli_real_escape_string($conn, empty($_POST['treatment_id'])?'NULL':$_POST['treatment_id']);
-        $m_id = mysqli_real_escape_string($conn, empty($_POST['prescription_id'])?'NULL':$_POST['prescription_id']);
+        $t = empty(trim($_POST['treatment']))?'NULL':mysqli_real_escape_string($conn, ("'".$_POST['treatment']."'"));
+        $m = empty(trim($_POST['prescription']))?'NULL':mysqli_real_escape_string($conn, ("'".$_POST['prescription']."'"));
         $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
         //$date_arr = explode('T',$date); // ex: ['2022-09-24', '00:55']
          
@@ -129,8 +129,8 @@ if(isset($_POST['submit'])) {
         if ($error==='') {
             
             // $alert_str = $pr_page?'Prescription':'Treatment';
-            $insert = "INSERT INTO consultations(patient_id, date, treatment_id, prescription_id, treatment_file, midwife_appointed, trimester) 
-            VALUES($patient_id, '$date', $t_id, $m_id, NULL, $session_id, $patient_trimester);";
+            $insert = "INSERT INTO consultations(patient_id, date, treatment, prescription, treatment_file, midwife_appointed, trimester) 
+                VALUES($patient_id, '$date', $t, $m, NULL, $session_id, $patient_trimester);";
             // echo $insert;
             if (mysqli_query($conn, $insert))  { 
                 echo "<script>alert('Consultation Added!');</script>"; 
@@ -159,86 +159,64 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Create Consultation Record</h4><hr>
-      <div class="container default table-responsive p-4">
-            <div class="col-md-8 col-lg-5 ">
+        <div class="background-head row m-2 my-4">
+            <h4 class="pb-3 m-3 fw-bolder ">Create Consultation Record</h4>
+            <hr/>
+            
+            <div class="container default table-responsive p-4">
+                <div class="col-md-8 col-lg-5 ">
         
-        <?php 
-            if (count($_barangay_list)==0) { ?>
-            You can't give consultations because you are not assigned to any barangay.
-        <?php } else if (count($patient_list)>0) { ?>
-        <form class="form form-box px-3" action="" method="post" enctype="multipart/form-data">
-            <?php
-                if(isset($error)) 
-                    echo '<span class="form__input-error-message">'.$error.'</span>'; 
-            ?> 
-            <div class="form__input-group">
-                <div class="form_select">
-                <label>Patient</label>
-                <select class="form_select_focus" name="patient_id">
-        </div>
-                    <?php
-                        if (count($patient_list)>0) {
-                            foreach ($patient_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php echo $value['id'];?>AND<?php echo $value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                            <?php echo $value['name'];?></option>
-                    <?php  
-                            }    
-                        }
-                    ?>  
-                </select>
-            </div> 
-            <div class="form-input">
-                <label>Consultation Date and Time*</label> 
-                <input type="datetime-local" name="date" required />
-                    </div>
-            <div class="form_select">     
-                <label>Prescription</label> 
-                <select class="form__select_focus" name="prescription_id">
-                    <option value="" selected>None</option>
-                    <?php
-                        if (count($prescription_list)>0) {
-                            foreach ($prescription_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
-                    <?php  
-                            }    
-                        }  
-                    ?>  
-                </select> 
-                    </div>
-              <div class="form_select">             
-                <label>Treatment</label> 
-                <select class="form__input" name="treatment_id">
-                    <option value="" selected>None</option>
-                    <?php
-                        if (count($treatment_list)>0) {
-                            foreach ($treatment_list as $key => $value) { 
-                    ?> 
-                        <option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
-                    <?php  
-                            }    
-                        }  
-                    ?>  
-                </select> 
-                <!-- <label for='treatment_file'>Treatment File</label> 
-                <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/> -->
-                    </div>
-            </div>   
+                    <?php if (count($_barangay_list)==0) { ?>
+                        You can't give consultations because you are not assigned to any barangay.
+                    <?php } else if (count($patient_list)>0) { ?>
+                        <form class="form form-box px-3" action="" method="post" enctype="multipart/form-data">
+                        <?php
+                            if(isset($error)) 
+                                echo '<span class="form__input-error-message">'.$error.'</span>'; 
+                        ?> 
+                        <div class="form__input-group">
+                            <div class="form_select">
+                                <label>Patient</label>
+                                <select class="form_select_focus" name="patient_id">
+                            <?php
+                                if (count($patient_list)>0) {
+                                    foreach ($patient_list as $key => $value) { 
+                            ?> 
+                                <option value="<?php echo $value['id'];?>AND<?php echo $value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
+                                    <?php echo $value['name'];?></option>
+                            <?php  
+                                    }    
+                                }
+                            ?>  
+                                </select>
+                            </div> 
+                            <div class="form-input">
+                                <label>Consultation Date and Time*</label> 
+                                <input type="datetime-local" name="date" required />
+                            </div>
+                            <div class="form-input">     
+                                <label>Prescription</label>
+                                <input type="text" name="prescription" placeholder="Prescription"/>  
+                            </div>
+                            <div class="form-input">     
+                                <label>Treatment</label>
+                                <input type="text" name="treatment" placeholder="Treatment"/>  
+                            </div>
+              
+                        </div>  
+                        <button class="w-100 btn  text-capitalize" 
+                            type="submit" name="submit">Create Consultation Record</button> 
+                        </form> 
+                    <?php } else {   ?>
+                        There should be at least one patient (under your assigned barangay) available in the database.
+                    <?php }  ?>  
 
-          
-            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Create Consultation Record</button> 
-        </form> 
-        <?php } else {   ?>
-            There should be at least one patient (under your assigned barangay) available in the database.
-        <?php }   
-        ?> 
+                </div>
+            </div>  
 
         </div>
-        </div>  
-      </div>
     </div>
+
   </div>
 </div>
 
