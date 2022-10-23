@@ -117,38 +117,38 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="row bg-light m-3"><h3>Update Footer</h3>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Footer</h4><hr>
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form" action="" method="post">
+        <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
             ?> 
-            Contact Information:<br/>
+            <h4>Contact Information:</h4><br/>
             <label>Email:</label><br/>
-            <div class="form__input-group">
-                <input type="email" class="form__input" name="email" value="<?php echo $c_email?>"
-                placeholder="Email"> 
+            <div class="form-input">
+                <input type="email" class="form-input" tabindex="10" autofocus  name="email" value="<?php echo $c_email?>"
+                placeholder="Email" required/> 
             </div>
-            <div class="form__input-group">
+            <div class="form-input">
                 <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-                <textarea id="contact" name="contact" class=" text_area"><?php echo ($c_contact_num)?></textarea> 
+                <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo ($c_contact_num)?></textarea> 
             </div>
             Address:
-            <div class="form__input-group"> 
-                <textarea name="address" class="form_input text_area" ><?php echo $c_address?></textarea> 
+            <div class="form-input"> 
+                <textarea name="address" class="form-control form-control-md w-100" ><?php echo $c_address?></textarea> 
             </div>
             Schedule:
-            <div class="form__input-group"> 
-                <textarea name="schedule" class="form_input text_area" ><?php echo $c_schedule?></textarea> 
+            <div class="form-input"> 
+                <textarea name="schedule" class="form-control form-control-md w-100" ><?php echo $c_schedule?></textarea> 
             </div> 
             Facebook:
-            <div class="form__input-group"> 
-                <input type="text" class="form__input" name="fb_link" value="<?php echo $c_fb_link?>"
-                    placeholder="Facebook Link"> 
+            <div class="form-input"> 
+                <input type="text" class="form-input" autofocus  name="fb_link" value="<?php echo $c_fb_link?>"
+                    placeholder="Facebook Link" required/> 
             </div> 
-          <button class="form__button" type="submit" name="submit">Update Footer</button>
+          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Footer</button>
         </form> 
       </div>
     </div>

@@ -90,14 +90,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php include_once('../php-templates/admin-navigation-left.php');  ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div id="page-content-wrapper" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient</h4><hr>
         <div class="table-padding table-responsive">
           <div class="pagination-sm col-md-8 col-lg-12 " id="table-position">
-           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
+           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col" >#</th>
