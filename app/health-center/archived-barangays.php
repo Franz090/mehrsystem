@@ -16,7 +16,8 @@ $select = "SELECT barangay_id, health_center,
     ' ', last_name)) midwife
   FROM barangays 
   LEFT JOIN users ON assigned_midwife=user_id 
-  LEFT JOIN user_details USING(user_id) WHERE archived=0";
+  LEFT JOIN user_details USING(user_id) 
+  WHERE archived=1";
 
   // echo $select;
 $result = mysqli_query($conn, $select);
@@ -41,7 +42,7 @@ else  {
 
 $conn->close(); 
 
-$page = 'view_barangay';
+$page = 'archived_barangays';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
  
@@ -54,7 +55,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Archived Barangays</h4><hr>
 
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12 " id="table-position">
@@ -82,11 +83,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     <td><?php echo $value['health_center']; ?></td>
                     <td><?php echo $value['midwife']; ?></td>
                     <!-- <td><?php //echo $value['status']; ?></td> -->
-                    <td>
-                      <a href="edit-barangay.php?id=<?php echo $value['id'] ?>">
-                        <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                      <a href="delete-barangay.php?id=<?php echo $value['id'] ?>">
-                        <button class="del btn btn-danger btn-sm btn-inverse" >Archive</button>
+                    <td> 
+                      <a href="restore-barangay.php?id=<?php echo $value['id'] ?>">
+                        <button class="del btn btn-primary btn-sm btn-inverse" >Restore</button>
                       </a>
                     </td>
                   </tr>
@@ -98,9 +97,8 @@ include_once('../php-templates/admin-navigation-head.php');
           </div> 
         </div>
 
-      </div>
+      </div<>
     </div>
-    <a href="archived-barangays.php">See Archived Barangays</a>
 
   </div>
 </div>

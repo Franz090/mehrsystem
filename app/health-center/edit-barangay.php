@@ -11,7 +11,7 @@ session_start();
 
 // fetch user 
 $id_from_get = $_GET['id'];
-$barangay_to_edit = "SELECT health_center FROM barangays WHERE barangay_id = '$id_from_get'";
+$barangay_to_edit = "SELECT health_center FROM barangays WHERE barangay_id = '$id_from_get' AND archived=0";
 $barangay_from_db = mysqli_query($conn, $barangay_to_edit);
 
 if (mysqli_num_rows($barangay_from_db) > 0) {

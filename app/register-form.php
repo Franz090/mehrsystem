@@ -12,7 +12,7 @@ $page_for_midwife = isset($_GET['type']) && $_GET['type']=="midwife";
 
 if (!$page_for_midwife) { 
    $barangay_list = [];
-   $select_brgy = "SELECT barangay_id id, health_center FROM barangays";
+   $select_brgy = "SELECT barangay_id id, health_center FROM barangays WHERE archived=0";
    $result_barangay = mysqli_query($conn, $select_brgy);
    if(mysqli_num_rows($result_barangay)>0)  {
       foreach($result_barangay as $row)  {

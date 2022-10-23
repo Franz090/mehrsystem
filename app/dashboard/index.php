@@ -219,7 +219,7 @@ else {
         IF(i.middle_name IS NULL OR i.middle_name='', '', 
             CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
         ' ', i.last_name) infant_name, i.user_id
-      FROM infants i, patient_details ud, barangays b WHERE i.user_id=ud.user_id AND ud.barangay_id=b.barangay_id $session_id_sql) main
+      FROM infants i, patient_details ud, barangays b WHERE i.user_id=ud.user_id AND ud.barangay_id=b.barangay_id AND b.archived=0 $session_id_sql) main
          LEFT JOIN 
       (SELECT infant_id, COUNT(infant_id) c_vaccinations FROM infant_vac_records GROUP BY infant_id) c
         USING (infant_id)"; 
