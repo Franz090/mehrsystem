@@ -116,7 +116,7 @@ if(isset($_POST['submit'])) {
         // $patient_arr = explode("AND",$_POST['patient_id']);
         // $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
         if ($admin==0) {
-            $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
+            // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
             
             $treatment_id = mysqli_real_escape_string($conn, empty($_POST['treatment_id'])?'NULL':$_POST['treatment_id']);
             $prescription_id = mysqli_real_escape_string($conn, empty($_POST['prescription_id'])?'NULL':$_POST['prescription_id']);
