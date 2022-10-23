@@ -109,7 +109,7 @@ $conn->close();
 include_once('php-templates/admin-head.php');
 include_once('php-templates/css/black-bg-remover.php');
 ?>
-<style>
+<!-- <style>
    #weight-height{
       background: #039b72;
       font-family: 'Open Sans',
@@ -117,16 +117,16 @@ include_once('php-templates/css/black-bg-remover.php');
          height: 100%;
       font-weight: 400;
    }
-</style>
+</style> -->
 
-<div class="container">
+<div class="container" >
    <div class="row px-4"> 
-      <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="">
+      <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
 
          <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
          <div class="card-body d-flex flex-column ">
-            <h4 class="title text-center mt-1">
+            <h4 class="title text-center mt-1" style="position: relative;top: 20px;">
                Create <?php echo $page_for_midwife?"Midwife":"Patient"; ?> Account
             </h4>
     
@@ -138,30 +138,30 @@ include_once('php-templates/css/black-bg-remover.php');
                      echo '<span class="form__input-error-message">'.$error.'</span>'; 
                ?>
                </div>
-               <div class="form-input">
+               <div class="form-input" style="position: relative;top: 10px;">
                   <input type="text"  name="usermail" autofocus placeholder="Email Address*"  
                      tabindex="10" required>
                </div>
-               <div class="form-input">
+               <div class="form-input mb-1" style="position: relative;top: 1px;">
                   <input class="mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
                   <input class="mb-1" type="text" name="mid_name" placeholder="Middle Name" 
-                     tabindex="12">
+                     tabindex="12" required>
                   <input type="text" class="form__input" name="last_name" placeholder="Last Name*" 
                      tabindex="13" required>
                </div>  
-               <div class="form-input"  style=""> 
-                  <input class="mb-1" type="password" name="password" 
+               <div class="form-input"  style="margin-bottom: 1px;margin-top: -20px;"> 
+                  <input  class="mb-1" type="password" name="password" 
                      placeholder="Password*" tabindex="14" required>
-                  <input class="mb-1" type="password"  name="cpassword" 
+                  <input class="mb-1"  " type="password"  name="cpassword" 
                      placeholder="Confirm password*" tabindex="15" required>
                </div>
-               <hr/>
+               
                <?php if (!$page_for_midwife) {?>
                   <div class="form-input"  style=""> 
                      <div class="form_select">
-                        <label style="color:#333;">Barangay</label>
-                        <select class="" name="barangay_id" tabindex="16">
+                        <label style="color:#333;text-align: center;position:relative;bottom: 8px;left: 150px;">Barangay</label>
+                        <select class="form_select_focus" style="position: relative;bottom: 8px;" name="barangay_id" tabindex="16" >
                            <?php if (count($barangay_list)>0) {
                               foreach ($barangay_list as $key => $value) { ?>  
                                  <option value="<?php echo $value['id'] ?>" <?php echo $key===0?'selected':'' ?>>
@@ -219,14 +219,14 @@ include_once('php-templates/css/black-bg-remover.php');
                   </div>
                <?php }?>
 
-               <button style="" class="w-100 btn text-capitalize" 
+               <button style="position:relative;bottom: 30px;" class="w-100 btn text-capitalize" 
                   value="register now" type="submit" name="submit">
                   Register <?php echo $page_for_midwife?"Midwife":"Patient"; ?></button> 
 
                
             </form>
 
-            <div class="text-center mb-2 have-account" style="">
+            <div class="text-center mb-2 have-account" style="position: relative;bottom: 20px;">
                Already have an account?
                <a class="register-link text-decoration-none" href="index.php" id="linkLogin">
                   Sign in</a>

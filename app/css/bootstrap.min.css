@@ -208,7 +208,7 @@ form{
 .form-input input:focus,
 .form-input input:valid {
 	border: 1px solid #ebecf0;
-	box-shadow: 0 0 5px #60e9d5;
+	box-shadow: 0 0 2px #bbccca;
 	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
 	-ms-transition: all 0.30s ease-in-out;
@@ -226,7 +226,7 @@ form{
 
 .form_select_focus:focus, .form_select_focus:invalid {
     border: 1px solid #ebecf0;
-	box-shadow: 0 0 5px #60e9d5;
+	box-shadow: 0 0 5px #fdfdfd;
 	-webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
 	-ms-transition: all 0.30s ease-in-out;

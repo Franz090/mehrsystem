@@ -370,11 +370,15 @@ if ($admin!=-1) {
     <?php
         } else {
     ?>  
-          
-          <form method="post" action="" class="form form-box p-5">
-            <h1 style="font-size:2rem">
+ <div class="container-fluid default" >
+      <div class="background-head row m-2 my-4" ><h6 class="pb-3 m-3 fw-bolder ">Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.</h6><hr>
+        
+        <div class="container default p-4 ">
+          <div class="col-md-8 col-lg-5">         
+          <form method="post" action="" class="form form-box px-3 py-5">
+            <!-- <h1 style="font-size:2rem">
               Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.
-            </h1>
+            </h1> -->
             <div class="form-input">
               Nickname
               <input type="text" value="<?php echo $c_nickname?>"
@@ -459,7 +463,7 @@ if ($admin!=-1) {
                 <option value="3" <?php echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
               </select>
             </div> 
-            <button type="submit" name="submit">Update Profile</button>
+            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Profile</button>
           </form> 
     <?php 
         }
@@ -519,7 +523,9 @@ if ($admin!=-1) {
   </div>  
 <!-- /#page-content-wrapper -->
 </div>
-
+                          </div>
+                          </div>
+                          </div>
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>
