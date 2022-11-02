@@ -204,7 +204,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default" >
-      <div class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder ">Update Account</h4><hr>
+      <div class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder ">Update Account</h4>
         
         <div class="container default p-4 ">
           <div class="col-md-8 col-lg-5">
@@ -316,36 +316,37 @@ include_once('../php-templates/admin-navigation-head.php');
                 <button class="w-100 btn  text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
               </form> 
               
-              <hr/>
+             
             <?php } ?>
 
-            <form class="form form-box px-3 pt-5" style=""  action="" method="post">
+            <form class="form form-box px-2 " style=""  action="" method="post">
               <?php
                 //if(isset($error)) 
                     //echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
               ?> 
               
               Put your current password to authorize the change(s)
-              <div class="form-input">
-                  <input type="password" class="form-input"  name="current" placeholder="Current Password" tabindex="10" required>
-                </div>
-              
+              <div class="form-floating mb-2">
+                  <input type="password" class="form-control"   name="current"  placeholder="Password" id="floatingPassword" >
+                  <label for="floatingPassword">Password</label>
+                </div>      
               Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
-              <div class="form-input">
-                  <input type="email" class="form-input"  name="new_email" placeholder="New Email" tabindex="11" >
+              <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInputInvalid"  name="new_email" placeholder="New Email Address" tabindex="11">
+                  <label for="floatingInput">New Email address</label>
                 </div>
-
-              
               Leave blank if you do not want to change the password
-              <div class="form-input">
-                  <input type="password" class="form-input"  
-                    name="new" placeholder="New Password" tabindex="12" />
+              <div class="form-floating mb-2">
+                  <input type="password" class="form-control"  
+                    name="new" placeholder="Password" id="floatingPassword"/>
+                    <label for="floatingPassword">New Password</label>
                 </div> 
-              <div class="form-input">
-                  <input type="password" class="form-input"  
-                    name="cnew" placeholder="Confirm New Password" tabindex="13" />
+              <div class="form-floating mb-2">
+                  <input type="password" class="form-control"  
+                    name="cnew" placeholder="Confirm New Password" id="floatingPassword"/>
+                    <label for="floatingPassword">Confirm New Password</label>
                 </div>
-              <button class="w-100 btn  text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
+              <button class="btn-primary w-100 btn text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
             </form> 
           </div>
         </div>

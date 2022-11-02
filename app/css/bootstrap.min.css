@@ -296,12 +296,14 @@ select:focus{
 	justify-content: center;
 }
 .form-box button[type="submit"]:hover {
-	background: var(--color-green-dark);
+	background:#28a685 !important;
 }
 
 .form-box button[type="submit"]:focus {
-	border: 1px solid #ebecf0;
-	box-shadow: 0 0 6px #60e9d5;
+	color: #eeeeee;
+	background-color: #28a685!important;
+	border-color: #1ba17e!important;
+	box-shadow: 0 0 0 .25rem rgba(2, 128, 95, 0.5)!important;
 	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
 	-ms-transition: all 0.30s ease-in-out;
@@ -331,7 +333,7 @@ input[type="date"] {
 }
 
 #page-content-wrapper {
-	background-color: #f0ebef;
+	background-color: #fdf8fc!important;
 }
 
 td {
@@ -344,14 +346,14 @@ td {
 th {
 	font-size: 16px;
 }
-
+/* 
 hr {
 	margin-top: 5px;
 	display: block;
 	border-style: inset;
 	border-width: 2px;
 	margin-bottom: 1px;
-}
+} */
 
 /* from treatment and prescription records */
 h3 {

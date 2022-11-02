@@ -151,11 +151,11 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient Report</h4><hr>
+        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient Report</h4>
 
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
-        <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+        <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
             <thead class="table-light text-center" colspan="3">
             <tr>
             <th scope="col">Patient Profile </th>
@@ -190,7 +190,7 @@ include_once('../php-templates/admin-navigation-head.php');
         </tbody>
            </table> 
         
-          <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+          <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
             <thead class="table-light text-center" colspan="3">
             <tr>
             <th scope="col">Patient Medical History </th>
@@ -216,7 +216,7 @@ include_once('../php-templates/admin-navigation-head.php');
             </tbody>
            </table> 
          
-          <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+          <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
             <thead class="table-light text-center" colspan="3">
               <tr>
                   <th scope="col"><?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?></th>
@@ -298,7 +298,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tr>
             </tbody>
           </table> 
-          <table class="table mt-4 table-striped table-responsive table-lg table-bordered table-hover display">
+          <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
             <thead class="table-light text-center" colspan="3">
               <tr>
                   <th scope="col">Consultation Records</th>

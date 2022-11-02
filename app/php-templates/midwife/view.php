@@ -58,23 +58,7 @@ $page = 'view_midwife';
 include_once('../php-templates/admin-navigation-head.php');
 ?> 
 <!-- style css -->
-<style>
-  .table-condensed {
-    width: 100% !important;
-  }
-  a{
-    text-decoration: none;
-    color: white; 
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-    font-family: arial,sans-serif;
-  } 
-</style>
+
 
 <div class="d-flex" id="wrapper"> 
   <!-- Sidebar --> 
@@ -84,7 +68,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Midwife</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Midwife</h4>
 
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12" id="table-position">

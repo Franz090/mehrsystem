@@ -78,8 +78,9 @@ include_once('../php-templates/admin-navigation-head.php');
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form-input">
-              <input value="<?php echo $c_health_center?>" type="text"  name="health_center" autofocus placeholder="Health Center*" required>
+          <div class="form-floating">
+              <input value="<?php echo $c_health_center?>" type="text"  name="health_center" class="form-control" placeholder="Edit Barangay Health Center" id="floatingPassword" required>
+              <label for="floatingPassword">Barangay Health Center</label>
           </div> 
           <!-- <div class="form__input-group">
               <label>Status</label>

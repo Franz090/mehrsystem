@@ -246,7 +246,7 @@
     <?php } ?>    
   </div>   
   <!-- end nav list  -->
-    <hr/>  
+
     <footer >
       <a href="../logout.php" class="h6 list-group-item list-group-item-action bg-transparent">
         <i class="fas fa-solid fa-box fa-md" 

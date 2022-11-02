@@ -117,7 +117,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Appointment</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Appointment</h4>
       <div class="container default p-4">
         <div class="col-md-8 col-lg-5">
         
@@ -131,29 +131,28 @@ include_once('../php-templates/admin-navigation-head.php');
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <?php if($admin==0) { ?>
-            <div class="form_select-group">
+            <div class=" mb-3">
                 <label>Patient</label>
-                <div class="form_select">
-                <select class="form_select_focus" autofocus name="patient_id_trimester">
+                <select  class="form-select"  name="patient_id_trimester">
                     <?php
                         if (count($patient_list)>0) {
                             foreach ($patient_list as $key => $value) { 
                     ?> 
-                        <option value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
+                        <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
                             <?php echo $value['name'];?></option>
                     <?php  
                             }    
                         }
                     ?>  
                 </select>
-                    </div>
+    
             </div> 
             <?php }  
             ?> 
-            <div class="form__select-group">
+            <div class="mb-3">
                 <label>Appointment Date and Time*</label> 
-                <div class="form-input">
-                <input type="datetime-local" name="date" required />
+                <div class="input-group date" id="datepicker">
+                <input class="form-control option" type="datetime-local" name="date"/>
                     </div>
             </div>  
            
@@ -172,6 +171,12 @@ include_once('../php-templates/admin-navigation-head.php');
     </div>
   </div>
 </div>
+<script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
+
 
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');

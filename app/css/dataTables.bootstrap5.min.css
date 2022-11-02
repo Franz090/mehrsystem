@@ -361,7 +361,7 @@ table.dataTable > tbody > tr {
 }
 
 table.dataTable > tbody > tr.selected > * {
-	box-shadow: inset 0 0 0 9999px rgba(13, 110, 253, 0.9);
+	box-shadow: inset 0 0 0 9999px rgba(33, 69, 122, 0.9);
 	color: white;
 }
 
@@ -386,9 +386,16 @@ div.dataTables_wrapper div.dataTables_length label {
 	text-align: left;
 	white-space: nowrap;
 	font-family: "Open Sans", sans-serif;
-	color: #352e35;
+	color: #352e35!important;
 	font-size: 16px;
 	clear: both; 
+	position: relative;
+	bottom: -3px;
+}
+div.dataTables_length:focus {
+	border-color: #81cbb8!important;
+	outline: 0!important;
+	box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)
 }
 .dataTables_wrapper .dataTables_length {
 	float: left;
@@ -397,6 +404,9 @@ div.dataTables_wrapper div.dataTables_length label {
 div.dataTables_wrapper div.dataTables_length select {
 	width: auto;
 	display: inline-block;
+	font-family: 'Open Sans',
+		sans-serif;
+	
 }
 
 div.dataTables_wrapper div.dataTables_filter {

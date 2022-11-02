@@ -126,27 +126,31 @@ include_once('../php-templates/admin-navigation-head.php');
                     echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
             ?> 
             <h4>Contact Information:</h4><br/>
-            <label>Email:</label><br/>
-            <div class="form-input">
-                <input type="email" class="form-input" tabindex="10" autofocus  name="email" value="<?php echo $c_email?>"
-                placeholder="Email" required/> 
+            Email:
+            <div  class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInputInvalid" name="email" value="<?php echo $c_email?>"
+                placeholder="Email" /> 
+                <label for="floatingInput">Email</label>
             </div>
-            <div class="form-input">
-                <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-                <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo ($c_contact_num)?></textarea> 
+            Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*<br/>
+            <div class="form-floating mb-3">
+                <textarea  class="form-control" placeholder="Mobile Number" id="floatingTextarea2" name="contact"><?php echo ($c_contact_num)?></textarea> 
+                <label for="floatingTextarea2">Mobile Number</label>
             </div>
             Address:
-            <div class="form-input"> 
-                <textarea name="address" class="form-control form-control-md w-100" ><?php echo $c_address?></textarea> 
+            <div class="form-floating mb-3"> 
+                <textarea name="address" class="form-control" placeholder="Address" id="floatingTextarea2"><?php echo $c_address?></textarea> 
+                 <label for="floatingTextarea2">Address</label>
             </div>
             Schedule:
-            <div class="form-input"> 
-                <textarea name="schedule" class="form-control form-control-md w-100" ><?php echo $c_schedule?></textarea> 
+            <div class="form-floating mb-3"> 
+                <textarea name="schedule" class="form-control" placeholder="Schedule" id="floatingTextarea2"><?php echo $c_schedule?></textarea> 
+                 <label for="floatingTextarea2">Schedule</label>
             </div> 
             Facebook:
-            <div class="form-input"> 
-                <input type="text" class="form-input" autofocus  name="fb_link" value="<?php echo $c_fb_link?>"
-                    placeholder="Facebook Link" required/> 
+            <div class="form-floating mb-3"> 
+                <input type="text" class="form-control" id="floatingInputInvalid"  name="fb_link" value="<?php echo $c_fb_link?>" placeholder="Facebook Link" /> 
+                <label for="floatingInput">Facebook</label>
             </div> 
           <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Footer</button>
         </form> 
