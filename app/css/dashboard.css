@@ -12,14 +12,13 @@
 
 .container {
 	min-height: 100vh;
-	background-color: #fdf8fc!important;
+	background-color: #fdf8fc !important;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-align: center;  
-	padding-top: 100px; 
+	text-align: center;
+	padding-top: 100px;
 }
-
 
 .container .content {
 	width: 700px;
@@ -67,15 +66,14 @@
 .background-head {
 	background-color: #fefefe;
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-	border-radius: 20px;
-	
+	border-radius: 20px; 
 	align-items: center;
 	justify-content:center;
 	grid-template-columns: 1fr ;
 	grid-gap: 1px;
 	position: relative;
 	padding: 20px;
-} 
+}  
 .table-padding {
 	padding-top: 5px;
 }
@@ -84,22 +82,23 @@ h4 {
 	font-weight: 800;
 	color: #029670;
 }
-/* hr { 
+ 
+/* hr {  
 	position: absolute;
 	padding-right: 0px;
 	margin-left: 0px;
-	color: #352e35; 
+	color: #352e35;
 
 	top: -22px;
 }
-hr {
+hr { 
 	position: relative; 
-} */
+} */ 
 img {
 	width: 135px;
 	height: 120px;
 	margin-top: 10px;
-	writing-mode: vertical-lr;
+	/* writing-mode: vertical-lr; */
 	text-orientation: mixed;
 	background: transparent !important;
 }
@@ -212,7 +211,7 @@ img {
 
 .rounded-full {
 	border-radius: 100%;
-} 
+}
 
 #wrapper {
 	overflow-x: hidden;
@@ -419,7 +418,7 @@ label {
 	.sidenav a {
 		font-size: 18px;
 	}
-} 
+}
 .text-color {
 	color: pink;
-} 
+}

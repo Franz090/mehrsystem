@@ -153,7 +153,7 @@ include_once('php-templates/css/black-bg-remover.php');
             </div>
             <div class="text-center">
               <a href="reset-password.php" class="forget-link text-decoration-none">
-                Forget your Password?
+                Forgot your Password?
               </a>
             </div>
             <hr class="my-2">
