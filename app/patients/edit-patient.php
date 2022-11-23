@@ -149,7 +149,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Patient Record</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Patient Record</h4>
         <?php
           if (isset($no_user))  
             echo '<span class="text-danger">'.$no_user.'</span>';
@@ -195,45 +195,48 @@ include_once('../php-templates/admin-navigation-head.php');
                 
                     </div><br>
                     Civil Status
-                  <div class="form-input">
+                   <div class="form-floating mb-3">
                     <input value="<?php echo $c_civil_status?>" type="text" 
-                      class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+                     class="form-control" id="floatingInputInvalid" name="civil_status" placeholder="Civil Status"/>
+                     <label for="floatingInput">Civil Status</label>
                   </div>
                    Blood Type
-                   <div class="form-input">   
+                    <div class="form-floating mb-3">  
                     <input value="<?php echo $c_blood_type?>" type="text" 
-                        class="form-input" name="blood_type" placeholder="Blood Type*" required/>
-                  </div>
-                   <div class="form-input"> 
-                   Diagnosed Condition
-                  <div class="form__input-group">    
-                    <input value="<?php echo $c_diagnosed_condition?>" type="text" 
-                        class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition" />
+                         class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type"/>
+                         <label for="floatingInput">Blood Type</label>
+                  </div> 
+                  Diagnosed Condition  
+                   <div class="form-floating mb-3"> 
+                    <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form-control" id="floatingInputInvalid"   name="diagnosed_condition" placeholder="Diagnosed Condition" />
+                     <label for="floatingInput">Diagnosed Condition</label>
                   </div>
                   Family History
-                  <div class="form__input-group">    
+                   <div class="form-floating mb-3">   
                     <input value="<?php echo $c_family_history?>" type="text" 
-                      class="form__input" name="family_history" placeholder="Family History" />
+                      class="form-control" id="floatingInputInvalid" name="family_history" placeholder="Family History" />
+                        <label for="floatingInput">Family History</label>
                   </div>
                    Allergies
-                  <div class="form__input-group"> 
+                  <div class="form-floating mb-3"> 
                     <input value="<?php echo $c_allergies?>" type="text" 
-                      class="form__input" name="allergies" placeholder="Allergies" />    
+                      class="form-control" id="floatingInputInvalid"  name="allergies" placeholder="Allergies" />   
+                       <label for="floatingInput">Allergies</label> 
                   </div>
-                  <div class="form_select">
+                  <div class=" mb-3">
                       <label>Tetanus Toxoid Vaccinated</label>
-                      <select class="form_select_focus" name="tetanus">
-                        <option value="0" <?php echo $c_tetanus==0?'selected':''?> >Unvaccinated</option>
-                        <option value="1" <?php echo $c_tetanus==1?'selected':''?> >Vaccinated</option> 
+                      <select class="form-select " name="tetanus">
+                        <option class="option" value="0" <?php echo $c_tetanus==0?'selected':''?> >Unvaccinated</option>
+                        <option class="option" value="1" <?php echo $c_tetanus==1?'selected':''?> >Vaccinated</option> 
                       </select>
                   </div> 
-                  <div class="form_select">
+                  <div class=" mb-3">
                       <label>Nth Trimester</label>
-                      <select class="form_select_focus" name="trimester">
-                        <option value="0" <?php echo $c_trimester==0?'selected':''?> >N/A</option>
-                        <option value="1" <?php echo $c_trimester==1?'selected':''?> >1st (0-13 weeks)</option>
-                        <option value="2" <?php echo $c_trimester==2?'selected':''?> >2nd (14-27 weeks)</option>
-                        <option value="3" <?php echo $c_trimester==3?'selected':''?> >3rd (28-42 weeks)</option>
+                      <select class="form-select" name="trimester">
+                        <option  class="option" value="0" <?php echo $c_trimester==0?'selected':''?> >N/A</option>
+                        <option  class="option"value="1" <?php echo $c_trimester==1?'selected':''?> >1st (0-13 weeks)</option>
+                        <option  class="option" value="2" <?php echo $c_trimester==2?'selected':''?> >2nd (14-27 weeks)</option>
+                        <option  class="option" value="3" <?php echo $c_trimester==3?'selected':''?> >3rd (28-42 weeks)</option>
                       </select>
                   </div> 
                   <button  class="w-100 btn  text-capitalize" type="submit" name="submit">Update Patient Record</button> 

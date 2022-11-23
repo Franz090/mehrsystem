@@ -88,9 +88,46 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- Page Content -->
   <div id="page-content-wrapper">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
+    <!-- Modal -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+        <form class="m-5" action="" method="POST">
+         <div class=" mb-3">
+                <label>Patient</label>
+                <select  class="form-select"  name="patient_id_trimester">
+                </select>
+            </div> 
+            <div class="mb-3">
+                <label>Appointment Date and Time*</label> 
+                <div class="input-group date" id="datepicker">
+                <input class="form-control option" type="datetime-local" name="date"/>
+                    </div>
+            </div>  
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submit" type="submit" name="submit">Add Appointment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <div class="container-fluid default">
-      <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4><hr>
+      <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 text-end mb-3">
+            <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
+          </div>
+        </div>
+      </div>
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
@@ -136,7 +173,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php }else {?> 
                             <td>
                                 <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                                  <button class="edit btn btn-info btn-sm btn-inverse">View Report</button></a>
+                                  <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a>
                                
                         <?php }?> 
                             <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>">

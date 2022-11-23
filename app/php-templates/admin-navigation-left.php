@@ -34,6 +34,7 @@
       </li>
       
     <?php 
+ 
       } else { // midwife/patient 
     ?>   
       <li>
@@ -48,6 +49,7 @@
             <span class="title">Consultations</span>
         </a>
       </li>
+ 
 
     <?php 
       }

@@ -8,6 +8,7 @@ session_start();
 @include '../php-templates/redirect/nurse-only.php';
 
 
+    
 // fetch barangays 
 $select = "SELECT barangay_id, health_center, 
   IF(assigned_midwife IS NULL, 'None', CONCAT(first_name, 
@@ -40,7 +41,6 @@ else  {
 
 
 $conn->close(); 
-
 $page = 'view_barangay';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
@@ -53,10 +53,43 @@ include_once('../php-templates/admin-navigation-head.php');
   <div id="page-content-wrapper"> 
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4><hr>
 
-        <div class="table-padding table-responsive">
+<!-- Modal -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5" id="exampleModalLabel">Add Barangay</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+        <form class="m-3" action="" method="POST">
+            
+          <div class="form-floating">
+            <input type="text" class="form-control" name="health_center"  placeholder="Barangay Health Center" id="floatingPassword"  >
+             <label for="floatingPassword">Barangay Health Center</label>
+          </div> 
+        </form>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-primary" type="submit" name="submit">Register Barangay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container-fluid default">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 text-end mb-3">
+            <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="table-padding table-responsive mt-1 px-2">
           <div class="col-md-8 col-lg-12 " id="table-position">
           <?php
             if (isset($_GET['error']))  

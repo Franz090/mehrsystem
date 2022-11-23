@@ -1,6 +1,6 @@
 body{
   height: 100vh;
-  background: #11b189!important;
+  background: #fdf8fc!important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,21 +27,22 @@ body{
 .card{
   overflow: hidden;
   border: 0 !important;
-  border-radius: 10px !important;
-  box-shadow: 0 0.5rem 5rem 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+   border-radius:  69%;
 }
 .img-left{
 
-  background: url('../img/login-background.png') left;
-  background-size:contain;
-  background-color:#fde9e8;;
+  background: url('../img/login-background.png') ;
+  background-size: 100% 600px;
   background-repeat: no-repeat;
 }
 .card-body{
   padding: 2rem;
-  background: #fde9e8;
+  background: #07be8a;
     
 }
+
 
 .title{
   margin-bottom: 2rem;

@@ -66,24 +66,24 @@
 .background-head {
 	background-color: #fefefe;
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-	border-radius: 20px;
-
+	border-radius: 20px; 
 	align-items: center;
-	justify-content: center;
-	grid-template-columns: 1fr;
+	justify-content:center;
+	grid-template-columns: 1fr ;
 	grid-gap: 1px;
 	position: relative;
 	padding: 20px;
-}
+}  
 .table-padding {
-	padding-top: 10px;
+	padding-top: 5px;
 }
 h4 {
 	font-family: "Open Sans", sans-serif;
 	font-weight: 800;
-	color: #352e35;
+	color: #029670;
 }
-hr {
+ 
+/* hr {  
 	position: absolute;
 	padding-right: 0px;
 	margin-left: 0px;
@@ -91,9 +91,9 @@ hr {
 
 	top: -22px;
 }
-hr {
-	position: relative;
-}
+hr { 
+	position: relative; 
+} */ 
 img {
 	width: 135px;
 	height: 120px;
