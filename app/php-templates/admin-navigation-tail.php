@@ -36,6 +36,16 @@ CONDITIONS AND ADDING A MODAL TO DELETE FUNCTION -->
       }
     });
   }
+
+  // Menu Toggle
+  const toggle = document.querySelector('.toggle');
+  const navigation = document.querySelector('.navigation_nu');
+  const main = document.querySelector('.main_nu');
+
+  toggle.onclick = function(){
+      navigation.classList.toggle('active');
+      main.classList.toggle('active');
+  }
 </script>
 
 <!-- calendar  -->
@@ -45,6 +55,13 @@ CONDITIONS AND ADDING A MODAL TO DELETE FUNCTION -->
   </script>
   <script src="../calendar/js/script.js"></script>
 <?php }?>
+
+<!-- icon frameworks go to https://ionic.io/ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
 </body>
 
 </html>

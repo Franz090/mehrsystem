@@ -349,12 +349,12 @@ if ($admin!=-1) {
 
 <?php } ?> 
 
-<div class="d-flex" id="wrapper">
+<div class="container_nu">
   <!-- Sidebar --> 
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
   <!-- /#sidebar-wrapper --> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" > 
+  <div class="main_nu" > 
     <?php include_once('../php-templates/admin-navigation-right.php');  
    
       if (isset($error)) {
@@ -366,192 +366,184 @@ if ($admin!=-1) {
       if ($current_user_is_a_patient) { // patient
         if ($status) {
     ?>
-        Patient <br/>
-        BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
- 
-        <div class="container py-5" id="page-container">
-          <div class="row">
-              <div class="col-md-9">
-                  <div id="calendar"></div>
-              </div>
-              <div class="col-md-3">
-                  <div class="cardt rounded-0 shadow">
-                      <div class="card-header bg-gradient bg-primary text-light">
-                          <h5 class="card-title">Book an Appointment</h5>
-                      </div>
-                      <div class="card-body">
-                          <div class="container-fluid">
-                              <form action="save_schedule.php" method="post" id="schedule-form">
-                                  <input type="hidden" name="id" value="">
-                                  <!-- <div class="form-group mb-2">
-                                      <label for="title" class="control-label">Title</label>
-                                      <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
-                                  </div>
-                                  <div class="form-group mb-2">
-                                      <label for="description" class="control-label">Description</label>
-                                      <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
-                                  </div> -->
-                                  <div class="form-group mb-2">
-                                      <label for="start_datetime" class="control-label">Appointment Date</label>
-                                      <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
-                                  </div>
-                                  <!-- <div class="form-group mb-2">
-                                      <label for="end_datetime" class="control-label">End</label>
-                                      <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
-                                  </div> -->
-                              </form>
+    Patient <br/>
+    BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
+
+    <div class="container py-5" id="page-container">
+      <div class="row">
+        <div class="col-md-9">
+            <div id="calendar"></div>
+        </div>
+        <div class="col-md-3">
+          <div class="cardt rounded-0 shadow">
+            <div class="card-header bg-gradient bg-primary text-light">
+              <h5 class="card-title">Book an Appointment</h5>
+            </div>
+              <div class="card-body">
+                  <div class="container-fluid">
+                      <form action="save_schedule.php" method="post" id="schedule-form">
+                          <input type="hidden" name="id" value="">
+                          <!-- <div class="form-group mb-2">
+                              <label for="title" class="control-label">Title</label>
+                              <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
                           </div>
-                      </div>
-                      <div class="card-footer">
-                          <div class="text-center">
-                              <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
-                              <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                          <div class="form-group mb-2">
+                              <label for="description" class="control-label">Description</label>
+                              <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
+                          </div> -->
+                          <div class="form-group mb-2">
+                              <label for="start_datetime" class="control-label">Appointment Date</label>
+                              <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
                           </div>
-                      </div>
+                          <!-- <div class="form-group mb-2">
+                              <label for="end_datetime" class="control-label">End</label>
+                              <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
+                          </div> -->
+                      </form>
                   </div>
               </div>
+              <div class="card-footer">
+                  <div class="text-center">
+                      <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                      <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                  </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
       <!-- Event Details Modal -->
       <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content rounded-0">
-                  <div class="modal-header rounded-0">
-                      <h5 class="modal-title">Schedule Details</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body rounded-0">
-                      <div class="container-fluid">
-                          <dl>
-                              <dt class="text-muted">Title</dt>
-                              <dd id="title" class="fw-bold fs-4"></dd>
-                              <dt class="text-muted">Description</dt>
-                              <dd id="description" class=""></dd>
-                              <dt class="text-muted">Start</dt>
-                              <dd id="start" class=""></dd>
-                              <!-- <dt class="text-muted">End</dt>
-                              <dd id="end" class=""></dd> -->
-                          </dl>
-                      </div>
-                  </div>
-                  <div class="modal-footer rounded-0">
-                      <div class="text-end">
-                          <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
-                          <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
-                          <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
-                      </div>
-                  </div>
-              </div>
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-0">
+            <div class="modal-header rounded-0">
+                <h5 class="modal-title">Schedule Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body rounded-0">
+                <div class="container-fluid">
+                    <dl>
+                        <dt class="text-muted">Title</dt>
+                        <dd id="title" class="fw-bold fs-4"></dd>
+                        <dt class="text-muted">Description</dt>
+                        <dd id="description" class=""></dd>
+                        <dt class="text-muted">Start</dt>
+                        <dd id="start" class=""></dd>
+                        <!-- <dt class="text-muted">End</dt>
+                        <dd id="end" class=""></dd> -->
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer rounded-0">
+                <div class="text-end">
+                    <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                    <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
           </div>
-      </div> 
-      <script>
-        var scheds = {
-          1: { id:'2',
-            description:"asdf",
-            // edate:"October 11, 2022 06:00 PM",
-            // end_datetime:"2022-10-11 18:00:00", 
-            sdate:"October 10, 2022 10:30 AM",
-            start_datetime:"2022-10-10 10:30:00",
-            title: "Sample 101"}}
-      </script>
+        </div>
+      </div>  
+    </div> 
+    <script>
+      var scheds = {
+        1: { id:'2',
+          description:"asdf",
+          // edate:"October 11, 2022 06:00 PM",
+          // end_datetime:"2022-10-11 18:00:00", 
+          sdate:"October 10, 2022 10:30 AM",
+          start_datetime:"2022-10-10 10:30:00",
+          title: "Sample 101"}}
+    </script>
     <?php
         } else {
     ?>  
- <div class="container-fluid default" >
-      <div class="background-head row m-2 my-4" ><h6 class="pb-3 m-3 fw-bolder ">Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.</h6><hr>
-        
+    <div class="container-fluid default" >
+      <div class="background-head row m-2 my-4" >
+        <h6 class="pb-3 m-3 fw-bolder ">
+          Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.
+        </h6><hr>
+  
         <div class="container default p-4 ">
           <div class="col-md-8 col-lg-5">         
-          <form method="post" action="" class="form form-box px-3 py-5">
-            <!-- <h1 style="font-size:2rem">
-              Fill up all the required information (the one's with *) to let the assigned Midwife approve your account.
-            </h1> -->
-            <div class="form-input">
-              Nickname
-              <input type="text" value="<?php echo $c_nickname?>"
-                  class="form-input" name="nickname"  placeholder="Nickname"/>
-            </div> 
-            <div class="form-input">
-              <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-              <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
-            </div><br>
-            <div class="form-input">
-              <label>Birth Date</label>
+            <form method="post" action="" class="form form-box px-3 py-5">
+        
               <div class="form-input">
-                <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                Nickname
+                <input type="text" value="<?php echo $c_nickname?>"
+                    class="form-input" name="nickname"  placeholder="Nickname"/>
+              </div> 
+              <div class="form-input">
+                <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
+                <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
+              </div><br>
+              <div class="form-input">
+                <label>Birth Date</label>
+                <div class="form-input">
+                  <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                </div>
               </div>
-            </div>
-            <div class="form-input">
-              <label for="address">Address</label><br/>
-              <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
-            </div><br>
-            Civil Status*
-            <div class="form-input">
-                <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
-            </div>  
+              <div class="form-input">
+                <label for="address">Address</label><br/>
+                <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
+              </div><br>
+              Civil Status*
+              <div class="form-input">
+                  <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+              </div>  
 
-            <div class="form-input">
-              <div class="form__text"><label>Medical History</label></div>
-            </div>
-            <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
-              Height* 
-              <div class="d-flex input-group">
-                <input value="<?php echo $c_height_ft?>" min='0' type="number" 
-                  class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
-                <div class="input-group-postpend">
-                  <div id="weight-height" class="input-group-text form__input text-white">ft</div>
-                </div> 
-                <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
-                class="form__input form-control" name="height_in" placeholder="Inches*" required/>
-                <div class="input-group-postpend">
-                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
-                </div> 
+              <div class="form-input">
+                <div class="form__text"><label>Medical History</label></div>
               </div>
-            </div>
-            <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
-              Weight*   
-              <div class="d-flex input-group">
-                <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
-                  required min="0"/>
+              <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                Height* 
+                <div class="d-flex input-group">
+                  <input value="<?php echo $c_height_ft?>" min='0' type="number" 
+                    class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
                   <div class="input-group-postpend">
-                    <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
+                    <div id="weight-height" class="input-group-text form__input text-white">ft</div>
                   </div> 
+                  <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
+                  class="form__input form-control" name="height_in" placeholder="Inches*" required/>
+                  <div class="input-group-postpend">
+                    <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
+                  </div> 
+                </div>
               </div>
-            </div><br>
-            Blood Type*
-            <div class="form-input"> 
-              <input type="text" value="<?php echo $c_blood_type?>"
-                class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
-            </div>
-            <div class="form-input">  
-              Diagnosed Condition
-              <input type="text" value="<?php echo $c_diagnosed_condition?>"
-                class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-              Family History
-              <input type="text" value="<?php echo $c_family_history?>"
-                class="form__input" name="family_history" placeholder="Family History"/> 
-              Allergies
-              <input type="text" value="<?php echo $c_allergies?>"
-                class="form__input" name="allergies" placeholder="Allergies"/>    
-            </div>
-            <!-- <div class="form_select">
-              <label>Tetanus Toxoid Vaccinated</label>
-              <select class="form_select_focus" name="tetanus">
-                <option value="0" <?php //echo $c_tetanus==0?'selected':''?>>Unvaccinated</option>
-                <option value="1" <?php //echo $c_tetanus==1?'selected':''?>>Vaccinated</option> 
-              </select>
-            </div> 
-            <div class="form_select">
-              <label>Nth Trimester</label>
-              <select class="form_select_focus" name="trimester">
-                <option value="0" <?php //echo $c_trimester==0?'selected':''?>>N/A</option>
-                <option value="1" <?php //echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
-                <option value="2" <?php //echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
-                <option value="3" <?php //echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
-              </select>
-            </div>  -->
-            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Profile</button>
-          </form> 
+              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
+                Weight*   
+                <div class="d-flex input-group">
+                  <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
+                    required min="0"/>
+                    <div class="input-group-postpend">
+                      <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
+                    </div> 
+                </div>
+              </div><br>
+              Blood Type*
+              <div class="form-input"> 
+                <input type="text" value="<?php echo $c_blood_type?>"
+                  class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
+              </div>
+              <div class="form-input">  
+                Diagnosed Condition
+                <input type="text" value="<?php echo $c_diagnosed_condition?>"
+                  class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+                Family History
+                <input type="text" value="<?php echo $c_family_history?>"
+                  class="form__input" name="family_history" placeholder="Family History"/> 
+                Allergies
+                <input type="text" value="<?php echo $c_allergies?>"
+                  class="form__input" name="allergies" placeholder="Allergies"/>    
+              </div>
+      
+              <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Profile</button>
+            </form> 
+            
+          </div> 
+        </div> 
+      </div> 
+    </div> 
     <?php 
         }
       }
@@ -559,60 +551,50 @@ if ($admin!=-1) {
     ?> 
     <div class="px-5" style="margin-bottom:20vh;">
       <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-          <thead class="table-dark">
-              <tr>
-              <th scope="col">#</th>
-              <th scope="col">Infant Birth Names</th>
-              <th scope="col">Vaccination Status</th>
-              <?php if ($admin==0) { ?> 
-                  <th scope="col">Action</th>
-              <?php } ?> 
-              </tr>
-          </thead>
-          <tbody>
-
-          <?php if (count($infant_list)==0) { ?> 
-              <tr> 
-                  <td colspan='4' style="text-align:center">No Infant Records</td> 
-              </tr> 
-          <?php } else 
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Infant Birth Names</th>
+            <th scope="col">Vaccination Status</th>
+            <?php if ($admin==0) { ?> 
+                <th scope="col">Action</th>
+            <?php } ?> 
+          </tr>
+        </thead>
+        <tbody> 
+        <?php if (count($infant_list)==0) { ?> 
+          <tr> 
+            <td colspan='4' style="text-align:center">No Infant Records</td> 
+          </tr> 
+        <?php } else 
               foreach ($infant_list as $key => $value) { ?> 
-              <tr>
-                  <th scope="row"><?php echo ($key+1);?></th>
-                  <td><?php echo $value['name'];?></td>
-                  <td><?php echo $value['status'];?></td>
-                  <?php if ($admin==0) { ?> 
-                      <td>
-                          <?php if ($value['status']!="Complete") { ?>
-                            <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
-                              <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
-                          <?php } ?>
-                          <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
-                              <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                          <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $value['id']?>">
-                            <button class="btn btn-dark btn-sm btn-inverse">
-                            See Vaccination Record</button></a>
-                          
-                              <!-- <a href="delete-infant.php?id=<?php //echo $value['id'] ?>">  -->
-                              <!-- <button class="del btn btn-danger btn-sm btn-inverse" onclick="temp_func()">
-                              Delete</button>  -->
-                          <!-- </a>     -->
-                      </td>
-                  <?php } ?>  
-              </tr> 
-          <?php } ?>
-              
-          </tbody>
+          <tr>
+            <th scope="row"><?php echo ($key+1);?></th>
+            <td><?php echo $value['name'];?></td>
+            <td><?php echo $value['status'];?></td>
+            <?php if ($admin==0) { ?> 
+            <td>
+                <?php if ($value['status']!="Complete") { ?>
+                  <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
+                    <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
+                <?php } ?>
+                <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
+                    <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
+                <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $value['id']?>">
+                  <button class="btn btn-dark btn-sm btn-inverse">
+                  See Vaccination Record</button></a> 
+            </td>
+            <?php } ?>  
+          </tr> 
+        <?php } ?> 
+        </tbody>
       </table>
     </div> 
-    <?php } ?>
-
+    <?php } ?> 
   </div>  
-<!-- /#page-content-wrapper -->
 </div>
-                          </div>
-                          </div>
-                          </div>
+                          
+                           
 
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
