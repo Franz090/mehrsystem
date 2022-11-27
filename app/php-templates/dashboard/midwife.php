@@ -1,5 +1,5 @@
 <?php 
-if ($admin==0) {
+if ($current_user_is_a_midwife) {
     $bar_chart_title = "Infant Vaccinations Chart";
     // total patients 
     $select_total_patients = "SELECT COUNT(u.user_id) c 

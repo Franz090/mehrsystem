@@ -5,7 +5,6 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-// @include '../php-templates/redirect/patient-status-checker.php';
 @include '../php-templates/redirect/patient-only.php';
  
 $session_id = $_SESSION['id'];
@@ -67,11 +66,11 @@ include_once('../php-templates/admin-navigation-head.php');
 }
 </style>
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper"> 
+  <div class="main_nu"> 
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
@@ -81,8 +80,14 @@ include_once('../php-templates/admin-navigation-head.php');
         else {
       ?>   
         <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Demographic Profile</h4>
+          <button type="button"> 
+            <a href="./update-account.php"> 
+              Update Account Information
+            </a>
+          </button>
+        
           <div class="table-padding table-responsive">
-          <div class="col-md-8 col-lg-12 " id="table-position">
+            <div class="col-md-8 col-lg-12 " id="table-position">
           <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>

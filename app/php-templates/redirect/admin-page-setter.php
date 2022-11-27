@@ -4,13 +4,16 @@ if(!isset($_SESSION['role']))
     header('location: ../'); 
 else {
     $admin = $_SESSION['role'];  
+    $current_user_is_an_admin = $admin==1; 
+    $current_user_is_a_midwife = $admin==0; 
+    $current_user_is_a_patient = $admin==-1;  
 } 
 // user is not a patient 
-if ($_SESSION['role']!=-1) {
+if (!$current_user_is_a_patient) {
     // if the account logged in is a nurse 
     // they will see add/view midwife 
     // else - meaning they are midwife, they ll see profile 
-    $account_type_midwife = $admin == 1 ? "midwife":"profile";
+    $account_type_midwife = $current_user_is_an_admin ? "midwife":"profile";
     // echo $account_type_midwife;
 } 
 

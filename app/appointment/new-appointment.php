@@ -11,7 +11,6 @@ session_start();
 
 $session_id = $_SESSION['id']; 
 
-$current_user_is_a_midwife = $admin==0;
 
 // user is a midwife  
 if ($current_user_is_a_midwife) {
@@ -53,53 +52,11 @@ if ($current_user_is_a_midwife) {
     } 
 } // user is patient 
 else {
-    $select_trimester = "SELECT trimester FROM users u, patient_details p, user_details ud
-        WHERE u.user_id=$session_id AND p.user_id=u.user_id AND ud.user_id=u.user_id";
-    $result_trimester = mysqli_query($conn, $select_trimester);
-// echo $select_trimester;
-    if (mysqli_num_rows($result_trimester)) {
-        foreach($result_trimester as $row) {  
-        $trimester_from_db = $row['trimester'];  
-        } 
-        mysqli_free_result($result_trimester);
-    } 
-    else  { 
-        mysqli_free_result($result_trimester);
-        $error = 'Something went wrong fetching data from the database.'; 
-    }    
+    @include '../php-templates/appointments/patient/trimester.php';
 }
 
 
-// add appointment
-if(isset($_POST['submit'])) {
-    $_POST['submit'] = null;
-    $error = ''; 
-
-    if (empty($_POST['date']))
-        $error .= 'Fill up input fields that are required (with * mark)! ';
-    else {   
-        if ($current_user_is_a_midwife) { 
-            $id_trimester_split = explode('AND',$_POST['patient_id_trimester']); 
-            // echo $id_trimester_split[0];
-            // echo $id_trimester_split[1];
-        }
-        $status = $current_user_is_a_midwife?1:0; 
-        $a_date = mysqli_real_escape_string($conn, $_POST['date']);
-        $patient_id = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[0]:$session_id));
-        $trimester_post = mysqli_real_escape_string($conn, ($current_user_is_a_midwife?$id_trimester_split[1]:$trimester_from_db));
- 
-        
-
-        $insert1 = "INSERT INTO appointments(patient_id, date, status, trimester) 
-            VALUES($patient_id, '$a_date', $status, $trimester_post);";
-        if (mysqli_query($conn,$insert1))  { 
-        echo "<script>alert('Appointment Added!');</script>"; 
-        }
-        else {  
-            $error .= 'Something went wrong adding the appointment to the database.';
-        }  
-    }  
-} 
+@include '../php-templates/appointments/submit-add-appointment.php';
 
 $conn->close(); 
 
@@ -122,15 +79,15 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="col-md-8 col-lg-5">
         
         <?php 
-            if ($admin==0 && count($_barangay_list)==0) { ?>
+            if ($current_user_is_a_midwife && count($_barangay_list)==0) { ?>
             You can't book an appointment because you are not assigned to any barangay.
-        <?php } else if ($admin==0 && count($patient_list)>0 || $admin==-1) { ?>
-        <form class="form form-box px-3" style="bottom:100px; action="" method="post" >
+        <?php } else if ($current_user_is_a_midwife && count($patient_list)>0 || $current_user_is_a_patient) { ?>
+        <form class="form form-box px-3" style="bottom:100px;" action="" method="post" >
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
-            <?php if($admin==0) { ?>
+            <?php if($current_user_is_a_midwife) { ?>
             <div class=" mb-3">
                 <label>Patient</label>
                 <select  class="form-select"  name="patient_id_trimester">
@@ -158,8 +115,8 @@ include_once('../php-templates/admin-navigation-head.php');
            
             <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Appointment</button> 
         </form> 
-        <?php }else {
-            if ($admin==0)  ?>
+        <?php } else {
+            if ($current_user_is_a_midwife)  ?>
             There should be at least one patient (under your assigned barangay) available in the database.
         <?php }   
         ?>

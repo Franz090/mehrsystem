@@ -57,66 +57,74 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Appointments</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Appointments</h4>
+      <button type="button"> 
+            <a href="./update-account.php"> 
+              Update Account Information
+            </a>
+          </button><hr>
+        
         <div class="table-padding table-responsive">
-          <div class="pagination-sm col-md-8 col-lg-12" id="table-position">
-           <table class=" text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
-            <thead class="table-light" colspan="3">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Patient Name</th> 
-                <th scope="col">Barangay</th>  
-                <th scope="col">Date and Time</th>
-                <!-- <th scope="col">Contact Number</th> -->
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-                <?php 
-                  if (isset($error)) {
-                    echo '<span class="">'.$error.'</span>'; 
-                  } 
-                  else { 
-                    foreach ($appointment_list as $key => $value) {
-                ?>    
-                    <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
-                        <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['barangay']; ?></td>
-                        <td><?php $dtf = date_create($value['a_date']); 
-                            echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                        <!-- <td><?php // echo $value['contact_no']; ?></td> -->
-                        <td>  
-                            <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
- 
-                             
-                            <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
+          <div class="col-md-8 col-lg-12" id="table-position">
+            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+              <thead class="table-light" colspan="3">
+                <tr>
+                  <th scope="col" class="col-sm-1">#</th>
+                  <!-- <th scope="col">Patient Name</th>  -->
+                  <!-- <th scope="col">Barangay</th>   -->
+                  <th scope="col">Date and Time</th>
+                  <!-- <th scope="col">Contact Number</th> -->
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php 
+                    if (isset($error)) {
+                      echo '<span class="">'.$error.'</span>'; 
+                    } 
+                    else { 
+                      foreach ($appointment_list as $key => $value) {
+                  ?>    
+                      <tr>
+                          <th scope="row"><?php echo $key+1; ?></th>
+                          <!-- <td><?php //echo $value['name']; ?></td> -->
+                          <!-- <td><?php //echo $value['barangay']; ?></td> -->
+                          <td><?php $dtf = date_create($value['a_date']); 
+                              echo date_format($dtf,'F d, Y h:i A'); ?></td>
+                          <!-- <td><?php // echo $value['contact_no']; ?></td> -->
+                          <td>  
+                              <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
+  
+                              
+                              <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
 
-                            <?php if ($value['status']==0)  { ?> 
-                              <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>"> 
-                                <button type="button" class=" btn btn-danger btn-sm btn-inverse ">
-                                  Delete</button></a>
-                            <?php } ?> 
-                        </td>   
-                    </tr>
-                <?php 
+                              <?php if ($value['status']==0)  { ?> 
+                                <a href="delete-appointment.php?id=<?php echo $value['a_id'] ?>"> 
+                                  <button type="button" class=" btn btn-danger btn-sm btn-inverse ">
+                                    Cancel</button></a>
+                              <?php } ?> 
+                          </td>   
+                      </tr>
+                  <?php 
+                      }
                     }
-                  }
-                ?> 
-            </tbody>
-          </table>
-        </div>     
-        </div>              
+                  ?> 
+              </tbody>
+            </table>
+          </div>     
+        </div>   
+
       </div>
     </div>
+    
   </div>
 </div>
 <script>

@@ -66,6 +66,7 @@ body {
 .navigation_nu ul li:hover a,
 .navigation_nu ul li.hovered a {
 	color: var(--green);
+	transition: 1s;
 }
 .navigation_nu ul li a .icon {
 	position: relative;
@@ -170,7 +171,7 @@ body {
 	height: 40px;
 	border-radius: 50%;
 	overflow: hidden;
-	cursor: pointer;
+	/* cursor: pointer; */
 	/* left: 450px; */
 }
 .user img {
