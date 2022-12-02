@@ -136,13 +136,13 @@ include_once('../php-templates/admin-navigation-head.php');
   }
 </style>
 
-<div class="d-flex" id="wrapper">
+<div class="container_nu">
 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
@@ -368,9 +368,11 @@ include_once('../php-templates/admin-navigation-head.php');
                           ?>  
                         </td> 
                       <?php }?>
-                      <td class="col-md-12 fw-bold">
-                        <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
-                      </td>
+                      <?php if (!$current_user_is_an_admin) { ?>
+                        <td class="col-md-12 fw-bold">
+                          <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
+                        </td>
+                      <?php } ?>
                     </tr>   
               <?php 
                   } //foreach

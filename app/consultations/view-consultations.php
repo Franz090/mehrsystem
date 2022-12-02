@@ -122,15 +122,16 @@ include_once('../php-templates/admin-navigation-head.php');
   } 
 </style> -->
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
+ 
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';

@@ -49,10 +49,10 @@ CONDITIONS AND ADDING A MODAL TO DELETE FUNCTION -->
 </script>
 
 <!-- calendar  -->
-<?php if ($admin==-1) {?> 
-  <script>
+<?php if (!$current_user_is_an_admin) {?> 
+  <!-- <script>
       var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
-  </script>
+  </script> -->
   <script src="../calendar/js/script.js"></script>
 <?php }?>
 
