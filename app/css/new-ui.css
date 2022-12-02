@@ -240,14 +240,6 @@ body {
 	grid-gap: 30px;
 	min-height: 200px;
 }
-.calendar .box {
-	position: relative;
-	background: #fff;
-	padding: 20px;
-	width: 100%;
-	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-	border-radius: 20px;
-}
 h4 {
 	color: var(--green);
 	margin: 7px;

@@ -8,7 +8,7 @@ session_start();
 
 
 $session_id = $_SESSION['id'];
-$session_id_str = ($admin==0?"c.midwife_appointed=":"u.user_id=") . $session_id;
+$session_id_str = ($admin==0?"":("AND u.user_id=". $session_id)) ;
 // fetch consultation to edit 
 $id_from_get = $_GET['id'];
 $select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id, treatment_file,
@@ -16,7 +16,7 @@ $select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id, treatment_fi
     date, treatment, prescription
 FROM users u, user_details d, patient_details p, consultations c
 WHERE u.user_id=d.user_id AND c.consultation_id=$id_from_get AND 
-    c.patient_id=u.user_id AND $session_id_str";
+    c.patient_id=u.user_id $session_id_str";
 // echo $select_c_to_edit;
 if ($result_c_to_edit = mysqli_query($conn, $select_c_to_edit)) {
     foreach($result_c_to_edit as $row) {

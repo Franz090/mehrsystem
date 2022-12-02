@@ -39,13 +39,15 @@
     <?php 
  
       } else { // midwife/patient 
+        $appointment_page_condition = 
+          $page == 'view_appointment' ||
+          $page == 'approved_appointment' ||
+          $page == 'pending_appointment';
+        $appointment_page_str = $current_user_is_a_midwife ? 'approved_appointment' : 'view_appointment';
+        $appointment_file_str = $current_user_is_a_midwife ? 'approved-appointment' : 'view-appointment';
     ?>   
-      <li <?php echo (
-        $page == 'view_appointment' ||
-        $page == 'approved_appointment' ||
-        $page == 'pending_appointment'
-      ) ? "class='hovered'":""?>>
-        <a <?php echo $page == 'view_appointment' ? "type='button'":'href="../appointment/view-appointment.php"'?>>
+      <li <?php echo $appointment_page_condition ? "class='hovered'":""?>>
+        <a <?php echo $page == $appointment_page_str ? "type='button'":'href="../appointment/'.$appointment_file_str.'.php"'?>>
             <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
             <span class="title">Appointments</span>
         </a>
@@ -60,7 +62,7 @@
 
     <?php 
       }
-      if (!$current_user_is_a_patient) { // admin/midwife 
+      if (!$current_user_is_a_patient) { 
     ?>  
       <li <?php echo $page == 'view_patient' ? "class='hovered'":""?>>
         <a <?php echo $page == 'view_patient' ? "type='button'":'href="../patients/view-patients.php"'?>>

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/dashboard.css"> 
   <link rel="stylesheet" href="../css/bootstrap.min.css">
  
-  <?php if ($current_user_is_a_patient) { ?>
+  <?php if (!$current_user_is_an_admin) { ?>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../calendar/css/bootstrap.min.css">
     <link rel="stylesheet" href="../calendar/fullcalendar/lib/main.min.css">

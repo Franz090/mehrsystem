@@ -24,6 +24,19 @@ if ($current_user_is_an_admin) {
   // echo $past_6_months; 
 } 
 if ($current_user_is_a_midwife) {
+    // get appointments 
+  // $sql_appointments = "SELECT * 
+  //     FROM appointments a 
+  //     LEFT JOIN (SELECT CONCAT(first_name, IF(middle_name IS NULL OR middle_name='', '', CONCAT(' ', SUBSTRING(middle_name, 1, 1), '.')), 
+  //     ' ', last_name) name, user_id patient_id FROM `users` u LEFT JOIN user_details ud USING(user_id) WHERE role=-1) p 
+  //       USING(patient_id) WHERE  AND a.status=1";
+  // $schedules = $conn->query($sql_appointments);
+  // $sched_res = [];
+  // foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
+  //     $row['appointment_date'] = date("F d, Y h:i A",strtotime($row['date']));
+  //     // $row['edate'] = date("F d, Y h:i A",strtotime($row['end_datetime']));
+  //     $sched_res[$row['appointment_id']] = $row;
+  // } 
   // $title = "Infant Vaccine Monitoring Pie Chart";
   // $av_vaccine = 0;
   // $used_vaccine = 0;
@@ -385,9 +398,9 @@ if (!$current_user_is_a_patient) {
     ?>
     <!-- TODO: move  -->
     <?php  
-      if (!$current_user_is_a_patient) {
+      if ($current_user_is_a_patient) {
     ?> 
-    <div class="px-5" style="margin-bottom:20vh;">
+    <!-- <div class="px-5" style="margin-bottom:20vh;">
       <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
         <thead class="table-dark">
           <tr>
@@ -427,7 +440,7 @@ if (!$current_user_is_a_patient) {
         <?php } ?> 
         </tbody>
       </table>
-    </div> 
+    </div>  -->
     <?php } ?> 
     <!-- TODO: end move  -->
   </div>  

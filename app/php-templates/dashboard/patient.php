@@ -72,17 +72,8 @@
     </div> 
 
     <script>
-      var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
-      // var scheds = {
-      //   1: { id:'2',
-      //     description:"asdf",
-      //     // edate:"October 11, 2022 06:00 PM",
-      //     // end_datetime:"2022-10-11 18:00:00", 
-      //     sdate:"October 10, 2022 10:30 AM",
-      //     start_datetime:"2022-10-10 10:30:00",
-      //     title: "Sample 101"}}
-
-          console.log(scheds)
+      var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
+      console.log(scheds)
     </script>
 <?php
     } else {

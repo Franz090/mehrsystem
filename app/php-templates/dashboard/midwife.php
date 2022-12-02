@@ -1,14 +1,38 @@
 <?php 
 if ($current_user_is_a_midwife) {
-    $bar_chart_title = "Infant Vaccinations Chart";
+    
+    $midwife_condition_string = "role=-1 AND u.user_id=pd.user_id
+    AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1
+    AND b.archived=0";
+
+    // patients 
+    $select_patients = "SELECT CONCAT(first_name, IF(middle_name IS NULL OR middle_name='', '', CONCAT(' ', SUBSTRING(middle_name, 1, 1), '.')), 
+    ' ', last_name) name, u.user_id patient_id 
+      FROM users u, patient_details pd, barangays b, user_details ud 
+        WHERE ud.user_id=u.user_id AND $midwife_condition_string";
+
+    $select_appointments = "SELECT * 
+        FROM appointments a, ($select_patients) p 
+            WHERE a.status=1 AND p.patient_id=a.patient_id";  
+    // echo $select_appointments;
+    $sched_res = [];
+    if($result_appointments = mysqli_query($conn, $select_appointments))  { 
+        foreach($result_appointments as $row)  { 
+            $row['appointment_date'] = date("F d, Y h:i A",strtotime($row['date']));
+            $sched_res[$row['appointment_id']] = $row;   
+        } 
+        mysqli_free_result($result_appointments); 
+    } 
+    else  { 
+        $error = 'Something went wrong fetching data from the database.'; 
+    }   
+
     // total patients 
     $select_total_patients = "SELECT COUNT(u.user_id) c 
         FROM users u, patient_details pd, barangays b 
-        WHERE role=-1 AND u.user_id=pd.user_id 
-            AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1
-            AND b.archived=0" ;
-    // echo $select_total_patients;
-    if($result_total_patients = mysqli_query($conn, $select_total_patients))  {
+        WHERE $midwife_condition_string" ;
+    $total_patients = 0;
+    if($result_total_patients = mysqli_query($conn, $select_total_patients))  { 
         foreach($result_total_patients as $row)  { 
             $total_patients = $row['c'];   
         } 
@@ -20,9 +44,8 @@ if ($current_user_is_a_midwife) {
     // appointments today 
     $select_appointments_today = "SELECT COUNT(a.appointment_id) c 
     FROM users u, patient_details pd, barangays b, appointments a 
-    WHERE role=-1 AND u.user_id=pd.user_id AND a.patient_id=u.user_id AND (a.date BETWEEN '$curr_date 00:00:00' AND '$curr_date 23:59:59')
-        AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND a.status=1 
-        AND pd.status=1 AND b.archived=0";
+    WHERE (a.date BETWEEN '$curr_date 00:00:00' AND '$curr_date 23:59:59') AND a.patient_id=u.user_id AND a.status=1 
+        AND $midwife_condition_string";
     // echo $select_appointments_today;
     if($result_appointments_today = mysqli_query($conn, $select_appointments_today))  {
         foreach($result_appointments_today as $row)  { 
@@ -33,106 +56,141 @@ if ($current_user_is_a_midwife) {
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
-   
-    // get infant vaccination records 
-    $infant_vacc_list = [];
-    $select_infant_vacc = "SELECT date, type 
-    FROM infant_vac_records ivr, users u, infants i, patient_details p, barangays b 
-    WHERE date>='$past_6_months 00:00:00' AND u.user_id=i.user_id AND i.infant_id=ivr.infant_id 
-        AND u.user_id=p.user_id AND p.barangay_id=b.barangay_id 
-        AND b.assigned_midwife=$session_id AND p.status=1
-        AND b.archived=0
-    ORDER BY date ASC";
 
-    // echo $select_infant_vacc;
-    if($result_infant_vacc = mysqli_query($conn, $select_infant_vacc))  {
-        foreach($result_infant_vacc as $row)  { 
-            $date = $row['date'];  
-            $type = $row['type'];  
-            array_push($infant_vacc_list, array(
-                'date' => substr($date,0,7),
-                'type' => $type
-            ));
-        } 
-        mysqli_free_result($result_infant_vacc); 
-    } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
-
-    // structure the chart data  
-    $labels = '["Months ('.$curr_year.')", "BCG", "Hepatitis B", "Pentavalent", "Oral Polio", "Inactivated Polio", "Pnueumococcal Conjugate", "Measles, Mumps, and Rubelia"],';
-//    echo $labels;
-
-    $count_infant_vacc_list = count($infant_vacc_list)-1;
-    $key_jump = -1;
-    foreach ($bar_chart_month_list as $key1 => $value1) {
-        $temp_arr = [$bar_chart_month_list_label[$key1]];
-
-        $BCG = 0;
-        $hepatitis_B = 0;
-        $pentavalent = 0;
-        $oral_polio = 0;
-
-        $inactivated_polio = 0;
-        $pnueumococcal_conjugate = 0;
-        $measles_mumps_rubelia = 0;
-        foreach ($infant_vacc_list as $key2 => $value2) {
-            if ($key_jump>$key2) continue; 
-
-            if ($value1==$value2['date']) {
-                if ($value2['type']==1)  {$BCG += 1;}
-                if ($value2['type']==2)  {$hepatitis_B += 1;}
-                if ($value2['type']==3)  {$pentavalent += 1;}
-                if ($value2['type']==4)  {$oral_polio += 1;} 
-
-                if ($value2['type']==5)  {$inactivated_polio += 1;}
-                if ($value2['type']==6)  {$pnueumococcal_conjugate += 1;}
-                if ($value2['type']==7)  {$measles_mumps_rubelia += 1;}
-                if ($key2==$count_infant_vacc_list) {
-                    $temp_arr = array_merge($temp_arr,[
-                        $BCG,
-                        $hepatitis_B,
-                        $pentavalent,
-                        $oral_polio,
-                        $inactivated_polio,
-                        $pnueumococcal_conjugate,
-                        $measles_mumps_rubelia
-                    ]);
-                }
-            } else {
-                $key_jump = $key2;
-                $temp_arr = array_merge($temp_arr,[
-                    $BCG,
-                    $hepatitis_B,
-                    $pentavalent,
-                    $oral_polio,
-                    $inactivated_polio,
-                    $pnueumococcal_conjugate,
-                    $measles_mumps_rubelia
-                ]);
-                break;
+    // get patients 
+    $patient_list = [];  
+    @include '../php-templates/midwife/get-assigned-barangays.php'; 
+    if (count($_barangay_list)>0) {
+        $barangay_select = '';
+        $barangay_list_length_minus_1 = count($_barangay_list)-1;
+        foreach ($_barangay_list as $key => $value) { 
+            $barangay_select .= "p.barangay_id=$value ";
+            if ($key < $barangay_list_length_minus_1) {
+                $barangay_select .= "OR ";
             }
         }
-        array_push($bar_chart_data,$temp_arr);
-    }
-    // fetch patients
-    $sql_all_patients = "SELECT COUNT(user_id) c FROM users WHERE role=-1";
-    if($result_all_patients = mysqli_query($conn, $sql_all_patients))  {
-        foreach($result_all_patients as $row)    
-            $total_patient_count = $row['c'];    
-        mysqli_free_result($result_all_patients); 
+        $select1 = "SELECT u.user_id, trimester,
+            CONCAT(ud.first_name, 
+        IF(ud.middle_name IS NULL OR ud.middle_name='', '', 
+            CONCAT(' ', SUBSTRING(ud.middle_name, 1, 1), '.')), 
+        ' ', ud.last_name) name
+            FROM users u, patient_details p, user_details ud
+            WHERE role=-1 AND ($barangay_select) AND p.user_id=u.user_id AND ud.user_id=u.user_id";
+        // fetch patients  
+        
+        $result_patient = mysqli_query($conn, $select1);
+        
+        if (mysqli_num_rows($result_patient)) {
+            foreach($result_patient as $row) {
+                $id = $row['user_id'];  
+                $name = $row['name'];  
+                $trimester = $row['trimester'];  
+                array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
+            } 
+            mysqli_free_result($result_patient);
+            // print_r($result_barangay); 
+        } 
+        else  { 
+            mysqli_free_result($result_patient);
+            $error = 'Something went wrong fetching data from the database.'; 
+        }    
     } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
-    $conn->close(); 
-    //bar chart js code 
-    include_once('script.php');
+    
+ 
+    $conn->close();  
 ?> 
 
 <div class="container-fluid default"> 
 Midwife <br/>
+    <div class="col-lg-10 col-sm-7 my-5 mr-5 text-center"> 
+        <div class="row ">  
+            <div class="col">
+                Total Number of Patients: <?php echo $total_patients ?>  
+            </div>
+            <div class="col">  
+                Appointments Today: <?php echo $appointments_today ?>  
+            </div> 
+        </div> 
+    </div>
+    <div class="container py-5" id="page-container">
+        <div class="row" style="width:100%;">
+
+            <div class="col-md-9">
+                <div id="calendar"></div>
+            </div>
+
+        <div class="col-md-3">
+          <div class="cardt rounded-0 shadow">
+            <div class="card-header bg-gradient bg-primary text-light">
+              <h5 class="card-title">Add an Appointment</h5>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <form method="post" id="schedule-form">
+                        <!-- <input type="hidden" name="id" value="">  -->
+                        <div class="form-group mb-2">
+                            <label for="start_datetime" class="control-label">Appointment Date</label>
+                            <select>
+                                <!-- list of patients under the assigned barangays  -->
+
+                            </select>
+                            <!-- <input type="datetime-local" class="form-control form-control-sm rounded-0" 
+                            name="date" id="start_datetime" required> -->
+                            <input type="datetime-local" class="form-control form-control-sm rounded-0" 
+                            name="date" id="start_datetime" required>
+                        </div>   
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm rounded-0" 
+                    type="submit" name="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-default border btn-sm rounded-0" 
+                    type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Event Details Modal -->
+      <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-0">
+            <div class="modal-header rounded-0">
+                <h5 class="modal-title">Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body rounded-0">
+                <div class="container-fluid">
+                    <dl>
+                        <dt class="text-muted">Name</dt>
+                        <dd id="title" class="fw-bold fs-4"></dd>
+                        <!-- <dt class="text-muted">Description</dt> -->
+                        <!-- <dd id="description" class=""></dd> -->
+                        <dt class="text-muted">Appointment Date and Time</dt>
+                        <dd id="start" class=""></dd> 
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer rounded-0">
+                <div class="text-end">
+                    <!-- <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button> -->
+                    <!-- <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Cancel</button> -->
+                    <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div> 
+
+
+    <script>
+      var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
+      console.log(scheds)
+    </script>
     <!-- <div class="row mt-5 col-sm-12">
         
         <div class="col-md-6 col-sm-12 d-flex justify-content-center">
@@ -143,42 +201,17 @@ Midwife <br/>
             <div id="columnchart_material" class="columnchart"> </div>
         </div>
     </div>   --> 
-    <div class="col-lg-10 col-sm-7 my-5 mr-5 text-center"> 
-        <div class="row ">  
-            <div class="col">
-            Total Number of Patients: <?php echo $total_patients ?>  
-        </div>
-        <div class="col">  
-            Appointments Today: <?php echo $appointments_today ?>  
-        </div> 
-    </div> 
-</div>
-<div class="col-lg-10 col-md-7 my-5 m-5 text-center">
-<?php include_once('barchart.php');?>
-</div>
 
-<!-- <div class="container">
-  <div class="row">
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-  </div>
-</div> -->
+ 
 
 <!-- <div class="container">
     <div class="row bg-light m-3 con1"></div>
 </div> -->
-    <div>
+    <!-- <div>
         <a href="../infant/add-infant.php"><button>
             Add Infant
         </button> </a>
-    </div>
+    </div> -->
 <?php 
 }
 ?>
