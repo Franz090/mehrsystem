@@ -95,8 +95,9 @@ if ($current_user_is_a_midwife) {
             $error = 'Something went wrong fetching data from the database.'; 
         }    
     } 
-    
- 
+    // submit add appointment
+    @include '../php-templates/appointments/submit-add-appointment.php';
+
     $conn->close();  
 ?> 
 
@@ -129,11 +130,20 @@ Midwife <br/>
                     <form method="post" id="schedule-form">
                         <!-- <input type="hidden" name="id" value="">  -->
                         <div class="form-group mb-2">
-                            <label for="start_datetime" class="control-label">Appointment Date</label>
-                            <select>
-                                <!-- list of patients under the assigned barangays  -->
-
+                            <label for="patient" class="control-label">Patient</label>
+                            <select  class="form-select"  name="patient_id_trimester" id="patient">
+                                <?php
+                                    if (count($patient_list)>0) {
+                                        foreach ($patient_list as $key => $value) { 
+                                ?> 
+                                    <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
+                                        <?php echo $value['name'];?></option>
+                                <?php  
+                                        }    
+                                    }
+                                ?>  
                             </select>
+                            <label for="start_datetime" class="control-label">Appointment Date</label>
                             <!-- <input type="datetime-local" class="form-control form-control-sm rounded-0" 
                             name="date" id="start_datetime" required> -->
                             <input type="datetime-local" class="form-control form-control-sm rounded-0" 
@@ -145,7 +155,7 @@ Midwife <br/>
             <div class="card-footer">
                 <div class="text-center">
                     <button class="btn btn-primary btn-sm rounded-0" 
-                    type="submit" name="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                    type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
                     <button class="btn btn-default border btn-sm rounded-0" 
                     type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                 </div>

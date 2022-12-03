@@ -30,7 +30,7 @@
               <div class="card-footer">
                 <div class="text-center">
                     <button class="btn btn-primary btn-sm rounded-0" 
-                      type="submit" name="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                      type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
                     <button class="btn btn-default border btn-sm rounded-0" 
                       type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                 </div>

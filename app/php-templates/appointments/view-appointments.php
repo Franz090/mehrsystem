@@ -123,6 +123,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
       <div class="card-body">
         <div class="row">
+          <a href="./<?php echo $pending?'approved':'pending'?>-appointment.php">See <?php echo $pending?'Approved':'Pending'?> Appointments</a>
           <div class="col-md-12 text-end mb-3">
             <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
           </div>

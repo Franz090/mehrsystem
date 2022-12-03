@@ -66,11 +66,11 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Appointments</h4>
-      <button type="button"> 
-            <a href="./update-account.php"> 
-              Update Account Information
-            </a>
-          </button><hr>
+        <button type="button"> 
+          <!-- <a href="./update-account.php"> 
+            Update Account Information
+          </a> -->
+        </button><hr>
         
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12" id="table-position">
