@@ -201,27 +201,8 @@ Midwife <br/>
       var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
       console.log(scheds)
     </script>
-    <!-- <div class="row mt-5 col-sm-12">
-        
-        <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-            <div id="piechart" class="chart"
-                style="bottom:200px; width: 400px;height 200px;"> </div>
-        </div>
-        <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-            <div id="columnchart_material" class="columnchart"> </div>
-        </div>
-    </div>   --> 
 
- 
 
-<!-- <div class="container">
-    <div class="row bg-light m-3 con1"></div>
-</div> -->
-    <!-- <div>
-        <a href="../infant/add-infant.php"><button>
-            Add Infant
-        </button> </a>
-    </div> -->
 <?php 
 }
 ?>
