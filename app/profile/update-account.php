@@ -27,8 +27,6 @@ if ($current_user_is_a_patient) {
       $c_b_date = $row['b_date']==null?'':$row['b_date'];
       $c_address = $row['address']==null?'':$row['address'];
       $c_civil_status = $row['civil_status'];
-      // $c_trimester = $row['trimester'];
-      // $c_tetanus = $row['tetanus'];
       $c_diagnosed_condition = $row['diagnosed_condition']==null?'':$row['diagnosed_condition'];
       $c_family_history = $row['family_history']==null?'':$row['family_history'];
       $c_allergies = $row['allergies']==null?'':$row['allergies'];
@@ -49,16 +47,42 @@ if ($current_user_is_a_patient) {
   } else {
     $error = 'Something went wrong fetching data from the database.'; 
   } 
-}
+} 
+if ($current_user_is_a_midwife) {
+  $select_get_current_user = 
+    "SELECT * 
+    FROM users u 
+    LEFT JOIN user_details ud USING(user_id) WHERE u.user_id=$session_id";
+  //  echo $select_get_current_user;
+
+  if ($result_current_user = mysqli_query($conn, $select_get_current_user)) {
+    foreach($result_current_user as $row)  {
+      $c_first_name = $row['first_name'];
+      $c_middle_name = $row['middle_name']==null?'':$row['middle_name'];
+      $c_last_name = $row['last_name'];
+      
+      $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$session_id AND type=1";
+      if ($result_c_no = mysqli_query($conn, $select_c_no)) {
+        $c_no = '';
+        foreach ($result_c_no as $row2) {
+          $c_no .= ($row2['mobile_number']."\r\n"); 
+        }
+      } 
+    }
+    mysqli_free_result($result_current_user);
+  } else {
+    $error = 'Something went wrong fetching data from the database.'; 
+  } 
+} 
 
 $valid_contact_exp = '/[0][9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/';
 if (isset($_POST['submit_profile'])) {
   $error = '';
   $_POST['submit_profile'] = null;
-  $submit_profile_condition = 
-    empty(trim($_POST['first_name'])) || empty(trim($_POST['last_name'])) || 
-    empty(trim($_POST['civil_status'])) || empty(trim($_POST['weight'])) || 
-    empty(trim($_POST['blood_type']));
+  $overlapping_condition  = empty(trim($_POST['first_name'])) || empty(trim($_POST['last_name']));
+  $submit_profile_condition = $current_user_is_a_midwife ? $overlapping_condition : 
+    $overlapping_condition || empty(trim($_POST['civil_status'])) ||
+    empty(trim($_POST['weight'])) || empty(trim($_POST['blood_type']));
   if ($submit_profile_condition) {
     $error = 'Fill up input fields that are required (with * mark)! '; 
   } else {
@@ -83,32 +107,34 @@ if (isset($_POST['submit_profile'])) {
       $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
       $mid_name = empty($_POST['middle_name'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['middle_name'])."'";
       $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
-      $nickname = empty($_POST['nickname'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['nickname'])."'"; 
+      if ($current_user_is_a_patient) { 
+        $nickname = empty($_POST['nickname'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['nickname'])."'"; 
+        
+        $civil_status = mysqli_real_escape_string($conn,$_POST['civil_status']);
+  
+        $b_date = empty($_POST['b_date'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['b_date'])."'";
+        $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'"; 
+        
+        $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+        $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
+        $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+  
+        $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
+        $diagnosed_condition = empty($_POST['diagnosed_condition'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['diagnosed_condition'])."'";
+        $family_history = empty($_POST['family_history'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['family_history'])."'";
+        $allergies = empty($_POST['allergies'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['allergies'])."'";
+      }
       
-      $civil_status = mysqli_real_escape_string($conn,$_POST['civil_status']);
-
-      $b_date = empty($_POST['b_date'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['b_date'])."'";
-      $address = empty($_POST['address'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['address'])."'"; 
-      
-      $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
-      $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
-      $weight = mysqli_real_escape_string($conn, $_POST['weight']);
-
-      $blood_type = mysqli_real_escape_string($conn, $_POST['blood_type']);
-      $diagnosed_condition = empty($_POST['diagnosed_condition'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['diagnosed_condition'])."'";
-      $family_history = empty($_POST['family_history'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['family_history'])."'";
-      $allergies = empty($_POST['allergies'])?"NULL":"'".mysqli_real_escape_string($conn, $_POST['allergies'])."'";
-      // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
-      // $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
-      //, trimester=$trimester, tetanus=$tetanus
       $update = '';
       $update .= "UPDATE user_details SET first_name='$first_name', middle_name=$mid_name, last_name='$last_name'
         WHERE user_id=$session_id; ";
-      $update .= "UPDATE patient_details SET nickname=$nickname, civil_status='$civil_status', 
-        b_date=$b_date, address=$address, height_ft=$height_ft, height_in=$height_in, weight=$weight,
-        blood_type='$blood_type', diagnosed_condition=$diagnosed_condition, family_history=$family_history,
-        allergies=$allergies
-        WHERE user_id=$session_id; ";
+      if ($current_user_is_a_patient) { 
+        $update .= "UPDATE patient_details SET nickname=$nickname, civil_status='$civil_status', 
+          b_date=$b_date, address=$address, height_ft=$height_ft, height_in=$height_in, weight=$weight,
+          blood_type='$blood_type', diagnosed_condition=$diagnosed_condition, family_history=$family_history,
+          allergies=$allergies
+          WHERE user_id=$session_id; ";
+      }
       $delete_contact_numbers = "DELETE FROM contacts 
         WHERE owner_id=$session_id;";
       $add_contact_numbers = "";
@@ -214,7 +240,7 @@ include_once('../php-templates/admin-navigation-head.php');
               ?>
             </form>
        
-            <?php if ($current_user_is_a_patient) { ?>
+            <?php if (!$current_user_is_an_admin) { ?>
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
             
                 <div class="form-input">
@@ -228,90 +254,80 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input type="text" value="<?php echo $c_last_name?>"
                     class="form-input" name="last_name" placeholder="Last Name*" required required/>
                 </div> 
-                <div class="form-input">
-                  Nickname
-                  <input type="text" value="<?php echo $c_nickname?>"
-                      class="form-input" name="nickname"  placeholder="Nickname"/>
-                </div> 
+                <?php if ($current_user_is_a_patient) { ?>
+                  <div class="form-input">
+                    Nickname
+                    <input type="text" value="<?php echo $c_nickname?>"
+                        class="form-input" name="nickname"  placeholder="Nickname"/>
+                  </div> 
+                <?php } ?>
                 <div class="form-input">
                   <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
                   <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
                 </div><br>
-                <div class="form-input">
-                  <label>Birth Date</label>
+                <?php if ($current_user_is_a_patient) { ?>
                   <div class="form-input">
-                    <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                    <label>Birth Date</label>
+                    <div class="form-input">
+                      <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                    </div>
                   </div>
-                </div>
-                <div class="form-input">
-                  <label for="address">Address</label><br/>
-                  <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
-                </div><br>
-                Civil Status*
-                <div class="form-input">
-                    <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
-                </div>  
-  
-                <div class="form-input">
-                  <div class="form__text"><label>Medical History</label></div>
-                </div>
-                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
-                  Height* 
-                  <div class="d-flex input-group">
-                    <input value="<?php echo $c_height_ft?>" min='0' type="number" 
-                      class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
-                    <div class="input-group-postpend">
-                      <div id="weight-height" class="input-group-text form__input text-white">ft</div>
-                    </div> 
-                    <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
-                    class="form__input form-control" name="height_in" placeholder="Inches*" required/>
-                    <div class="input-group-postpend">
-                      <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
-                    </div> 
+                
+                  <div class="form-input">
+                    <label for="address">Address</label><br/>
+                    <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
+                  </div><br>
+                  Civil Status*
+                  <div class="form-input">
+                      <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+                  </div>  
+    
+                  <div class="form-input">
+                    <div class="form__text"><label>Medical History</label></div>
                   </div>
-                </div>
-                <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
-                  Weight*   
-                  <div class="d-flex input-group">
-                    <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
-                      required min="0"/>
+                  <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                    Height* 
+                    <div class="d-flex input-group">
+                      <input value="<?php echo $c_height_ft?>" min='0' type="number" 
+                        class="form__input form-control" name="height_ft" placeholder="Feet*" required/> 
                       <div class="input-group-postpend">
-                        <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
+                        <div id="weight-height" class="input-group-text form__input text-white">ft</div>
                       </div> 
+                      <input value="<?php echo $c_height_in?>" min='0' max='11' type="number" 
+                      class="form__input form-control" name="height_in" placeholder="Inches*" required/>
+                      <div class="input-group-postpend">
+                        <div id="weight-height" class=" input-group-text form__input text-white">inch(es)</div>
+                      </div> 
+                    </div>
                   </div>
-                </div><br>
-                Blood Type*
-                <div class="form-input"> 
-                  <input type="text" value="<?php echo $c_blood_type?>"
-                    class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
-                </div>
-                <div class="form-input">  
-                  Diagnosed Condition
-                  <input type="text" value="<?php echo $c_diagnosed_condition?>"
-                    class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-                  Family History
-                  <input type="text" value="<?php echo $c_family_history?>"
-                    class="form__input" name="family_history" placeholder="Family History"/> 
-                  Allergies
-                  <input type="text" value="<?php echo $c_allergies?>"
-                    class="form__input" name="allergies" placeholder="Allergies"/>    
-                </div>
-                <!-- <div class="form_select">
-                  <label>Tetanus Toxoid Vaccinated</label>
-                  <select class="form_select_focus" name="tetanus">
-                    <option value="0" <?php //echo $c_tetanus==0?'selected':''?>>Unvaccinated</option>
-                    <option value="1" <?php //echo $c_tetanus==1?'selected':''?>>Vaccinated</option> 
-                  </select>
-                </div> 
-                <div class="form_select">
-                  <label>Nth Trimester</label>
-                  <select class="form_select_focus" name="trimester">
-                    <option value="0" <?php //echo $c_trimester==0?'selected':''?>>N/A</option>
-                    <option value="1" <?php //echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
-                    <option value="2" <?php //echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
-                    <option value="3" <?php //echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
-                  </select>
-                </div>  -->
+                  <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
+                    Weight*   
+                    <div class="d-flex input-group">
+                      <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" placeholder="Weight*" 
+                        required min="0"/>
+                        <div class="input-group-postpend">
+                          <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
+                        </div> 
+                    </div>
+                  </div><br>
+                  Blood Type*
+                  <div class="form-input"> 
+                    <input type="text" value="<?php echo $c_blood_type?>"
+                      class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
+                  </div>
+                  <div class="form-input">  
+                    Diagnosed Condition
+                    <input type="text" value="<?php echo $c_diagnosed_condition?>"
+                      class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+                    Family History
+                    <input type="text" value="<?php echo $c_family_history?>"
+                      class="form__input" name="family_history" placeholder="Family History"/> 
+                    Allergies
+                    <input type="text" value="<?php echo $c_allergies?>"
+                      class="form__input" name="allergies" placeholder="Allergies"/>    
+                  </div> 
+                <?php } ?>
+               
                 <button class="w-100 btn  text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
               </form> 
               
@@ -319,10 +335,6 @@ include_once('../php-templates/admin-navigation-head.php');
             <?php } ?>
 
             <form class="form form-box px-2" method="post">
-              <?php
-                //if(isset($error)) 
-                    //echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
-              ?> 
               
               Put your current password to authorize the change(s)
               <div class="form-floating mb-2">
