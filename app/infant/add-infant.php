@@ -30,9 +30,8 @@ if (count($_barangay_list)>0) {
   ' ', ud.last_name) name
       FROM users u, patient_details p, user_details ud
       WHERE role=-1 AND ($barangay_select) AND p.user_id=u.user_id AND ud.user_id=u.user_id";
-  $result_patient = mysqli_query($conn, $select1);
   
-  if (mysqli_num_rows($result_patient)>0) {
+  if ($result_patient = mysqli_query($conn, $select1)) {
       foreach($result_patient as $row) {
           $id = $row['user_id'];  
           $name = $row['name'];  
@@ -89,11 +88,11 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
   
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">

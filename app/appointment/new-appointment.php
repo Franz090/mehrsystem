@@ -66,11 +66,11 @@ include_once('../php-templates/admin-navigation-head.php');
 
 
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" >
+  <div class="main_nu" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
@@ -113,12 +113,14 @@ include_once('../php-templates/admin-navigation-head.php');
                     </div>
             </div>  
            
-            <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Appointment</button> 
+            <button class="w-100 btn  text-capitalize" type="submit" name="submit_appointment">Add Appointment</button> 
         </form> 
         <?php } else {
-            if ($current_user_is_a_midwife)  ?>
+                if ($current_user_is_a_midwife) { ?>
             There should be at least one patient (under your assigned barangay) available in the database.
-        <?php }   
+        <?php 
+                } 
+            }   
         ?>
 
  

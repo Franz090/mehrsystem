@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
         // echo $insert;
         if (mysqli_query($conn, $insert))  {
             echo "<script>alert('Vaccination Added!');</script>";
-            header("Location: ../dashboard");
+            header("Location: ./infant-vaccinations.php");
         }
         else { 
             $error .= 'Something went wrong inserting into the database.';
@@ -106,11 +106,11 @@ $page = "add_infant)vaccination";
 include_once('../php-templates/admin-navigation-head.php');
 ?> 
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">

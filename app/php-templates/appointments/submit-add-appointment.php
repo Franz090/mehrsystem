@@ -1,8 +1,8 @@
 <?php
 
 // add appointment
-if(isset($_POST['submit'])) {
-    $_POST['submit'] = null;
+if(isset($_POST['submit_appointment'])) {
+    $_POST['submit_appointment'] = null;
     $error = ''; 
 
     if (empty($_POST['date']))

@@ -58,6 +58,12 @@
             <span class="title">Consultations</span>
         </a>
       </li>
+      <li <?php echo $page == 'infant_vaccinations' ? "class='hovered'":""?>>
+        <a <?php echo $page == 'infant_vaccinations' ? "type='button'":'href="../infant/infant-vaccinations.php"'?>>
+            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="title">Infant Vaccinations</span>
+        </a>
+      </li>
  
 
     <?php 

@@ -12,7 +12,7 @@ $title = ''; // pie chart title
 $curr_date = date("Y-m-d");
 $curr_year = substr($curr_date,0,4);
 // echo "curr yewar: $curr_year";
-$complete_shots_of_vaccines = 15;
+// $complete_shots_of_vaccines = 15;
 
 $session_id = $_SESSION['id'];
 
@@ -244,48 +244,47 @@ if ($current_user_is_a_patient) {
 
 }
 else {
-  $session_id_sql = $current_user_is_an_admin?"":"AND b.assigned_midwife=$session_id";
-  $select2 = "SELECT main.infant_id, infant_name, c_vaccinations, main.user_id
-  FROM (SELECT i.infant_id, CONCAT(i.first_name, 
-        IF(i.middle_name IS NULL OR i.middle_name='', '', 
-            CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
-        ' ', i.last_name) infant_name, i.user_id
-      FROM infants i, patient_details ud, barangays b WHERE i.user_id=ud.user_id AND ud.barangay_id=b.barangay_id AND b.archived=0 $session_id_sql) main
-         LEFT JOIN 
-      (SELECT infant_id, COUNT(infant_id) c_vaccinations FROM infant_vac_records GROUP BY infant_id) c
-        USING (infant_id)"; 
+  // $session_id_sql = $current_user_is_an_admin?"":"AND b.assigned_midwife=$session_id";
+  // $select2 = "SELECT main.infant_id, infant_name, c_vaccinations, main.user_id
+  // FROM (SELECT i.infant_id, CONCAT(i.first_name, 
+  //       IF(i.middle_name IS NULL OR i.middle_name='', '', 
+  //           CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
+  //       ' ', i.last_name) infant_name, i.user_id
+  //     FROM infants i, patient_details ud, barangays b WHERE i.user_id=ud.user_id AND ud.barangay_id=b.barangay_id AND b.archived=0 $session_id_sql) main
+  //        LEFT JOIN 
+  //     (SELECT infant_id, COUNT(infant_id) c_vaccinations FROM infant_vac_records GROUP BY infant_id) c
+  //       USING (infant_id)"; 
   
 // echo $select2;
-  if($result2 = mysqli_query($conn, $select2))  {
-    foreach($result2 as $row)  {
-      $id = $row['infant_id'];  
-      $name = $row['infant_name'];  
-      $c_vaccinations = $row['c_vaccinations'];   
-      array_push($infant_list, array(
-        'id' => $id,
-        'name' => $name, 
-        'status' => ($c_vaccinations==$complete_shots_of_vaccines
-          ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
-    } 
-    mysqli_free_result($result2);
-    // print_r($nurse_list);
+  // if($result2 = mysqli_query($conn, $select2))  {
+  //   foreach($result2 as $row)  {
+  //     $id = $row['infant_id'];  
+  //     $name = $row['infant_name'];  
+  //     $c_vaccinations = $row['c_vaccinations'];   
+  //     array_push($infant_list, array(
+  //       'id' => $id,
+  //       'name' => $name, 
+  //       'status' => ($c_vaccinations==$complete_shots_of_vaccines
+  //         ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
+  //   } 
+  //   mysqli_free_result($result2);
+  //   // print_r($nurse_list);
   
-  } 
-  else  { 
-    $error = 'Something went wrong fetching data from the database.'; 
-  }   
+  // } 
+  // else  { 
+  //   $error = 'Something went wrong fetching data from the database.'; 
+  // }   
 
   // chart data 
-  $past_6_months = date("Y-m-d", strtotime('-5 months'));
-  $bar_chart_month_list = [];
-  $bar_chart_month_list_label = [];
-  // generate months to chart
-  for ($i=5; $i > -1; $i--) { 
-    $str_to_time = strtotime("-$i months");
-    array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
-    array_push($bar_chart_month_list_label,  date("M", $str_to_time));
-  }
-  $bar_chart_data = [];
+  // $bar_chart_month_list = [];
+  // $bar_chart_month_list_label = [];
+  // // generate months to chart
+  // for ($i=5; $i > -1; $i--) { 
+  //   $str_to_time = strtotime("-$i months");
+  //   array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
+  //   array_push($bar_chart_month_list_label,  date("M", $str_to_time));
+  // }
+  // $bar_chart_data = [];
 }
 
  
@@ -396,53 +395,6 @@ if (!$current_user_is_a_patient) {
       include_once('../php-templates/dashboard/patient.php');
   
     ?>
-    <!-- TODO: move  -->
-    <?php  
-      if ($current_user_is_a_patient) {
-    ?> 
-    <!-- <div class="px-5" style="margin-bottom:20vh;">
-      <table class="table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Infant Birth Names</th>
-            <th scope="col">Vaccination Status</th>
-            <?php if ($current_user_is_a_midwife) { ?> 
-                <th scope="col">Action</th>
-            <?php } ?> 
-          </tr>
-        </thead>
-        <tbody> 
-        <?php if (count($infant_list)==0) { ?> 
-          <tr> 
-            <td colspan='4' style="text-align:center">No Infant Records</td> 
-          </tr> 
-        <?php } else 
-              foreach ($infant_list as $key => $value) { ?> 
-          <tr>
-            <th scope="row"><?php echo ($key+1);?></th>
-            <td><?php echo $value['name'];?></td>
-            <td><?php echo $value['status'];?></td>
-            <?php if ($current_user_is_a_midwife) { ?> 
-            <td>
-                <?php if ($value['status']!="Complete") { ?>
-                  <a href="../infant/add-infant-vaccination.php?id=<?php echo $value['id'] ?>">
-                    <button class="edit btn btn-primary btn-sm btn-inverse">Add Vaccination</button></a>
-                <?php } ?>
-                <a href="../infant/edit-infant.php?id=<?php echo $value['id'] ?>">
-                    <button class="edit btn btn-success btn-sm btn-inverse">Edit</button></a>
-                <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $value['id']?>">
-                  <button class="btn btn-dark btn-sm btn-inverse">
-                  See Vaccination Record</button></a> 
-            </td>
-            <?php } ?>  
-          </tr> 
-        <?php } ?> 
-        </tbody>
-      </table>
-    </div>  -->
-    <?php } ?> 
-    <!-- TODO: end move  -->
   </div>  
 </div>
                           

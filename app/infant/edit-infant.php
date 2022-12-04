@@ -56,11 +56,11 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
