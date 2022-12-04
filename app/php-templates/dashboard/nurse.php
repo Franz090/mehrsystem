@@ -129,25 +129,41 @@ if ($admin==1) {
 
 <div class="container-fluid default">
     RHU  
-    <div class="col"> 
-        Total Number of Patients: <?php echo $total_patient_count;?>
-    </div> 
-    <div class="col">  
-        Tetanus Toxoid Vaccinated Patients: <?php echo $total_vacc ?>  
-    </div> 
+    
+      <!-- cards -->
+            <div class="cardBoxs">
+                <div class="cards">
+                    <div>
+                        <div class="number"><?php echo $total_patient_count;?></div>
+                        <div class="cardsNames">Total Number of Patients</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div>
+                        <div class="number"><?php echo $total_vacc ?></div>
+                        <div class="cardsNames">Tetanus Toxoid Vaccinated</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="eyedrop-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
 
     <!-- Add Charts --> 
-    <div class="d-flex row p-4 justify-content-center"> 
-        <div class="col-md-5">
-            <h4>Number of Patients per Barangay</h4>
+    <div class="graphBox"> 
+        <div class="col-md-5 box">
+            <h6>Number of Patients per Barangay</h6>
             <canvas id="patients"></canvas>
         </div>
-        <div class="col-md-7">
-            <h4>Number of Infants Vaccinated</h4>
+        <div class="col-md-7 box">
+            <h6 class="text-center">Number of Infants Vaccinated</h6>
             <canvas id="infant"></canvas>
         </div>
     </div> 
-    
+   
     <!-- chart => https://www.chartjs.org/ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
