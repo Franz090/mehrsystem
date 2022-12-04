@@ -127,7 +127,9 @@ body {
 	right: 80px;
 	left: initial;
 	transition: 0.5s;
+	
 }
+
 .main_nu.active .logo_nu img {
 	display: none;
 	opacity: 0;
@@ -190,7 +192,7 @@ body {
 }
 
 /* card box  */
-.cardBox {
+.cardBoxs {
 	position: relative;
 	width: 100%;
 	padding: 20px;
@@ -198,7 +200,7 @@ body {
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 30px;
 }
-.cardBox .card {
+.cardBoxs .cards {
 	position: relative;
 	background: var(--white);
 	padding: 30px;
@@ -208,27 +210,29 @@ body {
 	cursor: pointer;
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
-.cardBox .card .numbers {
+.cardBoxs .cards .number {
 	position: relative;
 	font-weight: 500;
 	font-size: 2.5em;
 	color: var(--green);
 }
-.cardBox .card .cardName {
+.cardBoxs .cards .cardsNames {
 	color: var(--black2);
-	font-size: 1.1em;
+	font-style: normal;
 	margin-top: 5px;
+	font-weight: 600;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.cardBox .card .iconBx {
+.cardBoxs .cards .iconBx {
 	font-size: 3.5em;
 	color: var(--black2);
 }
-.cardBox .card:hover {
+.cardBoxs .cards:hover {
 	background: var(--green);
 }
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx {
+.cardBoxs .cards:hover .number,
+.cardBoxs .cards:hover .cardsNames,
+.cardBoxs .cards:hover .iconBx {
 	color: var(--white);
 }
 .calendar {
@@ -240,9 +244,10 @@ body {
 	grid-gap: 30px;
 	min-height: 200px;
 }
-h4 {
+h6 {
 	color: var(--green);
-	margin: 7px;
+	margin: 7px!important;
+	font-weight: bold!important;
 }
 
 /* responsive design */
@@ -267,12 +272,12 @@ h4 {
 	.main_nu.active {
 		left: 300px;
 	}
-	.cardBox {
+	.cardBoxs {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 @media (max-width: 485px) {
-	.cardBox {
+	.cardBoxs {
 		grid-template-columns: repeat(1, 1fr);
 	}
 	.cardHeader h2 {
@@ -311,4 +316,98 @@ h4 {
 	justify-content: end;
 	align-items: center;
 	gap: 5px;
+}
+.graphBox {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 30px;
+	min-height: 200px;
+}
+
+.graphBox .box {
+	position: relative;
+	background: #fff;
+	padding: 20px;
+	width: 100%;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
+/* responsive design */
+@media (max-width:991px) {
+	.graphBox {
+		grid-template-columns: 1fr;
+		height: auto;
+		width: auto;
+	}
+
+	.navigation {
+		left: -300px;
+	}
+
+	.navigation.active {
+		width: 300px;
+		left: 0px;
+	}
+
+	.main {
+		width: 100%;
+		left: 0;
+	}
+
+	.main.active {
+		left: 300px;
+	}
+
+	.cardBoxs {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+
+}
+
+@media (max-width:485px) {
+
+	.cardBox {
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.cardHeader h2 {
+		font-size: 20px;
+	}
+
+	.user {
+		min-width: 40px;
+	}
+
+	.user img {
+		right: -100%;
+		left: initial;
+		position: fixed;
+	}
+
+	.navigation {
+		width: 100%;
+		left: -100%;
+		z-index: 1000;
+	}
+
+	.navigation.active {
+		width: 100%;
+		left: 0;
+	}
+
+	.toggle {
+		z-index: 10001;
+	}
+
+	.main.active .toggle {
+		color: var(--white);
+		position: fixed;
+		right: 0;
+		left: initial;
+
+	}
 }

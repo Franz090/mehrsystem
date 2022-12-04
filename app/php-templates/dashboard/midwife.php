@@ -102,17 +102,30 @@ if ($current_user_is_a_midwife) {
 ?> 
 
 <div class="container-fluid default"> 
-Midwife <br/>
-    <div class="col-lg-10 col-sm-7 my-5 mr-5 text-center"> 
-        <div class="row ">  
-            <div class="col">
-                Total Number of Patients: <?php echo $total_patients ?>  
+Midwife  <!-- cards -->
+            <div class="cardBoxs">
+                <div class="cards">
+                    <div>
+                        <div class="number"><?php echo $total_patients ?> </div>
+                        <div class="cardsNames">Total Number of Patients</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div>
+                        <div class="number"><?php echo $appointments_today ?></div>
+                        <div class="cardsNames"> Appointments Today</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="today-outline"></ion-icon>
+                    </div>
+                </div>
             </div>
-            <div class="col">  
-                Appointments Today: <?php echo $appointments_today ?>  
-            </div> 
-        </div> 
-    </div>
+   
+            
+           
     <div class="container py-5" id="page-container">
         <div class="row" style="width:100%;">
 
