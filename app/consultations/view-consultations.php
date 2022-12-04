@@ -16,6 +16,7 @@ $session_id = $_SESSION['id'];
 
 @include '../php-templates/midwife/get-assigned-barangays.php';
 
+$patient_list = []; 
 $consultation_list = [];
 if (count($_barangay_list)>0 && $admin==0 || $admin==-1) { 
   // $yester_date = date("Y-m-d", strtotime('-1 day'));
@@ -80,47 +81,63 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
     mysqli_free_result($result);
     $error = 'Something went wrong fetching data from the database.'; 
   }  
+
+  // fetch patients 
+  $select1 = "SELECT users.user_id id, trimester,
+  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name
+  FROM users, user_details d, patient_details p
+  WHERE role=-1 AND $barangay_select d.user_id=users.user_id AND p.user_id=users.user_id";
+  // echo $select1;
+  if ($result_patient = mysqli_query($conn, $select1)) {
+    foreach($result_patient as $row) {
+        $id = $row['id'];  
+        $trimester = $row['trimester'];  
+        $name = $row['name'];  
+        array_push($patient_list, array('id' => $id,
+        'name' => $name,
+        'trimester' => $trimester
+    ));
+    } 
+    mysqli_free_result($result_patient);
+  } 
+  else  { 
+    $error = 'Something went wrong fetching data from the database.'; 
+  }   
 } 
 
+// add  
+if(isset($_POST['submit_consultation'])) {
+  $_POST['submit_consultation'] = null;
+  $error = ''; 
 
+  if (empty($_POST['date']))
+    $error .= 'Fill up input fields that are required (with * mark)! ';
+  else {    
+    $patient_arr = explode("AND",$_POST['patient_id']);
+    $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
+    $patient_trimester = mysqli_real_escape_string($conn, ($patient_arr[1]));
+
+    $t = empty(trim($_POST['treatment']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['treatment']) . "'");
+    $m = empty(trim($_POST['prescription']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['prescription']) . "'");
+    $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
+    
+  
+    $insert = "INSERT INTO consultations(patient_id, date, treatment, prescription, treatment_file, midwife_appointed, trimester) 
+        VALUES($patient_id, '$date', $t, $m, NULL, $session_id, $patient_trimester);";
+
+    if (mysqli_query($conn, $insert))  { 
+      echo "<script>alert('Consultation Added!');window.location.href='./view-consultations.php'; </script>"; 
+    }
+    else {  
+      $error .= 'Something went wrong adding the appointment to the database.';
+    }  
+  }  
+} 
 
 $conn->close(); 
 
 include_once('../php-templates/admin-navigation-head.php');
-?>
-
-<!-- <style>
-  .table {
-   margin: auto;
-   width: 100%!important;
-   padding-top: 13px;
-   
-  }
-  .btn{
-    border-radius: 3px;
-    margin: 2px 4px;
-  }
-  
-  h3{
-    font-weight: 900;  
-    background-color: #ececec;  
-    padding-top: 10px;
-    position: relative;
-    top: 8px;
-  }
-  a{
-    text-decoration: none;
-    color: white;
-  }
-  a:hover{
-    color: #e2e5de;
-  }
-  .btn{
-    font-weight: 400;
-    font-size: 15px;
-    
-  } 
-</style> -->
+?> 
 
 <div class="container_nu"> 
   <!-- Sidebar -->
@@ -129,9 +146,83 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
+<!-- modal -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+        <form class="m-5" action="" method="POST" id="new_consultation">
+          <?php
+            if (count($_barangay_list)==0) {
+          ?> 
+            You can't give consultations because you are not assigned to any barangay.
+          <?php
+            } else  if (count($patient_list)>0) { 
+              if(isset($error)) 
+                echo '<span class="form__input-error-message">'.$error.'</span>'; 
+            ?> 
+            <div class="form__input-group">
+              <div class="form_select">
+                <label>Patient</label>
+                <select class="form_select_focus" name="patient_id">
+              <?php
+                if (count($patient_list)>0) {
+                  foreach ($patient_list as $key => $value) { 
+              ?> 
+                    <option value="<?php echo $value['id'];?>AND<?php echo $value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
+                      <?php echo $value['name'];?></option>
+              <?php  
+                  }    
+                }
+              ?>  
+                </select>
+              </div> 
+              <div class="form-input">
+                <label>Consultation Date and Time*</label> 
+                <input type="datetime-local" name="date" required />
+              </div>
+              <div class="form-input">     
+                <label>Prescription</label>
+                <input type="text" name="prescription" placeholder="Prescription"/>  
+              </div>
+              <div class="form-input">     
+                <label>Treatment</label>
+                <input type="text" name="treatment" placeholder="Treatment"/>  
+              </div> 
+            </div>  
+          <?php
+            } else {
+              ?>
+              There should be at least one patient (under your assigned barangay) available in the database.
+              <?php
+            }
+          
+          
+          ?>  
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="submit" type="submit" name="submit_consultation" form="new_consultation">Add Consultation</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->
+
+
     <div class="container-fluid">
        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
- 
+       <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 text-end mb-3">
+              <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
+            </div>
+          </div>
+        </div>
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';

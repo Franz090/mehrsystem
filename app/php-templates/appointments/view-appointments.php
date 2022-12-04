@@ -12,9 +12,9 @@ $session_id = $_SESSION['id'];
 @include '../php-templates/midwife/get-assigned-barangays.php';
 
 $appointment_list = [];
+$patient_list = [];  
 if (count($_barangay_list)>0) { 
   $yester_date = date("Y-m-d", strtotime('-1 day'));
-  // fetch appointments 
   $barangay_select = '';
   $barangay_list_length_minus_1 = count($_barangay_list)-1;
   foreach ($_barangay_list as $key => $value) { 
@@ -23,19 +23,18 @@ if (count($_barangay_list)>0) {
       $barangay_select .= "OR ";
     }
   } 
+  // fetch appointments  
   $select = "SELECT a.patient_id id, a.appointment_id a_id, CONCAT(i.first_name, 
-  IF(i.middle_name IS NULL OR i.middle_name='', '', 
-      CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
-  ' ', i.last_name) name, health_center, date
-FROM appointments a, user_details i, barangays b, patient_details p
-WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id 
-  AND p.user_id=i.user_id AND a.date>='$yester_date 00:00:00'
-  AND ($barangay_select)  AND b.assigned_midwife=$session_id
-  AND a.status=".($pending?0:1).";";
-  
-  // echo $yester_date; 
+    IF(i.middle_name IS NULL OR i.middle_name='', '', 
+        CONCAT(' ', SUBSTRING(i.middle_name, 1, 1), '.')), 
+    ' ', i.last_name) name, health_center, date
+  FROM appointments a, user_details i, barangays b, patient_details p
+  WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id 
+    AND p.user_id=i.user_id AND a.date>='$yester_date 00:00:00'
+    AND ($barangay_select)  AND b.assigned_midwife=$session_id
+    AND a.status=".($pending?0:1).";";
 
-  // echo $select;
+
   if($result = mysqli_query($conn, $select))  {
     foreach($result as $row)  {
       $id = $row['id'];  
@@ -74,7 +73,33 @@ WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id
     mysqli_free_result($result);
     $error = 'Something went wrong fetching data from the database.'; 
   }  
+
+  // fetch patients 
+  $select_patients = "SELECT u.user_id, trimester,
+      CONCAT(ud.first_name, 
+  IF(ud.middle_name IS NULL OR ud.middle_name='', '', 
+      CONCAT(' ', SUBSTRING(ud.middle_name, 1, 1), '.')), 
+  ' ', ud.last_name) name
+      FROM users u, patient_details p, user_details ud
+      WHERE role=-1 AND ($barangay_select) AND p.user_id=u.user_id AND ud.user_id=u.user_id";
+  
+  if ($result_patient = mysqli_query($conn, $select_patients)) {
+    foreach($result_patient as $row) {
+        $id = $row['user_id'];  
+        $name = $row['name'];  
+        $trimester = $row['trimester'];  
+        array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
+    } 
+    mysqli_free_result($result_patient);
+  } 
+  else  { 
+    mysqli_free_result($result_patient);
+    $error = 'Something went wrong fetching data from the database.'; 
+  }    
 } 
+
+@include '../php-templates/appointments/submit-add-appointment.php';
+
 
 $conn->close(); 
 
@@ -88,36 +113,66 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- Page Content -->
   <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
-    <!-- Modal -->
+
+
+<!-- Modal -->
+    <?php 
+    if (count($_barangay_list)) {
+      if (count($patient_list)>0) {?>
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Appointment</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
-        <form class="m-5" action="" method="POST">
-         <div class=" mb-3">
-                <label>Patient</label>
-                <select  class="form-select"  name="patient_id_trimester">
-                </select>
-            </div> 
+        <form class="m-5" action="" method="POST" id="new_appointment">
+          <?php
+            if(isset($error)) 
+              echo '<span class="form__input-error-message">'.$error.'</span>'; 
+          ?>
+          <div class=" mb-3">
+            <label>Patient</label>
+            <select  class="form-select"  name="patient_id_trimester">
+                <?php
+                    if (count($patient_list)>0) {
+                        foreach ($patient_list as $key => $value) { 
+                ?> 
+                    <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
+                        <?php echo $value['name'];?></option>
+                <?php  
+                        }    
+                    }
+                ?>  
+            </select> 
+          </div> 
             <div class="mb-3">
                 <label>Appointment Date and Time*</label> 
                 <div class="input-group date" id="datepicker">
-                <input class="form-control option" type="datetime-local" name="date"/>
-                    </div>
+                  <input class="form-control option" type="datetime-local" name="date"/>
+                </div>
             </div>  
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="submit" type="submit" name="submit">Add Appointment</button>
+        <button class="btn btn-primary" id="submit" type="submit" name="submit_appointment" form="new_appointment">Add Appointment</button>
       </div>
     </div>
   </div>
 </div>
+    <?php 
+      } else { ?>
+      There should be at least one patient (under your assigned barangay) available in the database.
+    <?php
+      }
+    } else {?>
+      You can't book an appointment because you are not assigned to any barangay.
+    <?php 
+    } 
+    ?>
 
+<!-- End Modal -->
 
     <div class="container-fluid default">
       <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
