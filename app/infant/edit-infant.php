@@ -47,6 +47,38 @@ if (count($_barangay_list)>0) {
 } 
 
 //TODO: update infant record
+if (isset($_POST['submit'])) {
+    $_POST['submit'] = null;
+    $error = '';  
+
+    if (
+        empty(trim($_POST['first_name'])) || 
+        empty(trim($_POST['last_name'])) ||
+        empty(trim($_POST['blood_type']))
+    )
+        $error .= 'Fill up input fields that are required (with * mark)! ';
+    else {
+        $first_name = mysqli_real_escape_string($conn, trim($_POST['first_name'])); 
+        $middle_name = empty(trim($_POST['middle_name']))?"NULL":"'".mysqli_real_escape_string($conn, $_POST['middle_name'])."'";
+        $last_name = mysqli_real_escape_string($conn, $_POST['last_name']); 
+        $nickname = empty(trim($_POST['nickname']))?"NULL":"'".mysqli_real_escape_string($conn, $_POST['nickname'])."'";
+        $sex = mysqli_real_escape_string($conn, $_POST['sex']); 
+        $blood_type = mysqli_real_escape_string($conn, trim($_POST['blood_type'])); 
+        $legitimacy = mysqli_real_escape_string($conn, $_POST['legitimacy']); 
+    
+        $up = "UPDATE infants SET first_name='$first_name', middle_name=$middle_name,
+            first_name='$first_name', nickname=$nickname,
+            sex='$sex', blood_type='$blood_type', legitimacy=$legitimacy
+        WHERE infant_id=$infant_id_from_get;";
+            // echo $up;
+        if (mysqli_query($conn, $up))  {
+            echo "<script>alert('Infant Record Updated!');window.location.href='./infant-vaccinations.php';</script>";
+        }
+        else { 
+            $error .= 'Something went wrong updating the infant record in the database.';
+        } 
+    } 
+}
 
  
 
@@ -105,8 +137,8 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form_select">
                 <label>Legitimacy</label>
                 <select class="form_select_focus" name="legitimacy">
-                <option value="1" <?php echo $c_legitimacy==1?"selected":""?>>Legitimate</option>
-                <option value="0" <?php echo $c_legitimacy==0?"selected":""?>>Illegitimate</option> 
+                    <option value="1" <?php echo $c_legitimacy==1?"selected":""?>>Legitimate</option>
+                    <option value="0" <?php echo $c_legitimacy==0?"selected":""?>>Illegitimate</option> 
                 </select>
             </div>  
             <button class="w-100 btn text-capitalize mb-5" type="submit" name="submit">Update Infant</button> 

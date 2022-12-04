@@ -215,14 +215,16 @@ include_once('../php-templates/admin-navigation-head.php');
 
 
     <div class="container-fluid">
-       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
-       <div class="card-body">
-          <div class="row">
-            <div class="col-md-12 text-end mb-3">
-              <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
+        <?php if ($current_user_is_a_midwife) { ?> 
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 text-end mb-3">
+                <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
+              </div>
             </div>
           </div>
-        </div>
+        <?php } ?>
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
