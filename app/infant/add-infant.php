@@ -96,10 +96,10 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4><hr>
-
-        <div class="container default table-responsive p-4">
+      <div class="containerBox row m-2 my-4"> <div class="box">
+        <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
           <div class="col-md-8 col-lg-5 ">
+            
         <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
           <?php
             if(isset($error)) 
@@ -108,41 +108,57 @@ include_once('../php-templates/admin-navigation-head.php');
               echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
             } else { 
           ?> 
-          <div class="form-input">
-            <input type="text" class="form-input" name="first_name" autofocus placeholder="First Name*" required>
-            <input type="text" class="form-input" name="middle_name" placeholder="Middle Name">
-            <input type="text" class="form-input" name="last_name" placeholder="Last Name*" required>
-            <input type="text" class="form-input" name="nickname" placeholder="Nickname"> 
-            
+      <div class="d-flex flex-row ">
+        <div class="col-md-9 col-lg-11 p-2">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" required>
+            <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name">
+            <label for="floatingInput">Middle Name</label>
+            </div>
+             <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputInvalid"  name="last_name" placeholder="Last Name*" required>
+            <label for="floatingInput">Last Name</label>
+            </div>
+             <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputInvalid"  name="nickname" placeholder="Nickname"> 
+            <label for="floatingInput">Nick Name</label>
           </div>  
-          <div class="form_select">
-            <label>Sex</label>
-            <select class="form_select_focus" name="sex">
+          <div class=" mb-3">
+            <!-- <label>Sex</label> -->
+            <select class="form-select pt-2 pb-2" name="sex">
+              <option value="Male" disabled>Gender</option>
               <option value="Male" selected>Male</option>
               <option value="Female">Female</option> 
               <option value="Other">Other</option> 
             </select>
-          </div> 
-          <div class="form__select-group">
+          </div>
+          </div>  
+        <div class="col-md-9 col-lg-11 p-1">
+          <div class="mb-3">
             <label>Birth Date*</label> 
-            <div class="form-input">
-              <input type="date" name="b_date" required />
+            <div class="input-group date" id="datepicker">
+              <input class="form-control option pt-2 pb-2" type="date" name="b_date" required />
             </div>
           </div> 
-          <div class="form-input">
-            <input type="text" class="form-input" name="blood_type" placeholder="Blood Type*" required>
+            
+           
+          <div class="form-floating mb-3">
+            <input type="text"  class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type*" required>
+            <label for="floatingInput">Blood Type</label>
           </div> 
-          <div class="form_select">
+          <div class=" mb-3">
             <label>Legitimacy</label>
-            <select class="form_select_focus" name="legitimacy">
+            <select class="form-select pt-2 pb-2" name="legitimacy">
               <option value="1" selected>Legitimate</option>
               <option value="0">Illegitimate</option> 
             </select>
           </div> 
-          <div class="form_select-group">
+          <div class=" mb-3">
             <label>Parent</label>
-            <div class="form_select">
-            <select class="form_select_focus" name="user_id">
+            <select class="form-select pt-2 pb-2" name="user_id">
                 <?php 
                   foreach ($patient_list as $key => $value) { 
                 ?> 
@@ -154,12 +170,14 @@ include_once('../php-templates/admin-navigation-head.php');
                 ?>  
             </select>
           </div>
-          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Register Infant</button> 
+          </div>
+        </div>
+          <button style="position:relative;left:200px;" class="w-100 btn  text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
           <?php } ?>  
         </form>  
           </div>
         </div>
-
+                </div>
       </div>
     </div>
 

@@ -134,7 +134,7 @@ include_once('../php-templates/admin-navigation-head.php');
           ?>
           <div class=" mb-3">
             <label>Patient</label>
-            <select  class="form-select"  name="patient_id_trimester">
+            <select  class="form-select pt-2 pb-2"  name="patient_id_trimester">
                 <?php
                     if (count($patient_list)>0) {
                         foreach ($patient_list as $key => $value) { 
@@ -150,7 +150,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="mb-3">
                 <label>Appointment Date and Time*</label> 
                 <div class="input-group date" id="datepicker">
-                  <input class="form-control option" type="datetime-local" name="date"/>
+                  <input class="form-control option pt-2 pb-2" type="datetime-local" name="date"/>
                 </div>
             </div>  
         </form>
@@ -175,15 +175,23 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- End Modal -->
 
     <div class="container-fluid default">
-      <div  class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+      <div  class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
       <div class="card-body">
-        <div class="row">
-          <a href="./<?php echo $pending?'approved':'pending'?>-appointment.php">See <?php echo $pending?'Approved':'Pending'?> Appointments</a>
-          <div class="col-md-12 text-end mb-3">
-            <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
-          </div>
+        
+       <div class="d-flex p-1 justify-content-between">
+           <select style="position:relative;left:-12px;width: 13%;padding: .275rem 1.25rem .175rem .50rem;" class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
+            <option value="" hidden><?php echo $pending?'Pending':'Approved'?></option>
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+          </select>
+ 
+ <!-- <a href="./<?php echo $pending?'approved':'pending'?>-appointment.php">See <?php echo $pending?'Approved':'Pending'?> Appointments</a> -->
+      
+          
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
         </div>
-      </div>
+  </div>
+ 
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
@@ -242,7 +250,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 ?> 
             </tbody>
           </table>
-        </div>    
+      </div>   
       <?php } ?> 
         </div>              
       </div>
@@ -268,7 +276,8 @@ include_once('../php-templates/admin-navigation-head.php');
     });
   } );
 </script>
-
+<!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
+<script src="../js/option-dropdown.js"></script>
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

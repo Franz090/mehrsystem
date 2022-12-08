@@ -235,7 +235,7 @@ sup {
 
 a {
     color: #029670;
-    text-decoration: underline
+    text-decoration: none!important;
 }
 
 a:hover {
@@ -1081,7 +1081,7 @@ textarea.form-control-lg {
     font-family: "Open Sans", sans-serif;
 }
 .option{
-    font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif!important;
 }
 
 .form-select:focus {

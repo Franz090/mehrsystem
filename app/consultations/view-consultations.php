@@ -166,9 +166,9 @@ include_once('../php-templates/admin-navigation-head.php');
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <div class="form__input-group">
-              <div class="form_select">
+              <div class="mb-3">
                 <label>Patient</label>
-                <select class="form_select_focus" name="patient_id">
+                <select class="form-select" name="patient_id">]
               <?php
                 if (count($patient_list)>0) {
                   foreach ($patient_list as $key => $value) { 
@@ -181,17 +181,20 @@ include_once('../php-templates/admin-navigation-head.php');
               ?>  
                 </select>
               </div> 
-              <div class="form-input">
+              <div class="mb-3">
                 <label>Consultation Date and Time*</label> 
-                <input type="datetime-local" name="date" required />
+                 <div class="input-group date" id="datepicker">
+                <input class="form-control option" type="datetime-local" name="date" required />
               </div>
-              <div class="form-input">     
-                <label>Prescription</label>
-                <input type="text" name="prescription" placeholder="Prescription"/>  
               </div>
-              <div class="form-input">     
-                <label>Treatment</label>
-                <input type="text" name="treatment" placeholder="Treatment"/>  
+              <div class="mb-3">     
+                <label for="prescription">Prescription</label>
+                <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"></textarea> 
+              </div>
+              <div class="mb-3">     
+                <label for="treatment">Treatment</label>
+                <textarea id="treatment"  name="treatment" 
+                class="form-control form-control-md w-100"></textarea>
               </div> 
             </div>  
           <?php
@@ -206,7 +209,9 @@ include_once('../php-templates/admin-navigation-head.php');
         </form>
       </div>
       <div class="modal-footer">
+       
         <button class="btn btn-primary" id="submit" type="submit" name="submit_consultation" form="new_consultation">Add Consultation</button>
+      
       </div>
     </div>
   </div>
@@ -218,9 +223,9 @@ include_once('../php-templates/admin-navigation-head.php');
        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
        <div class="card-body">
           <div class="row">
-            <div class="col-md-12 text-end mb-3">
-              <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
-            </div>
+               <div class="d-flex p-1 justify-content-between">
+              <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
+          </div>
           </div>
         </div>
         <div class="table-padding table-responsive">

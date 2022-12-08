@@ -242,18 +242,19 @@ include_once('../php-templates/admin-navigation-head.php');
        
             <?php if (!$current_user_is_an_admin) { ?>
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
-            
-                <div class="form-input">
-                  First Name
-                  <input type="text" value="<?php echo $c_first_name?>"
-                      name="first_name" placeholder="First Name*" required>
-                  Middle Name
-                  <input type="text" value="<?php echo $c_middle_name?>"
-                    class="form-input" name="middle_name" placeholder="Middle Name">
-                  Last Name
-                  <input type="text" value="<?php echo $c_last_name?>"
-                    class="form-input" name="last_name" placeholder="Last Name*" required required/>
-                </div> 
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" value="<?php echo $c_first_name?>" id="floatingInputInvalid"  name="first_name" placeholder="First Name" tabindex="11">
+                  <label for="floatingInput">First Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" value="<?php echo $c_middle_name?>" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name" tabindex="11">
+                  <label for="floatingInput">MIddle Name</label>
+                </div>
+                 <div class="form-floating mb-3">
+                  <input type="text" class="form-control" value="<?php echo $c_last_name?>" id="floatingInputInvalid"  name="last_name" placeholder="Last Name" tabindex="11">
+                  <label for="floatingInput">Last Name</label>
+                </div>
+              
                 <?php if ($current_user_is_a_patient) { ?>
                   <div class="form-input">
                     Nickname

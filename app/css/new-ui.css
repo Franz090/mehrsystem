@@ -244,6 +244,9 @@ body {
 	grid-gap: 30px;
 	min-height: 200px;
 }
+#calendar{
+	color: #352e35!important;
+}
 h6 {
 	color: var(--green);
 	margin: 7px!important;
@@ -317,6 +320,26 @@ h6 {
 	align-items: center;
 	gap: 5px;
 }
+.containerBox {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 30px;
+	min-height: 200px;
+}
+
+.containerBox .box {
+	position: relative;
+	background: #fff;
+	padding: 20px;
+	width: 100%;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
+
+
 .graphBox {
 	position: relative;
 	width: 100%;
@@ -335,12 +358,35 @@ h6 {
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 	border-radius: 20px;
 }
+.calendarBox {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 30px;
+	min-height: 200px;
+}
+
+.calendarBox .box {
+	position: relative;
+	background: #fff;
+	padding: 20px;
+	width: 100%;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
 /* responsive design */
 @media (max-width:991px) {
 	.graphBox {
 		grid-template-columns: 1fr;
 		height: auto;
 		width: auto;
+	}
+	.calendarBox{
+		grid-template-columns: 1fr;
+			height: auto;
+			width: auto;
 	}
 
 	.navigation {
@@ -373,7 +419,10 @@ h6 {
 	.cardBox {
 		grid-template-columns: repeat(1, 1fr);
 	}
-
+	     .calendarBox {
+	     	grid-template-columns: repeat(1fr);
+	     	
+	     }
 	.cardHeader h2 {
 		font-size: 20px;
 	}
