@@ -125,13 +125,15 @@ Midwife  <!-- cards -->
             </div>
    
             
-           
-    <div class="container py-5" id="page-container">
-        <div class="row" style="width:100%;">
 
-            <div class="col-md-9">
-                <div id="calendar"></div>
-            </div>
+    <div class="container-fluid" id="page-container">
+        <div class="row" style="width:100%;">
+<div class="calendarBox"> 
+        <div class="box">
+             <h6 class="text-center">Calendar</h6>
+             <div id="calendar"></div>
+        </div>
+           
 
         <div class="col-md-3">
           <div class="cardt rounded-0 shadow">
@@ -183,13 +185,13 @@ Midwife  <!-- cards -->
           <div class="modal-content rounded-0">
             <div class="modal-header rounded-0">
                 <h5 class="modal-title">Appointment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             
             </div>
             <div class="modal-body rounded-0">
                 <div class="container-fluid">
                     <dl>
                         <dt class="text-muted">Name</dt>
-                        <dd id="title" class="fw-bold fs-4"></dd>
+                        <dd id="title" class="fw-bold text-md-start fs-6"></dd>
                         <!-- <dt class="text-muted">Description</dt> -->
                         <!-- <dd id="description" class=""></dd> -->
                         <dt class="text-muted">Appointment Date and Time</dt>
@@ -201,7 +203,7 @@ Midwife  <!-- cards -->
                 <div class="text-end">
                     <!-- <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button> -->
                     <!-- <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Cancel</button> -->
-                    <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
           </div>

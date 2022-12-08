@@ -12,6 +12,7 @@
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
 
   <link rel="stylesheet" href="../css/new-ui.css"/> 
+
   <link rel="stylesheet" href="../css/dashboard.css"> 
   <link rel="stylesheet" href="../css/bootstrap.min.css">
  
@@ -48,7 +49,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
  
- 
+ <!-- icon frameworks go to https://ionic.io/ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <?php //echo isset($additional_script) ? $additional_script : ''; ?>
   <link rel="stylesheet" href="../css/theme.css"> 

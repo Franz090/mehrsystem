@@ -178,19 +178,19 @@ include_once('../php-templates/admin-navigation-head.php');
             
             <div class="form__input-group">
                 <?php if ($admin==0) { ?> 
-                <div class="form-input">
+                <div class="mb-3">
                     <label>Consultation Date and Time*</label> 
-                    <input type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
+                    <input class="form-control option" type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
                 </div>
-                <div class="form-input">     
-                    <label>Prescription</label>
-                    <input type="text" name="prescription" value="<?php echo $m_prescription?>" 
-                    placeholder="Prescription"/>  
+                <div class="mb-3">     
+                    <label for="prescription">Prescription</label>
+                    <!-- <input type="text" name="prescription" value="<?php echo $m_prescription?>" 
+                    placeholder="Prescription"/>   -->
+                    <textarea  id="prescription" name="prescription" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_prescription?></textarea>
                 </div>
-                <div class="form-input">     
-                    <label>Treatment</label>
-                    <input type="text" name="treatment" value="<?php echo $m_treatment?>" 
-                    placeholder="Treatment"/>  
+                <div class="mb-3">     
+                    <label for="treatment">Treatment</label>
+                    <textarea  id="treatment" name="treatment" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_treatment?></textarea>
                 </div>
                 <?php } ?> 
                 <!-- <div class="form_select"> 
