@@ -143,21 +143,37 @@ Midwife  <!-- cards -->
             <div class="card-body">
                 <div class="container-fluid">
                     <form method="post" id="schedule-form">
-                        <!-- <input type="hidden" name="id" value="">  -->
                         <div class="form-group mb-2">
                             <label for="patient" class="control-label">Patient</label>
-                            <select  class="form-select"  name="patient_id_trimester" id="patient">
+                            <!-- <select  class="form-select"  name="patient_id_trimester" id="patient">
                                 <?php
-                                    if (count($patient_list)>0) {
-                                        foreach ($patient_list as $key => $value) { 
+                                    // if (count($patient_list)>0) {
+                                        // foreach ($patient_list as $key => $value) { 
                                 ?> 
-                                    <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                                        <?php echo $value['name'];?></option>
+                                    <option class="option" value="<?php // echo $value['id']."AND".$value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
+                                        <?php // echo $value['name'];?></option>
                                 <?php  
-                                        }    
-                                    }
+                                        // }    
+                                    // }
                                 ?>  
-                            </select>
+                            </select> -->
+                            
+                            <!-- searchable select  -->
+                            <div class="wrapper_ss">
+                                <div class="select-btn_ss">
+                                    <span>Select A Patient</span>
+                                    <i class="uil uil-angle-down"></i>
+                                </div>
+                                <div class="content_ss">
+                                    <div class="search_ss">
+                                        <i class="uil uil-search"></i>
+                                        <input spellcheck="false" type="text" placeholder="Search">
+                                    </div>
+                                    <ul class="options_ss"></ul>
+                                </div>
+                            </div>
+
+
                             <label for="start_datetime" class="control-label">Appointment Date</label>
                             <!-- <input type="datetime-local" class="form-control form-control-sm rounded-0" 
                             name="date" id="start_datetime" required> -->

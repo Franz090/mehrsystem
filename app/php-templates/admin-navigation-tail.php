@@ -60,7 +60,46 @@ CONDITIONS AND ADDING A MODAL TO DELETE FUNCTION -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+<!-- searchable select js  -->
+<script>
+  const wrapper = document.querySelector(".wrapper_ss"),
+    selectBtn = wrapper.querySelector(".select-btn_ss"),
+    searchInp = wrapper.querySelector("input"),
+    options = wrapper.querySelector(".options_ss");
 
+  let countries = [];
+
+  function addCountry(selectedCountry) {
+      options.innerHTML = "";
+      countries.forEach(country => {
+          let isSelected = country == selectedCountry ? "selected" : "";
+          let li = `<li onclick="updateName(this)" class="${isSelected}">${country}</li>`;
+          options.insertAdjacentHTML("beforeend", li);
+      });
+  }
+  addCountry();
+
+  function updateName(selectedLi) {
+      searchInp.value = "";
+      addCountry(selectedLi.innerText);
+      wrapper.classList.remove("active");
+      selectBtn.firstElementChild.innerText = selectedLi.innerText;
+  }
+
+  searchInp.addEventListener("keyup", () => {
+      let arr = [];
+      let searchWord = searchInp.value.toLowerCase();
+      arr = countries.filter(data => {
+          return data.toLowerCase().startsWith(searchWord);
+      }).map(data => {
+          let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
+          return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
+      }).join("");
+      options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Oops! Country not found</p>`;
+  });
+
+  selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+</script>
 
 </body>
 

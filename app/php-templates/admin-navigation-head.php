@@ -55,6 +55,100 @@
 
   <?php //echo isset($additional_script) ? $additional_script : ''; ?>
   <link rel="stylesheet" href="../css/theme.css"> 
-  
+  for searchable select
+  <style> 
+    /* *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    } */
+    ::selection{
+      color: #fff;
+      background: #4285f4;
+    }
+    .wrapper_ss{
+    }
+    .select-btn_ss, li{
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .select-btn_ss{
+      padding: 0 20px;
+      background: #fff;
+      border-radius: 7px;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .select-btn_ss i{
+      transition: transform 0.3s linear;
+    }
+    .wrapper_ss.active .select-btn_ss i{
+      transform: rotate(-180deg);
+    }
+    .content_ss{
+      display: none;
+      padding: 20px;
+      margin-top: 15px;
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .wrapper_ss.active .content_ss{
+      display: block;
+    }
+    .content_ss .search_ss{
+      position: relative;
+    }
+    .search_ss i{
+      top: 50%;
+      left: 15px;
+      color: #999;
+      pointer-events: none;
+      transform: translateY(-50%);
+      position: absolute;
+    }
+    .search_ss input{
+      width: 100%;
+      outline: none;
+      border-radius: 5px;
+      padding: 0 20px 0 43px;
+      border: 1px solid #B3B3B3;
+    }
+    .search_ss input:focus{
+      padding-left: 42px;
+      border: 2px solid #4285f4;
+    }
+    .search_ss input::placeholder{
+      color: #bfbfbf;
+    }
+    .content_ss .options_ss{
+      margin-top: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 7px;
+    }
+    .options_ss::-webkit-scrollbar{
+      width: 7px;
+    }
+    .options_ss::-webkit-scrollbar-track{
+      background: #f1f1f1;
+      border-radius: 25px;
+    }
+    .options_ss::-webkit-scrollbar-thumb{
+      background: #ccc;
+      border-radius: 25px;
+    }
+    .options_ss::-webkit-scrollbar-thumb:hover{
+      background: #b3b3b3;
+    }
+    .options_ss li{
+      padding: 0 13px;
+    }
+    .options_ss li:hover, li.selected{
+      border-radius: 5px;
+      background: #f2f2f2;
+    }
+  </style>
 </head>
 
