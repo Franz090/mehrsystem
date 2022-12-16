@@ -61,12 +61,13 @@ include_once('php-templates/css/black-bg-remover.php');
                 echo '<span class="form__input-error-message">'.$error.'</span>';   
         ?> 
         </div>
-        <div  class="form-input">
-            <input type="text"  autofocus  name="email" 
+       <div class="form-input-group mb-3">
+            <input type="text"  class="rounded form-control form-control-md pb-2 pt-2" autofocus  name="email" 
                 placeholder="Email" tabindex="10" required>  
         </div> 
    <div class="mb-3 position-relative ">
-        <button class="w-100 btn btn-dark-dark  text-capitalize" style="font-family: arial;position:absolute;bottom: -2px;" type="submit" name="submit" >Reset Password</button>
+        <button class="btn btn-primary w-100 text-capitalize" style="position:absolute;bottom: -2px;" type="submit" name="submit" >Reset Password</button>
+        
         <br>
         <br>
     </div>

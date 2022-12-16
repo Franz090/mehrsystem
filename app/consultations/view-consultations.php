@@ -219,7 +219,7 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- end modal -->
 
 
-    <div class="container-fluid">
+    <div class="container-fluid default">
        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
        <div class="card-body">
           <div class="row">
@@ -242,7 +242,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <?php } ?>  
                 <th scope="col">Treatment File</th>  
                 <th scope="col">Barangay</th>  
-                <th scope="col">Date and Time</th>
+                <th scope="col" >Date and Time</th>
                 <?php if ($admin==0) { ?>  
                   <th scope="col">Contact Number(s)</th>
                 <?php } ?>  
@@ -279,7 +279,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td>
                           <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>">
                            <div class="p-1">
-                            <button class="edit btn btn-success btn-sm btn-inverse">Update</button></a>
+                            <button class="mb-2 edit btn btn-success btn-sm btn-inverse">Update</button></a>
                           <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
                             <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
                             <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">

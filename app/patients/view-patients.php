@@ -133,16 +133,18 @@ include_once('../php-templates/admin-navigation-head.php');
                             <?php if ($admin==0) { 
                               if ($value['status']==0) {?> 
                                <a href="approve-patient.php?id=<?php echo $value['id'] ?>">  
-                                  <button type="button" class="me-1 btn btn-primary btn-sm btn-inverse">
+                                  <button type="button" class="mb-2 btn btn-primary btn-sm btn-inverse">
                                     Approve</button></a>  
                                <a href="reject-patient.php?id=<?php echo $value['id'] ?>">  
-                                  <button type="button" class="me-1 btn btn-danger btn-sm btn-inverse">
+                                  <button type="button" class="mb-2 btn btn-danger btn-sm btn-inverse">
                                     Reject</button></a>  
 
                               <?php } else { ?>
+                                <div class="mb-2">
                                 <a href="edit-patient.php?id=<?php echo $value['id'] ?>">  
-                                  <button type="button" class="me-1 btn btn-success btn-sm btn-inverse">
+                                  <button type="button" class=" btn btn-success btn-sm btn-inverse">
                                     Update</button></a>  
+                                  </div>
                                 <!-- <a href="delete-patient.php?id=<?php //echo $value['id'] ?>&details_id=<?php //echo $value['details_id'] ?>&med_history_id=<?php //echo $value['med_history_id'] ?>"> -->
                                   <!-- <button onclick="temp_func() " type="button" class="me-1 btn-danger btn-sm btn-inverse ">Delete</button> -->
                                 <!-- </a> --> 

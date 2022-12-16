@@ -16,9 +16,11 @@ body {
 	min-height: 100vh;
 	overflow-x: hidden;
 }
+
 .container_nu {
 	position: relative;
-	width: 100%;
+	min-width:100vw;
+	
 }
 .navigation_nu {
 	position: fixed;
@@ -127,6 +129,9 @@ body {
 	right: 80px;
 	left: initial;
 	transition: 0.5s;
+	
+}
+.display_name{
 	
 }
 

@@ -84,7 +84,7 @@ include_once('../php-templates/admin-navigation-head.php');
   .table-condensed {
     width: 100% !important;
   }
-  a{
+  /* a{
     text-decoration: none;
     color: white; 
   }
@@ -95,7 +95,10 @@ include_once('../php-templates/admin-navigation-head.php');
     font-weight: 400;
     font-size: 15px;
     font-family: arial,sans-serif;
-  } 
+  }  */
+  h6{
+    font-size: 20px;
+  }
 </style>
 
 <div class="container_nu"> 
@@ -106,12 +109,12 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Vaccinations of <?php echo $infant_name ?></h4><hr>
-
+      <div class="background-head row m-2 my-4">
+        <h6 class="pb-3 m-3 fw-bolder">Vaccinations of <em><?php echo $infant_name ?></em></h6>
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12" id="table-position">
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3"> 
+            <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <thead class="table-light" colspan="3"> 
                 <tr>
                     <th scope="col" class="col-sm-1">#</th>
                     <th scope="col">Type</th>  
@@ -128,10 +131,13 @@ include_once('../php-templates/admin-navigation-head.php');
                         <td><?php echo $value['type']; ?></td>  
                         <td><?php echo $value['date']; ?></td> 
                         <td> 
-                            <a href="update-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>">   
-                                <button class="del btn btn-warning btn-sm btn-inverse">
+                          
+                            <a href="update-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>"> 
+                            <div class="p1">  
+                                <button class=" edit btn btn-success btn-sm btn-inverse">
                                 Update</button>
-                            </a>    
+                            </a>
+                          </div>    
                         </td>
                     </tr>
                 <?php 
@@ -161,7 +167,7 @@ include_once('../php-templates/admin-navigation-head.php');
       responsive: true,
       language:{
         search: "_INPUT_",
-        searchPlaceholder: "Search Midwife",
+        searchPlaceholder: "Search Vaccine",
       }
     });
   });
