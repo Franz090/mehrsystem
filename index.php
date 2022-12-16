@@ -26,7 +26,7 @@
 
     <nav class="navbar"> <h2 style="position:relative;bottom: 15px;color: #169f84;">Maternity Health Monitoring Record in Santa Cruz Laguna</h2></a>
        
-        <a href="#home">home</a>
+        <a href="#home">TEST</a>
         <a href="#services">services</a>
         <a href="#about">about</a>
         <a href="#review">review</a>
