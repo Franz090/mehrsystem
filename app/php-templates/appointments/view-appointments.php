@@ -181,7 +181,7 @@ include_once('../php-templates/admin-navigation-head.php');
        <div class="d-flex p-1 justify-content-between">
            <select style="position:relative;left:-12px;width: 13%;padding: .275rem 1.25rem .175rem .50rem;" class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
             <option value="" hidden><?php echo $pending?'Pending':'Approved'?></option>
-            <option value="Approved">Approved</option>
+            <option value="Approved">Approveds</option>
             <option value="Pending">Pending</option>
           </select>
  
