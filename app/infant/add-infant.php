@@ -74,7 +74,7 @@ if(isset($_POST['submit'])) {
     // echo $insert;
     
     if (mysqli_query($conn, $insert))  {
-      echo "<script>alert('Infant Added!');</script>";
+      echo "<script>alert('Infant Added!');window.location.href='./add-infant.php';</script>";
     }
     else { 
         $error .= 'Something went wrong inserting into the database.';
@@ -96,88 +96,102 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="containerBox row m-2 my-4"> <div class="box">
-        <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
+      <div class="containerBox row m-2 my-4"> 
+        <div class="box">
+
+          <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
           <div class="col-md-8 col-lg-5 ">
-            
-        <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
-          <?php
-            if(isset($error)) 
-              echo '<span class="form__input-error-message">'.$error.'</span>'; 
-            else if (count($patient_list)==0) {
-              echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
-            } else { 
-          ?> 
-      <div class="d-flex flex-row ">
-        <div class="col-md-9 col-lg-11 p-2">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" required>
-            <label for="floatingInput">First Name</label>
-            </div>
-            <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name">
-            <label for="floatingInput">Middle Name</label>
-            </div>
-             <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInputInvalid"  name="last_name" placeholder="Last Name*" required>
-            <label for="floatingInput">Last Name</label>
-            </div>
-             <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInputInvalid"  name="nickname" placeholder="Nickname"> 
-            <label for="floatingInput">Nick Name</label>
-          </div>  
-          <div class=" mb-3">
-            <!-- <label>Sex</label> -->
-            <select class="form-select pt-2 pb-2" name="sex">
-              <option value="Male" disabled>Gender</option>
-              <option value="Male" selected>Male</option>
-              <option value="Female">Female</option> 
-              <option value="Other">Other</option> 
-            </select>
-          </div>
-          </div>  
-        <div class="col-md-9 col-lg-11 p-1">
-          <div class="mb-3">
-            <label>Birth Date*</label> 
-            <div class="input-group date" id="datepicker">
-              <input class="form-control option pt-2 pb-2" type="date" name="b_date" required />
-            </div>
-          </div> 
-            
-           
-          <div class="form-floating mb-3">
-            <input type="text"  class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type*" required>
-            <label for="floatingInput">Blood Type</label>
-          </div> 
-          <div class=" mb-3">
-            <label>Legitimacy</label>
-            <select class="form-select pt-2 pb-2" name="legitimacy">
-              <option value="1" selected>Legitimate</option>
-              <option value="0">Illegitimate</option> 
-            </select>
-          </div> 
-          <div class=" mb-3">
-            <label>Parent</label>
-            <select class="form-select pt-2 pb-2" name="user_id">
-                <?php 
-                  foreach ($patient_list as $key => $value) { 
-                ?> 
-                  <option value="<?php echo $value['id'];?>" 
-                    <?php echo $key===0?'selected':'';?>>
-                      <?php echo $value['name'];?></option>
-                <?php  
-                  }   
-                ?>  
-            </select>
-          </div>
-          </div>
-        </div>
-          <button style="position:relative;left:200px;" class="w-100 btn  text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
-          <?php } ?>  
-        </form>  
-          </div>
-        </div>
+            <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
+              <?php
+                if(isset($error)) 
+                  echo '<span class="form__input-error-message">'.$error.'</span>'; 
+                else if (count($patient_list)==0) {
+                  echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
+                } else { 
+              ?> 
+              <div class="d-flex flex-row ">
+                <div class="col-md-9 col-lg-11 p-2">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" required>
+                    <label for="floatingInput">First Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name">
+                    <label for="floatingInput">Middle Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid"  name="last_name" placeholder="Last Name*" required>
+                    <label for="floatingInput">Last Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid"  name="nickname" placeholder="Nickname"> 
+                    <label for="floatingInput">Nick Name</label>
+                  </div>  
+                  <div class=" mb-3"> 
+                    <select class="form-select pt-2 pb-2" name="sex">
+                      <option value="Male" disabled>Gender</option>
+                      <option value="Male" selected>Male</option>
+                      <option value="Female">Female</option> 
+                      <option value="Other">Other</option> 
+                    </select>
+                  </div>
+                </div>  
+                <div class="col-md-9 col-lg-11 p-1">
+                  <div class="mb-3">
+                    <label>Birth Date*</label> 
+                    <div class="input-group date" id="datepicker">
+                      <input class="form-control option pt-2 pb-2" type="date" name="b_date" required />
+                    </div>
+                  </div>  
+                  <div class="form-floating mb-3">
+                    <input type="text"  class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type*" required>
+                    <label for="floatingInput">Blood Type</label>
+                  </div> 
+                  <div class=" mb-3">
+                    <label>Legitimacy</label>
+                    <select class="form-select pt-2 pb-2" name="legitimacy">
+                      <option value="1" selected>Legitimate</option>
+                      <option value="0">Illegitimate</option> 
+                    </select>
+                  </div> 
+                  <div class=" mb-3">
+                    <label>Parent</label>
+                    <!-- <select class="form-select pt-2 pb-2" name="user_id">
+                      <?php 
+                        //foreach ($patient_list as $key => $value) { 
+                      ?> 
+                        <option value="<?php //echo $value['id'];?>" 
+                          <?php //echo $key===0?'selected':'';?>>
+                            <?php //echo $value['name'];?>
+                        </option>
+                      <?php  
+                        //}   
+                      ?>  
+                    </select> -->
+                    <!-- searchable select  -->
+                    <div class="wrapper_ss">
+                      <div class="select-btn_ss">
+                        <span>Select A Patient</span>
+                        <i class="uil uil-angle-down"></i>
+                      </div>
+                      <input type="text" style="display:none;" name="user_id" class="patient_id_trimester"/>
+                      <div class="content_ss">
+                        <div class="search_ss">
+                          <i class="uil uil-search"></i>
+                          <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                        </div>
+                        <ul class="options_ss"></ul>
+                      </div>
+                    </div> 
+                  </div>
                 </div>
+              </div>
+              <button style="position:relative;left:200px;" class="w-100 btn  text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
+              <?php } ?>  
+            </form>  
+          </div> 
+
+        </div>
       </div>
     </div>
 

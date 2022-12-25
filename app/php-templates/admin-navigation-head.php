@@ -55,7 +55,7 @@
 
   <?php //echo isset($additional_script) ? $additional_script : ''; ?>
   <link rel="stylesheet" href="../css/theme.css"> 
-  for searchable select
+  <!-- for searchable select -->
   <style> 
     /* *{
       margin: 0;
@@ -68,7 +68,7 @@
     }
     .wrapper_ss{
     }
-    .select-btn_ss, li{
+    li{
       display: flex;
       align-items: center;
       cursor: pointer;

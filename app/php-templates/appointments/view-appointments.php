@@ -132,27 +132,27 @@ include_once('../php-templates/admin-navigation-head.php');
             if(isset($error)) 
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?>
-          <div class=" mb-3">
-            <label>Patient</label>
-            <select  class="form-select pt-2 pb-2"  name="patient_id_trimester">
-                <?php
-                    if (count($patient_list)>0) {
-                        foreach ($patient_list as $key => $value) { 
-                ?> 
-                    <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                        <?php echo $value['name'];?></option>
-                <?php  
-                        }    
-                    }
-                ?>  
-            </select> 
+          <!-- searchable select  -->
+          <div class="wrapper_ss">
+              <div class="select-btn_ss">
+                  <span>Select A Patient</span>
+                  <i class="uil uil-angle-down"></i>
+              </div>
+              <input type="text" style="display:none;" name="patient_id_trimester" class="patient_id_trimester"/>
+              <div class="content_ss">
+                  <div class="search_ss">
+                      <i class="uil uil-search"></i>
+                      <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                  </div>
+                  <ul class="options_ss"></ul>
+              </div>
           </div> 
-            <div class="mb-3">
-                <label>Appointment Date and Time*</label> 
-                <div class="input-group date" id="datepicker">
-                  <input class="form-control option pt-2 pb-2" type="datetime-local" name="date"/>
-                </div>
-            </div>  
+          <div class="mb-3">
+              <label>Appointment Date and Time*</label> 
+              <div class="input-group date" id="datepicker">
+                <input class="form-control option pt-2 pb-2" type="datetime-local" name="date"/>
+              </div>
+          </div>  
         </form>
       </div>
       <div class="modal-footer">
@@ -278,6 +278,8 @@ include_once('../php-templates/admin-navigation-head.php');
 </script>
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>
+
+
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

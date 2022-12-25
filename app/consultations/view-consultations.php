@@ -154,7 +154,7 @@ include_once('../php-templates/admin-navigation-head.php');
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-        <div class="modal-body">
+      <div class="modal-body">
         <form class="m-5" action="" method="POST" id="new_consultation">
           <?php
             if (count($_barangay_list)==0) {
@@ -168,18 +168,34 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form__input-group">
               <div class="mb-3">
                 <label>Patient</label>
-                <select class="form-select" name="patient_id">]
-              <?php
-                if (count($patient_list)>0) {
-                  foreach ($patient_list as $key => $value) { 
-              ?> 
-                    <option value="<?php echo $value['id'];?>AND<?php echo $value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                      <?php echo $value['name'];?></option>
-              <?php  
-                  }    
-                }
-              ?>  
-                </select>
+                <!-- <select class="form-select" name="patient_id">]
+                  <?php
+                    //if (count($patient_list)>0) {
+                      //foreach ($patient_list as $key => $value) { 
+                  ?> 
+                    <option value="<?php //echo $value['id'];?>AND<?php //echo $value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
+                      <?php//echo $value['name'];?></option>
+                  <?php  
+                    //  }    
+                    //}
+                  ?>  
+                </select> -->
+                <!-- searchable select  -->
+                <div class="wrapper_ss">
+                  <div class="select-btn_ss">
+                    <span>Select A Patient</span>
+                    <i class="uil uil-angle-down"></i>
+                  </div>
+                  <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
+                  <div class="content_ss">
+                    <div class="search_ss">
+                      <i class="uil uil-search"></i>
+                      <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                    </div>
+                    <ul class="options_ss"></ul>
+                  </div>
+                </div> 
+                <!-- end searchable select  -->
               </div> 
               <div class="mb-3">
                 <label>Consultation Date and Time*</label> 
