@@ -1,7 +1,7 @@
 <?php 
   if ($current_user_is_a_patient) { // patient 
     if ($status) {
-?>
+  ?>
     Patient <br/>
     BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
 
@@ -75,7 +75,7 @@
       var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
       console.log(scheds)
     </script>
-<?php
+  <?php
     } else {
 ?>  
     <!-- status inactive  -->
