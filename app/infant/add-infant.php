@@ -197,7 +197,7 @@ include_once('../php-templates/admin-navigation-head.php');
               </div>
               <div class="d-grid grap-2 h-100">
                 <div class="align-self-start mr-auto text-end">
-                  <button style="position:relative;right: 50%;top: 66px;" class="w-100 btn btn-primary text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
+                  <button style="" class="w-100 btn btn-primary text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
                 </div>
               </div>
               <?php } ?>  
