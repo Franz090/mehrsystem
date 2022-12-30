@@ -97,6 +97,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4">
+
         <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
         <div class="box p-5">
           <div class="col-md-8 col-lg-5 ">
@@ -204,6 +205,7 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>  
           </div>  
         </div>
+
       </div>
     </div>
 

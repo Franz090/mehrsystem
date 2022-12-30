@@ -157,11 +157,13 @@ include_once('../php-templates/admin-navigation-head.php');
                     value="<?php echo $c_blood_type?>">
                     <label for="floatingInput">Blood Type</label>
             </div> 
+
             <div class="mb-3"> 
                 <select class="form_select_focus" name="legitimacy">
                     <option selected disabled>Select Legitimacy</option>
                     <option value="1" <?php echo $c_legitimacy==1?"selected":""?>>Legitimate</option>
                     <option value="0" <?php echo $c_legitimacy==0?"selected":""?>>Illegitimate</option> 
+
                 </select>
             </div>  
             <button class="w-100 btn text-capitalize mb-5" type="submit" name="submit">Update Infant</button> 

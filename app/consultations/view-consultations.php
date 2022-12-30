@@ -168,6 +168,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form__input-group">
               <div class="mb-3">
                 <label>Patient</label>
+
                 <!-- <select class="form-select" name="patient_id">]
                   <?php
                     //if (count($patient_list)>0) {
@@ -195,12 +196,13 @@ include_once('../php-templates/admin-navigation-head.php');
                     <ul class="options_ss"></ul>
                   </div>
                 </div> 
-                <!-- end searchable select  -->
+                <!-- end searchable select  --> 
               </div> 
               <div class="mb-3">
                 <label>Consultation Date and Time*</label> 
                  <div class="input-group date" id="datepicker">
                 <input class="form-control option" type="datetime-local" name="date" required />
+
               </div>
               </div>
               <div class="mb-3">     
@@ -208,6 +210,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"></textarea> 
               </div>
               <div class="mb-3">     
+
                 <label for="treatment">Treatment</label>
                 <textarea id="treatment"  name="treatment" 
                 class="form-control form-control-md w-100"></textarea>
@@ -236,6 +239,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
 
     <div class="container-fluid default">
+
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
       <?php if ($current_user_is_a_midwife) { ?>
         <div class="card-body">
@@ -243,6 +247,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="d-flex p-1 justify-content-between">
               <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
             </div>
+
           </div>
         </div> 
         <?php } ?>

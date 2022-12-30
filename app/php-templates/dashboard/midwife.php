@@ -110,9 +110,11 @@ if ($current_user_is_a_midwife) {
                 <div class="number"><?php echo $total_patients ?> </div>
                 <div class="cardsNames">Total Number of Patients</div>
             </div>
+
             <div class="iconBx">
                 <ion-icon name="people-outline"></ion-icon>
             </div>
+
             </div>
             <div class="cards">
                 <div>
@@ -123,6 +125,7 @@ if ($current_user_is_a_midwife) {
                     <ion-icon name="today-outline"></ion-icon>
                 </div>
             </div>
+
         </div> 
 
         <div class="container-fluid" id="page-container">
@@ -212,6 +215,7 @@ if ($current_user_is_a_midwife) {
                     <div class="text-end">
                         <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
                     </div>
+
                 </div>
             </div>
         </div>

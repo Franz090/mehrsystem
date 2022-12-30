@@ -132,6 +132,7 @@ include_once('../php-templates/admin-navigation-head.php');
             if(isset($error)) 
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?>
+
           <!-- searchable select  -->
           <div class="wrapper_ss">
               <div class="select-btn_ss">
@@ -153,6 +154,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <input class="form-control option pt-2 pb-2" type="datetime-local" name="date"/>
               </div>
           </div>  
+
         </form>
       </div>
       <div class="modal-footer">
