@@ -158,7 +158,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <label for="floatingInput">Blood Type</label>
             </div> 
             <div class="mb-3"> 
-                <select class="form_select_focus" name="legitimacy" required>
+                <select class="form_select_focus" name="legitimacy">
                     <option selected disabled>Select Legitimacy</option>
                     <option value="1" <?php echo $c_legitimacy==1?"selected":""?>>Legitimate</option>
                     <option value="0" <?php echo $c_legitimacy==0?"selected":""?>>Illegitimate</option> 

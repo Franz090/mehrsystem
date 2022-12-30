@@ -157,8 +157,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div> 
                   <div class="mb-3"> 
                     <select class="form-select pt-2 pb-2" name="legitimacy" required>
-                      <option selected disabled>Select Legitimacy</option>
-                      <option value="1" selected>Legitimate</option>
+                      <option value="" selected disabled>Select Legitimacy</option>
+                      <option value="1">Legitimate</option>
                       <option value="0">Illegitimate</option> 
                     </select>
                   </div> 
