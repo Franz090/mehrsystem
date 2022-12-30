@@ -86,7 +86,7 @@ else  {
 // $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
 $consultations_list = [];
 // fetch patient consultations 
-$select2_b = "SELECT c.date, prescription, treatment, treatment_file, consultation_id id,
+$select2_b = "SELECT c.date, prescription, consultation_id id,
   CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
    trimester
   FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c 
@@ -101,17 +101,17 @@ if($result2_b = mysqli_query($conn, $select2_b))  {
     $id = $row['id'];  
     $date = $row['date'];  
     $trimester = $row['trimester'];  
-    $treatment = $row['treatment'];  
-    $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);
+    // $treatment = $row['treatment'];  
+    // $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);
     $midwife = $row['midwife'];  
     $prescription = $row['prescription'];  
     $trimester = $row['trimester'];  
     array_push($consultations_list, array(
       'id' => $id,
       'date' => $date,
-      'treatment' => $treatment,
+      // 'treatment' => $treatment,
       'midwife' => $midwife,
-      'treatment_file' => $treatment_file,
+      // 'treatment_file' => $treatment_file,
       'prescription' => $prescription,
       'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A'))
     ));
@@ -335,29 +335,29 @@ include_once('../php-templates/admin-navigation-head.php');
                           echo $value['trimester'];  
                         ?>  
                       </td> 
-                      <?php if ($value['treatment']!='') {?>
-                        <td class="col-md-6 fw-bold">
+                      <?php //if ($value['treatment']!='') {?>
+                        <!-- <td class="col-md-6 fw-bold">
                           Treatment
                         </td>
                         <td  class="col-md-6">
                           <?php
-                            echo $value['treatment'];  
+                            //echo $value['treatment'];  
                           ?>  
-                        </td>
+                        </td> -->
                          
-                        <?php if ($value['treatment_file']!='') {?> 
-                          <td class="col-md-6 fw-bold">
+                        <?php //if ($value['treatment_file']!='') {?> 
+                          <!-- <td class="col-md-6 fw-bold">
                             Treatment File
                           </td>
                           <td  class="col-md-6">
                             <a target="_blank" style="color:#000;"
-                              href="../consultations/view-treatment-file.php?id=<?php echo $value['treatment_file']?>">
+                              href="../consultations/view-treatment-file.php?id=<?php //echo $value['treatment_file']?>">
                               View Photo</a>  
-                          </td>
+                          </td> -->
 
-                        <?php } ?>
+                        <?php //} ?>
                        
-                      <?php }?>
+                      <?php //}?>
                       <?php if ($value['prescription']!='') {?>
                         <td class="col-md-6 fw-bold">
                           Prescription

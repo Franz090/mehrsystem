@@ -39,7 +39,7 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
   $select = "SELECT c.patient_id id, consultation_id c_id, CONCAT(d.first_name, 
   IF(d.middle_name IS NULL OR d.middle_name='', '', 
       CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
-  ' ', d.last_name) name, health_center, date, treatment_file
+  ' ', d.last_name) name, health_center, date
   FROM consultations c, user_details d, barangays b, patient_details p
   WHERE c.patient_id=d.user_id AND b.barangay_id=p.barangay_id 
     AND $barangay_select p.user_id=d.user_id $patient_str;";
@@ -62,12 +62,12 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
       $c_no = $_contact_num;  
       $c_id = $row['c_id'];  
       $name = $row['name'];   
-      $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);   
+      // $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);   
       $date = $row['date'];  
       $bgy = $row['health_center'];  
       array_push($consultation_list, array(
         'id' => $id,
-        'treatment_file' => $treatment_file,
+        // 'treatment_file' => $treatment_file,
         'c_id' => $c_id,
         'name' => $name,  
         'contact' => $c_no,
@@ -90,13 +90,13 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
   // echo $select1;
   if ($result_patient = mysqli_query($conn, $select1)) {
     foreach($result_patient as $row) {
-        $id = $row['id'];  
-        $trimester = $row['trimester'];  
-        $name = $row['name'];  
-        array_push($patient_list, array('id' => $id,
+      $id = $row['id'];  
+      $trimester = $row['trimester'];  
+      $name = $row['name'];  
+      array_push($patient_list, array('id' => $id,
         'name' => $name,
         'trimester' => $trimester
-    ));
+      ));
     } 
     mysqli_free_result($result_patient);
   } 
@@ -117,13 +117,13 @@ if(isset($_POST['submit_consultation'])) {
     $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
     $patient_trimester = mysqli_real_escape_string($conn, ($patient_arr[1]));
 
-    $t = empty(trim($_POST['treatment']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['treatment']) . "'");
+    // $t = empty(trim($_POST['treatment']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['treatment']) . "'");
     $m = empty(trim($_POST['prescription']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['prescription']) . "'");
     $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
     
   
-    $insert = "INSERT INTO consultations(patient_id, date, treatment, prescription, treatment_file, midwife_appointed, trimester) 
-        VALUES($patient_id, '$date', $t, $m, NULL, $session_id, $patient_trimester);";
+    $insert = "INSERT INTO consultations(patient_id, date, prescription, midwife_appointed, trimester) 
+        VALUES($patient_id, '$date',  $m, $session_id, $patient_trimester);";
 
     if (mysqli_query($conn, $insert))  { 
       echo "<script>alert('Consultation Added!');window.location.href='./view-consultations.php'; </script>"; 
@@ -209,12 +209,12 @@ include_once('../php-templates/admin-navigation-head.php');
                 <label for="prescription">Prescription</label>
                 <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"></textarea> 
               </div>
-              <div class="mb-3">     
+              <!-- <div class="mb-3">     
 
                 <label for="treatment">Treatment</label>
                 <textarea id="treatment"  name="treatment" 
                 class="form-control form-control-md w-100"></textarea>
-              </div> 
+              </div>  -->
             </div>  
           <?php
             } else {
@@ -263,7 +263,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <?php if ($admin==0) { ?>  
                   <th scope="col">Patient Name</th> 
                 <?php } ?>  
-                <th scope="col">Treatment File</th>  
+                <!-- <th scope="col">Treatment File</th>   -->
                 <th scope="col">Barangay</th>  
                 <th scope="col" >Date and Time</th>
                 <?php if ($admin==0) { ?>  
@@ -285,14 +285,14 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php if ($admin==0) { ?>  
                           <td><?php echo $value['name']; ?></td>
                         <?php } ?> 
-                        <?php if ($value['treatment_file']=='') { ?>  
-                          <td>No File</td> 
-                        <?php } else {?>  
-                          <td> <a target="_blank" style="color:#000;"
-                              href="./view-treatment-file.php?id=<?php echo $value['treatment_file']?>">
+                        <?php //if ($value['treatment_file']=='') { ?>  
+                          <!-- <td>No File</td>  -->
+                        <?php //} else {?>  
+                          <!-- <td> <a target="_blank" style="color:#000;"
+                              href="./view-treatment-file.php?id=<?php //echo $value['treatment_file']?>">
                               View Photo</a> 
-                          </td> 
-                        <?php } ?> 
+                          </td>  -->
+                        <?php //} ?> 
                         <td><?php echo $value['barangay']; ?></td>
                         <td><?php $dtf = date_create($value['date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
@@ -300,14 +300,19 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td><?php echo $value['contact']; ?></td> 
                         <?php } ?> 
                         <td>
-                          <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>">
-                           <div class="p-1">
-                            <button class="mb-2 edit btn btn-success btn-sm btn-inverse">Update</button></a>
-                          <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                            <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
-                            <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
-                              <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
-                        </div>
+                          <div class="p-1">
+                            <?php if ($current_user_is_a_midwife) {?>
+                              <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
+                                <button class="mb-2 edit btn btn-success btn-sm btn-inverse">
+                                  Update 
+                                </button>
+                              </a>
+                            <?php }?>
+                            <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
+                              <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
+                              <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
+                                <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
+                          </div>
                         </td>
                     </tr>
                 <?php 

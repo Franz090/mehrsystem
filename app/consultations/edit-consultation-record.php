@@ -4,16 +4,16 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-nurse.php';
+@include '../php-templates/redirect/midwife-only.php';
 
 
 $session_id = $_SESSION['id'];
 $session_id_str = ($admin==0?"":("AND u.user_id=". $session_id)) ;
 // fetch consultation to edit 
 $id_from_get = $_GET['id'];
-$select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id, treatment_file,
+$select_c_to_edit = "SELECT u.user_id u_id, c.consultation_id c_id,
     CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
-    date, treatment, prescription
+    date, prescription
 FROM users u, user_details d, patient_details p, consultations c
 WHERE u.user_id=d.user_id AND c.consultation_id=$id_from_get AND 
     c.patient_id=u.user_id $session_id_str";
@@ -24,9 +24,9 @@ if ($result_c_to_edit = mysqli_query($conn, $select_c_to_edit)) {
         $m_u_id = $row['u_id'];   
         $m_c_id = $row['c_id'];   
         // $m_trimester = $row['trimester'];   
-        $m_treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15); 
+        // $m_treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15); 
         $m_date = $row['date'];   
-        $m_treatment = $row['treatment'];   
+        // $m_treatment = $row['treatment'];   
         $m_prescription = $row['prescription'];    
     } 
     mysqli_free_result($result_c_to_edit);
@@ -85,7 +85,7 @@ if(isset($_POST['submit'])) {
         if ($admin==0) {
             // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
             
-            $treatment = empty($_POST['treatment'])?'NULL':("'".mysqli_real_escape_string($conn, $_POST['treatment'])."'");
+            // $treatment = empty($_POST['treatment'])?'NULL':("'".mysqli_real_escape_string($conn, $_POST['treatment'])."'");
             $prescription = empty($_POST['prescription'])?'NULL':("'".mysqli_real_escape_string($conn, $_POST['prescription'])."'");
             $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
         }
@@ -93,45 +93,42 @@ if(isset($_POST['submit'])) {
             $date = mysqli_real_escape_string($conn, $m_date); // ex: 2022-09-24T00:55
             $date_arr = explode(' ',$date); // ex: ['2022-09-24', '00:55']
          
-            if (isset($_FILES['treatment_file']) && $_FILES['treatment_file']['error']!==4) { // error 4 is no file
-                $tp_treatment_file = $_FILES['treatment_file'];
-                // print_r($tp_treatment_file);
-                $file_name_arr = explode('.', $tp_treatment_file['name']);
-                $file_ext = end($file_name_arr);
+            // if (isset($_FILES['treatment_file']) && $_FILES['treatment_file']['error']!==4) { // error 4 is no file
+            //     $tp_treatment_file = $_FILES['treatment_file'];
+            //     // print_r($tp_treatment_file);
+            //     $file_name_arr = explode('.', $tp_treatment_file['name']);
+            //     $file_ext = end($file_name_arr);
 
-                if ($tp_treatment_file['type']=='image/jpeg' || $tp_treatment_file['type']=='image/png') {
-                    if ($tp_treatment_file['error']===0) {
-                        // 5MB max file size 
-                        if ($tp_treatment_file['size']<=5000000) {
-                            $destination_path = getcwd().DIRECTORY_SEPARATOR;
-                            $new_file_name = 'treatment_file-'. $date_arr[0] . $m_u_id.$m_treatment.'.'.$file_ext ;
-                            $treatment_file = "'". mysqli_real_escape_string($conn, $new_file_name) . "'";
-                            $file_destination = "uploaded treatment files/" . $new_file_name;
-                            move_uploaded_file($tp_treatment_file['tmp_name'], $file_destination);
-                        } else {
-                            $error .= "File size too big. We only accept 5MB files or lower.";
-                        }
-                    } else {
-                        $error .= "Error: (".$tp_treatment_file['error'].")";
-                    }
-                }else {
-                    $error .= 'We only accept image/jpeg or image/png.';
-                }
-            }
-            // no file selected
-            else { 
-                $treatment_file = 'NULL';
-            }
+            //     if ($tp_treatment_file['type']=='image/jpeg' || $tp_treatment_file['type']=='image/png') {
+            //         if ($tp_treatment_file['error']===0) {
+            //             // 5MB max file size 
+            //             if ($tp_treatment_file['size']<=5000000) {
+            //                 $destination_path = getcwd().DIRECTORY_SEPARATOR;
+            //                 $new_file_name = 'treatment_file-'. $date_arr[0] . $m_u_id.$m_treatment.'.'.$file_ext ;
+            //                 $treatment_file = "'". mysqli_real_escape_string($conn, $new_file_name) . "'";
+            //                 $file_destination = "uploaded treatment files/" . $new_file_name;
+            //                 move_uploaded_file($tp_treatment_file['tmp_name'], $file_destination);
+            //             } else {
+            //                 $error .= "File size too big. We only accept 5MB files or lower.";
+            //             }
+            //         } else {
+            //             $error .= "Error: (".$tp_treatment_file['error'].")";
+            //         }
+            //     }else {
+            //         $error .= 'We only accept image/jpeg or image/png.';
+            //     }
+            // }
+            // // no file selected
+            // else { 
+            //     $treatment_file = 'NULL';
+            // }
         }
      
         
        
         if ($error==='') {
-            if ($admin==0)
-                $up = "UPDATE consultations SET trimester=$trimester, treatment=$treatment, 
-                    prescription=$prescription, date='$date' WHERE consultation_id=$m_c_id;";
-            else 
-                $up = "UPDATE consultations SET treatment_file=$treatment_file WHERE consultation_id=$m_c_id;";
+            $up = "UPDATE consultations SET trimester=$trimester, 
+                prescription=$prescription, date='$date' WHERE consultation_id=$m_c_id;";
             // $alert_str = $pr_page?'Prescription':'Treatment';
             //  echo $up;
             if (mysqli_query($conn, $up))  { 
@@ -197,10 +194,10 @@ include_once('../php-templates/admin-navigation-head.php');
                     placeholder="Prescription"/>   -->
                     <textarea  id="prescription" name="prescription" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_prescription?></textarea>
                 </div>
-                <div class="mb-3">     
+                <!-- <div class="mb-3">     
                     <label for="treatment">Treatment</label>
                     <textarea  id="treatment" name="treatment" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_treatment?></textarea>
-                </div>
+                </div> -->
                 <?php } ?> 
                 <!-- <div class="form_select"> 
                     <label>Trimester</label>   
@@ -212,18 +209,18 @@ include_once('../php-templates/admin-navigation-head.php');
                     </select> 
                 </div> -->
                  
-                <?php if ($m_treatment_file!='') { ?> 
-                    <label for='treatment_file'>Treatment File</label>
+                <?php //if ($m_treatment_file!='') { ?> 
+                    <!-- <label for='treatment_file'>Treatment File</label>
                     <a target="_blank" style="color:#000;"
-                        href="./view-treatment-file.php?id=<?php echo $m_treatment_file?>">
-                        View Photo</a>   
-                <?php } 
-                if ($admin==-1) { ?>  
-                    <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/>
-                <?php }  ?> 
+                        href="./view-treatment-file.php?id=<?php //echo $m_treatment_file?>">
+                        View Photo</a>    -->
+                <?php //} 
+                //if ($admin==-1) { ?>  
+                    <!-- <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/> -->
+                <?php //}  ?> 
             </div> 
             <button  class=" w-100 btn btn-primary  text-capitalize" type="submit" name="submit">
-                Update <?php echo $admin==0?"Consultation Record":"Treatment File" ?>  
+                Update <?php echo "Consultation Record" ?>  
             </button> 
         </form> 
         <?php } else {   ?>

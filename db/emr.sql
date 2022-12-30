@@ -102,10 +102,8 @@ INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`, `ar
 --
 
 CREATE TABLE `consultations` (
-  `consultation_id` int(50) NOT NULL,
-  `treatment` varchar(255) DEFAULT NULL,
-  `prescription` varchar(255) DEFAULT NULL,
-  `treatment_file` varchar(255) DEFAULT NULL,
+  `consultation_id` int(50) NOT NULL, 
+  `prescription` varchar(255) DEFAULT NULL, 
   `patient_id` int(50) NOT NULL,
   `midwife_appointed` int(50) NOT NULL,
   `date` datetime NOT NULL,
@@ -116,9 +114,9 @@ CREATE TABLE `consultations` (
 -- Dumping data for table `consultations`
 --
 
-INSERT INTO `consultations` (`consultation_id`, `treatment`, `prescription`, `treatment_file`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
-(1, 'A treatment', 'A prescription', NULL, 9, 3, '2022-09-29 00:00:00', 0),
-(2, NULL, 'Another Prescription', NULL, 9, 3, '2022-09-28 00:00:00', 0);
+INSERT INTO `consultations` (`consultation_id`, `prescription`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
+(1, 'A prescription', 9, 3, '2022-09-29 00:00:00', 0),
+(2, 'Another Prescription', 9, 3, '2022-09-28 00:00:00', 0);
 
 -- --------------------------------------------------------
 
