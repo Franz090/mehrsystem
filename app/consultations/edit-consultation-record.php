@@ -152,7 +152,14 @@ $page = 'edit_consultation';
 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-
+<style>
+    form{
+        text-align: center;
+    }
+    h6{
+    font-size: 20px;
+  }
+</style>
 
 <div class="container_nu"> 
   <!-- Sidebar -->
@@ -162,10 +169,12 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <?php echo $m_name?></h4><hr>
-      <div class="container default table-responsive p-4">
+      <div class="background-head row m-2 my-4">
+        <h6 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <em><?php echo $m_name?></em></h6>
+      
+    
         <div class="col-md-8 col-lg-5">  
-        
+        <br>
         <?php 
             if (count($_barangay_list)==0 && $admin==0) { ?>
             You can't give consultations because you are not assigned to any barangay.
@@ -213,7 +222,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/>
                 <?php }  ?> 
             </div> 
-            <button  class="w-100 btn  text-capitalize" type="submit" name="submit">
+            <button  class=" w-100 btn btn-primary  text-capitalize" type="submit" name="submit">
                 Update <?php echo $admin==0?"Consultation Record":"Treatment File" ?>  
             </button> 
         </form> 
@@ -226,7 +235,7 @@ include_once('../php-templates/admin-navigation-head.php');
       </div>
     </div>
   </div>
-</div>
+
 
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');

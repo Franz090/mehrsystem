@@ -129,6 +129,7 @@ include_once('php-templates/css/black-bg-remover.php');
             <h4 class="title text-center mt-1" style="position: relative;top: 20px;">
                Create <?php echo $page_for_midwife?"Midwife":"Patient"; ?> Account
             </h4>
+            
     
             <form class="form form-box px-3 d-flex flex-column" action="" method="post">
                
@@ -138,42 +139,39 @@ include_once('php-templates/css/black-bg-remover.php');
                      echo '<span class="form__input-error-message">'.$error.'</span>'; 
                ?>
                </div>
-               <div class="form-input" style="position: relative;top: 10px;">
-                  <input type="text"  name="usermail" autofocus placeholder="Email Address*"  
+               <div class="form-input-group mb-3" >
+                  <input type="text"  class="rounded form-control form-control-md pb-2 pt-2" name="usermail" autofocus placeholder="Email Address*"  
                      tabindex="10" required>
                </div> 
  
                <!-- <div class="form-input"> --> 
-               <div class="form-input mb-1" style="position: relative;top: 1px;"> 
- 
-                  <input class="mb-1" type="text" name="first_name" placeholder="First Name*" 
+               <div class="form-input-group mb-2" > 
+                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
-                  <input class="mb-1" type="text" name="mid_name" placeholder="Middle Name" 
+                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="mid_name" placeholder="Middle Name" 
                      tabindex="12" required>
-                  <input type="text" class="form__input" name="last_name" placeholder="Last Name*" 
+                  <input type="text" class="rounded form-control form-control-md pb-2 pt-2 mb-1" name="last_name" placeholder="Last Name*" 
                      tabindex="13" required>
                </div>  
-               <div class="form-input"  style="margin-bottom: 1px;margin-top: -20px;"> 
-                  <input  class="mb-1" type="password" name="password" 
+               <div class="form-input-group mb-2"> 
+                  <input  class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="password" name="password" 
                      placeholder="Password*" tabindex="14" required>
-                  <input class="mb-1"  " type="password"  name="cpassword" 
+                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-2" type="password"  name="cpassword" 
                      placeholder="Confirm password*" tabindex="15" required>
                </div>
                
                <?php if (!$page_for_midwife) {?>
-                  <div class="form-input"  style=""> 
-                     <div class="form_select">
-                        <label style="color:#333;text-align: center;position:relative;bottom: 8px;left: 150px;">Barangay</label>
-                        <select class="form_select_focus" style="position: relative;bottom: 8px;" name="barangay_id" tabindex="16" >
+                        <select class="form-select pb-2 pt-2" style="position: relative;bottom: 8px;" name="barangay_id" tabindex="16" >
+                        <option selected disabled>Select Barangay Name</option>
                            <?php if (count($barangay_list)>0) {
                               foreach ($barangay_list as $key => $value) { ?>  
-                                 <option value="<?php echo $value['id'] ?>" <?php echo $key===0?'selected':'' ?>>
+                                 <option value="<?php echo $value['id'] ?>" <?php echo $key===0?>>
                                     <?php echo $value['name'] ?>
                                  </option>  
                               <?php }
                            } ?> 
                         </select>
-                     </div> 
+                     
                      <!-- <div class="form_select">
                         <label style="color:#333;">Tetanus Toxoid Vaccinated</label>
                         <select class="form_select_focus" name="tetanus">
@@ -219,17 +217,17 @@ include_once('php-templates/css/black-bg-remover.php');
                            </div> 
                         </div>
                      </div> -->
-                  </div>
+                  
                <?php }?>
 
-               <button style="position:relative;bottom: 30px;" class="w-100 btn text-capitalize" 
+               <button  class="btn btn-primary w-100 btn text-capitalize btn-primary-md" 
                   value="register now" type="submit" name="submit">
                   Register <?php echo $page_for_midwife?"Midwife":"Patient"; ?></button> 
 
                
             </form>
 
-            <div class="text-center mb-2 have-account" style="position: relative;bottom: 20px;">
+            <div class="text-center mb-2 have-account" style="position: relative;top: 10px;">
                Already have an account?
                <a class="register-link text-decoration-none" href="index.php" id="linkLogin">
                   Sign in</a>

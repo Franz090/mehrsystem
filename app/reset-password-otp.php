@@ -79,28 +79,29 @@ include_once('php-templates/css/black-bg-remover.php');
         <div class="text-center mb-2 have-account" style="position:relative;bottom: 12px;">The OTP is sent to your email upon reset password request.
             <a class="register-link text-decoration-none" href="reset-password.php"> Don't have an OTP? Request here.</a>
       </div>
-        <div class="form-input">
-            <input type="text" autofocus name="email" placeholder="Email" tabindex="10" required>
+        <div class="form-input-group mb-2">
+            <input type="text" autofocus class="rounded form-control form-control-md pb-2 pt-2"  name="email" placeholder="Email" tabindex="10" required>
         </div>
-        <div class="form-input">
-            <input type="password" name="password" autofocus placeholder="New Password" tabindex="10" required>
+        <div class="form-input-group mb-2">
+            <input type="password"  class="rounded form-control form-control-md pb-2 pt-2" name="password" autofocus placeholder="New Password" tabindex="10" required>
         </div>
-        <div class="form-input">
-            <input type="password"  name="cpassword" autofocus placeholder="Confirm New Password" tabindex="10" required>
+         <div class="form-input-group mb-2">
+            <input type="password"  class="rounded form-control form-control-md pb-2 pt-2" name="cpassword" autofocus placeholder="Confirm New Password" tabindex="10" required>
+            
         </div>
-        <div class="form-input">
-            <input type="number" autofocus name="otp" placeholder="One Time Pin" tabindex="10" required>
+        <div class="form-input-group mb-2">
+            <input type="number" class="rounded form-control form-control-md pb-2 pt-2" autofocus name="otp" placeholder="One Time Pin" tabindex="10" required>
         </div>
     <div class="mb-3 position-relative ">
-        <button class="w-100 btn btn-dark-dark  text-capitalize" style="font-family: arial;position:absolute;bottom: -35px;" type="submit" name="submit">Update Password</button>
+        <button class="btn btn-primary w-100 btn text-capitalize btn-primary-md" style="font-family: arial;position:absolute;bottom: -55px;" type="submit" name="submit">Update Password</button>
             </div>
      
         <?php    
             }  
         ?>  
-     <hr class="my-2" style="position:relative;top: 40px;">
-        <a class="register-link text-decoration-none" href="../app"  style="position:relative;top: 50px;">Sign in</a>
-       <div class="text-center mb-2 have-account" style="position:relative;top: 50px;">Don't have an account? 
+     <hr class="my-2" style="position:relative;top:70px;">
+        <a class="register-link text-decoration-none" href="../app"  style="position:relative;top: 64px;left: 170px;">Sign in</a>
+       <div class="text-center mb-2 have-account" style="position:relative;top: 64px;">Don't have an account? 
         <a class="register-link text-decoration-none" href="register-form.php">Create account</a>
     <div>
     
@@ -111,6 +112,7 @@ include_once('php-templates/css/black-bg-remover.php');
 </div>
 </div>
 </div>
+<script src="js/toggle-eye.js"></script>
 <?php 
     include_once('php-templates/admin-tail.php');
 ?>

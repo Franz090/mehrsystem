@@ -105,7 +105,14 @@ $page = "add_infant)vaccination";
 
 include_once('../php-templates/admin-navigation-head.php');
 ?> 
-
+<style>
+    form{
+        text-align: center;
+    }
+    h6{
+    font-size: 20px;
+  }
+</style>
 <div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
@@ -114,9 +121,9 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Add Vaccination Record for <em><?php echo $name_from_db?></em></h4><hr>
+      <div class="background-head row m-2 my-4"><h6 class="pb-3 m-3 fw-bolder ">Add Vaccination Record for <em><?php echo $name_from_db?></em></h6>
 
-        <div class="container default table-responsive p-4">
+        
           <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
           <?php
@@ -129,14 +136,15 @@ include_once('../php-templates/admin-navigation-head.php');
           
             <div class="form__select-group">
                 <label>Vaccination Date*</label> 
-                <div class="form-input">
-                    <input type="datetime-local" name="date" required />
+                  <div class="mb-3">
+                    <div class="input-group date" id="datepicker">
+                    <input class="form-control option pt-2 pb-2" type="datetime-local" name="date" required />
                 </div>
             </div>    
 
-            <div class="form_select">
+            <div class="mb-3">
                 <label>Type*</label>
-                <select class="form_select_focus" name="type" require>
+                <select class="form-select pt-2 pb-2" name="type" require>
                     <option disabled selected>Select Vaccination Type</option>
                     <?php 
                     foreach ($type_max as $key => $value) {
@@ -156,7 +164,7 @@ include_once('../php-templates/admin-navigation-head.php');
       </div>
     </div>
 
-  </div>
+ 
 </div>
  
 <?php 

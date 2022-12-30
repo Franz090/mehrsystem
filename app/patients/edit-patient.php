@@ -149,15 +149,25 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Patient Record</h4>
+      <div class="background-head row m-2 my-4">
+        <div class="box">
+          <h4 class="pb-3 m-3 fw-bolder ">Update Patient Record</h4>
         <?php
           if (isset($no_user))  
             echo '<span class="text-danger">'.$no_user.'</span>';
           else   {
         ?> 
-              <div class="container default p-4 ">
+              
           <div class="col-md-8 col-lg-5">   
                 <form class="form form-box px-3 py-5" action="" method="post">
+                   <style type="text/css">
+    form {
+        text-align: center;
+    }
+    input {
+        width: 0px;
+    }
+    </style>
                   <?php 
                     if (isset($error))  
                       echo '<span class="form__input-error-message">'.$error.'</span>'; 

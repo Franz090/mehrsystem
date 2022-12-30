@@ -96,47 +96,70 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Infant Record</h4><hr>
+      <div class="background-head row m-2 my-4">
+        <div class="box">
+        <h4 class="pb-3 m-3 fw-bolder ">Update Infant Record</h4>
+        <div class="box p-5">
 
-        <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
+        <style type="text/css">
+    form {
+        text-align: center;
+       
+    }
+    input {
+        width: 100px;
+    }
+    </style>
             <?php
                 if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
                 else { 
             ?> 
-            <div class="form-input">
-                <input type="text" class="form-input" name="first_name" autofocus placeholder="First Name*" 
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" 
                     required value="<?php echo $c_first_name?>">
-                <input type="text" class="form-input" name="middle_name" placeholder="Middle Name" 
+                    <label for="floatingInput">First Name</label>
+                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputInvalid" name="middle_name" placeholder="Middle Name" 
                     value="<?php echo $c_middle_name?>">
-                <input type="text" class="form-input" name="last_name" placeholder="Last Name*" 
+                    <label for="floatingInput">Middle Name</label>
+                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputInvalid" name="last_name" placeholder="Last Name*" 
                     required value="<?php echo $c_last_name?>">
-                <input type="text" class="form-input" name="nickname" placeholder="Nickname" 
-                    value="<?php echo $c_nickname?>">  
+                    <label for="floatingInput">Last Name</label>
+                </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputInvalid" name="nickname" placeholder="Nickname" 
+                    value="<?php echo $c_nickname?>">
+                    <label for="floatingInput">Nick Name</label>  
             </div>  
-            <div class="form_select">
-                <label>Sex</label>
-                <select class="form_select_focus" name="sex">
+            <div class="mb-3">
+                
+                <select class="form-select pt-2 pb-2" name="sex">
+                    <option selected disabled>Gender</option>
                 <option value="Male" <?php echo $c_sex=="Male"?"selected":""?>>Male</option>
                 <option value="Female" <?php echo $c_sex=="Female"?"selected":""?>>Female</option> 
                 <option value="Other" <?php echo $c_sex=="Other"?"selected":""?>>Other</option> 
                 </select>
             </div> 
-            <div class="form__select-group">
+            <div class="mb-3">
                 <label>Birth Date*</label> 
-                <div class="form-input">
-                <input type="date" name="b_date" required value="<?php echo $c_b_date?>"/>
+                <div class="input-group date" id="datepicker">
+                <input class="form-control option pt-2 pb-2" type="date" name="b_date" required value="<?php echo $c_b_date?>"/>
                 </div>
             </div> 
-            <div class="form-input">
-                <input type="text" class="form-input" name="blood_type" placeholder="Blood Type*" required
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputInvalid" name="blood_type" placeholder="Blood Type*" required
                     value="<?php echo $c_blood_type?>">
+                    <label for="floatingInput">Blood Type</label>
             </div> 
-            <div class="form_select">
-                <label>Legitimacy</label>
-                <select class="form_select_focus" name="legitimacy">
+            <div class="mb-3"> 
+                <select class="form_select_focus" name="legitimacy" required>
+                    <option selected disabled>Select Legitimacy</option>
                     <option value="1" <?php echo $c_legitimacy==1?"selected":""?>>Legitimate</option>
                     <option value="0" <?php echo $c_legitimacy==0?"selected":""?>>Illegitimate</option> 
                 </select>
@@ -144,9 +167,10 @@ include_once('../php-templates/admin-navigation-head.php');
             <button class="w-100 btn text-capitalize mb-5" type="submit" name="submit">Update Infant</button> 
 
             <hr/>
-            <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $c_id?>" ><button class="w-100 btn text-capitalize" type="button">
+            <a target="_blank" href="../infant/infant-vacc-record.php?id=<?php echo $c_id?>" ><button class="w-100 btn btn-primary text-center text-capitalize" type="button">
                 See Vaccination Record</button></a>
           <?php } ?>  
+          
 
         </form>  
 

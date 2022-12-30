@@ -107,7 +107,7 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 
-<div class="container_nu"> 
+<div class="container_nu" > 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php');  ?> 
   <!-- Page Content -->
@@ -156,7 +156,7 @@ include_once('../php-templates/admin-navigation-head.php');
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" id="submit" type="submit" name="submit_appointment" form="new_appointment">Add Appointment</button>
+        <button class="btn btn-primary" id="submit" type="submit" name="submit_appointment" form="new_appointment">Add Appointments</button>
       </div>
     </div>
   </div>
@@ -192,7 +192,7 @@ include_once('../php-templates/admin-navigation-head.php');
         </div>
   </div>
  
-        <div class="table-padding table-responsive">
+        <div class="table-padding table-responsive mt-1 px-2">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
@@ -278,8 +278,6 @@ include_once('../php-templates/admin-navigation-head.php');
 </script>
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>
-
-
 <?php 
 include_once('../php-templates/admin-navigation-tail.php');
 ?>

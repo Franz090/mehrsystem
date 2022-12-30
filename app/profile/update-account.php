@@ -234,9 +234,10 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default" >
-      <div class="background-head row m-2 my-4" ><h4 class="pb-3 m-3 fw-bolder ">Update Account</h4>
-        
-        <div class="container default p-4 ">
+      <div class="background-head row m-2 my-4" >
+        <div class="box">
+        <h4 class="pb-3 m-3 fw-bolder ">Update Account</h4>
+       
           <div class="col-md-8 col-lg-5">
             <form>
               <?php
@@ -246,6 +247,8 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>
        
             <?php if (!$current_user_is_an_admin) { ?>
+          <div class="d-flex flex-row justify-content-between mx-auto">
+            <div class="col-md-9 col-lg-12  px-3 mb-5" >
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
               <div class="form-floating mb-3">
                   <input type="text" class="form-control" value="<?php echo $c_first_name?>" id="floatingInputInvalid"  name="first_name" placeholder="First Name" tabindex="11">
@@ -253,7 +256,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </div>
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" value="<?php echo $c_middle_name?>" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name" tabindex="11">
-                  <label for="floatingInput">MIddle Name</label>
+                  <label for="floatingInput">Middle Name</label>
                 </div>
                  <div class="form-floating mb-3">
                   <input type="text" class="form-control" value="<?php echo $c_last_name?>" id="floatingInputInvalid"  name="last_name" placeholder="Last Name" tabindex="11">
@@ -261,10 +264,10 @@ include_once('../php-templates/admin-navigation-head.php');
                 </div>
               
                 <?php if ($current_user_is_a_patient) { ?>
-                  <div class="form-input">
-                    Nickname
+               <div class="form-floating mb-3">
                     <input type="text" value="<?php echo $c_nickname?>"
-                        class="form-input" name="nickname"  placeholder="Nickname"/>
+                        class="form-control" id="floatingInputInvalid" name="nickname"  placeholder="Nickname"/>
+                        <label for="floatingInput">Nick Name</label>
                   </div> 
                 <?php } ?>
                 <div class="form-input">
@@ -272,20 +275,20 @@ include_once('../php-templates/admin-navigation-head.php');
                   <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
                 </div><br>
                 <?php if ($current_user_is_a_patient) { ?>
-                  <div class="form-input">
+                  <div class="mb-3">
                     <label>Birth Date</label>
-                    <div class="form-input">
-                      <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                    <div class="input-group date" id="datepicker">
+                      <input class="form-control option pt-2 pb-2" type="date" name="b_date" value="<?php echo $c_b_date?>"/>
                     </div>
                   </div>
                 
                   <div class="form-input">
-                    <label for="address">Address</label><br/>
-                    <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
+                    <label for="address">Address*</label><br/>
+                    <textarea id="address" name="address" class="form-control"><?php echo $c_address?></textarea> 
                   </div><br>
-                  Civil Status*
-                  <div class="form-input">
-                      <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+                  <div class="form-floating mb-3">
+                      <input type="text" value="<?php echo $c_civil_status?>" class="form-control"  id="floatingInputInvalid" name="civil_status" placeholder="Civil Status*" required/>
+                      <label for="floatingInput">Civil Status*</label>
                   </div>  
     
                   <div class="form-input">
@@ -316,32 +319,45 @@ include_once('../php-templates/admin-navigation-head.php');
                         </div> 
                     </div>
                   </div><br>
-                  Blood Type*
-                  <div class="form-input"> 
-                    <input type="text" value="<?php echo $c_blood_type?>"
-                      class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control"  id="floatingInputInvalid" value="<?php echo $c_blood_type?>"
+                       name="blood_type" placeholder="Blood Type*" required/>  
+                       <label for="floatingInput">Blood Type*</label>
                   </div>
-                  <div class="form-input">  
-                    Diagnosed Condition
-                    <input type="text" value="<?php echo $c_diagnosed_condition?>"
-                      class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-                    Family History
-                    <input type="text" value="<?php echo $c_family_history?>"
-                      class="form__input" name="family_history" placeholder="Family History"/> 
-                    Allergies
+                 <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid" value="<?php echo $c_diagnosed_condition?>"
+                      name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+                      <label for="floatingInput">Diagnosed Condition*</label>
+                </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputInvalid" value="<?php echo $c_family_history?>"
+                       name="family_history" placeholder="Family History"/> 
+                      <label for="floatingInput">Family History*</label>
+                </div>
+                  <div class="form-floating  ">
                     <input type="text" value="<?php echo $c_allergies?>"
-                      class="form__input" name="allergies" placeholder="Allergies"/>    
+                     class="form-control" id="floatingInputInvalid" name="allergies" placeholder="Allergies"/>  
+                     <label for="floatingInput">Allergies*</label>  
                   </div> 
                 <?php } ?>
-               
-                <button class="w-100 btn  text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
+                <div class="py-1 col-12">
+                <button class="w-100 btn text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
+               </div>
               </form> 
-              
+                </div>
              
             <?php } ?>
-
+<style type="text/css">
+    form {
+        text-align: center;
+    }
+    input {
+        width: 0px;
+    }
+    </style>
+    <div class="col-md-9 col-lg-12 px-3 pb-2">
             <form class="form form-box px-2" method="post">
-              
+    
               Put your current password to authorize the change(s)
               <div class="form-floating mb-2">
                   <input type="password" class="form-control"   name="current"  placeholder="Password" id="floatingPassword" >
@@ -363,11 +379,14 @@ include_once('../php-templates/admin-navigation-head.php');
                     name="cnew" placeholder="Confirm New Password" id="floatingPassword"/>
                     <label for="floatingPassword">Confirm New Password</label>
                 </div>
+               <div class="py-3 col-12 " style="margin-bottom: 5%;">
               <button class="btn-primary w-100 btn text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
+  </div>
             </form> 
+  </div>
           </div>
         </div>
-
+  </div>
       </div> 
     </div>
 

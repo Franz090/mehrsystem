@@ -96,12 +96,20 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="containerBox row m-2 my-4"> 
-        <div class="box">
-
-          <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
+      <div class="background-head row m-2 my-4">
+        <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
+        <div class="box p-5">
           <div class="col-md-8 col-lg-5 ">
             <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
+              <style type="text/css">
+                form {
+                    text-align: center;
+                  
+                }
+                input {
+                    width: 100px;
+                }
+              </style>
               <?php
                 if(isset($error)) 
                   echo '<span class="form__input-error-message">'.$error.'</span>'; 
@@ -109,8 +117,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
                 } else { 
               ?> 
-              <div class="d-flex flex-row ">
-                <div class="col-md-9 col-lg-11 p-2">
+              <div class="d-flex flex-row justify-content-between">
+                <div class="col-md-9 col-lg-12 p-2">
                   <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" required>
                     <label for="floatingInput">First Name</label>
@@ -136,7 +144,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     </select>
                   </div>
                 </div>  
-                <div class="col-md-9 col-lg-11 p-1">
+                <div class="col-md-9 col-lg-12" style="margin-left:20px; margin-top:-13px;">
                   <div class="mb-3">
                     <label>Birth Date*</label> 
                     <div class="input-group date" id="datepicker">
@@ -147,16 +155,17 @@ include_once('../php-templates/admin-navigation-head.php');
                     <input type="text"  class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type*" required>
                     <label for="floatingInput">Blood Type</label>
                   </div> 
-                  <div class=" mb-3">
-                    <label>Legitimacy</label>
-                    <select class="form-select pt-2 pb-2" name="legitimacy">
+                  <div class="mb-3"> 
+                    <select class="form-select pt-2 pb-2" name="legitimacy" required>
+                      <option selected disabled>Select Legitimacy</option>
                       <option value="1" selected>Legitimate</option>
                       <option value="0">Illegitimate</option> 
                     </select>
                   </div> 
-                  <div class=" mb-3">
+                  <div class="mb-2">
                     <label>Parent</label>
                     <!-- <select class="form-select pt-2 pb-2" name="user_id">
+                      <option selected disabled>Select Parent Name</option>
                       <?php 
                         //foreach ($patient_list as $key => $value) { 
                       ?> 
@@ -186,11 +195,14 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div>
                 </div>
               </div>
-              <button style="position:relative;left:200px;" class="w-100 btn  text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
+              <div class="d-grid grap-2 h-100">
+                <div class="align-self-start mr-auto text-end">
+                  <button style="position:relative;right: 50%;top: 66px;" class="w-100 btn btn-primary text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
+                </div>
+              </div>
               <?php } ?>  
             </form>  
-          </div> 
-
+          </div>  
         </div>
       </div>
     </div>

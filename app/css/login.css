@@ -28,18 +28,21 @@ body{
   overflow: hidden;
   border: 0 !important;
   background: #fff;
-   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-   border-radius:  69%;
+  position: relative;
+    width: 100%;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
 }
 .img-left{
-
+  opacity: 1;
   background: url('../img/login-background.png') ;
   background-size: 100% 600px;
   background-repeat: no-repeat;
+  height: auto;
 }
 .card-body{
   padding: 2rem;
-  background: #07be8a;
+  background: #fdf8fc;
     
 }
 

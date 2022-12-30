@@ -119,8 +119,8 @@ include_once('php-templates/css/black-bg-remover.php');
       <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
-        <div class="card-body">
-          <h4 class="title text-center mt-4">
+        <div class="card-body ">
+          <h4 class="title text-center mt-4" style="color: #352e35">
             Login 
           </h4>
             <form class="form form-box px-3" id="login" action="" method="post">
@@ -130,23 +130,15 @@ include_once('php-templates/css/black-bg-remover.php');
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             </div>
-            <div class="form-input">
-              <input type="email"  name="usermail" autofocus placeholder="Email Address" tabindex="10" required>
+             <div class="form-input-group mb-3">
+              <input type="email"  class="rounded form-control form-control-md pb-2 pt-2" id="exampleInputEmail1" name="usermail" autofocus placeholder="Email Address" tabindex="10" required>
             </div>
-            <div class="form-input">
-              <input type="password" name="password" id="id_password"  autocomplete="current-password" placeholder="Password" required>
-              <i class="bi bi-eye-slash" id="togglePassword" style="padding-bottom: 20px;margin-left: -30px; cursor: pointer;"></i>
-            </div>
-
-            <div class="mb-3">
-              <div class="custom-control">
-               
-                
-              </div>
-            </div>
-
-            <div class="mb-3 position-relative ">
-              <button type="submit" name="submit" style="font-family: arial;position:absolute;bottom: -2px;" class="w-100 btn btn-dark-dark  text-capitalize">
+            <div class="form-input-group">
+              <input type="password" name="password" id="id_password"  autocomplete="current-password" class="rounded form-control form-control-md pb-2 pt-2" placeholder="Password" required>
+              <i class="bi bi-eye-slash" id="togglePassword" style="position:relative;bottom:34px;margin-top: 220px;margin-left: 360px; cursor: pointer;"></i>
+           </div>
+            <div class="mt-1 mb-2">
+              <button type="submit" name="submit"  style="position:relative;bottom: 20px;" class="btn btn-primary w-100 btn text-capitalize btn-primary-md">
                 Log In
               </button>
               <br>
