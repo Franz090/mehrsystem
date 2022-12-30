@@ -154,7 +154,7 @@ include_once('../php-templates/admin-navigation-head.php');
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-        <div class="modal-body">
+      <div class="modal-body">
         <form class="m-5" action="" method="POST" id="new_consultation">
           <?php
             if (count($_barangay_list)==0) {
@@ -168,23 +168,41 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="form__input-group">
               <div class="mb-3">
                 <label>Patient</label>
-                <select class="form-select" name="patient_id">]
-              <?php
-                if (count($patient_list)>0) {
-                  foreach ($patient_list as $key => $value) { 
-              ?> 
-                    <option value="<?php echo $value['id'];?>AND<?php echo $value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                      <?php echo $value['name'];?></option>
-              <?php  
-                  }    
-                }
-              ?>  
-                </select>
+
+                <!-- <select class="form-select" name="patient_id">]
+                  <?php
+                    //if (count($patient_list)>0) {
+                      //foreach ($patient_list as $key => $value) { 
+                  ?> 
+                    <option value="<?php //echo $value['id'];?>AND<?php //echo $value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
+                      <?php//echo $value['name'];?></option>
+                  <?php  
+                    //  }    
+                    //}
+                  ?>  
+                </select> -->
+                <!-- searchable select  -->
+                <div class="wrapper_ss">
+                  <div class="select-btn_ss">
+                    <span>Select A Patient</span>
+                    <i class="uil uil-angle-down"></i>
+                  </div>
+                  <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
+                  <div class="content_ss">
+                    <div class="search_ss">
+                      <i class="uil uil-search"></i>
+                      <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                    </div>
+                    <ul class="options_ss"></ul>
+                  </div>
+                </div> 
+                <!-- end searchable select  --> 
               </div> 
               <div class="mb-3">
                 <label>Consultation Date and Time*</label> 
                  <div class="input-group date" id="datepicker">
                 <input class="form-control option" type="datetime-local" name="date" required />
+
               </div>
               </div>
               <div class="mb-3">     
@@ -192,6 +210,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"></textarea> 
               </div>
               <div class="mb-3">     
+
                 <label for="treatment">Treatment</label>
                 <textarea id="treatment"  name="treatment" 
                 class="form-control form-control-md w-100"></textarea>
@@ -220,14 +239,18 @@ include_once('../php-templates/admin-navigation-head.php');
 
 
     <div class="container-fluid default">
-       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
-       <div class="card-body">
+
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
+      <?php if ($current_user_is_a_midwife) { ?>
+        <div class="card-body">
           <div class="row">
-               <div class="d-flex p-1 justify-content-between">
+            <div class="d-flex p-1 justify-content-between">
               <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
+            </div>
+
           </div>
-          </div>
-        </div>
+        </div> 
+        <?php } ?>
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';

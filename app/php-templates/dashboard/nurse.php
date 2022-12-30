@@ -14,56 +14,64 @@ if ($admin==1) {
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
-
+    $past_6_months = date("Y-m-d", strtotime('-5 months'));
     // $bar_chart_title='Consultation Chart'; 
     // // get consultaitons 
-    // $consultations_list = [];
-    // $select_consultations = "SELECT date, trimester FROM consultations WHERE date>='$past_6_months 00:00:00' ORDER BY date ASC";
-    // if($result_consultations = mysqli_query($conn, $select_consultations))  {
-    //     foreach($result_consultations as $row)  { 
-    //         $date = $row['date'];  
-    //         $trimester = $row['trimester'];  
-    //         array_push($consultations_list, array(
-    //             'date' => substr($date,0,7),
-    //             'trimester' => $trimester
-    //         ));
-    //     } 
-    //     mysqli_free_result($result_consultations); 
-    // } 
-    // else  { 
-    //     $error = 'Something went wrong fetching data from the database.'; 
-    // }   
+    $consultations_list = [];
+    $select_consultations = "SELECT date, trimester FROM consultations WHERE date>='$past_6_months 00:00:00' ORDER BY date ASC";
+    if($result_consultations = mysqli_query($conn, $select_consultations))  {
+        foreach($result_consultations as $row)  { 
+            $date = $row['date'];  
+            $trimester = $row['trimester'];  
+            array_push($consultations_list, array(
+                'date' => substr($date,0,7),
+                'trimester' => $trimester
+            ));
+        } 
+        mysqli_free_result($result_consultations); 
+    } 
+    else  { 
+        $error = 'Something went wrong fetching data from the database.'; 
+    }   
     // structure the chart data  
     // $labels = '["Months ('.$curr_year.')", "No Trimester", "1st Trimester", "2nd Trimester", "3rd Trimester"],';
 
-    // $count_consul_list = count($consultations_list)-1;
-    // $key_jump = -1;
+    $count_consul_list = count($consultations_list)-1;
+    $key_jump = -1;
+    $bar_chart_month_list = [];
+    $bar_chart_month_list_label = [];
+    $bar_chart_data = [];
+    // generate months to chart
+    for ($i=5; $i > -1; $i--) { 
+        $str_to_time = strtotime("-$i months");
+        array_push($bar_chart_month_list, date("Y-m",  $str_to_time));
+        array_push($bar_chart_month_list_label,  date("M", $str_to_time));
+    }
+    foreach ($bar_chart_month_list as $key1 => $value1) {
+        $temp_arr = [$bar_chart_month_list_label[$key1]];
+        $temp0 = 0;
+        $temp1 = 0;
+        $temp2 = 0;
+        $temp3 = 0;
+        foreach ($consultations_list as $key2 => $value2) {
+            if ($key_jump>$key2) continue; 
 
-    // foreach ($bar_chart_month_list as $key1 => $value1) {
-    //     $temp_arr = [$bar_chart_month_list_label[$key1]];
-    //     $temp0 = 0;
-    //     $temp1 = 0;
-    //     $temp2 = 0;
-    //     $temp3 = 0;
-    //     foreach ($consultations_list as $key2 => $value2) {
-    //         if ($key_jump>$key2) continue; 
-
-    //         if ($value1==$value2['date']) {
-    //             if ($value2['trimester']==0)  {$temp0 += 1;}
-    //             if ($value2['trimester']==1)  {$temp1 += 1;}
-    //             if ($value2['trimester']==2)  {$temp2 += 1;}
-    //             if ($value2['trimester']==3)  {$temp3 += 1;} 
-    //             if ($key2==$count_consul_list) {
-    //                 $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
-    //             }
-    //         } else {
-    //             $key_jump = $key2;
-    //             $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
-    //             break;
-    //         }
-    //     }
-    //     array_push($bar_chart_data,$temp_arr);
-    // }
+            if ($value1==$value2['date']) {
+                if ($value2['trimester']==0)  {$temp0 += 1;}
+                if ($value2['trimester']==1)  {$temp1 += 1;}
+                if ($value2['trimester']==2)  {$temp2 += 1;}
+                if ($value2['trimester']==3)  {$temp3 += 1;} 
+                if ($key2==$count_consul_list) {
+                    $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
+                }
+            } else {
+                $key_jump = $key2;
+                $temp_arr = array_merge($temp_arr,[$temp0,$temp1,$temp2,$temp3]);
+                break;
+            }
+        }
+        array_push($bar_chart_data,$temp_arr);
+    }
 
     // fetch patients
     $patients_per_barangay = [];
@@ -152,7 +160,11 @@ if ($admin==1) {
                 </div>
             </div>
 
-    <!-- Add Charts --> 
+            <!-- Add Charts --> 
+    <div class="col-md-10 box">
+        <h6 class="text-center">Consultations Chart</h6>
+        <canvas id="trimester"></canvas>
+    </div>
     <div class="graphBox"> 
         <div class="col-md-5 box">
             <h6>Number of Patients per Barangay</h6>
@@ -162,11 +174,28 @@ if ($admin==1) {
             <h6 class="text-center">Number of Infants Vaccinated</h6>
             <canvas id="infant"></canvas>
         </div>
+       
     </div> 
+
    
     <!-- chart => https://www.chartjs.org/ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
+        const labels_trimester = [];
+        <?php   
+            foreach ($bar_chart_month_list_label as $value) {?> 
+                labels_trimester.push("<?php echo $value?>")    
+        <?php   
+            }?> 
+        const data_trimester = [ [], [], [], [] ];
+        <?php   
+            foreach ($bar_chart_data as $value) {?>  
+                data_trimester[0].push("<?php echo $value[1]?>");    
+                data_trimester[1].push("<?php echo $value[2]?>");    
+                data_trimester[2].push("<?php echo $value[3]?>");   
+                data_trimester[3].push("<?php echo $value[4]?>");    
+        <?php   
+            }?>  
         const labels_patients = [];
         const data_patients = [];
         <?php   

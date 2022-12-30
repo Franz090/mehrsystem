@@ -102,121 +102,133 @@ if ($current_user_is_a_midwife) {
 ?> 
 
 <div class="container-fluid default"> 
-Midwife  <!-- cards -->
-            <div class="cardBoxs">
-                <div class="cards">
-                    <div>
-                        <div class="number"><?php echo $total_patients ?> </div>
-                        <div class="cardsNames">Total Number of Patients</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
+    Midwife  <!-- cards -->
+    <div class="cardBoxs">
+                
+        <div class="cards">
+            <div>
+                <div class="number"><?php echo $total_patients ?> </div>
+                <div class="cardsNames">Total Number of Patients</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="people-outline"></ion-icon>
+            </div>
+
+            </div>
+            <div class="cards">
+                <div>
+                    <div class="number"><?php echo $appointments_today ?></div>
+                    <div class="cardsNames"> Appointments Today</div>
                 </div>
-                <div class="cards">
-                    <div>
-                        <div class="number"><?php echo $appointments_today ?></div>
-                        <div class="cardsNames"> Appointments Today</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="today-outline"></ion-icon>
+                <div class="iconBx">
+                    <ion-icon name="today-outline"></ion-icon>
+                </div>
+            </div>
+
+        </div> 
+
+        <div class="container-fluid" id="page-container">
+            <div class="row" style="width:100%;">
+                <div class="calendarBox"> 
+                    <div class="box">
+                        <h6 class="text-center">Calendar</h6>
+                        <div id="calendar"></div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="cardt rounded-0 shadow">
+                            <div class="card-header bg-gradient bg-primary text-light">
+                                <h5 class="card-title">Add an Appointment</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <form method="post" id="schedule-form">
+                                        <div class="form-group mb-2">
+                                            <label for="patient" class="control-label">Patient</label>
+                                            <!-- <select  class="form-select"  name="patient_id_trimester" id="patient">
+                                                <?php
+                                                    // if (count($patient_list)>0) {
+                                                        // foreach ($patient_list as $key => $value) { 
+                                                ?> 
+                                                    <option class="option" value="<?php // echo $value['id']."AND".$value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
+                                                        <?php // echo $value['name'];?></option>
+                                                <?php  
+                                                        // }    
+                                                    // }
+                                                ?>  
+                                            </select> -->
+                                            
+                                            <!-- searchable select  -->
+                                            <div class="wrapper_ss">
+                                                <div class="select-btn_ss">
+                                                    <span>Select A Patient</span>
+                                                    <i class="uil uil-angle-down"></i>
+                                                </div>
+                                                <input type="text" style="display:none;" name="patient_id_trimester" class="patient_id_trimester"/>
+                                                <div class="content_ss">
+                                                    <div class="search_ss">
+                                                        <i class="uil uil-search"></i>
+                                                        <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                                                    </div>
+                                                    <ul class="options_ss"></ul>
+                                                </div>
+                                            </div> 
+                                            <label for="start_datetime" class="control-label">Appointment Date</label> 
+                                            <input type="datetime-local" class="form-control form-control-sm rounded-0" 
+                                                name="date" id="start_datetime" required>
+                                        </div>   
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <button class="btn btn-primary btn-sm rounded-0" 
+                                        type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                                    <button class="btn btn-default border btn-sm rounded-0" 
+                                        type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-   
-            
+            <!-- Event Details Modal -->
+            <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-0">
+                        <div class="modal-header rounded-0">
+                            <h5 class="modal-title">Appointment</h5> 
+                        </div>
+                        <div class="modal-body rounded-0">
+                            <div class="container-fluid">
+                                <dl>
+                                    <dt class="text-muted">Name</dt>
+                                    <dd id="title" class="fw-bold text-md-start fs-6"></dd>
+                                    <!-- <dt class="text-muted">Description</dt> -->
+                                    <!-- <dd id="description" class=""></dd> -->
+                                    <dt class="text-muted">Appointment Date and Time</dt>
+                                    <dd id="start" class=""></dd> 
+                                </dl>
+                        </div>
+                    </div>
+                <div class="modal-footer rounded-0">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                    </div>
 
-    <div class="container-fluid" id="page-container">
-        <div class="row" style="width:100%;">
-<div class="calendarBox"> 
-        <div class="box">
-             <h6 class="text-center">Calendar</h6>
-             <div id="calendar"></div>
+                </div>
+            </div>
         </div>
-           
 
-        <div class="col-md-3">
-          <div class="cardt rounded-0 shadow">
-            <div class="card-header bg-gradient bg-primary text-light">
-              <h5 class="card-title">Add an Appointment</h5>
-            </div>
-            <div class="card-body">
-                <div class="container-fluid">
-                    <form method="post" id="schedule-form">
-                        <!-- <input type="hidden" name="id" value="">  -->
-                        <div class="form-group mb-2">
-                            <label for="patient" class="control-label">Patient</label>
-                            <select  class="form-select"  name="patient_id_trimester" id="patient">
-                                <?php
-                                    if (count($patient_list)>0) {
-                                        foreach ($patient_list as $key => $value) { 
-                                ?> 
-                                    <option class="option" value="<?php echo $value['id']."AND".$value['trimester'];?>" <?php echo $key===0?'selected':'';?>>
-                                        <?php echo $value['name'];?></option>
-                                <?php  
-                                        }    
-                                    }
-                                ?>  
-                            </select>
-                            <label for="start_datetime" class="control-label">Appointment Date</label>
-                            <!-- <input type="datetime-local" class="form-control form-control-sm rounded-0" 
-                            name="date" id="start_datetime" required> -->
-                            <input type="datetime-local" class="form-control form-control-sm rounded-0" 
-                            name="date" id="start_datetime" required>
-                        </div>   
-                    </form>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="text-center">
-                    <button class="btn btn-primary btn-sm rounded-0" 
-                    type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
-                    <button class="btn btn-default border btn-sm rounded-0" 
-                    type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
-                </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Event Details Modal -->
-      <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content rounded-0">
-            <div class="modal-header rounded-0">
-                <h5 class="modal-title">Appointment</h5>
-             
-            </div>
-            <div class="modal-body rounded-0">
-                <div class="container-fluid">
-                    <dl>
-                        <dt class="text-muted">Name</dt>
-                        <dd id="title" class="fw-bold text-md-start fs-6"></dd>
-                        <!-- <dt class="text-muted">Description</dt> -->
-                        <!-- <dd id="description" class=""></dd> -->
-                        <dt class="text-muted">Appointment Date and Time</dt>
-                        <dd id="start" class=""></dd> 
-                    </dl>
-                </div>
-            </div>
-            <div class="modal-footer rounded-0">
-                <div class="text-end">
-                    <!-- <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button> -->
-                    <!-- <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Cancel</button> -->
-                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div> 
+    </div>  
+</div> 
 
 
-    <script>
-      var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
-      console.log(scheds)
-    </script>
-
+<script>
+    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
+//   console.log(scheds)
+</script>
+ 
 
 <?php 
 }

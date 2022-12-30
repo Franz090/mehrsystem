@@ -78,7 +78,15 @@
       </li>
     <?php  
       } 
-    ?>
+      if ($current_user_is_an_admin) {?> 
+      <li <?php echo $page == 'update_footer' ? "class='hovered'":""?>>
+        <a <?php echo $page == 'update_footer' ? "type='button'":'href="../update-footer"'?>>
+            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="title">Update Footer</span>
+        </a>
+      </li>
+    <?php 
+      } ?>
     <hr/>
     <li>
        <a href="../logout.php">
