@@ -207,7 +207,7 @@ if (isset($_POST['submit_cred'])) {
           $error= '';
           if (!empty($_POST['new_email'])) $_SESSION['usermail'] = $new_email;
 
-          echo "<script>alert('Accout updated!');</script>";
+          echo "<script>alert('Account updated!');window.location.href='./update-account.php';</script>";
         }   
         else  {
           $error = 'Something went wrong updating your account.';
