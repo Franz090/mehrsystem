@@ -34,11 +34,11 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
   
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
@@ -55,14 +55,7 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="form-floating">
             <input type="text" class="form-control" name="health_center"  placeholder="Barangay Health Center" id="floatingPassword"  >
              <label for="floatingPassword">Barangay Health Center</label>
-          </div> 
-          <!-- <div class="form__input-group">
-              <label>Status</label>
-              <select class="form__input" name="status">
-                <option value="Inactive" selected>Inactive</option>
-                <option value="Active">Active</option>
-              </select>
-          </div>   -->
+          </div>  
           <button class="w-100 btn  text-capitalize" type="submit" name="submit">Register Barangay</button> 
         </form>  
           </div>

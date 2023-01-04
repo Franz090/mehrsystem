@@ -39,6 +39,25 @@ else  {
   $error = 'Something went wrong fetching data from the database.'; 
 }  
 
+// register
+if(isset($_POST['submit'])) {
+  $_POST['submit'] = null;
+  $error = '';  
+  if (empty($_POST['health_center']))
+    $error .= 'Fill up input fields that are required (with * mark)! ';
+  else {
+    $health_center = mysqli_real_escape_string($conn, $_POST['health_center']); 
+   
+    $insert = "INSERT INTO barangays(health_center, assigned_midwife, archived) 
+      VALUES('$health_center', NULL, 0)";
+    if (mysqli_query($conn, $insert))  {
+      echo "<script>alert('Barangay Added!');window.location.href='./view-barangay.php';</script>";
+    }
+    else { 
+        $error .= 'Something went wrong inserting into the database.';
+    } 
+  } 
+} 
 
 $conn->close(); 
 $page = 'view_barangay';
@@ -63,7 +82,7 @@ include_once('../php-templates/admin-navigation-head.php');
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
-        <form class="m-3" action="" method="POST">
+        <form class="m-3" action="" method="POST" id="add_barangay_form">
             
           <div class="form-floating">
             <input type="text" class="form-control" name="health_center"  placeholder="Barangay Health Center" id="floatingPassword"  >
@@ -73,7 +92,7 @@ include_once('../php-templates/admin-navigation-head.php');
       </div>
       <div class="modal-footer">
        
-        <button type="button" class="btn btn-primary" type="submit" name="submit">Register Barangay</button>
+        <button class="btn btn-primary" type="submit" name="submit" form="add_barangay_form">Register Barangay</button>
       </div>
     </div>
   </div>

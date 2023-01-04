@@ -123,12 +123,17 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="table-padding table-responsive">
       <?php if (count($_barangay_list)==0 && $admin==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
-      } else { ?> 
+      } else { 
+          if ($current_user_is_a_midwife) {?> 
             <div>
                 <a href="./add-infant.php"><button class="btn btn-primary">
                     Add Infant
                 </button> </a>
             </div>
+
+          <?php 
+          } ?>
+
             <br>
          <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
           <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">

@@ -45,39 +45,7 @@ if (count($_barangay_list)>0) {
     else  { 
         $error = 'Something went wrong fetching data from the database.'; 
     }   
-
-    // fetch medicine
-    // $select2 = "SELECT treat_med_id id, name
-    //     FROM treat_med 
-    //     WHERE type=0;";  
-
-    // if ($result_m = mysqli_query($conn, $select2)) {
-    //     foreach($result_m as $row) {
-    //         $id = $row['id'];  
-    //         $name = $row['name'];  
-    //         array_push($prescription_list, array('id' => $id,'name' => $name));
-    //     } 
-    //     mysqli_free_result($result_m);
-    // } 
-    // else  {  
-    //     $error = 'Something went wrong fetching data from the database.'; 
-    // }    
-    // fetch treatment
-    // $select3 = "SELECT treat_med_id id, name
-    //     FROM treat_med 
-    //     WHERE type=1;";  
-
-    // if ($result_t = mysqli_query($conn, $select3)) {
-    //     foreach($result_t as $row) {
-    //         $id = $row['id'];  
-    //         $name = $row['name'];  
-    //         array_push($treatment_list, array('id' => $id,'name' => $name));
-    //     } 
-    //     mysqli_free_result($result_t);
-    // } 
-    // else  {  
-    //     $error = 'Something went wrong fetching data from the database.'; 
-    // }    
+ 
 }  
 // add  
 if(isset($_POST['submit'])) {
@@ -151,11 +119,11 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
 
 
-<div class="d-flex" id="wrapper"> 
+<div class="container_nu"> 
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?> 
   <!-- Page Content -->
-  <div id="page-content-wrapper" >
+  <div class="main_nu" >
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">

@@ -150,7 +150,11 @@ if (isset($_POST['submit_profile'])) {
         }
       }
       // echo $update;
-      if (mysqli_multi_query($conn, "$update $delete_contact_numbers $add_contact_numbers")) {
+      if (mysqli_multi_query($conn, "$update $delete_contact_numbers $add_contact_numbers")) { 
+        $_SESSION['name'] = 
+          $first_name . " " 
+            . ($mid_name=="NULL"?'': (substr($mid_name, 1, 1) . ". ")) 
+            . $last_name;
         $conn->close(); 
         header('location:demographic-profile.php');  
       }else {
@@ -202,7 +206,8 @@ if (isset($_POST['submit_cred'])) {
 
           $error= '';
           if (!empty($_POST['new_email'])) $_SESSION['usermail'] = $new_email;
-          echo "<script>alert('Accout updated!');</script>";
+
+          echo "<script>alert('Account updated!');window.location.href='./update-account.php';</script>";
         }   
         else  {
           $error = 'Something went wrong updating your account.';
