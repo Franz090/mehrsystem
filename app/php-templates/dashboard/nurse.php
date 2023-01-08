@@ -1,5 +1,5 @@
 <?php 
-if ($admin==1) { 
+if ($admin==1) { //closing bracket at the end of the file
     // tetanus vaccinated
     $select_total_vacc = "SELECT COUNT(u.user_id) c 
     FROM users u, patient_details pd
