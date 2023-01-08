@@ -15,7 +15,7 @@ $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
 $midwife_sql = $admin==-1?'':($admin_b?'':"AND b.assigned_midwife=".$_SESSION['id']);
 // fetch patient
 $select = "SELECT  u.user_id,
-  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
+  CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
   CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies 
@@ -87,7 +87,7 @@ else  {
 $consultations_list = [];
 // fetch patient consultations 
 $select2_b = "SELECT c.date, prescription, consultation_id id,
-  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
+  CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
    trimester
   FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c 
   LEFT JOIN users u
