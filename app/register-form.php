@@ -126,7 +126,7 @@ include_once('php-templates/css/black-bg-remover.php');
          <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
          <div class="card-body d-flex flex-column ">
-            <h4 class="title text-center mt-1" style="position: relative;top: 20px;">
+            <h4 class="title text-center mt-1" style="position: relative;top: 20px;color: #808080;">
                Create <?php echo $page_for_midwife?"Midwife":"Patient"; ?> Account
             </h4>
             
@@ -229,7 +229,7 @@ include_once('php-templates/css/black-bg-remover.php');
 
             <div class="text-center mb-2 have-account" style="position: relative;top: 10px;">
                Already have an account?
-               <a class="register-link text-decoration-none" href="index.php" id="linkLogin">
+               <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;" href="index.php" id="linkLogin">
                   Sign in</a>
             </div> 
          </div>

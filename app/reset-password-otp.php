@@ -59,7 +59,7 @@ include_once('php-templates/css/black-bg-remover.php');
       <div class="col-lg-12 col-xl-12 card flex-row mx-auto px-0" style="height: 550px;">
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
         <div class="card-body">
-          <h4 class="title text-center mt-4">
+          <h4 class="title text-center mt-4" style="color: #808080;">
            Reset Password
           </h4>
     <form class="form form-box px-3" action="" method="post">
@@ -77,7 +77,7 @@ include_once('php-templates/css/black-bg-remover.php');
         ?>
 
         <div class="text-center mb-2 have-account" style="position:relative;bottom: 12px;">The OTP is sent to your email upon reset password request.
-            <a class="register-link text-decoration-none" href="reset-password.php"> Don't have an OTP? Request here.</a>
+            <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;" href="reset-password.php"> Don't have an OTP? Request here.</a>
       </div>
         <div class="form-input-group mb-2">
             <input type="text" autofocus class="rounded form-control form-control-md pb-2 pt-2"  name="email" placeholder="Email" tabindex="10" required>
@@ -100,9 +100,9 @@ include_once('php-templates/css/black-bg-remover.php');
             }  
         ?>  
      <hr class="my-2" style="position:relative;top:70px;">
-        <a class="register-link text-decoration-none" href="../app"  style="position:relative;top: 64px;left: 170px;">Sign in</a>
+        <a class="text-decoration-none text-black fw-bold"  href="../app"  style="position:relative;top: 64px;left: 170px;--bs-text-opacity: .5;" >Sign in</a>
        <div class="text-center mb-2 have-account" style="position:relative;top: 64px;">Don't have an account? 
-        <a class="register-link text-decoration-none" href="register-form.php">Create account</a>
+        <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;" href="register-form.php">Create account</a>
     <div>
     
 

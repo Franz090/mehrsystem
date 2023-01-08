@@ -120,7 +120,7 @@ include_once('php-templates/css/black-bg-remover.php');
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
         <div class="card-body ">
-          <h4 class="title text-center mt-4" style="color: #352e35">
+          <h4 class="title text-center mt-4" style="color: #808080;">
             Login 
           </h4>
             <form class="form form-box px-3" id="login" action="" method="post">
@@ -137,21 +137,20 @@ include_once('php-templates/css/black-bg-remover.php');
               <input type="password" name="password" id="id_password"  autocomplete="current-password" class="rounded form-control form-control-md pb-2 pt-2" placeholder="Password" required>
               <i class="bi bi-eye-slash" id="togglePassword" style="position:relative;bottom:34px;margin-top: 220px;margin-left: 360px; cursor: pointer;"></i>
            </div>
-            <div class="mt-1 mb-2">
+            <div class="mt-1">
               <button type="submit" name="submit"  style="position:relative;bottom: 20px;" class="btn btn-primary w-100 btn text-capitalize btn-primary-md">
                 Log In
               </button>
-              <br>
-            </div>
+</div> 
             <div class="text-center">
-              <a href="reset-password.php" class="forget-link text-decoration-none">
+              <a href="reset-password.php" class=" text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;">
                 Forgot your Password?
               </a>
             </div>
             <hr class="my-2">
             <div class="text-center mb-2 have-account">
               Don't have an account?
-              <a href="register-form.php" class="register-link text-decoration-none">
+              <a href="register-form.php" class=" text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;">
                 Register here
               </a>
             </div>

@@ -51,7 +51,7 @@ include_once('php-templates/css/black-bg-remover.php');
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
         <div class="card-body">
-          <h4 class="title text-center mt-4">
+          <h4 class="title text-center mt-4" style="color: #808080;">
            Reset Password
           </h4>
     <form class="form form-box px-3" id="login" action="" method="post">
@@ -72,15 +72,15 @@ include_once('php-templates/css/black-bg-remover.php');
         <br>
     </div>
        <div class="text-center">Already have an OTP?
-            <a class="forget-link text-decoration-none" href="reset-password-otp.php"> Change your password here.</a>
+            <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;"  href="reset-password-otp.php"> Change your password here.</a>
         </div>
    
          <div class="text-center">
-            <a class="forget-link text-decoration-none"  href="index.php">Sign in</a>
+            <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;"  href="index.php">Sign in</a>
         </div>
         <hr class="my-2">
          <div class="text-center mb-2 have-account">Don't have an account? 
-            <a class="register-link text-decoration-none" href="register-form.php">Create account
+            <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;" href="register-form.php">Create account
             </a>
           </div>
     </form> 

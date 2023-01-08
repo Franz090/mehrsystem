@@ -1,6 +1,6 @@
 body{
   height: 100vh;
-  background: #fdf8fc!important;
+  background: #fcf7f7!important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +42,7 @@ body{
 }
 .card-body{
   padding: 2rem;
-  background: #fdf8fc;
+  background: #ffffff;
     
 }
 
