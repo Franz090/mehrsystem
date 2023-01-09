@@ -102,23 +102,37 @@ INSERT INTO `barangays` (`barangay_id`, `health_center`, `assigned_midwife`, `ar
 --
 
 CREATE TABLE `consultations` (
-  `consultation_id` int(50) NOT NULL,
-  `treatment` varchar(255) DEFAULT NULL,
-  `prescription` varchar(255) DEFAULT NULL,
-  `treatment_file` varchar(255) DEFAULT NULL,
+  `consultation_id` int(50) NOT NULL, 
+  `prescription` varchar(255) DEFAULT NULL, 
   `patient_id` int(50) NOT NULL,
   `midwife_appointed` int(50) NOT NULL,
   `date` datetime NOT NULL,
-  `trimester` int(11) NOT NULL
+  `trimester` int(11) NOT NULL,
+
+  `gestation` varchar(255) NOT NULL, 
+  `blood_pressure` varchar(255) NOT NULL, 
+  `weight` int(11) NOT NULL,
+  `height_ft` int(11) NOT NULL,
+  `height_in` int(11) NOT NULL,
+
+  `nutritional_status` varchar(255) NOT NULL, 
+  `status_analysis` varchar(255) NOT NULL, 
+  `advice` varchar(255) NOT NULL, 
+  `change_plan` varchar(255) NOT NULL, 
+  `date_return` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `consultations`
 --
 
-INSERT INTO `consultations` (`consultation_id`, `treatment`, `prescription`, `treatment_file`, `patient_id`, `midwife_appointed`, `date`, `trimester`) VALUES
-(1, 'A treatment', 'A prescription', NULL, 9, 3, '2022-09-29 00:00:00', 0),
-(2, NULL, 'Another Prescription', NULL, 9, 3, '2022-09-28 00:00:00', 0);
+INSERT INTO `consultations` (
+  `consultation_id`, `prescription`, `patient_id`, `midwife_appointed`, `date`, `trimester`,
+  `gestation`,`blood_pressure`,`weight`,`height_ft`,`height_in`,
+  `nutritional_status`,`status_analysis`,`advice`,`change_plan`,`date_return`
+) VALUES
+(1, 'A prescription', 9, 3, '2022-09-29 00:00:00', 0, "gestation", "120/80 mmHg", 50, 5, 0, "Normal", "status", "some adivce", "plan", '2023-01-30 00:00:00'),
+(2, 'Another Prescription', 9, 3, '2022-09-28 00:00:00', 0, "gestation", "120/80 mmHg", 50, 5, 0, "Normal", "status", "some adivce", "plan", '2023-01-30 00:00:00');
 
 -- --------------------------------------------------------
 

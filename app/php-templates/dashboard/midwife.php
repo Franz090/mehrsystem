@@ -1,5 +1,5 @@
 <?php 
-if ($current_user_is_a_midwife) {
+if ($current_user_is_a_midwife) { //closing bracket at the end of the file
     
     $midwife_condition_string = "role=-1 AND u.user_id=pd.user_id
     AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1

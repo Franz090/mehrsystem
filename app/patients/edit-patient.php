@@ -34,7 +34,8 @@ session_start();
 $id_from_get = $_GET['id'];
 $user_to_edit = "SELECT  u.user_id id, family_history, civil_status, 
     height_ft, height_in, weight, blood_type, diagnosed_condition, allergies,
-    tetanus, trimester 
+    tetanus, trimester,
+    CONCAT(ud.first_name,IF(ud.middle_name='' OR ud.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(ud.middle_name,1,1),'.')),' ',ud.last_name) AS user_name 
    FROM users u, user_details ud, patient_details pd
    WHERE u.user_id = $id_from_get AND u.user_id = ud.user_id AND u.user_id = pd.user_id";
  
@@ -44,6 +45,7 @@ if ($user_from_db = mysqli_query($conn, $user_to_edit)) {
   foreach($user_from_db as $row)  {
 
     $c_id = $row['id'];
+    $c_name = $row['user_name'];
     $c_height_ft = $row['height_ft'];
     $c_height_in = $row['height_in'];
     $c_civil_status = $row['civil_status'];
@@ -99,14 +101,14 @@ if(isset($_POST['submit'])) {
       "'".mysqli_real_escape_string($conn, $_POST['allergies'])."'"; 
 
     $tetanus = mysqli_real_escape_string($conn, $_POST['tetanus']);
-    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']); 
+    // $trimester = mysqli_real_escape_string($conn, $_POST['trimester']); 
     
     $up = "";
      
     $up .= "UPDATE patient_details SET civil_status='$civil_status', 
       height_ft=$height_ft, height_in=$height_in, weight=$weight,
       blood_type='$blood_type', diagnosed_condition=$diagnosed_condition, family_history=$family_history,
-      allergies=$allergies, trimester=$trimester, tetanus=$tetanus
+      allergies=$allergies, tetanus=$tetanus
       WHERE user_id=$c_id ; "; 
 
     // $delete_contact_numbers = "DELETE FROM contacts 
@@ -151,7 +153,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4">
         <div class="box">
-          <h4 class="pb-3 m-3 fw-bolder ">Update Patient Record</h4>
+          <h4 class="pb-3 m-3 fw-bolder ">Update Patient Record of <em><?php echo $c_name?></em></h4>
         <?php
           if (isset($no_user))  
             echo '<span class="text-danger">'.$no_user.'</span>';
@@ -242,11 +244,11 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div> 
                   <div class=" mb-3">
                       <label>Nth Trimester</label>
-                      <select class="form-select" name="trimester">
-                        <option  class="option" value="0" <?php echo $c_trimester==0?'selected':''?> >N/A</option>
-                        <option  class="option"value="1" <?php echo $c_trimester==1?'selected':''?> >1st (0-13 weeks)</option>
-                        <option  class="option" value="2" <?php echo $c_trimester==2?'selected':''?> >2nd (14-27 weeks)</option>
-                        <option  class="option" value="3" <?php echo $c_trimester==3?'selected':''?> >3rd (28-42 weeks)</option>
+                      <select class="form-select" name="trimester" disabled>
+                        <option  class="option" value="0" <?php echo $c_trimester==0?'selected':''?>>N/A</option>
+                        <option  class="option" value="1" <?php echo $c_trimester==1?'selected':''?>>1st (0-13 weeks)</option>
+                        <option  class="option" value="2" <?php echo $c_trimester==2?'selected':''?>>2nd (14-27 weeks)</option>
+                        <option  class="option" value="3" <?php echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
                       </select>
                   </div> 
                   <button  class="w-100 btn  text-capitalize" type="submit" name="submit">Update Patient Record</button> 

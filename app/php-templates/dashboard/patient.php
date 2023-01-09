@@ -1,5 +1,5 @@
 <?php 
-  if ($current_user_is_a_patient) { // patient 
+  if ($current_user_is_a_patient) { //closing bracket at the end of the file
     if ($status) {
   ?>
     Patient <br/>
