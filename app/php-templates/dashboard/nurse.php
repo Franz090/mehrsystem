@@ -161,18 +161,21 @@ if ($admin==1) {
             </div>
 
             <!-- Add Charts --> 
-    <div class="col-md-10 box">
-        <h6 class="text-center">Consultations Chart</h6>
-        <canvas id="trimester"></canvas>
-    </div>
-    <div class="graphBox"> 
-        <div class="col-md-5 box">
+<div class="graphBox1">
+   <div class="col-md-5 box">
             <h6>Number of Patients per Barangay</h6>
-            <canvas id="patients"></canvas>
+            <canvas height="10" id="patients"></canvas>
         </div>
+</div>
+    <div class="graphBox"> 
+         <div class="col-md-7 box">
+        <h6 class="text-center">Consultations Chart</h6>
+        <canvas height="300" id="trimester"></canvas>
+    </div>
         <div class="col-md-7 box">
             <h6 class="text-center">Number of Infants Vaccinated</h6>
-            <canvas id="infant"></canvas>
+            <br>
+            <canvas height="300" id="infant"></canvas>
         </div>
        
     </div> 

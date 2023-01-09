@@ -189,7 +189,21 @@ include_once('../php-templates/admin-navigation-head.php');
 ?>
  
 <div class="container_nu">
+<style>
+  input[type=checkbox]{
+    width: 17px;
+    height: 17px;
+     accent-color: #28a685;
 
+}
+
+label{
+  font-size: 17px;
+  font-family: 'Poppins',sans-serif;
+  font-weight: 500;
+  color: #352e35;
+}
+</style>
   <!-- Sidebar -->
   <?php include_once('../php-templates/admin-navigation-left.php'); ?>
 
@@ -198,7 +212,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Assign Barangays to <?php echo $c_name?></h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Assign Barangays to <?php echo $c_name?></h4>
       <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
         <?php
@@ -224,8 +238,8 @@ include_once('../php-templates/admin-navigation-head.php');
               if (count($barangay_list)>0) { 
             ?>   
               <div class="form__input-group">
-                <label>List of Barangays</label> 
-                <fieldset style="text-align:left; border:1px solid #333; padding:1rem; border-radius:5px;">      
+                <label><h6 style="font-size: 20px;">List of Barangays</h6></label> 
+                <fieldset style="text-align:center; border:1px solid #fefefe; padding:1rem; border-radius:5px;">      
                   <?php  
                     foreach ($barangay_list as $key => $value) {
                   ?>  
