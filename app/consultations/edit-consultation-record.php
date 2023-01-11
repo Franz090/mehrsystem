@@ -223,27 +223,49 @@ include_once('../php-templates/admin-navigation-head.php');
                     </select>
                 </div> 
                 <div class="mb-3"> <!-- gestation -->    
-                    <label for="gestation">Age of Gestation</label>
-                    <input id="gestation" name="gestation" class="" type="text" required
+                    <label>Age of Gestation</label>
+                    <input id="gestation" name="gestation" class="form-control mt-2 mb-2" type="text" required
                         value="<?php echo $m_gestation?>"/> 
                 </div>
                 <div class="mb-3"> <!-- blood_pressure -->      
-                    <label for="blood_pressure">Blood Pressure</label>
-                    <input id="blood_pressure" name="blood_pressure" class="" type="text" required
+                    <label>Blood Pressure</label>
+                    <input id="blood_pressure" name="blood_pressure" class="form-control mt-2 mb-2" type="text" required
                         value="<?php echo $m_blood_pressure?>"/> 
                 </div>
-                <div class="mb-3"> <!-- weight -->     
-                    <label for="weight">Weight</label>
-                    <input id="weight" name="weight" class="" type="number" required
-                        value="<?php echo $m_weight?>"/>kg 
+
+                 <!-- start -->
+             
+                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                    <!-- Height -->
+                  <div class="d-flex input-group">
+                    <input  min='0' type="number" 
+                      class="form__input form-control" id="height_ft" name="height_ft" value="<?php echo $m_height_ft?>" placeholder="Height*" required/>
+                       <div class="input-group-postpend">
+
+                        <div id="weight-height" class="input-group-text form__input text-white">
+                         ft</div>
+                    </div>
+      
+                    <input  value="<?php echo $m_height_in?>" min='0' max='11' type="number" 
+                       class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
+                       <div class="input-group-postpend">
+                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
+                  </div>
                 </div>
-                <div class="mb-3"> <!-- height  -->     
-                    <label for="height">Height</label>
-                    <input id="height_ft" name="height_ft" class="" type="number" required
-                        value="<?php echo $m_height_ft?>"/>ft 
-                    <input id="height_in" name="height_in" class="" type="number" required
-                        value="<?php echo $m_height_in?>"/>in
-                </div>
+              </div>
+              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
+                    Weight
+
+                <div class="d-flex input-group">   
+                    <input value="<?php echo $m_weight?>" type="number" class="form__input form-control" id="weight" name="weight" 
+                      placeholder="Weight*" required min='0'/>
+                      <div class="input-group-postpend">
+                    <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
+                  </div>
+                  </div>
+                   <!-- end -->
+                
+              
                 <div class="mb-3"> <!-- date -->
                     <label>Consultation Date and Time*</label> 
                     <input class="form-control option" type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>

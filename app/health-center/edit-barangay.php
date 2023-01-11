@@ -73,7 +73,7 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="form__input-error-message">'.$no_bgy.'</span>';
           else   {
         ?>   
-        <form class="form form-box px-3" action="" method="post">
+        <form class="form form-box px-3" action="" method="post" style="position:relative;bottom: 89px;">
           <?php 
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 

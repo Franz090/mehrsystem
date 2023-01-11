@@ -55,7 +55,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Archived Barangays</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Archived Barangays</h4>
 
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12 " id="table-position">
@@ -64,8 +64,8 @@ include_once('../php-templates/admin-navigation-head.php');
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-bordered table-hover display" id="datatables">
-            <thead class="table-dark" colspan="3">
+            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+            <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>
                   <th scope="col" class="col-md-5">Barangay</th>

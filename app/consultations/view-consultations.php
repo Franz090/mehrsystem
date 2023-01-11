@@ -221,7 +221,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </div> 
                 <!-- end searchable select  --> 
               </div> 
-              <div class=" mb-3"> <!-- trimester -->
+              <div class=" mb-3" > <!-- trimester -->
                 <label>Nth Trimester</label>
                 <select class="form-select" name="trimester">
                   <option  class="option" value="0">N/A</option>
@@ -230,23 +230,50 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option  class="option" value="3">3rd (28-42 weeks)</option>
                 </select>
               </div> 
-              <div class="mb-3"> <!-- gestation -->    
-                <label for="gestation">Age of Gestation</label>
-                <input id="gestation" name="gestation" class="" type="text" required/> 
+         
+              <div class=" mb-3"> <!-- gestation -->
+              <label>Age of Gestation*</label>
+                <input type="text" 
+                     class="form-control mt-2 mb-2"  name="gestation" required/>    
+                
+                <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
               </div>
               <div class="mb-3"> <!-- blood_pressure -->      
-                <label for="blood_pressure">Blood Pressure</label>
-                <input id="blood_pressure" name="blood_pressure" class="" type="text" required/> 
+                <label>Blood Pressure*</label>
+                <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
               </div>
-              <div class="mb-3"> <!-- weight -->     
-                <label for="weight">Weight</label>
-                <input id="weight" name="weight" class="" type="number" required/>kg
+
+              <!-- start -->
+             
+                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                    <!-- Height -->
+                  <div class="d-flex input-group">
+                    <input  min='0' type="number" 
+                      class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
+                       <div class="input-group-postpend">
+
+                        <div id="weight-height" class="input-group-text form__input text-white">
+                         ft</div>
+                    </div>
+      
+                    <input  min='0' max='11' type="number" 
+                       class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
+                       <div class="input-group-postpend">
+                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
+                  </div>
+                </div>
               </div>
-              <div class="mb-3"> <!-- height  -->     
-                <label for="height">Height</label>
-                <input id="height_ft" name="height_ft" class="" type="number" required/>ft 
-                <input id="height_in" name="height_in" class="" type="number" required/>in
-              </div>
+              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
+                    Weight
+
+                <div class="d-flex input-group">   
+                    <input type="number" class="form__input form-control" id="weight" name="weight" 
+                      placeholder="Weight*" required min='0'/>
+                      <div class="input-group-postpend">
+                    <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
+                  </div>
+                  </div>
+                   <!-- end -->
               <div class="mb-3"> <!-- date -->
                 <label>Consultation Date and Time*</label> 
                 <div class="input-group date" id="datepicker">
@@ -289,7 +316,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input class="form-control option" type="datetime-local" name="date_return" required/> 
                 </div> 
               </div>  
-            </div>  
+            </div>
+          </div>
           <?php
             } else {
               ?>
@@ -376,7 +404,7 @@ include_once('../php-templates/admin-navigation-head.php');
                           <div class="p-1">
                             <?php if ($current_user_is_a_midwife) {?>
                               <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
-                                <button class="mb-2 edit btn btn-success btn-sm btn-inverse">
+                                <button class="edit btn btn-success btn-sm btn-inverse">
                                   Update 
                                 </button>
                               </a>

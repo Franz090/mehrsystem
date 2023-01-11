@@ -74,12 +74,31 @@
       cursor: pointer;
     }
     .select-btn_ss{
-      padding: 0 20px;
-      background: #fff;
-      border-radius: 7px;
-      justify-content: space-between;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+       display: block;
+    width: 100%;
+     padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    appearance: none;
+    font-family: "Open Sans", sans-serif;
     }
+    .select-btn_ss:focus-visible,
+    .select-btn_ss:active{
+    border-color: #81cbb8!important;
+    outline: 0!important;
+    box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)!important;
+}
+
+
     .select-btn_ss i{
       transition: transform 0.3s linear;
     }
