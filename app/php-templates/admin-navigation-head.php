@@ -98,23 +98,30 @@
     box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)!important;
 }
 
-
+ 
     .select-btn_ss i{
       transition: transform 0.3s linear;
+    }
+    .select-btn_ss span{
+      font-family: "Open Sans",sans-serif;
     }
     .wrapper_ss.active .select-btn_ss i{
       transform: rotate(-180deg);
     }
     .content_ss{
       display: none;
+      position: absolute;
+      z-index: 1;
       padding: 20px;
-      margin-top: 15px;
       background: #fff;
       border-radius: 7px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      border: 1px solid #dee2e6;      
     }
     .wrapper_ss.active .content_ss{
       display: block;
+      
     }
     .content_ss .search_ss{
       position: relative;
@@ -127,16 +134,41 @@
       transform: translateY(-50%);
       position: absolute;
     }
+    .ss{
+      font-family: "Open Sans",sans-serif;
+    }
+    .search-logo{
+      position: relative;
+      top: 25px;
+      left: 23px;
+    }
+     .search-logo1{
+      position: relative;
+      top: 26px;
+      right: 130px;
+    }
+      .search_ss ion-icon {
+        font-size: 17px; 
+    }
+    
+   
+    
     .search_ss input{
       width: 100%;
       outline: none;
-      border-radius: 5px;
       padding: 0 20px 0 43px;
-      border: 1px solid #B3B3B3;
+      border: 1px solid #dbdcdc;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      padding-right: 200px;
     }
     .search_ss input:focus{
       padding-left: 42px;
-      border: 2px solid #4285f4;
+      border: 1px solid #B3B3B3;
+      border-top: none;
+      border-right: none;
+      border-left: none;
     }
     .search_ss input::placeholder{
       color: #bfbfbf;
@@ -146,6 +178,10 @@
       max-height: 250px;
       overflow-y: auto;
       padding-right: 7px;
+      font-family: "Open sans",sans-serif;
+    }
+    .options_ss li .selected{
+      font-family: "Open sans",sans-serif;
     }
     .options_ss::-webkit-scrollbar{
       width: 7px;
@@ -166,7 +202,9 @@
     }
     .options_ss li:hover, li.selected{
       border-radius: 5px;
-      background: #f2f2f2;
+      background: #029670;
+      color: white;
+
     }
   </style>
 </head>

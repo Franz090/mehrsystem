@@ -72,10 +72,10 @@ include_once('../php-templates/admin-navigation-head.php');
 
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12" id="table-position">
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3"> 
                 <tr>
-                  <th scope="col" class="col-sm-1">#</th>
+                  <th scope="col" class="col-sm-2" >#</th>
                   <th scope="col">Midwife Name</th> 
                   <!-- <th scope="col">Status</th> -->
                   <?php if ($admin==1) { ?>
@@ -92,8 +92,8 @@ include_once('../php-templates/admin-navigation-head.php');
                 ?>    
                 
                   <tr>
-                    <th scope="row"><?php echo $key+1; ?></th>
-                    <td><?php echo $value['name']; ?></td> 
+                    <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
+                    <td class="td-bold"><?php echo $value['name']; ?></td> 
                     <!-- <td><?php //echo $value['status']; ?></td> -->
                     <?php if ($admin==1) { ?>
                       <!-- <td><?php //echo $value['contact']; ?></td> -->

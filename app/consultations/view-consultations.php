@@ -213,7 +213,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
                   <div class="content_ss">
                     <div class="search_ss">
-                      <i class="uil uil-search"></i>
+                     <ion-icon class="search-logo" name="search-outline"></ion-icon>
                       <input spellcheck="false" type="text" placeholder="Search" class="ss">
                     </div>
                     <ul class="options_ss"></ul>
@@ -382,9 +382,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     foreach ($consultation_list as $key => $value) {
                 ?>    
                     <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
+                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                         <?php if ($admin==0) { ?>  
-                          <td><?php echo $value['name']; ?></td>
+                          <td class="td-bold"><?php echo $value['name']; ?></td>
                         <?php } ?> 
                         <?php //if ($value['treatment_file']=='') { ?>  
                           <!-- <td>No File</td>  -->

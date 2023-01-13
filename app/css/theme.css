@@ -47,7 +47,7 @@
 
 body {
     margin: 0;
-    font-family: var(--bs-font-sans-serif);
+    font-family: "Open Sans",sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -330,9 +330,9 @@ tfoot,
 tr,
 td,
 th {
-    border-color: inherit;
+    border-color: #fefefe!important;
     border-style: solid;
-    border-width: 0
+    border-width: 0;
 }
 
 label {
@@ -353,7 +353,7 @@ select,
 optgroup,
 textarea {
     margin: 0;
-    font-family: inherit;
+    font-family: "Open Sans",sans-serif;
     font-size: inherit;
     line-height: inherit
 }
@@ -634,7 +634,7 @@ progress {
 }
 
 .table {
-    --bs-table-bg: rgba(0, 0, 0, 0);
+    --bs-table-bg: rgba(224, 40, 40, 0);
     --bs-table-accent-bg: rgba(0, 0, 0, 0);
     --bs-table-striped-color: #212529;
     --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
@@ -665,7 +665,7 @@ progress {
 }
 
 .table>:not(:last-child)>:last-child>* {
-    border-bottom-color: #e0e4e3!important;
+    border-bottom-color: #fefefe!important;
 }
 
 .caption-top {
@@ -783,8 +783,29 @@ progress {
     --bs-table-active-color: #000!important;
     --bs-table-hover-bg: #e6eae9!important;
     --bs-table-hover-color: #000!important;
-    color: #362e35!important;
+    color: #0a8a6a !important;
     border-color: #e0e4e3!important;
+    font-family: "Open Sans", sans-serif!important;
+    font-size: 15px!important;
+    font-weight: 600!important;
+}
+ td{
+    font-size: 15px!important;
+    font-family: "Open Sans", sans-serif !important;
+}
+.th-number > span{
+    font-family: "Open Sans", sans-serif !important;
+    font-size: 15px !important;
+    font-weight: normal !important;  
+    position:relative;
+    top:3px;
+
+}
+
+.td-bold{
+    font-weight: bold!important;
+    font-size: 15px!important;
+    
 }
 
 .table-dark {
@@ -902,7 +923,7 @@ progress {
 .form-control:focus {
     color: #212529;
     background-color: #fff;
-    border-color: #81cbb8;
+    border-color: #d5dec2;
     outline: 0;
     box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)!important;
 }
@@ -1076,7 +1097,7 @@ textarea.form-control-lg {
     background-repeat: no-repeat;
     background-position: right .75rem center;
     background-size: 16px 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid #d5dce2!important;
     border-radius: .25rem;
     appearance: none;
     font-family: "Open Sans", sans-serif;
@@ -1086,7 +1107,7 @@ textarea.form-control-lg {
 }
 
 .form-select:focus {
-    border-color: #81cbb8!important;
+    
     outline: 0!important;
     box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)!important;
     
@@ -1160,7 +1181,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input:focus {
-    border-color: #81cbb8;
+   
     outline: 0;
     box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)
 }
@@ -1712,6 +1733,8 @@ textarea.form-control.is-invalid {
 .btn {
     display: inline-block;
     font-weight: 400;
+    font-size: 15px!important;
+    font-family: "Open Sans",sans-serif;
     line-height: 1.5;
     color: #212529;
     text-align: center;

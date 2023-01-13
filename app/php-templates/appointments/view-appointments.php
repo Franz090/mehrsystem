@@ -142,7 +142,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <input type="text" style="display:none;" name="patient_id_trimester" class="patient_id_trimester"/>
               <div class="content_ss">
                   <div class="search_ss">
-                      <i class="uil uil-search"></i>
+                      <ion-icon class="search-logo" name="search-outline"></ion-icon>
                       <input spellcheck="false" type="text" placeholder="Search" class="ss">
                   </div>
                   <ul class="options_ss"></ul>
@@ -219,8 +219,8 @@ include_once('../php-templates/admin-navigation-head.php');
                     foreach ($appointment_list as $key => $value) {
                 ?>    
                     <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
-                        <td><?php echo $value['name']; ?></td>
+                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
+                        <td class="td-bold"><?php echo $value['name']; ?></td>
                         <td><?php echo $value['barangay']; ?></td>
                         <td><?php $dtf = date_create($value['date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
