@@ -38,7 +38,7 @@ if(isset($_POST['submit'])) {
 
         
     $up = "UPDATE barangays SET health_center='$h_center' 
-      WHERE id=$id_from_get";
+      WHERE barangay_id=$id_from_get";
     if (mysqli_query($conn, $up))  {
       echo "<script>alert('Barangay Record Updated!');</script>";
       $conn->close(); 
