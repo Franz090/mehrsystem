@@ -4,7 +4,7 @@
 if(isset($_POST['submit_appointment'])) {
   $_POST['submit_appointment'] = null;
   $error = '';
-  if (empty($_POST['date']) || empty($_POST['patient_id_trimester']))
+  if (empty($_POST['date']) || (empty($_POST['patient_id_trimester'] && $current_user_is_a_midwife || $current_user_is_a_patient)))
   $error .= 'Fill up input fields that are required (with * mark)! ';
   else {   
     // echo "<script>alert('Appointment Added! ".$_POST['patient_id_trimester']."'); window.location.href='../';</script>"; 
