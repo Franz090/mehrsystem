@@ -1,5 +1,5 @@
 <?php
-
+@include '../includes/config.php';
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
