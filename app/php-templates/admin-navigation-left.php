@@ -1,3 +1,9 @@
+
+<?php 
+  include_once "../controller/onLoadController.php";
+  $onloadData = new onLoadController();
+  $notifCount = $onloadData->getNotifCount();
+?>
 <div class="navigation_nu">  
   <ul> 
     <li>
@@ -86,7 +92,21 @@
         </a>
       </li>
     <?php 
-      } ?>
+ 
+      } 
+      
+    if (!$current_user_is_an_admin) {?>
+
+      <li <?php echo $page == 'notification' ? "class='hovered'":""?>>
+        <a href="../notification">
+              <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
+              <span class="title">Notification 
+                <?php $notifCount ? print_r("<span class='badge bg-danger'>".$notifCount."</span>") : "";?>
+              </span>
+          </a>
+      </li>
+    <?php }?>
+    <hr/> 
     <li>
        <a href="../logout.php">
             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
