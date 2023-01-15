@@ -117,7 +117,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <td  class="col-md-3 fw-bold">Date of Birth</td>
                 <td class="col-md-3"><?php  
                   $dtf1 = date_create($b_date); 
-                  echo date_format($dtf1,"F d, Y");  
+                  echo $b_date?date_format($dtf1,"F d, Y"):"No Data";  
                 ?></td>
               </tr>
             </tbody>
