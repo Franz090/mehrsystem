@@ -39,7 +39,7 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
   $select = "SELECT c.patient_id id, consultation_id c_id, CONCAT(d.first_name, 
   IF(d.middle_name IS NULL OR d.middle_name='', '', 
       CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
-  ' ', d.last_name) name, health_center, date, treatment_file
+  ' ', d.last_name) name, health_center, date
   FROM consultations c, user_details d, barangays b, patient_details p
   WHERE c.patient_id=d.user_id AND b.barangay_id=p.barangay_id 
     AND $barangay_select p.user_id=d.user_id $patient_str;";
@@ -62,12 +62,12 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
       $c_no = $_contact_num;  
       $c_id = $row['c_id'];  
       $name = $row['name'];   
-      $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);   
+      // $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);   
       $date = $row['date'];  
       $bgy = $row['health_center'];  
       array_push($consultation_list, array(
         'id' => $id,
-        'treatment_file' => $treatment_file,
+        // 'treatment_file' => $treatment_file,
         'c_id' => $c_id,
         'name' => $name,  
         'contact' => $c_no,
@@ -84,19 +84,19 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
 
   // fetch patients 
   $select1 = "SELECT users.user_id id, trimester,
-  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name
-  FROM users, user_details d, patient_details p
-  WHERE role=-1 AND $barangay_select d.user_id=users.user_id AND p.user_id=users.user_id";
+    CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name
+    FROM users, user_details d, patient_details p
+    WHERE role=-1 AND $barangay_select d.user_id=users.user_id AND p.user_id=users.user_id";
   // echo $select1;
   if ($result_patient = mysqli_query($conn, $select1)) {
     foreach($result_patient as $row) {
-        $id = $row['id'];  
-        $trimester = $row['trimester'];  
-        $name = $row['name'];  
-        array_push($patient_list, array('id' => $id,
+      $id = $row['id'];  
+      $trimester = $row['trimester'];  
+      $name = $row['name'];  
+      array_push($patient_list, array('id' => $id,
         'name' => $name,
         'trimester' => $trimester
-    ));
+      ));
     } 
     mysqli_free_result($result_patient);
   } 
@@ -105,27 +105,50 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
   }   
 } 
 
-// add  
+// create consultation  
 if(isset($_POST['submit_consultation'])) {
   $_POST['submit_consultation'] = null;
   $error = ''; 
 
-  if (empty($_POST['date']))
+  if (empty($_POST['date']) || empty($_POST['date_return'])) 
     $error .= 'Fill up input fields that are required (with * mark)! ';
   else {    
     $patient_arr = explode("AND",$_POST['patient_id']);
-    $patient_id = mysqli_real_escape_string($conn, ($patient_arr[0]));
-    $patient_trimester = mysqli_real_escape_string($conn, ($patient_arr[1]));
+    $patient_id = mysqli_real_escape_string($conn, $patient_arr[0]);
+    $trimester = mysqli_real_escape_string($conn, $_POST['trimester']);
 
-    $t = empty(trim($_POST['treatment']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['treatment']) . "'");
+    // $t = empty(trim($_POST['treatment']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['treatment']) . "'");
     $m = empty(trim($_POST['prescription']))?'NULL':("'" . mysqli_real_escape_string($conn, $_POST['prescription']) . "'");
     $date = mysqli_real_escape_string($conn, $_POST['date']); // ex: 2022-09-24T00:55
     
   
-    $insert = "INSERT INTO consultations(patient_id, date, treatment, prescription, treatment_file, midwife_appointed, trimester) 
-        VALUES($patient_id, '$date', $t, $m, NULL, $session_id, $patient_trimester);";
+    $gestation = mysqli_real_escape_string($conn, $_POST['gestation']);
+    $blood_pressure = mysqli_real_escape_string($conn, $_POST['blood_pressure']);
+    $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+    $height_ft = mysqli_real_escape_string($conn, $_POST['height_ft']);
+    $height_in = mysqli_real_escape_string($conn, $_POST['height_in']);
+    
+    $nutritional_status = mysqli_real_escape_string($conn, $_POST['nutritional_status']);
+    $status_analysis = mysqli_real_escape_string($conn, $_POST['status_analysis']);
+    $advice = mysqli_real_escape_string($conn, $_POST['advice']);
+    $change_plan = mysqli_real_escape_string($conn, $_POST['change_plan']);
+    $date_return = mysqli_real_escape_string($conn, $_POST['date_return']);
 
-    if (mysqli_query($conn, $insert))  { 
+    $insert = "INSERT INTO consultations(
+          patient_id, date, prescription, midwife_appointed, trimester,
+          gestation, blood_pressure, weight, height_ft, height_in,
+          nutritional_status, status_analysis, advice, change_plan, date_return
+        ) 
+        VALUES($patient_id, '$date',  $m, $session_id, $trimester,
+          '$gestation', '$blood_pressure', $weight, $height_ft, $height_in, 
+          '$nutritional_status', '$status_analysis', '$advice', '$change_plan', '$date_return'
+        );";
+    // update weight height_ft height_in trimester of patient
+    $update_patient_based_on_consultation = 
+      "UPDATE patient_details 
+        SET weight=$weight, height_ft=$height_ft, height_in=$height_in, trimester=$trimester
+        WHERE user_id=$patient_id";
+    if (mysqli_multi_query($conn, "$insert $update_patient_based_on_consultation"))  { 
       echo "<script>alert('Consultation Added!');window.location.href='./view-consultations.php'; </script>"; 
     }
     else {  
@@ -166,7 +189,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             <div class="form__input-group">
-              <div class="mb-3">
+              <div class="mb-3"> <!-- patient -->
                 <label>Patient</label>
 
                 <!-- <select class="form-select" name="patient_id">]
@@ -190,7 +213,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
                   <div class="content_ss">
                     <div class="search_ss">
-                      <i class="uil uil-search"></i>
+                     <ion-icon class="search-logo" name="search-outline"></ion-icon>
                       <input spellcheck="false" type="text" placeholder="Search" class="ss">
                     </div>
                     <ul class="options_ss"></ul>
@@ -198,24 +221,103 @@ include_once('../php-templates/admin-navigation-head.php');
                 </div> 
                 <!-- end searchable select  --> 
               </div> 
-              <div class="mb-3">
-                <label>Consultation Date and Time*</label> 
-                 <div class="input-group date" id="datepicker">
-                <input class="form-control option" type="datetime-local" name="date" required />
-
-              </div>
-              </div>
-              <div class="mb-3">     
-                <label for="prescription">Prescription</label>
-                <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"></textarea> 
-              </div>
-              <div class="mb-3">     
-
-                <label for="treatment">Treatment</label>
-                <textarea id="treatment"  name="treatment" 
-                class="form-control form-control-md w-100"></textarea>
+              <div class=" mb-3" > <!-- trimester -->
+                <label>Nth Trimester</label>
+                <select class="form-select" name="trimester">
+                  <option  class="option" value="0">N/A</option>
+                  <option  class="option" value="1">1st (0-13 weeks)</option>
+                  <option  class="option" value="2">2nd (14-27 weeks)</option>
+                  <option  class="option" value="3">3rd (28-42 weeks)</option>
+                </select>
               </div> 
-            </div>  
+         
+              <div class=" mb-3"> <!-- gestation -->
+              <label>Age of Gestation*</label>
+                <input type="text" 
+                     class="form-control mt-2 mb-2"  name="gestation" required/>    
+                
+                <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
+              </div>
+              <div class="mb-3"> <!-- blood_pressure -->      
+                <label>Blood Pressure*</label>
+                <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
+              </div>
+
+              <!-- start -->
+             
+                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                    <!-- Height -->
+                  <div class="d-flex input-group">
+                    <input  min='0' type="number" 
+                      class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
+                       <div class="input-group-postpend">
+
+                        <div id="weight-height" class="input-group-text form__input text-white">
+                         ft</div>
+                    </div>
+      
+                    <input  min='0' max='11' type="number" 
+                       class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
+                       <div class="input-group-postpend">
+                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
+                    Weight
+
+                <div class="d-flex input-group">   
+                    <input type="number" class="form__input form-control" id="weight" name="weight" 
+                      placeholder="Weight*" required min='0'/>
+                      <div class="input-group-postpend">
+                    <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
+                  </div>
+                  </div>
+                   <!-- end -->
+              <div class="mb-3"> <!-- date -->
+                <label>Consultation Date and Time*</label> 
+                <div class="input-group date" id="datepicker">
+                  <input class="form-control option" type="datetime-local" name="date" required /> 
+                </div> 
+              </div>  
+              <div class=" mb-3"> <!-- nutritional_status -->
+
+                <label>Nutritional Status*</label>
+                <select class="form-select" name="nutritional_status">
+                  <option  class="option" value="Normal">Normal</option>
+                  <option  class="option" value="Underweight">Underweight</option>
+                  <option  class="option" value="Overweight">Overweight</option>
+                </select>
+              </div> 
+              <div class="mb-3"> <!-- status_analysis -->     
+                <label for="status_analysis">Status Analysis</label>
+                <textarea id="status_analysis" name="status_analysis" 
+                  class="form-control form-control-md w-100"></textarea> 
+              </div>
+              <div class="mb-3"> <!-- advice -->     
+                <label for="advice">Advice</label>
+                <textarea id="advice" name="advice" 
+                  class="form-control form-control-md w-100"></textarea> 
+              </div>
+              <div class="mb-3"> <!-- change_plan -->     
+                <label for="change_plan">Changes in Birth Plan</label>
+                <textarea id="change_plan" name="change_plan" 
+                  class="form-control form-control-md w-100"></textarea> 
+              </div>
+              
+              <div class="mb-3"> <!-- prescription -->     
+                <label for="prescription">Prescription</label>
+                <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"> 
+                </textarea> 
+              </div>
+              <div class="mb-3"> <!-- date_return -->
+                <label>Date of Return*</label> 
+                <div class="input-group date" id="datepicker_return">
+                  <input class="form-control option" type="datetime-local" name="date_return" required/> 
+                </div> 
+              </div>  
+            </div>
+          </div>
           <?php
             } else {
               ?>
@@ -227,10 +329,9 @@ include_once('../php-templates/admin-navigation-head.php');
           ?>  
         </form>
       </div>
-      <div class="modal-footer">
-       
-        <button class="btn btn-primary" id="submit" type="submit" name="submit_consultation" form="new_consultation">Add Consultation</button>
-      
+      <div class="modal-footer"> 
+        <button class="btn btn-primary" id="submit" type="submit" 
+          name="submit_consultation" form="new_consultation">Add Consultation</button>
       </div>
     </div>
   </div>
@@ -259,15 +360,15 @@ include_once('../php-templates/admin-navigation-head.php');
           <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
-                <th scope="col" >#</th>
+                <th scope="col"  >#</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Patient Name</th> 
+                  <th scope="col" class="col-sm-2">Patient Name</th> 
                 <?php } ?>  
-                <th scope="col">Treatment File</th>  
+                <!-- <th scope="col">Treatment File</th>   -->
                 <th scope="col">Barangay</th>  
                 <th scope="col" >Date and Time</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Contact Number(s)</th>
+                  <th scope="col" class="col-sm-2">Contact Number(s)</th>
                 <?php } ?>  
                 <th scope="col">Actions</th>
               </tr>
@@ -281,18 +382,18 @@ include_once('../php-templates/admin-navigation-head.php');
                     foreach ($consultation_list as $key => $value) {
                 ?>    
                     <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
+                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                         <?php if ($admin==0) { ?>  
-                          <td><?php echo $value['name']; ?></td>
+                          <td class="td-bold"><?php echo $value['name']; ?></td>
                         <?php } ?> 
-                        <?php if ($value['treatment_file']=='') { ?>  
-                          <td>No File</td> 
-                        <?php } else {?>  
-                          <td> <a target="_blank" style="color:#000;"
-                              href="./view-treatment-file.php?id=<?php echo $value['treatment_file']?>">
+                        <?php //if ($value['treatment_file']=='') { ?>  
+                          <!-- <td>No File</td>  -->
+                        <?php //} else {?>  
+                          <!-- <td> <a target="_blank" style="color:#000;"
+                              href="./view-treatment-file.php?id=<?php //echo $value['treatment_file']?>">
                               View Photo</a> 
-                          </td> 
-                        <?php } ?> 
+                          </td>  -->
+                        <?php //} ?> 
                         <td><?php echo $value['barangay']; ?></td>
                         <td><?php $dtf = date_create($value['date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
@@ -300,14 +401,19 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td><?php echo $value['contact']; ?></td> 
                         <?php } ?> 
                         <td>
-                          <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>">
-                           <div class="p-1">
-                            <button class="mb-2 edit btn btn-success btn-sm btn-inverse">Update</button></a>
-                          <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                            <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
-                            <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
-                              <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
-                        </div>
+                          <div class="p-1">
+                            <?php if ($current_user_is_a_midwife) {?>
+                              <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
+                                <button class="edit btn btn-success btn-sm btn-inverse">
+                                  Update 
+                                </button>
+                              </a>
+                            <?php }?>
+                            <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
+                              <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
+                              <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
+                                <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
+                          </div>
                         </td>
                     </tr>
                 <?php 

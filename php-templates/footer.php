@@ -59,5 +59,5 @@ else {
             </div> 
         </div> 
     <?php }?>
-    <div class="credit"> All right reserved<span>AW09</span> | all rights reserved 2022</div>
+    <div class="credit"> All rights reserved|<span>2022</span></div>
 </section>

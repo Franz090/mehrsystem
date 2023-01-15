@@ -117,16 +117,14 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Footer</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Contact Information:</h4>
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
-        <form class="form form-box px-3" style="padding-top: 100px;" action="" method="post">
+        <form class="form form-box px-3" style="padding-top: 100px;position:relative;bottom: 90px;" action="" method="post">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
             ?> 
-            <h4>Contact Information:</h4><br/>
-            Email:
             <div  class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingInputInvalid" name="email" value="<?php echo $c_email?>"
                 placeholder="Email" /> 

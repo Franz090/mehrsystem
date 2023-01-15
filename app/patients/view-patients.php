@@ -13,7 +13,7 @@ $session_id= $_SESSION['id'];
 $barangay_assigned_midwife_str = $admin==1?"":"AND $session_id=b.assigned_midwife";
 
 $select = "SELECT u.user_id AS user_id, 
-  CONCAT(d.first_name,IF(d.middle_name='' OR middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name, u.email,  
+  CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name, u.email,  
   health_center, trimester, m.status 
   FROM users u, user_details as d, barangays as b, patient_details m
   WHERE u.role = -1 AND d.user_id=u.user_id 
@@ -98,15 +98,15 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient</h4>
         <div class="table-padding table-responsive">
-          <div class="pagination-sm col-md-8 col-lg-12 " id="table-position">
+          <div class="pagination-sm col-md-8 col-lg-12" id="table-position">
            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col" >#</th>
-                <th scope="col">Patient Name</th> 
-                <th scope="col">Email</th>  
-                <th scope="col">Trimester</th> 
-                <th scope="col">Contact Number</th>
+                <th scope="col" class="col-sm-2">Patient Name</th> 
+                <th scope="col" class="col-sm-1 mx-auto" style="width: 10px;margin-left: 2">Email</th>  
+                <th scope="col" >Trimester</th> 
+                <th scope="col" class="col-sm-2">Contact Number</th>
                 <!-- <th scope="col">Birthdate</th> -->
                 <th scope="col">Barangay</th> 
                 <th scope="col" >Actions</th>
@@ -121,9 +121,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     foreach ($patient_list as $key => $value) {
                 ?>    
                     <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
-                        <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['email']; ?></td>
+                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
+                        <td class="td-bold"><?php echo $value['name']; ?></td>
+                        <td ><?php echo $value['email']; ?></td>
                         <td><?php echo $value['trimester']; ?></td>
                         <td><?php echo $value['contact']; ?></td>
                         <!-- <td><?php $dtf = date_create($value['b_date']); echo date_format($dtf,"F d, Y"); ?></td> -->
@@ -135,7 +135,7 @@ include_once('../php-templates/admin-navigation-head.php');
                                <a href="approve-patient.php?id=<?php echo $value['id'] ?>">  
                                   <button type="button" class="mb-2 btn btn-primary btn-sm btn-inverse">
                                     Approve</button></a>  
-                               <a href="reject-patient.php?id=<?php echo $value['id'] ?>">  
+                               <a href="reject-patient.php?id=<?php echo $value['id'] ?>" onclick="return confirm('Are you sure?')">  
                                   <button type="button" class="mb-2 btn btn-danger btn-sm btn-inverse">
                                     Reject</button></a>  
 
@@ -186,6 +186,21 @@ include_once('../php-templates/admin-navigation-head.php');
           }
         });
       } );
+
+       var el_up = document.getElementById("GFG_UP");
+                  
+            el_up.innerHTML =
+                    "Click on the LINK for further confirmation."; 
+              
+            var el = document.getElementsByClassName('confirm');
+              
+            var confirmThis = function (e) {
+                if (!confirm('Are you sure?')) e.preventDefault();
+            };
+              
+            for (var i = 0, l = el.length; i < l; i++) {
+                el[i].addEventListener('click', confirmThis, false);
+            }
   </script>
  
 <?php 

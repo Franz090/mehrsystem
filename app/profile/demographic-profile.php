@@ -80,8 +80,8 @@ include_once('../php-templates/admin-navigation-head.php');
         else {
       ?>   
         <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Demographic Profile</h4>
-          <button type="button"> 
-            <a href="./update-account.php"> 
+          <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
+            <a href="./update-account.php" class="text-light" style=""> 
               Update Account Information
             </a>
           </button>
@@ -117,7 +117,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <td  class="col-md-3 fw-bold">Date of Birth</td>
                 <td class="col-md-3"><?php  
                   $dtf1 = date_create($b_date); 
-                  echo date_format($dtf1,"F d, Y");  
+                  echo $b_date?date_format($dtf1,"F d, Y"):"No Data";  
                 ?></td>
               </tr>
             </tbody>
