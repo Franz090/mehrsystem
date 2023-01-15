@@ -170,7 +170,7 @@ if ($current_user_is_a_patient) {
     } 
 
     mysqli_free_result($result3);
-    $status = $_SESSION['status']; 
+    $status = isset($_SESSION['status'])? $_SESSION['status'] : ''; 
 
     if ($status) {
       // print_r($nurse_list);
