@@ -1,5 +1,5 @@
 
-<script src="../active.js"></script>
+<script src="../js/active.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   var el = document.getElementById("wrapper");
@@ -118,6 +118,145 @@
   }
 ?>
 <!-- end searchable select js  -->
+
+<!-- SWEET ALERT -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="../js/system-script.js"></script>
+
+<script>
+  $(document).ready(function(){
+
+    var date_sched = $.parseJSON('<?= json_encode($date_sched_array) ?>');
+    // console.log('fdsfsd',date_sched);
+    $('#date').on('change', function() {
+      var selected_date = $(this).val(),
+          date = new Date(selected_date),
+          dayOfWeek = date.getDay(),
+          hours = date.getHours(),
+          today = new Date();
+
+      if(date < today) {
+        dateErrorHandler(`Please Select future date.`);
+      }
+      else if(dayOfWeek === 6 || dayOfWeek === 0) {
+        dateErrorHandler(`Weekend is not availble!`);
+      }
+      else if(hours < 8 || hours >= 17) {
+        dateErrorHandler(`Choose time between 8am to 5pm`);
+      } else {
+        for(var i = 0; i < date_sched.length; i++) {
+          var diff= Math.abs(date - new Date(date_sched[i]));
+          var minutes = Math.floor((diff/1000)/60);
+          // console.log(minutes);
+          if(minutes < 30) {
+            dateErrorHandler(`This schedule is not available!`);
+          }
+        }
+      }    
+    })
+
+    
+    $('.search_date').on('change', function() {
+      var selected_date = $(this).val(),
+          date = new Date(selected_date),
+          dayOfWeek = date.getDay(),
+          hours = date.getHours(),
+          today = new Date();
+
+      if (date < today && date.setHours(0,0,0,0) != today.setHours(0,0,0,0)) {
+        dateErrorHandler(`Please Select future date.`);
+      }
+      else if(dayOfWeek === 6 || dayOfWeek === 0) {
+        dateErrorHandler(`Please Select weekdays!`);
+      }  
+    });
+
+    const dateErrorHandler = (message) => {
+      $.SystemScript.swalAlertMessage('Error', message, 'error');
+      $('.search_date').val('');
+      $('#date').val('');
+      return false;
+    }
+
+
+    var url = '../controller/appointmentController.php';
+    $('.cancel-appointment').on('click', function() {
+      const appointment_id = $( this ).data( "id" );
+      const appointment_date = $( this ).data( "date" );
+      const patient = $( this ).data( "patient" );
+      $(this).prop('disabled', true);
+      $(this).html('Please wait...');
+      $.SystemScript.swalConfirmMessage('Are you sure', 
+        'Do you want to cancel this appointment?', 'question').done(function(response) {
+            if(response) {
+                
+                let path = url + `?command=deleteAppointment&appointment_id=${appointment_id}&appointment_date=${appointment_date}&patient=${patient}`;
+                $.SystemScript.executeGet(path).done((res) => {
+                  // console.log(res);
+                  if(res.data.status == 'success') {
+                    $.SystemScript.swalAlertMessage('Successfully',`${res.data.message}`, 'success');
+                    $('.swal2-confirm').click(function(){
+                        location.reload();
+                    });
+                  } else {
+                      $.SystemScript.swalAlertMessage('Error',`${res.data.message}`, 'error');
+                      $('.cancel-appointment').prop('disabled', false);
+                      $('.cancel-appointment').html('Cancel');
+                  }
+                });
+              
+            } else {
+              $('.cancel-appointment').prop('disabled', false);
+              $('.cancel-appointment').html('Cancel');
+            }
+            
+        });
+        
+    });
+
+
+    $("#search_availability").submit(function(e) {
+        e.preventDefault();
+        $('.btn-submit').prop('disabled', true);
+        $('.btn-submit').html('Searching...');
+        var data = new FormData(this);
+        let path = url + `?command=searchAvailableAppointment`;
+        $.SystemScript.executePost(path, data).done((response) => {
+          // console.log(response.data);
+          if(response.data.status == 'success') {
+            $( "#available_result" ).html( "" );
+            var result = `
+              <h4 style="text-align:right !important;">Available Slot  
+                <span class="text-danger">${response.data.count}</span>/18
+              </h4>
+              <h5>Time Taken</h5>
+              <div id="time-taken"></div>
+            `;
+            $( "#available_result" ).append(result);
+            if(response.data.data.length != 0) {
+              var date = $.each(response.data.data, function( index, value ) {
+                $( "#time-taken" ).append(`<p>${value}</p><hr class="m-0"><br/>`);
+              });
+            } else {
+              $( "#time-taken" ).append(`<p class="text-danger">All time are available.</p>`);
+            }
+          } else {
+            $.SystemScript.swalAlertMessage('Error',`${response.data.message}`, 'error');
+          }
+          $('.btn-submit').prop('disabled', false);
+          $('.btn-submit').html('Search');
+        });
+    });
+
+    
+  })
+</script>
+
+
+
 
 </body>
 

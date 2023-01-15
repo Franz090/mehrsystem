@@ -2,12 +2,23 @@
   if ($current_user_is_a_patient) { // patient 
     if ($status) {
   ?>
+  <style>
+    .text-main {
+        color: var(--green);
+        text-align: left !important;
+    }
+  </style>
+  <div class="p-4">
     Patient <br/>
-    BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
+    BMI: <?php echo round($bmi,2). " ($bmi_desc)"?> 
+    
+  </div>
 
-    <div class="container py-5" id="page-container">
-      <div class="row" style="width:100%;">
-        <div class="col-md-9">
+    
+    <div class="container pt-0" id="page-container">
+      <!-- <div class="row" style="width:100%;">
+        <h2 class="">Appointment Schedule</h2>
+        <div class="col-md-12 box background-head p-4">
             <div id="calendar"></div>
         </div>
         <div class="col-md-3">
@@ -37,8 +48,18 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+        <div class="row" style="width:100%;">
+                <div class="calendarBox"> 
+                    <h2 class="text-main">Appointment Schedule</h2>
+                    <div class="box">
+                        <h6 class="text-center">Calendar</h6>
+                        <div id="calendar"></div>
+                    </div> 
+                </div>
+            </div>
       </div>
+      
       <!-- Event Details Modal -->
       <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
         <div class="modal-dialog modal-dialog-centered">
