@@ -32,7 +32,7 @@ if (count($_barangay_list)>0) {
   WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id 
     AND p.user_id=i.user_id AND a.date>='$yester_date 00:00:00'
     AND ($barangay_select)  AND b.assigned_midwife=$session_id
-    AND a.status=".($pending?0:1).";";
+    AND a.status=".($pending?0:1)." ORDER BY a.date DESC;";
 
 
   if($result = mysqli_query($conn, $select))  {
@@ -98,7 +98,7 @@ if (count($_barangay_list)>0) {
   }    
 } 
 
-@include '../php-templates/appointments/submit-add-appointment.php';
+// @include '../php-templates/appointments/submit-add-appointment.php';
 
 
 $conn->close(); 
@@ -139,7 +139,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <span>Select A Patient</span>
                   <i class="uil uil-angle-down"></i>
               </div>
-              <input type="text" style="display:none;" name="patient_id_trimester" class="patient_id_trimester"/>
+              <input type="text" style="display:none;" name="patient_id_trimester" id="patient_id_trimester" class="patient_id_trimester"/>
               <div class="content_ss">
                   <div class="search_ss">
                       <ion-icon class="search-logo" name="search-outline"></ion-icon>
@@ -151,14 +151,14 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="mb-3">
               <label>Appointment Date and Time*</label> 
               <div class="input-group date" id="datepicker">
-                <input class="form-control option pt-2 pb-2" type="datetime-local" name="date"/>
+                <input class="form-control option pt-2 pb-2" type="datetime-local" name="date" id="date"/>
               </div>
           </div>  
 
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" id="submit" type="submit" name="submit_appointment" form="new_appointment">Add Appointments</button>
+        <button class="btn btn-primary btn-submit" id="submit" type="submit" name="submit_appointment" form="new_appointment">Add Appointments</button>
       </div>
     </div>
   </div>
@@ -177,7 +177,12 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- End Modal -->
 
     <div class="container-fluid default">
-      <div  class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+      <div  class="background-head row m-2 my-4">
+        
+        <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
+          <h4 class="fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+          <button class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
+        </div>
       <div class="card-body">
         
        <div class="d-flex p-1 justify-content-between">
@@ -231,8 +236,14 @@ include_once('../php-templates/admin-navigation-head.php');
                             </td>
                         <?php } else if ($pending) {?>
                           <td>
-                            <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>">
-                                <button class="edit btn btn-success btn-sm btn-inverse">Approve</button></a>
+                            <!-- <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>"> -->
+                                <button class="edit btn btn-success btn-sm btn-inverse approve-appointment"
+                                  data-id="<?php echo $value['a_id'] ?>" 
+                                  data-date="<?php echo $value['date']; ?>" 
+                                  data-patient="<?php echo $value['id']?>">
+                                  Approve
+                                </button>
+                            <!-- </a> -->
                             <!-- <a href="delete-appointment.php?id=<?php //echo $value['a_id'] ?>">
                                 <button class="del btn btn-danger btn-sm btn-inverse">Delete</button></a>
                           </td>  -->
@@ -242,8 +253,11 @@ include_once('../php-templates/admin-navigation-head.php');
                                   <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a>
                                
                         <?php }?> 
-                            <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>" >
-                                  <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a> 
+ 
+                                  <button class="btn btn-danger btn-sm btn-inverse cancel-appointment" 
+                                  data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="<?php echo $value['id']?>">
+                                  Cancel 
+                                  </button> 
                           </td>
                     </tr>
                 <?php 
@@ -256,6 +270,27 @@ include_once('../php-templates/admin-navigation-head.php');
       <?php } ?> 
         </div>              
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="searchSchedule" tabindex="-1" aria-labelledby="searchSchedule" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Search Available Schedule</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+          <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
+            <input class="form-control option pt-2 pb-2 search_date" type="date" name="s_date" required/>
+            <input type="hidden" name="role" value="midwife">
+            <button class="btn btn-primary btn-submit" id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+          </form>
+          <div id="available_result"></div>
+        </div>
     </div>
   </div>
 </div>
@@ -283,5 +318,69 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>
 <?php 
+include_once "../controller/onLoadController.php";
+$onloadData = new onLoadController();
+$date_sched_array = $onloadData->getMidwifeAppointment();
 include_once('../php-templates/admin-navigation-tail.php');
 ?>
+
+<script>
+  $(document).ready( function () {
+    var url = '../controller/appointmentController.php';
+    $("#new_appointment").submit(function(e) {
+        e.preventDefault();
+        $('.btn-submit').prop('disabled', true);
+        $('.btn-submit').html('Please wait...');
+        var data = new FormData(this);
+        var ptine = $('#patient_id_trimester').val();
+        let path = url + `?command=addAppointment`;
+        $.SystemScript.executePost(path, data).done((response) => {
+          // console.log(response.data);
+          if(response.data.status == 'success') {
+            $.SystemScript.swalAlertMessage('Successfully',`${response.data.message}`, 'success');
+            $('.swal2-confirm').click(function(){
+                location.reload();
+            });
+          } else {
+            $.SystemScript.swalAlertMessage('Error',`${response.data.message}`, 'error');
+          }
+          $('.btn-submit').prop('disabled', false);
+          $('.btn-submit').html('Submit');
+        });
+    });
+
+
+    $('.approve-appointment').on('click', function() {
+        const appointment_id = $( this ).data( "id" );
+        const appointment_date = $( this ).data( "date" );
+        const patient = $( this ).data( "patient" );
+        $(this).prop('disabled', true);
+        $(this).html('Please wait...');
+        $.SystemScript.swalConfirmMessage('Are you sure', 
+        'Do you want to approve this appointment?', 'question').done(function(response) {
+            if(response) {
+                let path = url + `?command=approveAppointment&appointment_id=${appointment_id}&appointment_date=${appointment_date}&patient=${patient}`;
+                $.SystemScript.executeGet(path).done((res) => {
+                  // console.log(res);
+                  if(res.data.status == 'success') {
+                    $.SystemScript.swalAlertMessage('Successfully',`${res.data.message}`, 'success');
+                    $('.swal2-confirm').click(function(){
+                        location.reload();
+                    });
+                  } else {
+                      $.SystemScript.swalAlertMessage('Error',`${res.data.message}`, 'error');
+                      $('.approve-appointment').prop('disabled', false);
+                      $('.approve-appointment').html('Approve');
+                  }
+                });
+              
+            } else {
+              $('.approve-appointment').prop('disabled', false);
+              $('.approve-appointment').html('Approve');
+            }
+            
+        });
+    });
+
+  });
+</script>

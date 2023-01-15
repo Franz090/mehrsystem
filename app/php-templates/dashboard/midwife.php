@@ -100,7 +100,11 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
 
     $conn->close();  
 ?> 
-
+<style>
+    .text-main {
+        color: var(--green);
+    }
+</style>
 <div class="container-fluid default"> 
     Midwife  <!-- cards -->
     <div class="cardBoxs">
@@ -131,11 +135,12 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
         <div class="container-fluid" id="page-container">
             <div class="row" style="width:100%;">
                 <div class="calendarBox"> 
+                    <h2 class="text-main">Appointment Schedule</h2>
                     <div class="box">
                         <h6 class="text-center">Calendar</h6>
                         <div id="calendar"></div>
                     </div> 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="cardt rounded-0 shadow">
                             <div class="card-header bg-gradient bg-primary text-light">
                                 <h5 class="card-title">Add an Appointment</h5>
@@ -145,20 +150,7 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                                     <form method="post" id="schedule-form">
                                         <div class="form-group mb-2">
                                             <label for="patient" class="control-label">Patient</label>
-                                            <!-- <select  class="form-select"  name="patient_id_trimester" id="patient">
-                                                <?php
-                                                    // if (count($patient_list)>0) {
-                                                        // foreach ($patient_list as $key => $value) { 
-                                                ?> 
-                                                    <option class="option" value="<?php // echo $value['id']."AND".$value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
-                                                        <?php // echo $value['name'];?></option>
-                                                <?php  
-                                                        // }    
-                                                    // }
-                                                ?>  
-                                            </select> -->
-                                            
-                                            <!-- searchable select  -->
+                                           
                                             <div class="wrapper_ss">
                                                 <div class="select-btn_ss">
                                                     <span>Select A Patient</span>
@@ -189,7 +181,7 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- Event Details Modal -->
