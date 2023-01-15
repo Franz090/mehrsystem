@@ -179,9 +179,18 @@
       overflow-y: auto;
       padding-right: 7px;
       font-family: "Open sans",sans-serif;
+      height: 110px;
+      overflow:scroll;
+      scrollbar-width: none;
+     -ms-overflow-style: none;
+    }
+    .content_ss .options_ss::-webkit-scrollbar {
+      display: none;
+      overflow: hidden;
     }
     .options_ss li .selected{
       font-family: "Open sans",sans-serif;
+     
     }
     .options_ss::-webkit-scrollbar{
       width: 7px;
@@ -199,13 +208,15 @@
     }
     .options_ss li{
       padding: 0 13px;
+      font-family: "Open sans",sans-serif;
     }
     .options_ss li:hover, li.selected{
       border-radius: 5px;
       background: #029670;
       color: white;
-
+      font-family: "Open sans",sans-serif;
     }
+    
   </style>
 </head>
 

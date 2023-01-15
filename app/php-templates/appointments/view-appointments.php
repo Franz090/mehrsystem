@@ -242,7 +242,7 @@ include_once('../php-templates/admin-navigation-head.php');
                                   <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a>
                                
                         <?php }?> 
-                            <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>">
+                            <a href="cancel-appointment.php?id=<?php echo $value['a_id'] ?>" onclick="return confirm('Are you sure you want to cancel appointment?')">
                                   <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a> 
                           </td>
                     </tr>
@@ -277,6 +277,14 @@ include_once('../php-templates/admin-navigation-head.php');
       }
     });
   } );
+
+   var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
 </script>
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>

@@ -360,15 +360,15 @@ include_once('../php-templates/admin-navigation-head.php');
           <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
-                <th scope="col" >#</th>
+                <th scope="col"  >#</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Patient Name</th> 
+                  <th scope="col" class="col-sm-2">Patient Name</th> 
                 <?php } ?>  
                 <!-- <th scope="col">Treatment File</th>   -->
                 <th scope="col">Barangay</th>  
                 <th scope="col" >Date and Time</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Contact Number(s)</th>
+                  <th scope="col" class="col-sm-2">Contact Number(s)</th>
                 <?php } ?>  
                 <th scope="col">Actions</th>
               </tr>
