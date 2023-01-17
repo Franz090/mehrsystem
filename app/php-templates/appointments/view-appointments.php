@@ -148,7 +148,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   <ul class="options_ss"></ul>
               </div>
           </div> 
-          <div class="mb-3">
+          <br>
+          <div class="mb-3" style="text-align:center;">
               <label>Appointment Date and Time*</label> 
               <div class="input-group date" id="datepicker">
                 <input class="form-control option pt-2 pb-2" type="datetime-local" name="date" id="date"/>
@@ -177,11 +178,15 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- End Modal -->
 
     <div class="container-fluid default">
+
       <div  class="background-head row m-2 my-4">
-        
+        <br>
         <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
-          <h4 class="fw-bolder "><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+       
+          <h4 class="fw-bolder"><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
+          <div style="position:relative;bottom: -68px;right:157px;">
           <button class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
+        </div>
         </div>
       <div class="card-body">
         
@@ -280,14 +285,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">Search Available Schedule</h1>
+        <h1 class="modal-title fs-5" ">Search Available Schedule</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
           <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
-            <input class="form-control option pt-2 pb-2 search_date" type="date" name="s_date" required/>
+            <input style="width: 80%;" class="form-control option pt-1 pb-1 search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="midwife">
-            <button class="btn btn-primary btn-submit" id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+            <button class="btn btn-primary btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
           </form>
           <div id="available_result"></div>
         </div>
@@ -296,7 +301,6 @@ include_once('../php-templates/admin-navigation-head.php');
 </div>
 <script>
   $(document).ready( function () {
-    $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu":[
         [10, 25, 30,50, -1],

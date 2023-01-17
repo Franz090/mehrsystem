@@ -115,19 +115,21 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4">
-        
-        <div style="display:flex; justify-content: space-between; margin-bottom: 20px;">
+      <div class="d-flex">
+        <div >
+          <br>
           <h4 class="fw-bolder ">Appointments</h4>
-          <button class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
+          <br>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-12 text-end mb-3">
-              <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
+            <div class="col-md-12 text-end mb-3" style="position:relative;top: 65px;">
+              <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
             </div>
           </div>
         </div>
-        
+        </div>
         <div class="table-padding table-responsive mt-1 px-2">
           <div class="col-md-8 col-lg-12" id="table-position">
             <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
@@ -151,7 +153,7 @@ include_once('../php-templates/admin-navigation-head.php');
                       foreach ($appointment_list as $key => $value) {
                   ?>    
                       <tr>
-                          <th scope="row"><?php echo $key+1; ?></th>
+                          <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                           <!-- <td><?php //echo $value['name']; ?></td> -->
                           <!-- <td><?php //echo $value['barangay']; ?></td> -->
                           <td><?php $dtf = date_create($value['a_date']); 

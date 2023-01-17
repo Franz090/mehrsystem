@@ -130,7 +130,7 @@ h3,
 
 h4,
 .h4 {
-    font-size: calc(1.275rem + .3vw)
+    font-size: calc(1.268rem + .1vw);
 }
 
 @media (min-width: 1200px) {
@@ -143,7 +143,8 @@ h4,
 
 h5,
 .h5 {
-    font-size: 1.25rem
+    font-size: 1.17rem;
+    font-family: 'Open Sans',sans-serif;
 }
 
 h6,
@@ -153,7 +154,8 @@ h6,
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
+    font-family: 'Open Sans',sans-serif;
 }
 
 abbr[title],
@@ -4720,7 +4722,8 @@ fieldset:disabled .btn {
 .modal-body {
     position: relative;
     flex: 1 1 auto;
-    padding: 1rem
+    padding: 1rem;
+    font-size: 17px;
 }
 
 .modal-footer {
@@ -6708,27 +6711,43 @@ fieldset:disabled .btn {
 }
 
 .fs-1 {
-    font-size: calc(1.375rem + 1.5vw) !important
+    font-size: calc(1.375rem + 1.5vw) !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500!important;
 }
 
 .fs-2 {
-    font-size: calc(1.325rem + .9vw) !important
+    font-size: calc(1.325rem + .9vw) !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500 !important;
+   
 }
 
 .fs-3 {
-    font-size: calc(1.3rem + .6vw) !important
+    font-size: calc(1.3rem + .6vw) !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500 !important;
+    
 }
 
 .fs-4 {
-    font-size: calc(1.275rem + .3vw) !important
+    font-size: calc(1.275rem + .3vw) !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500 !important;
+    
+  
 }
 
 .fs-5 {
-    font-size: 1.25rem !important
+    font-size: 1.25rem !important;
+    font-family: 'Open Sans',sans-serif!important;
+    font-weight: 500 !important;
 }
 
 .fs-6 {
-    font-size: 1rem !important
+    font-size: 1rem !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 400 !important;
 }
 
 .fst-italic {
@@ -6905,7 +6924,7 @@ fieldset:disabled .btn {
 }
 
 .bg-light {
-    background-color: #f9fdfc !important
+    background-color: #f1f1f1 !important
 }
 
 .bg-dark {

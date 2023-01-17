@@ -44,19 +44,19 @@ include_once('../php-templates/admin-navigation-head.php');
                 $getNotification = $onloadData->getNotification();
                 while ($data = $getNotification->fetch()) {
              ?>
-                <tr class="<?php echo $data['status'] ? '':'bg-dark text-white'?>">
+                <tr  class="<?php echo $data['status'] ? '':'bg-light text-dark'?> style='max-width: 28rem;border-radius: 200px;'">
                     <td>
                         <h4 class="change-status" style="cursor: pointer;" data-id="<?php echo $data['id'] ?>" data-status="<?php echo $data['status'] ?>">
                             <?php 
                                 if($data['status']) {
-                                    echo '<ion-icon name="eye-outline"></ion-icon>';
+                                    echo '<ion-icon name="eye-outline" style="padding-bottom: 5px;padding-top: 5px;"></ion-icon>';
                                 } else {
-                                    echo '<ion-icon name="eye-off-outline"></ion-icon>';
+                                    echo '<ion-icon name="eye-off-outline" style="padding-bottom: 5px;padding-top:5px;"></ion-icon>';
                                 }
                             ?>
                         </h4>
                     </td>
-                    <td><?php echo $data['message']?></td>
+                    <td ><?php echo $data['message']?></td>
                     <td><?php echo date('m-d-Y h:i a', strtotime($data['created_date']))?></td>
                 </tr>
             <?php  
