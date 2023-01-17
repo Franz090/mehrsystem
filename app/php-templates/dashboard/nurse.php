@@ -163,8 +163,11 @@ if ($admin==1) { //closing bracket at the end of the file
             <!-- Add Charts --> 
 <div class="graphBox1">
    <div class="col-md-5 box">
+    <div class="graph">
             <h6>Number of Patients per Barangay</h6>
-            <canvas height="10" id="patients"></canvas>
+         
+            <canvas id="patients"></canvas>
+        </div>
         </div>
 </div>
     <div class="graphBox"> 

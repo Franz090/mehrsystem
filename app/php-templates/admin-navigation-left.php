@@ -101,12 +101,12 @@
         <a href="../notification">
               <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
               <span class="title">Notification 
-                <?php $notifCount ? print_r("<span class='badge bg-danger'>".$notifCount."</span>") : "";?>
+                <?php $notifCount ? print_r("<span style='font-size:10px;position:relative;bottom:8px;right:2px;font-family:'Arial,sans-serif;' class='badge bg-danger ml-1'>".$notifCount."</span>") : "";?>
               </span>
           </a>
       </li>
     <?php }?>
-    <hr/> 
+   
     <li>
        <a href="../logout.php">
             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>

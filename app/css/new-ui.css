@@ -343,13 +343,13 @@ h6 {
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 	border-radius: 20px;
 }
-.graphBox1 {
+.graphBox1{
 	position: relative;
 	padding: 20px;
 	display: grid;
-	grid-template-columns: 1fr;
 	grid-gap: 30px;
 	min-height: 200px;
+	
 }
 
 .graphBox1 .box {
@@ -360,6 +360,12 @@ h6 {
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 	border-radius: 20px;
 	width: 100%;
+}
+.graph > canvas {
+	margin-left: 200px;
+	margin-right: 200px;
+	width: 100%;
+	grid-template-columns: repeat(6, 200px);
 }
 
 
@@ -405,10 +411,18 @@ h6 {
 /* responsive design */
 @media (max-width:991px) {
 	.graphBox {
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(1, 1fr);
 		height: auto;
 		width: auto;
+		margin: auto;
 	}
+		.graph> canvas{
+			grid-template-columns: repeat(1fr,1fr);
+			height: auto;
+				width: auto;
+				margin: auto;
+				padding-bottom: 30px;
+		}
 	.calendarBox{
 		grid-template-columns: 1fr;
 			height: auto;
