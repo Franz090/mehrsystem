@@ -458,7 +458,7 @@ include_once('../php-templates/admin-navigation-head.php');
               </table>
             <?php }?> 
 
-            <!-- nag add ako ng print button -->
+            <!-- nag add ako ng print button dito -->
             <button onclick="window.print();" class "btn btn-p">Print</button>
       <?php
           }
