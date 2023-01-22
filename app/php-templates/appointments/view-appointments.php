@@ -254,8 +254,8 @@ include_once('../php-templates/admin-navigation-head.php');
                           </td>  -->
                         <?php }else {?> 
                             <td>
-                                <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                                  <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a>
+                                <!-- <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
+                                  <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a> -->
                                
                         <?php }?> 
  

@@ -168,16 +168,18 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- Page Content -->
   <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
-
+<style>
+  
+</style>
 <!-- modal -->
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+     <div class="modal-body">
         <form class="m-5" action="" method="POST" id="new_consultation">
           <?php
             if (count($_barangay_list)==0) {
@@ -187,7 +189,10 @@ include_once('../php-templates/admin-navigation-head.php');
             } else  if (count($patient_list)>0) { 
               if(isset($error)) 
                 echo '<span class="form__input-error-message">'.$error.'</span>'; 
-            ?> 
+            ?>
+            
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
             <div class="form__input-group">
               <div class="mb-3"> <!-- patient -->
                 <label>Patient</label>
@@ -211,16 +216,19 @@ include_once('../php-templates/admin-navigation-head.php');
                     <i class="uil uil-angle-down"></i>
                   </div>
                   <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
-                  <div class="content_ss">
-                    <div class="search_ss">
+                  <div class="content_ss1">
+                    <div class="search_ss1">
                      <ion-icon class="search-logo" name="search-outline"></ion-icon>
-                      <input spellcheck="false" type="text" placeholder="Search" class="ss">
+                      <input spellcheck="false" type="text" placeholder="Search" class="ss" >
                     </div>
                     <ul class="options_ss"></ul>
                   </div>
                 </div> 
+                </div>
+                </div>
                 <!-- end searchable select  --> 
               </div> 
+              <div class="col-lg-6 col-md-6">
               <div class=" mb-3" > <!-- trimester -->
                 <label>Nth Trimester</label>
                 <select class="form-select" name="trimester">
@@ -230,7 +238,12 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option  class="option" value="3">3rd (28-42 weeks)</option>
                 </select>
               </div> 
-         
+          </div>
+        </div>
+
+
+           <div class="row">
+            <div class="col-lg-6 col-md-6">
               <div class=" mb-3"> <!-- gestation -->
               <label>Age of Gestation*</label>
                 <input type="text" 
@@ -238,15 +251,20 @@ include_once('../php-templates/admin-navigation-head.php');
                 
                 <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
               </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- blood_pressure -->      
                 <label>Blood Pressure*</label>
                 <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
               </div>
-
+              </div>
+            </div>
               <!-- start -->
-             
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
                 <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
                     <!-- Height -->
+                    <label>Height*</label>
                   <div class="d-flex input-group">
                     <input  min='0' type="number" 
                       class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
@@ -263,9 +281,10 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div>
                 </div>
               </div>
+                      </div>
+              <div class="col-lg-6 col-md-6">
               <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
-                    Weight
-
+                    <label>Weight*</label>
                 <div class="d-flex input-group">   
                     <input type="number" class="form__input form-control" id="weight" name="weight" 
                       placeholder="Weight*" required min='0'/>
@@ -273,51 +292,74 @@ include_once('../php-templates/admin-navigation-head.php');
                     <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
                   </div>
                   </div>
+                      </div>
+                      </div>
+                      </div>
                    <!-- end -->
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- date -->
                 <label>Consultation Date and Time*</label> 
                 <div class="input-group date" id="datepicker">
-                  <input class="form-control option" type="datetime-local" name="date" required /> 
-                </div> 
+                  <input class="form-control option" type="datetime-local" name="date" required /></div> 
               </div>  
+              </div>
+              <div class="col-lg-6 col-md-6">
               <div class=" mb-3"> <!-- nutritional_status -->
-
                 <label>Nutritional Status*</label>
                 <select class="form-select" name="nutritional_status">
                   <option  class="option" value="Normal">Normal</option>
                   <option  class="option" value="Underweight">Underweight</option>
                   <option  class="option" value="Overweight">Overweight</option>
                 </select>
-              </div> 
+              </div>
+            </div> 
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- status_analysis -->     
                 <label for="status_analysis">Status Analysis</label>
                 <textarea id="status_analysis" name="status_analysis" 
                   class="form-control form-control-md w-100"></textarea> 
               </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- advice -->     
                 <label for="advice">Advice</label>
                 <textarea id="advice" name="advice" 
                   class="form-control form-control-md w-100"></textarea> 
               </div>
+                </div>
+            </div>
+
+             <div class="row">
+              <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- change_plan -->     
                 <label for="change_plan">Changes in Birth Plan</label>
                 <textarea id="change_plan" name="change_plan" 
                   class="form-control form-control-md w-100"></textarea> 
               </div>
-              
+            </div>
+            <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- prescription -->     
                 <label for="prescription">Prescription</label>
                 <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"> 
                 </textarea> 
+                </div>
               </div>
+            </div>
+            <div class="row">
+            <div class="col-lg-6 col-md-6">
               <div class="mb-3"> <!-- date_return -->
                 <label>Date of Return*</label> 
                 <div class="input-group date" id="datepicker_return">
                   <input class="form-control option" type="datetime-local" name="date_return" required/> 
+                </div>
                 </div> 
+              </div>
               </div>  
-            </div>
-          </div>
+             
+          
           <?php
             } else {
               ?>
@@ -326,9 +368,10 @@ include_once('../php-templates/admin-navigation-head.php');
             }
           
           
-          ?>  
+          ?>
+        
         </form>
-      </div>
+           </div>
       <div class="modal-footer"> 
         <button class="btn btn-primary" id="submit" type="submit" 
           name="submit_consultation" form="new_consultation">Add Consultation</button>
@@ -405,9 +448,9 @@ include_once('../php-templates/admin-navigation-head.php');
                             <?php if ($current_user_is_a_midwife) {?>
                               <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
                               <!-- ginawa kong comment yung update-->
-                                <!--<button class="edit btn btn-success btn-sm btn-inverse">
-                                  Update 
-                                </button>-->
+                                <button class="edit btn btn-success btn-sm btn-inverse">
+                                  Edit
+                                </button>
                               </a>
                             <?php }?>
                             <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">

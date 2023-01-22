@@ -135,7 +135,7 @@ include_once('../php-templates/admin-navigation-head.php');
                             <a href="update-infant-vaccination-record.php?id=<?php echo $value['id'] ?>&infant_id=<?php echo $infant_id ?>"> 
                             <div class="p1">  
                                 <button class=" edit btn btn-success btn-sm btn-inverse">
-                                Update</button>
+                                Edit</button>
                             </a>
                           </div>    
                         </td>

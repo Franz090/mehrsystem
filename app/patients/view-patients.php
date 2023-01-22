@@ -135,7 +135,7 @@ include_once('../php-templates/admin-navigation-head.php');
                                <a href="approve-patient.php?id=<?php echo $value['id'] ?>">  
                                   <button type="button" class="mb-2 btn btn-primary btn-sm btn-inverse">
                                     Approve</button></a>  
-                               <a href="reject-patient.php?id=<?php echo $value['id'] ?>" onclick="return confirm('Are you sure?')">  
+                               <a href="reject-patient.php?id=<?php echo $value['id'] ?>" onclick="return confirm('Are you sure? Do you want to reject this patient?')">  
                                   <button type="button" class="mb-2 btn btn-danger btn-sm btn-inverse">
                                     Reject</button></a>  
 

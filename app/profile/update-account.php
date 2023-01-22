@@ -250,30 +250,36 @@ include_once('../php-templates/admin-navigation-head.php');
           <div class="d-flex flex-row justify-content-between mx-auto">
             <div class="col-md-9 col-lg-12  px-3 mb-5" >
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
-              <div class="form-floating mb-3">
-                  <input type="text" class="form-control" value="<?php echo $c_first_name?>" id="floatingInputInvalid"  name="first_name" placeholder="First Name" tabindex="11">
-                  <label for="floatingInput">First Name</label>
+              <div class="mb-3 text-start">
+                <label>First Name</label>
+                  <input type="text" class="form-control" value="<?php echo $c_first_name?>"   name="first_name" placeholder="First Name" tabindex="11">
+                  
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" value="<?php echo $c_middle_name?>" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name" tabindex="11">
-                  <label for="floatingInput">Middle Name</label>
+                <div class="mb-3 text-start">
+                  <label>Middle Name</label>
+                  <input type="text" class="form-control" value="<?php echo $c_middle_name?>"  name="middle_name" placeholder="Middle Name" tabindex="11">
+                  
                 </div>
-                 <div class="form-floating mb-3">
+                 <div class="mb-3 text-start">
+                  <label>Last Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_last_name?>" id="floatingInputInvalid"  name="last_name" placeholder="Last Name" tabindex="11">
-                  <label for="floatingInput">Last Name</label>
+                  
                 </div>
               
                 <?php if ($current_user_is_a_patient) { ?>
-               <div class="form-floating mb-3">
+               <div class="text-start mb-3">
+                <label>Nick Names</label>
                     <input type="text" value="<?php echo $c_nickname?>"
-                        class="form-control" id="floatingInputInvalid" name="nickname"  placeholder="Nickname"/>
-                        <label for="floatingInput">Nick Name</label>
+                        class="form-control"  name="nickname"  placeholder="Nickname"/>
+                        
                   </div> 
                 <?php } ?>
-                <div class="form-input">
-                  <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-                  <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
-                </div><br>
+                <div class="mb-3">
+                <div class="form-input text-start">
+                  <label>Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
+                  <textarea name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
+                </div>
+              </div>
                 <?php if ($current_user_is_a_patient) { ?>
                   <div class="mb-3">
                     <label>Birth Date</label>
@@ -355,35 +361,36 @@ include_once('../php-templates/admin-navigation-head.php');
         width: 0px;
     }
     </style>
-    <div class="col-md-9 col-lg-12 px-3 pb-2">
+    <!-- <div class="col-md-9 col-lg-12 px-3 pb-2">
             <form class="form form-box px-2" method="post">
     
               Put your current password to authorize the change(s)
-              <div class="form-floating mb-2">
-                  <input type="password" class="form-control"   name="current"  placeholder="Password" id="floatingPassword" >
-                  <label for="floatingPassword">Password</label>
+              <div class="text-start mb-2">
+               
+                  <input type="password" class="form-control"   name="current"  placeholder="Password"  >
+                  
                 </div>      
               Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
-              <div class="form-floating mb-3">
+              <div class=" mb-3">
                   <input type="email" class="form-control" id="floatingInputInvalid"  name="new_email" placeholder="New Email Address" tabindex="11">
-                  <label for="floatingInput">New Email address</label>
+                  
                 </div>
               Leave blank if you do not want to change the password
-              <div class="form-floating mb-2">
+              <div class="mb-2">
                   <input type="password" class="form-control"  
-                    name="new" placeholder="Password" id="floatingPassword"/>
-                    <label for="floatingPassword">New Password</label>
+                    name="new" placeholder="New Password" id="floatingPassword"/>
+                    
                 </div> 
-              <div class="form-floating mb-2">
+              <div class=" mb-2">
                   <input type="password" class="form-control"  
                     name="cnew" placeholder="Confirm New Password" id="floatingPassword"/>
-                    <label for="floatingPassword">Confirm New Password</label>
+                   
                 </div>
                <div class="py-3 col-12 " style="margin-bottom: 5%;">
               <button class="btn-primary w-100 btn text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
   </div>
             </form> 
-  </div>
+  </div> -->
           </div>
         </div>
   </div>

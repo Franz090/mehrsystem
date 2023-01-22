@@ -79,12 +79,12 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Demographic Profile</h4>
-          <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
+        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4>
+          <!-- <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
             <a href="./update-account.php" class="text-light" style=""> 
               Update Account Information
             </a>
-          </button>
+          </button> -->
         
           <div class="table-padding table-responsive">
             <div class="col-md-8 col-lg-12 " id="table-position">
@@ -147,7 +147,13 @@ include_once('../php-templates/admin-navigation-head.php');
               <td class="col-md-3"><?php echo $blood_type ?></td> 
               <tr>
             </tbody>
-          </table> 
+          </table>
+            <!-- nag add ako ng print button dito -->
+            <div class="col-md-12 text-center">
+            <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
+          </div>
+          <br> 
+          
           
             </div> 
           </div>     
