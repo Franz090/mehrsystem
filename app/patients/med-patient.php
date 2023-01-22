@@ -442,9 +442,11 @@ include_once('../php-templates/admin-navigation-head.php');
                             <?php echo date_format($dtf2,"h:i A"); ?>  
                           </td>
                           <?php if ($current_user_is_a_midwife) { ?>
-                            <td class="col-md-12 fw-bold">
+                           
+                           <!-- tinanggal ko yung add consultation dito -->
+                            <!-- <td class="col-md-12 fw-bold">
                               <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
-                            </td>
+                            </td> -->
                           <?php } ?>
                         </tr> 
                   <?php 
@@ -456,6 +458,10 @@ include_once('../php-templates/admin-navigation-head.php');
               </table>
             <?php }?> 
 
+            <!-- nag add ako ng print button dito -->
+            <div class="col-md-12 text-center">
+            <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
+          </div>
       <?php
           }
       ?>  

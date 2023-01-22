@@ -2,12 +2,23 @@
   if ($current_user_is_a_patient) { //closing bracket at the end of the file
     if ($status) {
   ?>
+  <style>
+    .text-main {
+        color: var(--green);
+        text-align: left !important;
+    }
+  </style>
+  <!-- <div class="p-4">
     Patient <br/>
-    BMI: <?php echo round($bmi,2). " ($bmi_desc)"?>  
+    BMI: <?php echo round($bmi,2). " ($bmi_desc)"?> 
+    
+  </div> -->
 
-    <div class="container py-5" id="page-container">
-      <div class="row" style="width:100%;">
-        <div class="col-md-9">
+    
+    <div class="container pt-0" id="page-container">
+      <!-- <div class="row" style="width:100%;">
+        <h2 class="">Appointment Schedule</h2>
+        <div class="col-md-12 box background-head p-4">
             <div id="calendar"></div>
         </div>
         <div class="col-md-3">
@@ -37,8 +48,18 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+        <div class="row" style="width:100%;">
+                <div class="calendarBox"> 
+                    <h2 class="text-main">Appointment Schedule</h2>
+                    <div class="box">
+                        <h6 class="text-center">Calendar</h6>
+                        <div id="calendar"></div>
+                    </div> 
+                </div>
+            </div>
       </div>
+      
       <!-- Event Details Modal -->
       <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
         <div class="modal-dialog modal-dialog-centered">
@@ -89,28 +110,28 @@
           <div class="col-md-8 col-lg-5">         
             <form method="post" action="" class="form form-box px-3 py-5">
         
-              <div class="form-input">
-                Nickname
+              <div class="mb-3">
+                <label>Nickname*</label>
                 <input type="text" value="<?php echo $c_nickname?>"
-                    class="form-input" name="nickname"  placeholder="Nickname"/>
+                    class="form-control mt-2 mb-2"  name="nickname"  placeholder="Nickname"/>
               </div> 
               <div class="form-input">
                 <label for="contact">Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
                 <textarea id="contact" name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
               </div><br>
-              <div class="form-input">
+              <div class="mb-3"> 
                 <label>Birth Date</label>
-                <div class="form-input">
-                  <input type="date" name="b_date" value="<?php echo $c_b_date?>"/>
+                <div class="input-group date" id="datepicker">
+                  <input type="date" class="form-control option" name="b_date" value="<?php echo $c_b_date?>" required/>
                 </div>
               </div>
               <div class="form-input">
                 <label for="address">Address</label><br/>
                 <textarea id="address" name="address" class="form-control form-control-md w-100"><?php echo $c_address?></textarea> 
               </div><br>
-              Civil Status*
-              <div class="form-input">
-                  <input type="text" value="<?php echo $c_civil_status?>" class="form-input" name="civil_status" placeholder="Civil Status*" required/>
+              <label>Civil Status*</label>
+              <div class="mb-3">
+                  <input type="text" value="<?php echo $c_civil_status?>" class="form-control mt-2 mb-2" name="civil_status" placeholder="Civil Status*" required/>
               </div>  
 
               <div class="form-input">
@@ -141,21 +162,25 @@
                     </div> 
                 </div>
               </div><br>
-              Blood Type*
-              <div class="form-input"> 
+              <label>Blood Type*</label>
+              <div class="mb-3"> 
                 <input type="text" value="<?php echo $c_blood_type?>"
-                  class="form-input" name="blood_type" placeholder="Blood Type*" required/>  
+                  class="form-control mt-2 mb-2" name="blood_type" placeholder="Blood Type*" required/>  
               </div>
-              <div class="form-input">  
-                Diagnosed Condition
+              <label>Diagnosed Condition</label> 
+              <div class="mb-3">  
                 <input type="text" value="<?php echo $c_diagnosed_condition?>"
-                  class="form-input" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-                Family History
+                  class="form-control mt-2 mb-2" name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
+                <label>Family History</label> 
+                <div class="mb-3"> 
                 <input type="text" value="<?php echo $c_family_history?>"
-                  class="form__input" name="family_history" placeholder="Family History"/> 
-                Allergies
+                  class="form-control mt-2 mb-2" name="family_history" placeholder="Family History"/> 
+                 </div>
+                <label>Allergies</label> 
+                <div class="mb-3"> 
                 <input type="text" value="<?php echo $c_allergies?>"
-                  class="form__input" name="allergies" placeholder="Allergies"/>    
+                  class="form-control mt-2 mb-2" name="allergies" placeholder="Allergies"/>    
+                </div>
               </div>
       
               <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Profile</button>

@@ -187,7 +187,7 @@ include_once('../php-templates/admin-navigation-head.php');
                       <input type="text" style="display:none;" name="user_id" class="patient_id_trimester"/>
                       <div class="content_ss">
                         <div class="search_ss">
-                          <i class="uil uil-search"></i>
+                          <ion-icon class="search-logo1" name="search-outline"></ion-icon>
                           <input spellcheck="false" type="text" placeholder="Search" class="ss">
                         </div>
                         <ul class="options_ss"></ul>

@@ -64,7 +64,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Barangay Record</h4><hr>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Barangay Record</h4>
 
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
@@ -73,7 +73,7 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="form__input-error-message">'.$no_bgy.'</span>';
           else   {
         ?>   
-        <form class="form form-box px-3" action="" method="post">
+        <form class="form form-box px-3" action="" method="post" style="position:relative;bottom: 89px;">
           <?php 
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 

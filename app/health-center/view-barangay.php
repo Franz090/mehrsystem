@@ -108,14 +108,14 @@ include_once('../php-templates/admin-navigation-head.php');
         </div>
       </div>
     
-      <div class="table-padding table-responsive mt-1 px-2">
+      <div style="position:relative;bottom: 35px;" class="table-padding table-responsive mt-1 px-2">
           <div class="col-md-8 col-lg-12 " id="table-position">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>
@@ -130,9 +130,9 @@ include_once('../php-templates/admin-navigation-head.php');
                   foreach ($barangay_list as $key => $value) {
                 ?>    
                   <tr>
-                    <th scope="row"><?php echo $key+1; ?></th>
+                    <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                     <td><?php echo $value['health_center']; ?></td>
-                    <td><?php echo $value['midwife']; ?></td>
+                    <td class="td-bold"><?php echo $value['midwife']; ?></td>
                     <!-- <td><?php //echo $value['status']; ?></td> -->
                     <td>
                       <a href="edit-barangay.php?id=<?php echo $value['id'] ?>">

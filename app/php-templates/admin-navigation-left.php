@@ -1,3 +1,9 @@
+
+<?php 
+  include_once "../controller/onLoadController.php";
+  $onloadData = new onLoadController();
+  $notifCount = $onloadData->getNotifCount();
+?>
 <div class="navigation_nu">  
   <ul> 
     <li>
@@ -31,7 +37,7 @@
       </li>
       <li <?php echo $page == 'view_barangay' ? "class='hovered'":""?>>
         <a <?php echo $page == 'view_barangay' ? "type='button'":'href="../health-center/view-barangay.php"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="medkit-outline"></ion-icon></span>
             <span class="title">Health Center</span>
         </a>
       </li>
@@ -48,19 +54,19 @@
     ?>   
       <li <?php echo $appointment_page_condition ? "class='hovered'":""?>>
         <a <?php echo $page == $appointment_page_str ? "type='button'":'href="../appointment/'.$appointment_file_str.'.php"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
             <span class="title">Appointments</span>
         </a>
       </li>
       <li <?php echo $page == 'view_consultations' ? "class='hovered'":""?>>
         <a <?php echo $page == 'view_consultations' ? "type='button'":'href="../consultations/view-consultations.php"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
             <span class="title">Consultations</span>
         </a>
       </li>
       <li <?php echo $page == 'infant_vaccinations' ? "class='hovered'":""?>>
         <a <?php echo $page == 'infant_vaccinations' ? "type='button'":'href="../infant/infant-vaccinations.php"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="footsteps-outline"></ion-icon></span>
             <span class="title">Infant Vaccinations</span>
         </a>
       </li>
@@ -72,7 +78,7 @@
     ?>  
       <li <?php echo $page == 'view_patient' ? "class='hovered'":""?>>
         <a <?php echo $page == 'view_patient' ? "type='button'":'href="../patients/view-patients.php"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="woman-outline"></ion-icon></span>
             <span class="title">Patients</span>
         </a>
       </li>
@@ -81,13 +87,26 @@
       if ($current_user_is_an_admin) {?> 
       <li <?php echo $page == 'update_footer' ? "class='hovered'":""?>>
         <a <?php echo $page == 'update_footer' ? "type='button'":'href="../update-footer"'?>>
-            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+            <span class="icon"><ion-icon name="sync-outline"></ion-icon></span>
             <span class="title">Update Footer</span>
         </a>
       </li>
     <?php 
-      } ?>
-    <hr/>
+ 
+      } 
+      
+    if (!$current_user_is_an_admin) {?>
+
+      <li <?php echo $page == 'notification' ? "class='hovered'":""?>>
+        <a href="../notification">
+              <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
+              <span class="title">Notification 
+                <?php $notifCount ? print_r("<span style='font-size:10px;position:relative;bottom:8px;right:2px;font-family:'Arial,sans-serif;' class='badge bg-danger ml-1'>".$notifCount."</span>") : "";?>
+              </span>
+          </a>
+      </li>
+    <?php }?>
+   
     <li>
        <a href="../logout.php">
             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>

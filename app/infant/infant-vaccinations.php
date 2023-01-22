@@ -156,8 +156,8 @@ include_once('../php-templates/admin-navigation-head.php');
                 foreach ($infant_list as $key => $value) {
         ?>    
             <tr>
-                <th scope="row"><?php echo ($key+1);?></th>
-                <td><?php echo $value['name'];?></td>
+                <th scope="row" class="th-number"><span><?php echo ($key+1);?></span></th>
+                <td class="td-bold"><?php echo $value['name'];?></td>
                 <td><?php echo $value['status'];?></td>
             <?php   if ($current_user_is_a_midwife) { ?> 
                 <td>

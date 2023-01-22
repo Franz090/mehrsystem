@@ -161,18 +161,24 @@ if ($admin==1) { //closing bracket at the end of the file
             </div>
 
             <!-- Add Charts --> 
-    <div class="col-md-10 box">
-        <h6 class="text-center">Consultations Chart</h6>
-        <canvas id="trimester"></canvas>
-    </div>
-    <div class="graphBox"> 
-        <div class="col-md-5 box">
+<div class="graphBox1">
+   <div class="col-md-5 box">
+    <div class="graph">
             <h6>Number of Patients per Barangay</h6>
+         
             <canvas id="patients"></canvas>
         </div>
+        </div>
+</div>
+    <div class="graphBox"> 
+         <div class="col-md-7 box">
+        <h6 class="text-center">Consultations Chart</h6>
+        <canvas height="300" id="trimester"></canvas>
+    </div>
         <div class="col-md-7 box">
             <h6 class="text-center">Number of Infants Vaccinated</h6>
-            <canvas id="infant"></canvas>
+            <br>
+            <canvas height="300" id="infant"></canvas>
         </div>
        
     </div> 

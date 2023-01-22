@@ -213,7 +213,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
                   <div class="content_ss">
                     <div class="search_ss">
-                      <i class="uil uil-search"></i>
+                     <ion-icon class="search-logo" name="search-outline"></ion-icon>
                       <input spellcheck="false" type="text" placeholder="Search" class="ss">
                     </div>
                     <ul class="options_ss"></ul>
@@ -221,7 +221,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </div> 
                 <!-- end searchable select  --> 
               </div> 
-              <div class=" mb-3"> <!-- trimester -->
+              <div class=" mb-3" > <!-- trimester -->
                 <label>Nth Trimester</label>
                 <select class="form-select" name="trimester">
                   <option  class="option" value="0">N/A</option>
@@ -230,23 +230,50 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option  class="option" value="3">3rd (28-42 weeks)</option>
                 </select>
               </div> 
-              <div class="mb-3"> <!-- gestation -->    
-                <label for="gestation">Age of Gestation</label>
-                <input id="gestation" name="gestation" class="" type="text" required/> 
+         
+              <div class=" mb-3"> <!-- gestation -->
+              <label>Age of Gestation*</label>
+                <input type="text" 
+                     class="form-control mt-2 mb-2"  name="gestation" required/>    
+                
+                <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
               </div>
               <div class="mb-3"> <!-- blood_pressure -->      
-                <label for="blood_pressure">Blood Pressure</label>
-                <input id="blood_pressure" name="blood_pressure" class="" type="text" required/> 
+                <label>Blood Pressure*</label>
+                <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
               </div>
-              <div class="mb-3"> <!-- weight -->     
-                <label for="weight">Weight</label>
-                <input id="weight" name="weight" class="" type="number" required/>kg
+
+              <!-- start -->
+             
+                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                    <!-- Height -->
+                  <div class="d-flex input-group">
+                    <input  min='0' type="number" 
+                      class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
+                       <div class="input-group-postpend">
+
+                        <div id="weight-height" class="input-group-text form__input text-white">
+                         ft</div>
+                    </div>
+      
+                    <input  min='0' max='11' type="number" 
+                       class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
+                       <div class="input-group-postpend">
+                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
+                  </div>
+                </div>
               </div>
-              <div class="mb-3"> <!-- height  -->     
-                <label for="height">Height</label>
-                <input id="height_ft" name="height_ft" class="" type="number" required/>ft 
-                <input id="height_in" name="height_in" class="" type="number" required/>in
-              </div>
+              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
+                    Weight
+
+                <div class="d-flex input-group">   
+                    <input type="number" class="form__input form-control" id="weight" name="weight" 
+                      placeholder="Weight*" required min='0'/>
+                      <div class="input-group-postpend">
+                    <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
+                  </div>
+                  </div>
+                   <!-- end -->
               <div class="mb-3"> <!-- date -->
                 <label>Consultation Date and Time*</label> 
                 <div class="input-group date" id="datepicker">
@@ -289,7 +316,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   <input class="form-control option" type="datetime-local" name="date_return" required/> 
                 </div> 
               </div>  
-            </div>  
+            </div>
+          </div>
           <?php
             } else {
               ?>
@@ -332,15 +360,15 @@ include_once('../php-templates/admin-navigation-head.php');
           <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
-                <th scope="col" >#</th>
+                <th scope="col"  >#</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Patient Name</th> 
+                  <th scope="col" class="col-sm-2">Patient Name</th> 
                 <?php } ?>  
                 <!-- <th scope="col">Treatment File</th>   -->
                 <th scope="col">Barangay</th>  
                 <th scope="col" >Date and Time</th>
                 <?php if ($admin==0) { ?>  
-                  <th scope="col">Contact Number(s)</th>
+                  <th scope="col" class="col-sm-2">Contact Number(s)</th>
                 <?php } ?>  
                 <th scope="col">Actions</th>
               </tr>
@@ -354,9 +382,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     foreach ($consultation_list as $key => $value) {
                 ?>    
                     <tr>
-                        <th scope="row"><?php echo $key+1; ?></th>
+                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                         <?php if ($admin==0) { ?>  
-                          <td><?php echo $value['name']; ?></td>
+                          <td class="td-bold"><?php echo $value['name']; ?></td>
                         <?php } ?> 
                         <?php //if ($value['treatment_file']=='') { ?>  
                           <!-- <td>No File</td>  -->
@@ -376,9 +404,10 @@ include_once('../php-templates/admin-navigation-head.php');
                           <div class="p-1">
                             <?php if ($current_user_is_a_midwife) {?>
                               <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
-                                <button class="mb-2 edit btn btn-success btn-sm btn-inverse">
+                              <!-- ginawa kong comment yung update-->
+                                <!--<button class="edit btn btn-success btn-sm btn-inverse">
                                   Update 
-                                </button>
+                                </button>-->
                               </a>
                             <?php }?>
                             <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
