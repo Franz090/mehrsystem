@@ -175,7 +175,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient Report</h4> 
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
-            <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
+            <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">
                 <tr>
                   <th scope="col">Patient Profile </th>
@@ -207,7 +207,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tr>
               </tbody>
             </table>  
-            <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
+            <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">
                 <tr>
                   <th scope="col">Patient Medical History </th>
@@ -315,7 +315,8 @@ include_once('../php-templates/admin-navigation-head.php');
                     </tr>
                 </tbody>
               </table> 
-              <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
+           
+              <table class="table mt-4 table-bordered table-striped table-responsive table-lg  table-hover display">
                 <thead class="table-light text-center" colspan="3">
                   <tr> <th scope="col">Consultation Records</th> </tr>
                 </thead>
@@ -324,25 +325,29 @@ include_once('../php-templates/admin-navigation-head.php');
                       foreach ($consultations_list as $key => $value) { 
                   ?> 
                         <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-6 fw-bold">
+                          <td class="col-md-3 fw-bold">
                             Consultation Date
                           </td>
-                          <td class="col-md-6"> 
+                          <td class="col-md-3 "> 
                             <?php
                               $dtf2 = date_create($value['date']); 
                               echo date_format($dtf2,"F d, Y");  
                             ?>  
                           </td>
-                          <td class="col-md-6 fw-bold">
+                          <td class="col-md-3  fw-bold">
                             Consultation Time
                           </td>
-                          <td  class="col-md-6">
+                    
+                      
+                          <td  class="col-md-3 ">
                             <?php echo date_format($dtf2,"h:i A"); ?>  
-                          </td>
-                          <td class="col-md-6 fw-bold">
+                          </td>  
+                        </tr> 
+                        <tr  class="row col-xs-3 col-md-12 col-centered">
+                          <td class="col-md-3  fw-bold">
                             Trimester
                           </td>
-                          <td  class="col-md-6">
+                          <td  class="col-md-3 ">
                             <?php echo $value['trimester']; ?>  
                           </td> 
                           <?php //if ($value['treatment']!='') {?>
@@ -369,27 +374,25 @@ include_once('../php-templates/admin-navigation-head.php');
                           
                           <?php //}?>
                           <?php if ($value['prescription']!='') {?>
-                            <td class="col-md-6 fw-bold">
+                            <td class="col-md-3 fw-bold">
                               Prescription
                             </td>
-                            <td  class="col-md-6">
+                         
+                         
+                            <td  class="col-md-3 ">
                               <?php
                                 echo $value['prescription'];  
                               ?>  
                             </td> 
                           <?php }?>
-                          <td class="col-md-6 fw-bold">
-                            Gestation
-                          </td>
-                          <td  class="col-md-6">
-                            <?php echo $value['gestation']; ?>  
-                          </td> 
-                          <td class="col-md-6 fw-bold">
-                            Blood Pressure
-                          </td>
-                          <td  class="col-md-6">
-                            <?php echo $value['blood_pressure']; ?>  
-                          </td> 
+                          </tr> 
+                        <tr  class="row col-xs-3 col-md-12 col-centered">
+                          <td class="col-md-3  fw-bold">Gestation</td>
+                          <td  class="col-md-3"><?php echo $value['gestation']; ?></td> 
+                          <td class="col-md-3  fw-bold">Blood Pressure</td>
+                          <td  class="col-md-3"><?php echo $value['blood_pressure']; ?></td> 
+                        </tr>
+                        <tr  class="row col-xs-3 col-md-12 col-centered">
                           <td class="col-md-3 fw-bold">
                             Weight
                           </td>
@@ -402,53 +405,57 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td  class="col-md-3">
                             <?php echo $value['height_ft']."'".$value['height_in']."\""; ?>   
                           </td> 
-                          <td class="col-md-6 fw-bold">
-                            Nutritional Status
-                          </td>
-                          <td  class="col-md-6">
-                            <?php echo $value['nutritional_status']; ?>   
-                          </td> 
-                          <td class="col-md-6 fw-bold">
-                            Status Analysis
-                          </td>
-                          <td  class="col-md-6">
-                            <?php echo $value['status_analysis']; ?>   
-                          </td> 
-                          <td class="col-md-6 fw-bold">
+                          </tr>
+                          <tr  class="row col-xs-3 col-md-12 col-centered">
+                          <td class="col-md-3 fw-bold">Nutritional Status</td>
+                          <td  class="col-md-3 "><?php echo $value['nutritional_status']; ?></td> 
+                          <td class="col-md-3  fw-bold">Status Analysis</td>
+                          <td  class="col-md-3 "><?php echo $value['status_analysis']; ?></td>
+                        </tr>
+                          <tr  class="row col-xs-3 col-md-12 col-centered"> 
+                          <td class="col-md-3  fw-bold">
                             Advice
                           </td>
-                          <td  class="col-md-6">
+                          <td  class="col-md-3 ">
                             <?php echo $value['advice']; ?>   
                           </td> 
-                          <td class="col-md-6 fw-bold">
+                          <td class="col-md-3  fw-bold">
                             Change Plan
                           </td>
-                          <td  class="col-md-6">
+                          <td  class="col-md-3">
                             <?php echo $value['change_plan']; ?>   
-                          </td> 
-                          <td class="col-md-6 fw-bold">
+                          </td>  
+                        </tr>
+                        
+                        <tr  class="row col-xs-3 col-md-12 col-centered" style="padding-bottom: 60px;">
+                       
+                          <td class="col-md-3 fw-bold">
                             Return Date
                           </td>
-                          <td class="col-md-6"> 
+                          <td class="col-md-3 "> 
                             <?php
                               $dtf2 = date_create($value['date_return']); 
                               echo date_format($dtf2,"F d, Y");  
                             ?>  
                           </td>
-                          <td class="col-md-6 fw-bold">
+                          <td class="col-md-3  fw-bold">
                             Return Time
                           </td>
-                          <td  class="col-md-6">
+                         
+                         
+                          <td  class="col-md-3 " >
                             <?php echo date_format($dtf2,"h:i A"); ?>  
                           </td>
+                          
                           <?php if ($current_user_is_a_midwife) { ?>
-                           
+                            
                            <!-- tinanggal ko yung add consultation dito -->
                             <!-- <td class="col-md-12 fw-bold">
                               <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
                             </td> -->
                           <?php } ?>
                         </tr> 
+                        
                   <?php 
                       } //foreach 
                   } else { ?> 
@@ -456,12 +463,14 @@ include_once('../php-templates/admin-navigation-head.php');
                   <?php } ?>
                 </tbody>
               </table>
+            
+            
             <?php }?> 
-
             <!-- nag add ako ng print button dito -->
             <div class="col-md-12 text-center">
             <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
           </div>
+          <br>
       <?php
           }
       ?>  

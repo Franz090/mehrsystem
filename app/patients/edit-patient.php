@@ -177,7 +177,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <!-- <div class="form__input-group">
                     <div class="form__text"><label>Medical History</label></div>
                   </div> -->
-               
+<!--                
                   <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
                     Height
                   <div class="d-flex input-group">
@@ -234,7 +234,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     <input value="<?php echo $c_allergies?>" type="text" 
                       class="form-control" id="floatingInputInvalid"  name="allergies" placeholder="Allergies" />   
                        <label for="floatingInput">Allergies</label> 
-                  </div>
+                  </div> -->
                   <div class=" mb-3">
                       <label>Tetanus Toxoid Vaccinated</label>
                       <select class="form-select " name="tetanus">

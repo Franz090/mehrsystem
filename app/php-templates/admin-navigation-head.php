@@ -10,7 +10,10 @@
 
   <link rel="icon" href="../img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
-
+<script
+      src="https://kit.fontawesome.com/3e0ba4391f.js"
+      crossorigin="anonymous"
+    ></script>
   <link rel="stylesheet" href="../css/new-ui.css"/> 
 
   <link rel="stylesheet" href="../css/dashboard.css"> 
@@ -216,8 +219,75 @@
       color: white;
       font-family: "Open sans",sans-serif;
     }
-   
+
+
+
     
+    /* view consultations */
+   
+     .content_ss1{
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 20px;
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 46%;
+      border: 1px solid #dee2e6;      
+    }
+    .wrapper_ss.active .content_ss1{
+      display: block;
+      
+    }
+    .content_ss1 .search_ss1{
+      position: relative;
+    }
+     .content_ss1 .options_ss{
+      margin-top: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 7px;
+      font-family: "Open sans",sans-serif;
+      height: 110px;
+      overflow:scroll;
+      scrollbar-width: none;
+     -ms-overflow-style: none;
+    }
+    .content_ss1 .options_ss::-webkit-scrollbar {
+      display: none;
+      overflow: hidden;
+    }
+     .search_ss1 input{
+    
+      outline: none;
+      padding: 0 20px 0 43px;
+      border: 1px solid #dbdcdc;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      padding-right: 10px;
+    }
+    .search_ss1 input:focus{
+      padding-left: 42px;
+      border: 1px solid #B3B3B3;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+    .search_ss1 input::placeholder{
+      color: #bfbfbf;
+    }
+    
+    @media only screen and (max-width: 600px) {
+  .content_ss1 {
+    width: auto;
+    height: auto;
+  }
+  .search_ss1 input{
+    width: 300px;
+  }
+}
   </style>
 </head>
 
