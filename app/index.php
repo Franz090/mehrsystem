@@ -20,11 +20,10 @@ if(isset($_POST['submit'])) {
         //     CONCAT(first_name,IF(middle_name IS NULL, '', CONCAT(' ',middle_name)),' ',last_name) AS name, admin
         //     FROM users WHERE email = '$email' && password = '$pass'";
 
-        
         $select = "SELECT u.user_id, u.role, 
             CONCAT(first_name, 
                 IF(middle_name IS NULL OR middle_name='', '', CONCAT(' ', SUBSTRING(middle_name, 1, 1), '.')), 
-                ' ', last_name) name 
+                ' ', last_name) name, profile_picture
         FROM (SELECT user_id, role FROM users WHERE email = '$email' && password = '$pass') u 
         LEFT JOIN user_details USING(user_id);";
  
@@ -42,6 +41,7 @@ if(isset($_POST['submit'])) {
                 $name_from_db = $row['name'];    
                 // $status_from_db = $row['status'];    
                 $role_from_db = $row['role']; 
+                $profile_pic_from_db = $row['profile_picture']; 
             } 
             
             // if ($status_from_db==0) {
@@ -53,6 +53,7 @@ if(isset($_POST['submit'])) {
                 $_SESSION['usermail'] = $email;
                 $_SESSION['name'] = $name_from_db;
                 $_SESSION['role'] = $role_from_db;
+                $_SESSION['profile_picture'] = $profile_pic_from_db;
                 // $_SESSION['status'] = $status_from_db;
               
      

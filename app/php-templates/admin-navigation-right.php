@@ -10,11 +10,11 @@
       <div class="nav">
       
         <div class="ig">
-          <img src="../php-templates/img/profile.jpg" id="navbar" alt="" />
+          <img src="../img/profile/<?php echo isset($_SESSION['profile_picture'])?$_SESSION['profile_picture']:'default.png'?>" id="navbar" alt="" />
         </div>
         <div class="float" id="flow">
           <div class="profile">
-            <img src="../php-templates/img/profile.jpg" alt="" />
+            <img src="../img/profile/<?php echo isset($_SESSION['profile_picture'])?$_SESSION['profile_picture']:'default.png'?>" alt="" />
             <h4><span class="display_name" style="color: #352e35;font-size:17px;"><?php echo isset($_SESSION['name'])? 
                 $_SESSION['name']:''; ?></span></h4>
           </div>

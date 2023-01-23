@@ -16,7 +16,7 @@ $select = "SELECT u.user_id AS id,
                 ' ', last_name) name, 
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
-  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies
+  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, profile_picture
   FROM users as u, user_details as d, barangays as b, patient_details as m
   WHERE u.user_id=$session_id AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id";
 // echo $select;
@@ -36,13 +36,14 @@ if ($result = mysqli_query($conn, $select)){
         $c_no .= '('.$row2['mobile_number'].') '; 
       }
     }   
-    $b_date = $row['b_date'];  
+    $b_date = $row['b_date'];
     $bgy = $row['health_center'];     
     $height = $row['height'];   
     $weight = $row['weight'];   
     $blood_type = $row['blood_type'];   
     $diagnosed_condition = $row['diagnosed_condition'];   
     $allergies = $row['allergies'];    
+    $profile_picture = $row['profile_picture']==null?'default.png':$row['profile_picture']; 
   } 
   mysqli_free_result($result);
 } 
@@ -79,7 +80,11 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4>
+        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4> <br/>
+          <div>
+            <img src="../img/profile/<?php echo $profile_picture; ?>" 
+              alt="<?php echo $name; ?>" width="500" height="600">
+          </div>
           <!-- <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
             <a href="./update-account.php" class="text-light" style=""> 
               Update Account Information

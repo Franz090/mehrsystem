@@ -18,7 +18,7 @@ $select = "SELECT  u.user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
-  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies 
+  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, profile_picture 
   FROM users as u, user_details as d, barangays as b, patient_details as m
   WHERE u.user_id=$id_from_get AND d.user_id=u.user_id 
     AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id AND b.archived=0 $midwife_sql";
@@ -47,7 +47,8 @@ if($result = mysqli_query($conn, $select))  {
     $weight = $row['weight'];   
     $blood_type = $row['blood_type'];   
     $diagnosed_condition = $row['diagnosed_condition'];   
-    $allergies = $row['allergies'];    
+    $allergies = $row['allergies'];  
+    $profile_picture = $row['profile_picture']==null?'default.png':$row['profile_picture'];   
   } 
   mysqli_free_result($result);
 } 
@@ -175,6 +176,10 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient Report</h4> 
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
+            <div>
+              <img src="../img/profile/<?php echo $profile_picture; ?>" 
+                alt="<?php echo $name; ?>" width="500" height="600">
+            </div>
             <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">
                 <tr>
