@@ -235,10 +235,10 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default" >
       <div class="background-head row m-2 my-4" >
-        <div class="box">
+   
         <h4 class="pb-3 m-3 fw-bolder ">Update Account</h4>
        
-          <div class="col-md-8 col-lg-5">
+      
             <form>
               <?php
                 if(isset($error)) 
@@ -247,59 +247,91 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>
        
             <?php if (!$current_user_is_an_admin) { ?>
-          <div class="d-flex flex-row justify-content-between mx-auto">
-            <div class="col-md-9 col-lg-12  px-3 mb-5" >
+         <div class="container-fluid d-flex justify-content-center ">
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
-              <div class="mb-3 text-start">
+              
+                <?php if ($current_user_is_a_patient) { ?> <div class="row"> <?php } ?>
+                   <?php if ($current_user_is_a_patient) { ?>
+                  <div class="col-md-3">
+                    <?php } ?>
+                    <div class="mb-4">
                 <label>First Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_first_name?>"   name="first_name" placeholder="First Name" tabindex="11">
-                  
                 </div>
-                <div class="mb-3 text-start">
+              <?php if ($current_user_is_a_patient) { ?></div><?php } ?>
+              <?php if ($current_user_is_a_patient) { ?>
+              <div class="col-md-3">
+                 <?php } ?>
+                <div class="mb-3 ">
                   <label>Middle Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_middle_name?>"  name="middle_name" placeholder="Middle Name" tabindex="11">
-                  
-                </div>
-                 <div class="mb-3 text-start">
+                  </div>
+                <?php if ($current_user_is_a_patient) { ?></div><?php } ?>
+                   <?php if ($current_user_is_a_patient) { ?>
+                <div class="col-md-3">
+                   <?php } ?>
+                 <div class="mb-3 ">
                   <label>Last Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_last_name?>" id="floatingInputInvalid"  name="last_name" placeholder="Last Name" tabindex="11">
-                  
-                </div>
-              
+                  </div>
+                <?php if ($current_user_is_a_patient) { ?></div> <?php } ?>
+             
                 <?php if ($current_user_is_a_patient) { ?>
+              <div class="col-md-3">
                <div class="text-start mb-3">
                 <label>Nick Names</label>
                     <input type="text" value="<?php echo $c_nickname?>"
                         class="form-control"  name="nickname"  placeholder="Nickname"/>
-                        
-                  </div> 
+                   </div>   
+                  </div>  
+                <?php if ($current_user_is_a_patient) { ?></div><?php } ?>
                 <?php } ?>
+                 <?php if ($current_user_is_a_patient) { ?><div class="row"> <?php } ?>
+                   <?php if ($current_user_is_a_patient) { ?>
+                  <div class="col-md-6">
+                     <?php } ?>
                 <div class="mb-3">
-                <div class="form-input text-start">
-                  <label>Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
-                  <textarea name="contact" class="form-control form-control-md w-100"><?php echo $c_no?></textarea> 
+                <div class="form-input ">
+                  <label>Mobile Number(s): *use this format: 09XX-XXX-XXXX*</label>
+                  <textarea name="contact" class="form-control"><?php echo $c_no?></textarea> 
+                  </div>
                 </div>
-              </div>
+              <?php if ($current_user_is_a_patient) { ?></div>   <?php } ?>
+
+               <?php if ($current_user_is_a_patient) { ?>
+              <div class="col-md-6">
+                <div class="mb-3">
+              <div class="form-input">
+                    <label for="address">Address*</label>
+                    <textarea id="address" name="address" class="form-control"><?php echo $c_address?></textarea> 
+                  </div>
+               </div>
+                </div>
+              <?php if ($current_user_is_a_patient) { ?> </div> <?php } ?>
+                  <?php } ?>
                 <?php if ($current_user_is_a_patient) { ?>
+                  <div class="row">
+                    <div class="col-md-6">
                   <div class="mb-3">
                     <label>Birth Date</label>
                     <div class="input-group date" id="datepicker">
                       <input class="form-control option pt-2 pb-2" type="date" name="b_date" value="<?php echo $c_b_date?>"/>
                     </div>
                   </div>
-                
-                  <div class="form-input">
-                    <label for="address">Address*</label><br/>
-                    <textarea id="address" name="address" class="form-control"><?php echo $c_address?></textarea> 
-                  </div><br>
-                  <div class="form-floating mb-3">
-                      <input type="text" value="<?php echo $c_civil_status?>" class="form-control"  id="floatingInputInvalid" name="civil_status" placeholder="Civil Status*" required/>
-                      <label for="floatingInput">Civil Status*</label>
-                  </div>  
-    
-                  <div class="form-input">
-                    <div class="form__text"><label>Medical History</label></div>
                   </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label>Civil Status*</label>
+                      <input type="text" value="<?php echo $c_civil_status?>" class="form-control pt-2 pb-2"  name="civil_status" placeholder="Civil Status*" required/>
+                      </div>
+                  </div>  
+               </div>
+                  <div class="form-input">
+                    <div class="form__text"><label style="font-weight: bold;color:#352e35;">Medical History</label></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
                   <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
                     Height* 
                     <div class="d-flex input-group">
@@ -315,6 +347,8 @@ include_once('../php-templates/admin-navigation-head.php');
                       </div> 
                     </div>
                   </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">   
                     Weight*   
                     <div class="d-flex input-group">
@@ -324,76 +358,54 @@ include_once('../php-templates/admin-navigation-head.php');
                           <div id="weight-height" class="w-100 input-group-text form__input text-white">kg</div>
                         </div> 
                     </div>
-                  </div><br>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control"  id="floatingInputInvalid" value="<?php echo $c_blood_type?>"
-                       name="blood_type" placeholder="Blood Type*" required/>  
-                       <label for="floatingInput">Blood Type*</label>
                   </div>
-                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid" value="<?php echo $c_diagnosed_condition?>"
-                      name="diagnosed_condition" placeholder="Diagnosed Condition"/> 
-                      <label for="floatingInput">Diagnosed Condition*</label>
                 </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid" value="<?php echo $c_family_history?>"
+               <div class="col-md-4">
+                  <div class="mb-3">
+                    <label>Blood Type*</label>
+                    <input type="text" class="form-control" value="<?php echo $c_blood_type?>"
+                       name="blood_type" placeholder="Blood Type*" required/>  
+                       </div> 
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                 <div class="mb-3">
+                  <label>Diagnosed Condition*</label>
+                    <input type="text" class="form-control" value="<?php echo $c_diagnosed_condition?>"
+                      name="diagnosed_condition" placeholder="Diagnosed Condition"/>
+                    </div> 
+                </div>
+                <div class="col-md-4">
+                  <div class=" mb-3">
+                    <label>Family History*</label>
+                    <input type="text" class="form-control" value="<?php echo $c_family_history?>"
                        name="family_history" placeholder="Family History"/> 
-                      <label for="floatingInput">Family History*</label>
+                      </div>
                 </div>
-                  <div class="form-floating  ">
+                <div class="col-md-4">
+                  <div class="mb-3 ">
+                    <label for="floatingInput">Allergies*</label> 
                     <input type="text" value="<?php echo $c_allergies?>"
-                     class="form-control" id="floatingInputInvalid" name="allergies" placeholder="Allergies"/>  
-                     <label for="floatingInput">Allergies*</label>  
+                     class="form-control" name="allergies" placeholder="Allergies"/>  
+                    </div>
                   </div> 
+                </div>
                 <?php } ?>
-                <div class="py-1 col-12">
-                <button class="w-100 btn text-capitalize" type="submit" name="submit_profile">Update Profile Data</button>
-               </div>
+                <div class="col-md-12 text-center">
+                <?php if (!$current_user_is_an_admin) { ?>
+                <button class="w-30  btn btn-primary text-capitalize" type="submit" name="submit_profile">Update Profile</button>
+                 <a  style="position:relative;top: 0px;padding:5px;" class=" w-30  btn btn-danger text-capitalize"  href="../dashboard">Cancel</a>
+                </div>
+               <?php } ?> 
+              
               </form> 
-                </div>
-             
+              <?php if ($current_user_is_a_patient) { ?>
+               </div>
+             <?php } ?>
             <?php } ?>
-<style type="text/css">
-    form {
-        text-align: center;
-    }
-    input {
-        width: 0px;
-    }
-    </style>
-    <!-- <div class="col-md-9 col-lg-12 px-3 pb-2">
-            <form class="form form-box px-2" method="post">
+
     
-              Put your current password to authorize the change(s)
-              <div class="text-start mb-2">
-               
-                  <input type="password" class="form-control"   name="current"  placeholder="Password"  >
-                  
-                </div>      
-              Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
-              <div class=" mb-3">
-                  <input type="email" class="form-control" id="floatingInputInvalid"  name="new_email" placeholder="New Email Address" tabindex="11">
-                  
-                </div>
-              Leave blank if you do not want to change the password
-              <div class="mb-2">
-                  <input type="password" class="form-control"  
-                    name="new" placeholder="New Password" id="floatingPassword"/>
-                    
-                </div> 
-              <div class=" mb-2">
-                  <input type="password" class="form-control"  
-                    name="cnew" placeholder="Confirm New Password" id="floatingPassword"/>
-                   
-                </div>
-               <div class="py-3 col-12 " style="margin-bottom: 5%;">
-              <button class="btn-primary w-100 btn text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
-  </div>
-            </form> 
-  </div> -->
-          </div>
-        </div>
-  </div>
       </div> 
     </div>
 

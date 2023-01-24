@@ -22,11 +22,11 @@ try {
     $mail->addAddress($email_from_db);
 
     $mail->isHTML(true);
-    $mail->Subject = 'OTP from MEHR System.';
+    $mail->Subject = 'MEHR System -MyAccount OTP';
     $mail->Body =
-        "<h3>OTP</h3>
-        <br/><p>$random_pin</p><br/>
-        <p>Have a nice day!</p>";
+        "<h3 style='font-weight:bold'>OTP</h3>
+        <br/><p>$random_pin</p>
+        <p>Please click change your password link to reset password!</p>";
     $mail->send();
 } catch (Exception $e) {
 }

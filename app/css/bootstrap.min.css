@@ -271,18 +271,10 @@ select:focus {
 	border: 0px;
 }
 
-.form-box button[type="submit"] {
+/* .form-box button[type="submit"] {
 	margin-top: 10px;
-	border: none;
-	cursor: pointer;
-	border-radius: 25px;
-	background: #039b72;
-	color: var(--text-secondary-color);
-	font-size: 100%;
-	font-weight: bold;
-	letter-spacing: .1rem;
-	transition: 0.5s;
-	padding: 12px;
+	
+	padding: 8px 10px;
 	position: relative;
 	text-align: center;
 	justify-content: center;
@@ -301,7 +293,7 @@ select:focus {
 	-moz-transition: all 0.30s ease-in-out;
 	-ms-transition: all 0.30s ease-in-out;
 	-o-transition: all 0.30s ease-in-out;
-}
+} */
 
 input[type="datetime-local"]:focus {
 	color: var(--text-primary-color);

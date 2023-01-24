@@ -155,7 +155,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </select>
             </div> 
            
-          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Add Vaccination</button> 
+          <button class="btn btn-primary w-50 btn  text-capitalize" type="submit" name="submit">Add Vaccination</button> 
           <?php } ?>  
         </form>  
           </div>
