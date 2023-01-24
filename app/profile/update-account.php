@@ -34,6 +34,7 @@ if ($current_user_is_a_patient) {
       $c_weight = $row['weight'];
       $c_height_ft = $row['height_ft'];
       $c_height_in = $row['height_in'];
+      $c_profile_picture = $row['profile_picture']==null?'default.png':$row['profile_picture'];
       
       $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$session_id AND type=1";
       if ($result_c_no = mysqli_query($conn, $select_c_no)) {
@@ -219,6 +220,37 @@ if (isset($_POST['submit_cred'])) {
     } 
   }
 }
+
+if(isset($_POST['submit_pic'])) { 
+  $error = '';
+  if(isset($_FILES['profile_picture']) && $_FILES['profile_picture']['size'] > 0) { 
+    $extension = pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION);  
+
+    $allowed_extensions = array("jpg", "jpeg", "png", "gif");
+    if(!in_array(strtolower($extension), $allowed_extensions)) {
+      $error = "Invalid file type. Please select a JPG, JPEG, PNG, or GIF file.";
+    }  
+    $max_file_size = 5 * 1024 * 1024; // 5MB
+    if($_FILES['profile_picture']['size'] > $max_file_size) {
+      $error = "File size too large. Maximum file size is 5MB.";
+    } 
+    $file_name = $session_id . "." . $extension; 
+    // Move the uploaded file to the uploads folder
+    $upload_path = "../img/profile/" . $file_name;
+    if(!move_uploaded_file($_FILES['profile_picture']['tmp_name'], $upload_path)) {
+      $error = 'File upload failed!';
+    } 
+    else {
+      // Save the file name to the database
+      $query = "UPDATE user_details SET profile_picture = '$file_name' WHERE user_id = '$session_id'";
+      if(!mysqli_query($conn, $query)) {
+        $error = "Error updating database: " . mysqli_error($conn);
+      } 
+      $_SESSION['profile_picture'] = $file_name;
+      echo "<script>alert('Profile Picture Updated');window.location.href='./update-account.php';</script>";
+    } 
+  }
+}
  
 $conn->close(); 
 
@@ -247,14 +279,29 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>
        
             <?php if (!$current_user_is_an_admin) { ?>
+
          <div class="container-fluid d-flex justify-content-center ">
+              <?php if ($current_user_is_a_patient) { ?>
+                <form class="form form-box px-3 py-5" style=""  action="" method="post" enctype="multipart/form-data">
+                  <img src="../img/profile/<?php echo $c_profile_picture; ?>" 
+                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width="500" height="600">
+                  <br/>
+                  <label for="profile_picture">Select a new profile picture:</label>
+                  <input type="file" name="profile_picture" id="profile_picture" style="width:100%;">
+                  <div class="py-1 col-12">
+                    <button class="w-100 btn text-capitalize" type="submit" name="submit_pic">Update Profile Picture</button>
+                  </div>
+                </form> 
+                <hr/>
+              <?php } ?>
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
               
                 <?php if ($current_user_is_a_patient) { ?> <div class="row"> <?php } ?>
                    <?php if ($current_user_is_a_patient) { ?>
                   <div class="col-md-3">
                     <?php } ?>
-                    <div class="mb-4">
+                    <div class="mb-4"> 
+
                 <label>First Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_first_name?>"   name="first_name" placeholder="First Name" tabindex="11">
                 </div>
@@ -290,6 +337,7 @@ include_once('../php-templates/admin-navigation-head.php');
                    <?php if ($current_user_is_a_patient) { ?>
                   <div class="col-md-6">
                      <?php } ?>
+
                 <div class="mb-3">
                 <div class="form-input ">
                   <label>Mobile Number(s): *use this format: 09XX-XXX-XXXX*</label>
@@ -307,6 +355,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div>
                </div>
                 </div>
+
               <?php if ($current_user_is_a_patient) { ?> </div> <?php } ?>
                   <?php } ?>
                 <?php if ($current_user_is_a_patient) { ?>

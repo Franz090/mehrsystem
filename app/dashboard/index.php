@@ -177,26 +177,31 @@ if ($current_user_is_a_patient) {
       $in_to_m_conversion = 0.0254;
       $ft_to_in_conversion = 12;
       $m = ($height_ft * $ft_to_in_conversion + $height_in) * $in_to_m_conversion; 
+
       // echo $m. "<br>";
       // echo $height_ft. "<br>";
       // echo $height_in. "<br>";
       // https://www.diabetes.ca/managing-my-diabetes/tools---resources/body-mass-index-(bmi)-calculator#:~:text=Body%20Mass%20Index%20is%20a,most%20adults%2018%2D65%20years.
       // BMI = kg/m2
-      $bmi = $weight/$m**2;
-      // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
-      // Underweight = <18.5
-      // Normal weight = 18.5–24.9
-      // Overweight = 25–29.9
-      // Obesity = BMI of 30 or greater
-      if ($bmi<=18.5) {
-        $bmi_desc = 'Underweight';
-      } else if ($bmi<25 && $bmi>18.5) {
-        $bmi_desc = 'Normal weight';
-      } else if ($bmi<30 && $bmi>=25) {
-        $bmi_desc = 'Overweight';
-      } else if ($bmi>=30) {
-        $bmi_desc = 'Obese';
-      }
+      $bmi_desc = "Please set your height and weight.";
+      $bmi = null;
+      if ($m != 0) {
+        $bmi = $weight/$m**2;
+        // https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
+        // Underweight = <18.5
+        // Normal weight = 18.5–24.9
+        // Overweight = 25–29.9
+        // Obesity = BMI of 30 or greater
+        if ($bmi<=18.5) {
+          $bmi_desc = 'Underweight';
+        } else if ($bmi<25 && $bmi>18.5) {
+          $bmi_desc = 'Normal weight';
+        } else if ($bmi<30 && $bmi>=25) {
+          $bmi_desc = 'Overweight';
+        } else if ($bmi>=30) {
+          $bmi_desc = 'Obese';
+        }
+      } 
     }
   } 
   else  { 

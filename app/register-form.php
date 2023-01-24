@@ -149,7 +149,7 @@ include_once('php-templates/css/black-bg-remover.php');
                   <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
                   <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="mid_name" placeholder="Middle Name" 
-                     tabindex="12" required>
+                     tabindex="12">
                   <input type="text" class="rounded form-control form-control-md pb-2 pt-2 mb-1" name="last_name" placeholder="Last Name*" 
                      tabindex="13" required>
                </div>  
