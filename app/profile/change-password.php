@@ -73,10 +73,10 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default" >
       <div class="background-head row m-2 my-4" >
-        <div class="box">
-        <h4 class="pb-3 m-3 fw-bolder ">Change Password</h4>
- <div class="col-md-9 col-lg-12 px-3 pb-2">
-            <form class="form form-box px-2" method="post">
+       
+        <h4 class="pb-5 m-3 fw-bolder ">Change Password</h4>
+ <div class="container-fluid d-flex justify-content-center ">
+            <form class="form form-box px-2 text-center" method="post">
     
               Put your current password to authorize the change(s)
               <div class="text-start mb-2">
@@ -101,12 +101,12 @@ include_once('../php-templates/admin-navigation-head.php');
                    
                 </div>
                <div class="py-3 col-12 " style="margin-bottom: 5%;">
-               <button class="btn-primary w-100 btn text-capitalize" type="submit" name="submit_cred">Update Credentials</button>
+               <button class="btn-primary w-50 btn text-capitalize" type="submit" name="submit_cred">Update Password</button>
   </div>
             </form> 
   </div>
 
- </div>
+
       </div> 
     </div>
 

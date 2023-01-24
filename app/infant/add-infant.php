@@ -99,18 +99,9 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4">
 
         <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
-        <div class="box p-5">
-          <div class="col-md-8 col-lg-5 ">
-            <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post">
-              <style type="text/css">
-                form {
-                    text-align: center;
-                  
-                }
-                input {
-                    width: 100px;
-                }
-              </style>
+        
+            <form class="form form-box px-3" action="" method="post">
+              
               <?php
                 if(isset($error)) 
                   echo '<span class="form__input-error-message">'.$error.'</span>'; 
@@ -118,24 +109,23 @@ include_once('../php-templates/admin-navigation-head.php');
                   echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
                 } else { 
               ?> 
-              <div class="d-flex flex-row justify-content-between">
-                <div class="col-md-9 col-lg-12 p-2">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid" name="first_name" autofocus placeholder="First Name*" required>
-                    <label for="floatingInput">First Name</label>
+                  <label >First Name</label>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="first_name" autofocus placeholder="First Name*" required>
+                  </div> 
+                  <label>Middle Name</label>
+                  <div class="mb-3">
+                    <input type="text" class="form-control"   name="middle_name" placeholder="Middle Name*">
+                  </div> 
+                  <label>Last Name</label>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last Name*" required>
                   </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid"  name="middle_name" placeholder="Middle Name">
-                    <label for="floatingInput">Middle Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid"  name="last_name" placeholder="Last Name*" required>
-                    <label for="floatingInput">Last Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInputInvalid"  name="nickname" placeholder="Nickname"> 
-                    <label for="floatingInput">Nick Name</label>
+                  <label>Nick Name</label>
+                  <div class="mb-3">
+                    <input type="text" class="form-control"  name="nickname" placeholder="Nickname"> 
                   </div>  
+                 <label>Gender</label>
                   <div class=" mb-3"> 
                     <select class="form-select pt-2 pb-2" name="sex">
                       <option value="Male" disabled>Gender</option>
@@ -144,18 +134,18 @@ include_once('../php-templates/admin-navigation-head.php');
                       <option value="Other">Other</option> 
                     </select>
                   </div>
-                </div>  
-                <div class="col-md-9 col-lg-12" style="margin-left:20px; margin-top:-13px;">
+               
+               <label>Birth Date</label> 
                   <div class="mb-3">
-                    <label>Birth Date*</label> 
                     <div class="input-group date" id="datepicker">
                       <input class="form-control option pt-2 pb-2" type="date" name="b_date" required />
                     </div>
-                  </div>  
-                  <div class="form-floating mb-3">
-                    <input type="text"  class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type*" required>
-                    <label for="floatingInput">Blood Type</label>
+                </div>
+               <label >Blood Type</label>
+                  <div class="mb-3">
+                    <input type="text"  class="form-control"  name="blood_type" placeholder="Blood Type*" required>
                   </div> 
+                <label >Legitimacy</label>
                   <div class="mb-3"> 
                     <select class="form-select pt-2 pb-2" name="legitimacy" required>
                       <option value="" selected disabled>Select Legitimacy</option>
@@ -194,17 +184,14 @@ include_once('../php-templates/admin-navigation-head.php');
                       </div>
                     </div> 
                   </div>
-                </div>
-              </div>
-              <div class="d-grid grap-2 h-100">
-                <div class="align-self-start mr-auto text-end">
-                  <button style="" class="w-100 btn btn-primary text-center text-capitalize" type="submit" name="submit">Register Infant</button> 
-                </div>
-              </div>
+                
+              
+              
+                  <button style="" class="w-100 btn btn-primary  text-capitalize" type="submit" name="submit">Register Infant</button> 
+              
               <?php } ?>  
             </form>  
-          </div>  
-        </div>
+          
 
       </div>
     </div>
