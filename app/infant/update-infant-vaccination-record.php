@@ -158,8 +158,9 @@ include_once('../php-templates/admin-navigation-head.php');
                     }?> 
                 </select>
             </div> 
-           
-          <button class="w-100 btn text-capitalize" type="submit" name="submit">Update Vaccination</button> 
+           <div class="col-md-12 text-center">
+          <button class="w-50 btn btn-primary text-capitalize" type="submit" name="submit">Update Vaccination</button>
+         </div>
           <?php } ?>  
         </form>  
           </div>
