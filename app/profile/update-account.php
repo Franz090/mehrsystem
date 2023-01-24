@@ -301,6 +301,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <div class="col-md-3">
                     <?php } ?>
                     <div class="mb-4"> 
+
                 <label>First Name</label>
                   <input type="text" class="form-control" value="<?php echo $c_first_name?>"   name="first_name" placeholder="First Name" tabindex="11">
                 </div>
@@ -336,6 +337,7 @@ include_once('../php-templates/admin-navigation-head.php');
                    <?php if ($current_user_is_a_patient) { ?>
                   <div class="col-md-6">
                      <?php } ?>
+
                 <div class="mb-3">
                 <div class="form-input ">
                   <label>Mobile Number(s): *use this format: 09XX-XXX-XXXX*</label>
@@ -353,6 +355,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div>
                </div>
                 </div>
+
               <?php if ($current_user_is_a_patient) { ?> </div> <?php } ?>
                   <?php } ?>
                 <?php if ($current_user_is_a_patient) { ?>
