@@ -45,12 +45,12 @@ if(isset($_REQUEST['command'])) {
     }
 
     public function addAppointment() {
-
-        $patient_id = $_POST['patient_id_trimester'];
+        $id_trimester_split = explode('AND',$_POST['patient_id_trimester']);
+        $patient_id = $id_trimester_split[0];
         $midwife = $_SESSION['id'];
         $date = $_POST['date'];
         $status = 1;
-        $trimester_post = $_POST['patient_id_trimester'];
+        $trimester_post = $id_trimester_split[1];
 
         if (empty($date) || empty($patient_id)) {
             echo json_encode(array(
@@ -61,8 +61,8 @@ if(isset($_REQUEST['command'])) {
 
             $created_date = date_create($_POST['date']);
             $date_formatted = date_format($created_date,"F d, Y g:i A");
-            $patient_id = substr($patient_id, 0, 1);
-            $trimester_post = substr($trimester_post, 4, 1);
+            // $patient_id = substr($patient_id, 0, 1);
+            // $trimester_post = substr($trimester_post, 4, 1);
             $inserted = $this->insertAppoint($patient_id, $midwife, $date, $status, $trimester_post);
 
             if($inserted) {
