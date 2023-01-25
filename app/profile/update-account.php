@@ -279,19 +279,23 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>
        
             <?php if (!$current_user_is_an_admin) { ?>
-
+<br>
          <div class="container-fluid d-flex justify-content-center ">
               <?php if ($current_user_is_a_patient) { ?>
-                <form class="form form-box px-3 py-5" style=""  action="" method="post" enctype="multipart/form-data">
-                  <img src="../img/profile/<?php echo $c_profile_picture; ?>" 
-                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width="500" height="600">
-                  <br/>
-                  <label for="profile_picture">Select a new profile picture:</label>
-                  <input type="file" name="profile_picture" id="profile_picture" style="width:100%;">
-                  <div class="py-1 col-12">
-                    <button class="w-100 btn text-capitalize" type="submit" name="submit_pic">Update Profile Picture</button>
-                  </div>
+                <form class="form form-box  px-2 text-center" style=""  action="" method="post" enctype="multipart/form-data">
+                  <img style="border: 1px solid #e5e5e5;" class="rounded-circle" src="../img/profile/<?php echo $c_profile_picture; ?>" 
+                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width="300" height="600">
+                  <br/><br/>
+                  <div class="col-md-12 justify-content-center d-flex ">
+              
+                  <input type="file" name="profile_picture" id="profile_picture" style="width:100%;position:relative;top: 10px;left: 40px;" size="50">
+                 </div>
+                 <br>
+                    <button class="w-20  text-capitalize btn-danger btn" type="submit" name="submit_pic">Update Profile Picture</button>
+             
+
                 </form> 
+              </div>
                 <hr/>
               <?php } ?>
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
@@ -441,7 +445,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   </div> 
                 </div>
                 <?php } ?>
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center mt-3">
                 <?php if (!$current_user_is_an_admin) { ?>
                 <button class="w-30  btn btn-primary text-capitalize" type="submit" name="submit_profile">Update Profile</button>
                  <a  style="position:relative;top: 0px;padding:5px;" class=" w-30  btn btn-danger text-capitalize"  href="../dashboard">Cancel</a>

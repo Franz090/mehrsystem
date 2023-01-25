@@ -177,8 +177,10 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
             <div>
-              <img src="../img/profile/<?php echo $profile_picture; ?>" 
+              <div class="container-fluid d-flex justify-content-center ">
+              <img class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
                 alt="<?php echo $name; ?>" width="500" height="600">
+        </div>
             </div>
             <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">

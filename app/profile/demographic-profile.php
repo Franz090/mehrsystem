@@ -82,8 +82,10 @@ include_once('../php-templates/admin-navigation-head.php');
       ?>   
         <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4> <br/>
           <div>
-            <img src="../img/profile/<?php echo $profile_picture; ?>" 
+            <div class="container-fluid d-flex justify-content-center ">
+            <img  style="border: 1px solid #e5e5e5;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
               alt="<?php echo $name; ?>" width="500" height="600">
+        </div>
           </div>
           <!-- <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
             <a href="./update-account.php" class="text-light" style=""> 
