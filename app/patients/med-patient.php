@@ -29,11 +29,11 @@ if($result = mysqli_query($conn, $select))  {
     header('location: ../'); 
   }
   foreach($result as $row)  {
-    $id = $row['user_id'];  
+    $user_id = $row['user_id'];  
     $name = $row['name'];  
     $e = $row['email'];  
     $s = $row['tetanus']; 
-    $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$id AND type=1";
+    $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$user_id AND type=1";
     if ($result_c_no = mysqli_query($conn, $select_c_no)) {
       $c_no = '';
       foreach ($result_c_no as $row2) {
@@ -64,7 +64,7 @@ $appointments_list = [];
 // fetch patient appointments 
 $select2_a = "SELECT a.date a_date, trimester
   FROM appointments a
-  WHERE $id=a.patient_id AND a.status=1 $date
+  WHERE $user_id=a.patient_id AND a.status=1 $date
   ORDER BY a.date $order";
 
 // echo $select2_a;  
@@ -91,7 +91,7 @@ $select2_b = "SELECT c.date, prescription, consultation_id id, gestation, blood_
   height_in, nutritional_status, status_analysis, advice, change_plan, date_return,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
    trimester
-  FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c 
+  FROM (SELECT * FROM consultations WHERE $user_id=patient_id ORDER BY date DESC) c 
   LEFT JOIN users u
     ON u.user_id=c.midwife_appointed
   LEFT JOIN user_details d
@@ -147,6 +147,7 @@ else  {
 $conn->close(); 
 
 $page = 'med_patient';
+
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 
@@ -475,7 +476,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <?php }?> 
             <!-- nag add ako ng print button dito -->
             <div class="col-md-12 text-center">
-            <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
+            <a href='print.php?user_details_id=<?php echo $user_id?>'>Print</a>
           </div>
           <br>
       <?php
