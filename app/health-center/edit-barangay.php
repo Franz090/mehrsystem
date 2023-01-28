@@ -63,25 +63,28 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
-    <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Barangay Record</h4>
-
-        <div class="container default table-responsive p-4">
-          <div class="col-md-8 col-lg-5 ">
+    <div class="container-fluid  h-100" >
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Update Barangay Record</h4><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+    
+     
         <?php
           if (isset($no_bgy))  
             echo '<span class="form__input-error-message">'.$no_bgy.'</span>';
           else   {
         ?>   
-        <form class="form form-box px-3" action="" method="post" style="position:relative;bottom: 89px;">
+         <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-md-6 col-lg-5">
+        <form class="form form-box " action="" method="post" >
           <?php 
             if (isset($error))  
               echo '<span class="form__input-error-message">'.$error.'</span>'; 
           ?> 
-          <div class="form-floating">
-              <input value="<?php echo $c_health_center?>" type="text"  name="health_center" class="form-control" placeholder="Edit Barangay Health Center" id="floatingPassword" required>
-              <label for="floatingPassword">Barangay Health Center</label>
-          </div> 
+       
+      <label >Barangay Health Center</label>
+              <input value="<?php echo $c_health_center?>" type="text"  name="health_center" class="form-control" placeholder="Edit Barangay Health Center" required>
+             
+          
           <!-- <div class="form__input-group">
               <label>Status</label>
               <select class="form__input" name="status" >
@@ -89,16 +92,20 @@ include_once('../php-templates/admin-navigation-head.php');
                   <option value="Active" <?php// echo $c_status=='Active' ? 'selected':''?>>Active</option>
               </select>
           </div>   -->
-          <button class="w-100 btn  text-capitalize" value="register now" type="submit" name="submit">Update Barangay Record</button> 
+        <div class="col-md-12 text-center pt-4">
+          <button class="w-50 btn  btn-primary btn-sm text-capitalize" value="register now" type="submit" name="submit">Update Barangay Record</button> </div>
         </form>  
         <?php
           }
         ?>
         
-          </div>
-        </div>
+   
+       </div>
+   
+    </div>
 
-      </div>
+        </div>
+   
     </div>
 
   </div>

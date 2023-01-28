@@ -78,31 +78,31 @@ include_once('../php-templates/admin-navigation-head.php');
  <div class="container-fluid d-flex justify-content-center ">
             <form class="form form-box px-2 text-center" method="post">
     
-              Put your current password to authorize the change(s)
-              <div class="text-start mb-2">
+              <label class="mb-2">Put your current password to authorize the change(s)</label>
+              <div class=" mb-3">
                
                   <input type="password" class="form-control"   name="current"  placeholder="Password"  >
                   
                 </div>      
-              Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email
+              <label class="mb-2">Current Email: <?php echo $_SESSION['usermail']?><br/>Leave blank if you do not want to change the email</label>
               <div class=" mb-3">
                   <input type="email" class="form-control" id="floatingInputInvalid"  name="new_email" placeholder="New Email Address" tabindex="11">
                   
                 </div>
-              Leave blank if you do not want to change the password
-              <div class="mb-2">
+               <label  class="mb-2"> Leave blank if you do not want to change the password</label>
+              <div class="mb-3">
                   <input type="password" class="form-control"  
                     name="new" placeholder="New Password" id="floatingPassword"/>
                     
                 </div> 
-              <div class=" mb-2">
+              <div class=" mb-2 text-center">
                   <input type="password" class="form-control"  
                     name="cnew" placeholder="Confirm New Password" id="floatingPassword"/>
-                   
                 </div>
-               <div class="py-3 col-12 " style="margin-bottom: 5%;">
-               <button class="btn-primary w-50 btn text-capitalize" type="submit" name="submit_cred">Update Password</button>
-  </div>
+              <br>
+               <div class="col-md-12 text-center">
+               <button class="btn-primary w-30 btn text-capitalize" type="submit" name="submit_cred">Update Password</button>
+              </div>
             </form> 
   </div>
 

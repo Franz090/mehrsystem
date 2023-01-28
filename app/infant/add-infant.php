@@ -86,7 +86,7 @@ $conn->close();
 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-  
+ 
 
 <div class="container_nu"> 
   <!-- Sidebar -->
@@ -99,7 +99,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4">
 
         <h4 class="pb-3 m-3 fw-bolder ">Add Infant</h4>
-        
+        <br>
             <form class="form form-box px-3" action="" method="post">
               
               <?php
@@ -109,22 +109,34 @@ include_once('../php-templates/admin-navigation-head.php');
                   echo '<span class="form__input-error-message">There should be at least one patient (under your assigned barangay) available in the database.</span>'; 
                 } else { 
               ?> 
+              <div class="row">
+                <div class="col-sm-4">
                   <label >First Name</label>
                   <div class="mb-3">
                     <input type="text" class="form-control" name="first_name" autofocus placeholder="First Name*" required>
-                  </div> 
+                  </div>
+                </div>
+                <div class="col-sm-4">
                   <label>Middle Name</label>
                   <div class="mb-3">
                     <input type="text" class="form-control"   name="middle_name" placeholder="Middle Name*">
-                  </div> 
+                  </div>
+                </div>
+                <div class="col-sm-4">
                   <label>Last Name</label>
                   <div class="mb-3">
                     <input type="text" class="form-control" name="last_name" placeholder="Last Name*" required>
                   </div>
+                </div> 
+                </div>
+                 <div class="row">
+                  <div class="col-sm-4">
                   <label>Nick Name</label>
                   <div class="mb-3">
                     <input type="text" class="form-control"  name="nickname" placeholder="Nickname"> 
-                  </div>  
+                  </div>
+                </div>  
+                <div class="col-sm-4">
                  <label>Gender</label>
                   <div class=" mb-3"> 
                     <select class="form-select pt-2 pb-2" name="sex">
@@ -134,17 +146,24 @@ include_once('../php-templates/admin-navigation-head.php');
                       <option value="Other">Other</option> 
                     </select>
                   </div>
-               
+               </div>
+               <div class="col-sm-4">
                <label>Birth Date</label> 
                   <div class="mb-3">
                     <div class="input-group date" id="datepicker">
                       <input class="form-control option pt-2 pb-2" type="date" name="b_date" required />
                     </div>
+                  </div>
                 </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
                <label >Blood Type</label>
                   <div class="mb-3">
                     <input type="text"  class="form-control"  name="blood_type" placeholder="Blood Type*" required>
-                  </div> 
+                  </div>
+                </div>
+                <div class="col-sm-4">
                 <label >Legitimacy</label>
                   <div class="mb-3"> 
                     <select class="form-select pt-2 pb-2" name="legitimacy" required>
@@ -152,7 +171,9 @@ include_once('../php-templates/admin-navigation-head.php');
                       <option value="1">Legitimate</option>
                       <option value="0">Illegitimate</option> 
                     </select>
-                  </div> 
+                  </div>
+                </div>
+                <div class="col-sm-4">
                   <div class="mb-2">
                     <label>Parent</label>
                     <!-- <select class="form-select pt-2 pb-2" name="user_id">
@@ -175,20 +196,20 @@ include_once('../php-templates/admin-navigation-head.php');
                         <i class="uil uil-angle-down"></i>
                       </div>
                       <input type="text" style="display:none;" name="user_id" class="patient_id_trimester"/>
-                      <div class="content_ss">
-                        <div class="search_ss">
-                          <ion-icon class="search-logo1" name="search-outline"></ion-icon>
+                      <div class="content_ss2">
+                        <div class="search_ss2">
+                          <ion-icon  name="search-outline"></ion-icon>
                           <input spellcheck="false" type="text" placeholder="Search" class="ss">
                         </div>
                         <ul class="options_ss"></ul>
                       </div>
                     </div> 
                   </div>
-                
-              
-              
-                  <button style="" class="w-100 btn btn-primary  text-capitalize" type="submit" name="submit">Register Infant</button> 
-              
+                </div>
+              </div>
+              <div class="col-md-12 text-center pt-4">
+                  <button style="" class="w-40 btn btn-primary  text-capitalize" type="submit" name="submit">Register Infant</button> 
+              </div>
               <?php } ?>  
             </form>  
           

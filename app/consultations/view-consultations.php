@@ -478,8 +478,8 @@ include_once('../php-templates/admin-navigation-head.php');
     $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu":[
-        [10, 25, 30,50, -1],
-        [10, 25, 30,50, "All"]
+        [30,50, -1],
+        [30,50, "All"]
       ],
       destroy: true,
       fixedColumns: true,

@@ -8,7 +8,7 @@
   <ul> 
     <li>
       <a href='href="../dashboard"'>
-          <span><img class="logo_nu" src="../img/rhu-logo.png" alt="logo"></a><span>
+          <span><img class="logo_nu" src="../img/rhu-logo.png" alt="logo"><span>
       </a>
     </li>
     <li <?php echo $page == 'dashboard' ? "class='hovered'":""?>>

@@ -84,9 +84,10 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="modal-body">
         <form class="m-3" action="" method="POST" id="add_barangay_form">
             
-          <div class="form-floating">
+          <div >
+             <label>Barangay Health Center</label>
             <input type="text" class="form-control" name="health_center"  placeholder="Barangay Health Center" id="floatingPassword"  >
-             <label for="floatingPassword">Barangay Health Center</label>
+            
           </div> 
         </form>
       </div>

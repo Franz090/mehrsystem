@@ -197,10 +197,11 @@ include_once('../php-templates/admin-navigation-head.php');
 
 }
 
+
 label{
   font-size: 17px;
-  font-family: 'Poppins',sans-serif;
-  font-weight: 500;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 700;
   color: #352e35;
 }
 </style>
@@ -212,8 +213,9 @@ label{
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Assign Barangays to <?php echo $c_name?></h4>
-      <div class="container default table-responsive p-4">
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Assign Barangays to <?php echo $c_name?></h4><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+   
           <div class="col-md-8 col-lg-5 ">
         <?php
           if (isset($no_user))  
@@ -238,13 +240,13 @@ label{
               if (count($barangay_list)>0) { 
             ?>   
               <div class="form__input-group">
-                <label><h6 style="font-size: 20px;">List of Barangays</h6></label> 
+                <!-- <label><h6 style="font-size: 18px;font-family:Open Sans,sans-serif;">List of Barangays</h6></label>  -->
                 <fieldset style="text-align:center; border:1px solid #fefefe; padding:1rem; border-radius:5px;">      
                   <?php  
                     foreach ($barangay_list as $key => $value) {
                   ?>  
-                    <input type="checkbox" id="check<?php echo $key ?>" value="<?php echo $value['id'] ?>" <?php echo $value['checked'] ?> name="barangay_id[]"/>
-                      <label for="check<?php echo $key ?>"><?php echo $value['name'] ?></label>
+                    <input class="form-check-input"  type="checkbox" id="check<?php echo $key ?>" value="<?php echo $value['id'] ?>" <?php echo $value['checked'] ?> name="barangay_id[]"/>
+                      <label class="form-check-label" for="check<?php echo $key ?>"><?php echo $value['name'] ?></label>
                     <br/> 
                   <?php 
                     } 
@@ -254,8 +256,9 @@ label{
             <?php  
                 }
             ?>  
-            <button class="form__button" value="register now" type="submit" name="submit">
-              Update Assigned Barangays</button> 
+            <div class="col-md-12 text-center">
+            <button class="btn-primary btn btn-sm w-60" value="register now" type="submit" name="submit">
+              Update Assigned Barangays</button> </div>
           <?php 
             } 
           ?>  
@@ -263,7 +266,7 @@ label{
         <?php 
           }
         ?>
-        </div>
+      
         </div>
       </div>
     </div>
