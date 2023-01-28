@@ -197,22 +197,23 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid">
       <div class="background-head row m-2 my-4">
-        <h6 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <em><?php echo $m_name?></em></h6>
+        <h6 class="pb-3 m-3 fw-bolder ">Update Consultation Record of <em><?php echo $m_name?></em></h6><br>
       
     
-        <div class="col-md-8 col-lg-5">  
+    
         <br>
         <?php 
             if (count($_barangay_list)==0) { ?>
             You can't give consultations because you are not assigned to any barangay.
         <?php } else if (count($patient_list)>0) { ?>
-        <form class="form form-box px-3" style="padding-top: 4px;" action="" method="post" enctype="multipart/form-data">
+        <form class="form form-box px-3"  action="" method="post" enctype="multipart/form-data">
             <?php
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span>'; 
             ?> 
             
-            <div class="form__input-group">
+             <div class="row">
+                <div class="col-sm-2">
                 <div class=" mb-3"> <!-- trimester -->
                     <label>Nth Trimester</label>
                     <select class="form-select" name="trimester">
@@ -221,22 +222,27 @@ include_once('../php-templates/admin-navigation-head.php');
                         <option  class="option" value="2" <?php echo $m_trimester==="2"?"selected":""?>>2nd (14-27 weeks)</option>
                         <option  class="option" value="3" <?php echo $m_trimester==="3"?"selected":""?>>3rd (28-42 weeks)</option>
                     </select>
-                </div> 
+                </div>
+            </div> 
+            <div class="col-sm-3">
                 <div class="mb-3"> <!-- gestation -->    
                     <label>Age of Gestation</label>
-                    <input id="gestation" name="gestation" class="form-control mt-2 mb-2" type="text" required
+                    <input id="gestation" name="gestation" class="form-control " type="text" required
                         value="<?php echo $m_gestation?>"/> 
                 </div>
+            </div>
+            <div class="col-sm-3">
                 <div class="mb-3"> <!-- blood_pressure -->      
                     <label>Blood Pressure</label>
-                    <input id="blood_pressure" name="blood_pressure" class="form-control mt-2 mb-2" type="text" required
+                    <input id="blood_pressure" name="blood_pressure" class="form-control " type="text" required
                         value="<?php echo $m_blood_pressure?>"/> 
                 </div>
-
+              </div>
                  <!-- start -->
              
-                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
-                    <!-- Height -->
+             <div class="col-sm-4">
+                 <div class="mb-3"> 
+                    <label> Height</label> 
                   <div class="d-flex input-group">
                     <input  min='0' type="number" 
                       class="form__input form-control" id="height_ft" name="height_ft" value="<?php echo $m_height_ft?>" placeholder="Height*" required/>
@@ -252,10 +258,12 @@ include_once('../php-templates/admin-navigation-head.php');
                   <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
                   </div>
                 </div>
-              </div>
-              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
-                    Weight
-
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label> Weight</label>
                 <div class="d-flex input-group">   
                     <input value="<?php echo $m_weight?>" type="number" class="form__input form-control" id="weight" name="weight" 
                       placeholder="Weight*" required min='0'/>
@@ -263,13 +271,16 @@ include_once('../php-templates/admin-navigation-head.php');
                     <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
                   </div>
                   </div>
+                </div>
                    <!-- end -->
                 
-              
+              <div class="col-sm-4">
                 <div class="mb-3"> <!-- date -->
                     <label>Consultation Date and Time*</label> 
                     <input class="form-control option" type="datetime-local" name="date"  value="<?php echo $m_date?>" required/>
                 </div>
+            </div>
+            <div class="col-sm-4">
                 <div class=" mb-3"> <!-- nutritional_status --> 
                     <label>Nutritional Status*</label>
                     <select class="form-select" name="nutritional_status">
@@ -280,35 +291,53 @@ include_once('../php-templates/admin-navigation-head.php');
                     <option  class="option" value="Overweight" 
                         <?php echo $m_nutritional_status==="Overweight"?"selected":""?>>Overweight</option>
                     </select>
-                </div> 
+                </div>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="mb-3"> <!-- status_analysis -->     
                     <label for="status_analysis">Status Analysis</label>
                     <textarea id="status_analysis" name="status_analysis" 
                     class="form-control form-control-md w-100"><?php echo $m_status_analysis?></textarea> 
                 </div>
+            </div>
+            <div class="col-sm-6">
                 <div class="mb-3"> <!-- advice -->     
                     <label for="advice">Advice</label>
                     <textarea id="advice" name="advice" 
                     class="form-control form-control-md w-100"><?php echo $m_advice?></textarea> 
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="mb-3"> <!-- change_plan -->     
                     <label for="change_plan">Changes in Birth Plan</label>
                     <textarea id="change_plan" name="change_plan" 
                     class="form-control form-control-md w-100"><?php echo $m_change_plan?></textarea> 
                 </div>
+            </div>
+            <div class="col-sm-6">
                 <div class="mb-3">     
                     <label for="prescription">Prescription</label>
                     <!-- <input type="text" name="prescription" value="<?php echo $m_prescription?>" 
                     placeholder="Prescription"/>   -->
                     <textarea  id="prescription" name="prescription" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_prescription?></textarea>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="mb-3"> <!-- date_return -->
                     <label>Date of Return*</label> 
                     <div class="input-group date" id="datepicker_return">
                         <input class="form-control option" type="datetime-local" name="date_return" required
                             value="<?php echo $m_date_return?>"/> 
                     </div> 
-                </div>   
+                </div>  
+            </div> 
+            <div class="col-sm-6">
                 <div class=" mb-3"> <!-- apply changes to patient -->
                     <label>Apply Changes to Patient Record</label>
                     <select class="form-select" name="apply_changes">
@@ -316,7 +345,8 @@ include_once('../php-templates/admin-navigation-head.php');
                         <option  class="option" value="apply">Apply Changes to Patient Record</option>
                     </select>
                 </div> 
-                               <!-- <div class="mb-3">     
+                 </div> 
+                </div>             <!-- <div class="mb-3">     
                     <label for="treatment">Treatment</label>
                     <textarea  id="treatment" name="treatment" class="form-control form-control-md w-100" placeholder="Prescription" ><?php echo $m_treatment?></textarea>
                 </div> -->
@@ -339,20 +369,21 @@ include_once('../php-templates/admin-navigation-head.php');
                 //if ($admin==-1) { ?>  
                     <!-- <input type="file" id="treatment_file" name="treatment_file"  class="form__input"/> -->
                 <?php //}  ?> 
-            </div> 
-            <button  class=" w-100 btn btn-primary  text-capitalize" type="submit" name="submit">
+           <br>
+            <button  class=" w-20 btn-sm btn btn-primary  text-capitalize" type="submit" name="submit">
                 Update <?php echo "Consultation Record" ?>  
             </button> 
         </form> 
+        <br>
         <?php } else {   ?>
             There should be at least one patient (under your assigned barangay) available in the database.
         <?php }  ?> 
 
         </div>
         </div>  
-      </div>
+     
     </div>
-  </div>
+
 
 
 <?php 

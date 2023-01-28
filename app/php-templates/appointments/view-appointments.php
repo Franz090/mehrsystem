@@ -181,28 +181,33 @@ include_once('../php-templates/admin-navigation-head.php');
 
       <div  class="background-head row m-2 my-4">
         <br>
-        <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
-       
           <h4 class="fw-bolder"><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
-          <div style="position:relative;bottom: -68px;right:157px;">
-          <button class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
-        </div>
-        </div>
-      <div class="card-body">
-        
-       <div class="d-flex p-1 justify-content-between">
-           <select style="position:relative;left:-12px;width: 13%;padding: .275rem 1.25rem .175rem .50rem;" class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
+        <br>
+        <div class="float-start">
+        <div class="d-flex justify-content-between">
+      <div class="d-flex bd-highlight">
+         <div class="p-1 bd-highlight">
+            <button class="btn btn-sm btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button> 
+  </div>
+
+   <div class="p-1 bd-highlight">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
+  </div>
+</div>
+      <div class="float-end">
+      <div class="p-1 flex-grow-1 bd-highlight">
+           <select class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
             <option value="" hidden><?php echo $pending?'Pending':'Approved'?></option>
             <option value="Approved">Approved</option>
             <option value="Pending">Pending</option>
           </select>
- 
+        </div>
+          </div>
+  </div>
+</div>
  <!-- <a href="./<?php echo $pending?'approved':'pending'?>-appointment.php">See <?php echo $pending?'Approved':'Pending'?> Appointments</a> -->
       
-          
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
-        </div>
-  </div>
+         
  
         <div class="table-padding table-responsive mt-1 px-2">
       <?php if (count($_barangay_list)==0){
@@ -301,23 +306,22 @@ include_once('../php-templates/admin-navigation-head.php');
 </div>
 <script>
   $(document).ready( function () {
+    var url = '../controller/appointmentController.php';
+    $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu":[
-        [10, 25, 30,50, -1],
-        [10, 25, 30,50, "All"]
+        [30,50, -1],
+        [30,50, "All"]
       ],
-      responsive: true,
       destroy: true,
       fixedColumns: true,
       responsive: true,
       language:{
         search: "_INPUT_",
-        searchPlaceholder: "Search <?php echo $pending?'Pending':'Approved' ?>",
+        searchPlaceholder: "Search Appointment",
       }
     });
   } );
-
-   
 </script>
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>

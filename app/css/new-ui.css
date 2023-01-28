@@ -144,7 +144,7 @@ body {
 	width: calc(100% - 280px);
 	left: 270px;
 	min-height: 100vh;
-	background: var(--white);
+	background: #fdf8fc!important;
 	transition: 0.5s;
 }
 .main_nu.active {

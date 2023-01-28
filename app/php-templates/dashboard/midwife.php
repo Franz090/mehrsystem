@@ -194,18 +194,18 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                         <div class="modal-body rounded-0">
                             <div class="container-fluid">
                                 <dl>
-                                    <dt class="text-muted">Name</dt>
+                                    <dt class="text-primary">Name</dt>
                                     <dd id="title" class="fw-bold text-md-start fs-6"></dd>
                                     <!-- <dt class="text-muted">Description</dt> -->
                                     <!-- <dd id="description" class=""></dd> -->
-                                    <dt class="text-muted">Appointment Date and Time</dt>
+                                    <dt class="text-primary">Appointment Date and Time</dt>
                                     <dd id="start" class=""></dd> 
                                 </dl>
                         </div>
                     </div>
                 <div class="modal-footer rounded-0">
                     <div class="text-end">
-                        <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-sm rounded-2" data-bs-dismiss="modal">Close</button>
                     </div>
 
                 </div>
