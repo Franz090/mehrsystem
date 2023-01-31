@@ -23,7 +23,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4">
         <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
-            <h4 class="fw-bolder">Notifications</h4>
+            <h4 class="fw-bolder">Notification</h4>
             <?php if($notifCount) {?>
                 <button class="btn btn-primary pull-right" id="mark-all">Mark all as read</button>
             <?php } ?>

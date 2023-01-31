@@ -395,4 +395,5 @@ include_once('../php-templates/admin-navigation-tail.php');
     });
 
   });
+  
 </script>
