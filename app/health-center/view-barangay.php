@@ -78,7 +78,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title fs-5" id="exampleModalLabel">Add Barangay</h4>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Barangay</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">

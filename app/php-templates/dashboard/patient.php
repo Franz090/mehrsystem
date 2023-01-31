@@ -181,8 +181,8 @@
                   class="form-control mt-2 mb-2" name="allergies" placeholder="Allergies"/>    
                 </div>
               </div>
-      
-              <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Profile</button>
+              <br>
+              <button class="w-50 btn btn-primary  text-capitalize" type="submit" name="submit">Update Profile</button>
             </form> 
             
           </div> 

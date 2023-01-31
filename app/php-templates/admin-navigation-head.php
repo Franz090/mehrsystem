@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
   <!-- calendar  -->
-
+  
   <link rel="icon" href="../img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
 <script
@@ -26,6 +26,7 @@
     <script src="../calendar/js/jquery-3.6.0.min.js"></script>
     <script src="../calendar/js/bootstrap.min.js"></script>
     <script src="../calendar/fullcalendar/lib/main.min.js"></script>
+    
   <?php } ?>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="../css/material-design-iconic-font.css">
@@ -60,6 +61,42 @@
   <link rel="stylesheet" href="../css/theme.css"> 
   <!-- for searchable select -->
   <style> 
+  .upload{
+  width: 100px;
+  position: relative;
+  margin: auto;
+}
+.ion-cam{
+  color: #636863;
+}
+.upload img{
+  border-radius: 50%;
+  border: 6px solid #eaeaea;
+}
+
+.upload .round{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #f0eded;
+  width: 32px;
+  height: 32px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 10%;
+  overflow: hidden;
+}
+
+.upload .round input[type = "file"]{
+  position: absolute;
+  transform: scale(2);
+  opacity: 0;
+}
+
+input[type=file]::-webkit-file-upload-button{
+    cursor: pointer;
+}
+
     /* *{
       margin: 0;
       padding: 0;
