@@ -448,7 +448,7 @@ include_once('../php-templates/admin-navigation-head.php');
                             <?php if ($current_user_is_a_midwife) {?>
                               <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
                               <!-- ginawa kong comment yung update-->
-                                <button class="edit btn btn-success btn-sm btn-inverse">
+                                <button class=" btn btn-success btn-sm btn-inverse">
                                   Edit
                                 </button>
                               </a>

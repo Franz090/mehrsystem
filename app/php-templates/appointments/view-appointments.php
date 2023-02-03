@@ -124,7 +124,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Appointment</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
         <form class="m-5" action="" method="POST" id="new_appointment">
@@ -214,7 +214,7 @@ include_once('../php-templates/admin-navigation-head.php');
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
         <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
-           <table  class="text-center table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+           <table  class="text-center table mt-5  table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col" width="6%">#</th>
@@ -236,10 +236,10 @@ include_once('../php-templates/admin-navigation-head.php');
                     <tr>
                         <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                         <td class="td-bold"><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['barangay']; ?></td>
-                        <td><?php $dtf = date_create($value['date']); 
+                        <td ><?php echo $value['barangay']; ?></td>
+                        <td class="col-2"><?php $dtf = date_create($value['date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                        <td><?php echo $value['contact']; ?></td>
+                        <td class="col-2"><?php echo $value['contact']; ?></td>
                         <?php if ($value['name']=='Deleted Patient') {?>
                             <td>
                               Deleted Patient
@@ -247,7 +247,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php } else if ($pending) {?>
                           <td>
                             <!-- <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>"> -->
-                                <button class="edit btn btn-success btn-sm btn-inverse approve-appointment"
+                                <button class=" btn btn-success btn-sm btn-inverse approve-appointment col-xs-2 margin-left"
                                   data-id="<?php echo $value['a_id'] ?>" 
                                   data-date="<?php echo $value['date']; ?>" 
                                   data-patient="<?php echo $value['id']?>">
@@ -263,8 +263,12 @@ include_once('../php-templates/admin-navigation-head.php');
                                   <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a> -->
                                
                         <?php }?> 
- 
-                                  <button class="btn btn-danger btn-sm btn-inverse cancel-appointment" 
+ <style>
+  .margin-left{
+    margin-left: 5px !important;
+}
+ </style>
+                                  <button class="btn btn-outline-danger btn-sm btn-inverse cancel-appointment col-xs-2 margin-left" 
                                   data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="<?php echo $value['id']?>">
                                   Cancel 
                                   </button> 
@@ -290,14 +294,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" ">Search Available Schedule</h1>
+        <h1 class="modal-title fs-5">Search Available Schedule</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
           <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
-            <input style="width: 80%;" class="form-control option pt-1 pb-1 search_date" type="date" name="s_date" required/>
+            <input style="width:80%;"  class=" form-control-md form-control option p-2 search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="midwife">
-            <button class="btn btn-primary btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+            <button class="btn btn-primary  btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
           </form>
           <div id="available_result"></div>
         </div>

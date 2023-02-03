@@ -310,16 +310,17 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-	width: 15px;
-	height: 15px;
+	width: 15px!important;
+	height: 15px!important;
 }
 
 input[type="date"]:focus {
-	color: var(--text-primary-color);
+	color: var(--text-primary-color)!important;
 }
 
 input[type="date"] {
 	color: #757575;
+	padding-left: 19px!important;
 }
 
 #page-content-wrapper {

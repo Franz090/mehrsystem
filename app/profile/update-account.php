@@ -279,23 +279,34 @@ include_once('../php-templates/admin-navigation-head.php');
             </form>
        
             <?php if (!$current_user_is_an_admin) { ?>
-<br>
-         <div class="container-fluid d-flex justify-content-center ">
+<br><br>
+        
               <?php if ($current_user_is_a_patient) { ?>
                 <form class="form form-box  px-2 text-center" style=""  action="" method="post" enctype="multipart/form-data">
-                  <img style="border: 1px solid #e5e5e5;" class="rounded-circle" src="../img/profile/<?php echo $c_profile_picture; ?>" 
+                  <div class="upload">
+                    <img src="../img/profile/<?php echo $c_profile_picture; ?>" 
+                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width = 100 height = 100 alt="">
+                    <div class="round">
+                      <input type="file" name="profile_picture" id="profile_picture" accept="image/png, image/gif, image/jpeg" />
+                      <ion-icon name="camera"></ion-icon></ion-icon>
+                    </div>
+                  </div>
+                  <!-- <img style="border: 1px solid #e5e5e5;" class="rounded-circle" src="../img/profile/<?php echo $c_profile_picture; ?>" 
                     alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width="300" height="600">
                   <br/><br/>
                   <div class="col-md-12 justify-content-center d-flex ">
               
                   <input type="file" name="profile_picture" id="profile_picture" style="width:100%;position:relative;top: 10px;left: 40px;" size="50">
                  </div>
+
+                 <br> -->
                  <br>
-                    <button class="w-20  text-capitalize btn-danger btn" type="submit" name="submit_pic">Update Profile Picture</button>
-             
+                 <div class="col-md-12 text-center">
+                    <button class="text-capitalize btn-danger btn" type="submit" name="submit_pic">Update Profile Picture</button>
+             </div>
 
                 </form> 
-              </div>
+          
                 <hr/>
               <?php } ?>
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
