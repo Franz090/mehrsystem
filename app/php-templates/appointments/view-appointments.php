@@ -124,7 +124,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Appointment</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
         <form class="m-5" action="" method="POST" id="new_appointment">
@@ -181,35 +181,40 @@ include_once('../php-templates/admin-navigation-head.php');
 
       <div  class="background-head row m-2 my-4">
         <br>
-        <div style="display:flex; justify-content: space-between; margin-bottom: 10px;">
-       
           <h4 class="fw-bolder"><?php echo $pending?'Pending':'Approved'?> Appointments</h4>
-          <div style="position:relative;bottom: -68px;right:157px;">
-          <button class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
-        </div>
-        </div>
-      <div class="card-body">
-        
-       <div class="d-flex p-1 justify-content-between">
-           <select style="position:relative;left:-12px;width: 13%;padding: .275rem 1.25rem .175rem .50rem;" class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
+        <br>
+        <div class="float-start">
+        <div class="d-flex justify-content-between">
+      <div class="d-flex bd-highlight">
+         <div class="p-1 bd-highlight">
+            <button class="btn btn-sm btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button> 
+  </div>
+
+   <div class="p-1 bd-highlight">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
+  </div>
+</div>
+      <div class="float-end">
+      <div class="p-1 flex-grow-1 bd-highlight">
+           <select class="form-select" aria-label="Default select example" name="s01" onChange="SelectRedirect();" id="s01">
             <option value="" hidden><?php echo $pending?'Pending':'Approved'?></option>
             <option value="Approved">Approved</option>
             <option value="Pending">Pending</option>
           </select>
- 
+        </div>
+          </div>
+  </div>
+</div>
  <!-- <a href="./<?php echo $pending?'approved':'pending'?>-appointment.php">See <?php echo $pending?'Approved':'Pending'?> Appointments</a> -->
       
-          
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
-        </div>
-  </div>
+         
  
         <div class="table-padding table-responsive mt-1 px-2">
       <?php if (count($_barangay_list)==0){
         echo '<span class="">There are no barangays assigned to you.</span>';
       } else { ?> 
         <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
-           <table  class="text-center table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+           <table  class="text-center table mt-5  table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col" width="6%">#</th>
@@ -231,10 +236,10 @@ include_once('../php-templates/admin-navigation-head.php');
                     <tr>
                         <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                         <td class="td-bold"><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['barangay']; ?></td>
-                        <td><?php $dtf = date_create($value['date']); 
+                        <td ><?php echo $value['barangay']; ?></td>
+                        <td class="col-2"><?php $dtf = date_create($value['date']); 
                             echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                        <td><?php echo $value['contact']; ?></td>
+                        <td class="col-2"><?php echo $value['contact']; ?></td>
                         <?php if ($value['name']=='Deleted Patient') {?>
                             <td>
                               Deleted Patient
@@ -242,7 +247,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php } else if ($pending) {?>
                           <td>
                             <!-- <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>"> -->
-                                <button class="edit btn btn-success btn-sm btn-inverse approve-appointment"
+                                <button class=" btn btn-primary mt-3 btn-sm btn-inverse approve-appointment col-xs-2 margin-left"
                                   data-id="<?php echo $value['a_id'] ?>" 
                                   data-date="<?php echo $value['date']; ?>" 
                                   data-patient="<?php echo $value['id']?>">
@@ -258,8 +263,12 @@ include_once('../php-templates/admin-navigation-head.php');
                                   <button class="edit btn btn-primary btn-sm btn-inverse">View Report</button></a> -->
                                
                         <?php }?> 
- 
-                                  <button class="btn btn-danger btn-sm btn-inverse cancel-appointment" 
+ <style>
+  .margin-left{
+    margin-left: 5px !important;
+}
+ </style>
+                                  <button class="btn btn-danger btn-sm btn-inverse mt-3 cancel-appointment col-xs-2 margin-left" 
                                   data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="<?php echo $value['id']?>">
                                   Cancel 
                                   </button> 
@@ -285,14 +294,14 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" ">Search Available Schedule</h1>
+        <h1 class="modal-title fs-5">Search Available Schedule</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
           <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
-            <input style="width: 80%;" class="form-control option pt-1 pb-1 search_date" type="date" name="s_date" required/>
+            <input style="width:80%;"  class=" form-control-md form-control option p-2 search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="midwife">
-            <button class="btn btn-primary btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+            <button class="btn btn-primary  btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
           </form>
           <div id="available_result"></div>
         </div>
@@ -301,23 +310,22 @@ include_once('../php-templates/admin-navigation-head.php');
 </div>
 <script>
   $(document).ready( function () {
+    var url = '../controller/appointmentController.php';
+    $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu":[
-        [10, 25, 30,50, -1],
-        [10, 25, 30,50, "All"]
+        [30,50, -1],
+        [30,50, "All"]
       ],
-      responsive: true,
       destroy: true,
       fixedColumns: true,
       responsive: true,
       language:{
         search: "_INPUT_",
-        searchPlaceholder: "Search <?php echo $pending?'Pending':'Approved' ?>",
+        searchPlaceholder: "Search Appointment",
       }
     });
   } );
-
-   
 </script>
 <!-- js file to sa option dropdown dun sa dropdown na may nakalagay na pending at approved -->
 <script src="../js/option-dropdown.js"></script>
@@ -387,4 +395,5 @@ include_once('../php-templates/admin-navigation-tail.php');
     });
 
   });
+  
 </script>

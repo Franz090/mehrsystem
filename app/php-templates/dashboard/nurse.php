@@ -93,6 +93,8 @@ if ($admin==1) { //closing bracket at the end of the file
         $error = 'Something went wrong fetching data from the database.'; 
     }   
 
+    // fetch patient count
+
     // infant vax  
     $infant_vax_records = [];
     $sql_all_records = "SELECT COUNT(ivr.infant_vac_rec_id) c, type FROM infant_vac_records ivr GROUP BY type";
@@ -183,6 +185,145 @@ if ($admin==1) { //closing bracket at the end of the file
        
     </div> 
 
+
+    <!-- Chart of report -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartBox {
+        width: 700px;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px rgba(54, 162, 235, 1);
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chartMenu">
+    </div>
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+        Start : <input type="date"> End: <input type="date">
+        <button onclick="filterDate()">Filter</button> <br>
+        <button onclick="resetDate()">Reset</button> <br>
+        <button onclick="timeFrame(this)" value = "day">Day</button>
+        <button onclick="timeFrame(this)" value = "week">Week</button>
+        <button onclick="timeFrame(this)" value = "month">Month</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <script>
+
+    const day = [
+        {x: Date.parse('2021-11-01 00:00:00 GMT+0800'), y: 18 },
+        {x: Date.parse('2021-11-02 00:00:00 GMT+0800'), y: 12 },
+        {x: Date.parse('2021-11-03 00:00:00 GMT+0800'), y: 16 },
+        {x: Date.parse('2021-11-04 00:00:00 GMT+0800'), y: 9 },
+        {x: Date.parse('2021-11-05 00:00:00 GMT+0800'), y: 12 },
+        {x: Date.parse('2021-11-06 00:00:00 GMT+0800'), y: 3 },
+        {x: Date.parse('2021-11-07 00:00:00 GMT+0800'), y: 9 },
+    ];
+
+    const week = [
+        {x: Date.parse('2021-10-31 00:00:00 GMT+0800'), y: 50 },
+        {x: Date.parse('2021-11-7 00:00:00 GMT+0800'), y: 70 },
+        {x: Date.parse('2021-11-14 00:00:00 GMT+0800'), y: 100 },
+        {x: Date.parse('2021-11-21 00:00:00 GMT+0800'), y: 60 },
+        {x: Date.parse('2021-11-28 00:00:00 GMT+0800'), y: 30 },
+    ];
+
+    const month = [
+        {x: Date.parse('2021-8-1 00:00:00 GMT+0800'), y: 500 },
+        {x: Date.parse('2021-9-1 00:00:00 GMT+0800'), y: 700 },
+        {x: Date.parse('2021-10-1 00:00:00 GMT+0800'), y: 500 },
+        {x: Date.parse('2021-11-1 00:00:00 GMT+0800'), y: 600 },
+        {x: Date.parse('2021-12-1 00:00:00 GMT+0800'), y: 300 },
+    ];
+    // setup 
+    const data = {
+      // labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Monthly Report',
+        data: day,
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
+            },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    function timeFrame(period){
+        console.log(period.value)
+        if (period.value == 'day'){
+            myChart.config.options.scales.x.time.unit = period.value;
+            myChart.config.data.datasets[0].data = day;
+        }
+        if (period.value == 'week'){
+            myChart.config.options.scales.x.time.unit = period.value;
+            myChart.config.data.datasets[0].data = week;
+        }
+        if (period.value == 'month'){
+            myChart.config.options.scales.x.time.unit = period.value;
+            myChart.config.data.datasets[0].data = month;
+        }
+        myChart.update();
+    }
+    </script>
+
+  </body>
+    
    
     <!-- chart => https://www.chartjs.org/ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>

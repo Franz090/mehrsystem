@@ -160,26 +160,19 @@ include_once('../php-templates/admin-navigation-head.php');
           else   {
         ?> 
               
-          <div class="col-md-8 col-lg-5">   
-                <form class="form form-box px-3 py-5" action="" method="post">
-                   <style type="text/css">
-    form {
-        text-align: center;
-    }
-    input {
-        width: 0px;
-    }
-    </style>
+          <br>
+                <form class="form form-box" action="" method="post">
                   <?php 
                     if (isset($error))  
                       echo '<span class="form__input-error-message">'.$error.'</span>'; 
                   ?>  
-                  <!-- <div class="form__input-group">
-                    <div class="form__text"><label>Medical History</label></div>
-                  </div> -->
-<!--                
-                  <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
-                    Height
+                 <div class="text-center col-md-12">
+                  <label class="text" style="font-weight: bold;color:#352e35;">Medical History</label>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                   <div class="mb-3">
+                    <label>Height</label> 
                   <div class="d-flex input-group">
                     <input value="<?php echo $c_height_ft?>" min='0' type="number" 
                       class="form__input form-control" name="height_ft" placeholder="Feet*" required/>
@@ -194,54 +187,69 @@ include_once('../php-templates/admin-navigation-head.php');
                   <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
                   </div>
                 </div>
-              </div>
-            <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
-                    Weight
-
+            </div>
+          </div>
+          <div class="col-sm-4">
+               <div class="mb-3">
+                    <label>Weight</label> 
                 <div class="d-flex input-group">   
                     <input value="<?php echo $c_weight?>" type="number" class="form__input form-control" name="weight" 
                       placeholder="Weight*" required min='0'/>
                       <div class="input-group-postpend">
                     <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
                   </div>
-                
-                    </div><br>
-                    Civil Status
-                   <div class="form-floating mb-3">
+                </div>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <label>Civil Status</label>
+                   <div class=" mb-3">
                     <input value="<?php echo $c_civil_status?>" type="text" 
-                     class="form-control" id="floatingInputInvalid" name="civil_status" placeholder="Civil Status"/>
-                     <label for="floatingInput">Civil Status</label>
+                     class="form-control" name="civil_status" placeholder="Civil Status"/>
+                     </div>
                   </div>
-                   Blood Type
-                    <div class="form-floating mb-3">  
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                  <label>Blood Type</label>
+                    <div class=" mb-3">  
                     <input value="<?php echo $c_blood_type?>" type="text" 
-                         class="form-control" id="floatingInputInvalid"  name="blood_type" placeholder="Blood Type"/>
-                         <label for="floatingInput">Blood Type</label>
-                  </div> 
-                  Diagnosed Condition  
-                   <div class="form-floating mb-3"> 
+                         class="form-control"  name="blood_type" placeholder="Blood Type"/>
+                         </div>
+                  </div>
+                  <div class="col-md-4">
+                  <div class="mb-3">  
+                 <label>Diagnosed Condition</label>
                     <input value="<?php echo $c_diagnosed_condition?>" type="text" class="form-control" id="floatingInputInvalid"   name="diagnosed_condition" placeholder="Diagnosed Condition" />
-                     <label for="floatingInput">Diagnosed Condition</label>
                   </div>
-                  Family History
-                   <div class="form-floating mb-3">   
+                </div>
+                <div class="col-md-4">
+                   <div class=" mb-3">
+                     <label>Family History</label>   
                     <input value="<?php echo $c_family_history?>" type="text" 
-                      class="form-control" id="floatingInputInvalid" name="family_history" placeholder="Family History" />
-                        <label for="floatingInput">Family History</label>
+                      class="form-control"  name="family_history" placeholder="Family History" />
+                       </div>
                   </div>
-                   Allergies
-                  <div class="form-floating mb-3"> 
+                </div>
+                <div class="row">
+                <div class="col-md-4">
+                 <label>Allergies</label> 
+                  <div class="mb-3"> 
                     <input value="<?php echo $c_allergies?>" type="text" 
-                      class="form-control" id="floatingInputInvalid"  name="allergies" placeholder="Allergies" />   
-                       <label for="floatingInput">Allergies</label> 
-                  </div> -->
+                      class="form-control"  name="allergies" placeholder="Allergies" />   
+                      </div>
+                  </div> 
+                  <div class="col-md-4">
                   <div class=" mb-3">
                       <label>Tetanus Toxoid Vaccinated</label>
                       <select class="form-select " name="tetanus">
                         <option class="option" value="0" <?php echo $c_tetanus==0?'selected':''?> >Unvaccinated</option>
                         <option class="option" value="1" <?php echo $c_tetanus==1?'selected':''?> >Vaccinated</option> 
                       </select>
-                  </div> 
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class=" mb-3">
                       <label>Nth Trimester</label>
                       <select class="form-select" name="trimester" disabled>
@@ -251,8 +259,14 @@ include_once('../php-templates/admin-navigation-head.php');
                         <option  class="option" value="3" <?php echo $c_trimester==3?'selected':''?>>3rd (28-42 weeks)</option>
                       </select>
                   </div> 
-                  <button  class="w-100 btn  text-capitalize" type="submit" name="submit">Update Patient Record</button> 
+                </div>
+              </div>
+           
+                <div class="col-md-12 text-center">
+                  <button  class="w-40 btn-sm btn  btn-primary text-capitalize" type="submit" name="submit">Update Patient Record</button>
+                </div> 
                 </form> 
+                <br>
               </div>
             </div>
         <?php

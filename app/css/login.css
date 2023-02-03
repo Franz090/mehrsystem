@@ -131,12 +131,13 @@ body{
   color: var(--color-primary);
   font-size: 15px;
  
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .register-link{
   color: var(--color-primary);
   font-size: 15px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto",
+    sans-serif;
 
 }
 
@@ -157,17 +158,20 @@ body{
 .form__input-error-message {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto",
+    sans-serif;
   color: var(--color-error-dark);
 }
-h4{font-family: 'Roboto', sans-serif; 
+h4{font-family: "Roboto",
+  sans-serif;
 }
 .bi-eye-slash{
   color: rgb(35, 67, 71);
 
 }
 .have-account{
-    font-family: 'Open Sans', sans-serif;
+    font-family:"Roboto",
+      sans-serif;
     color: var(--text-primary-color);
     font-size: 15px;
 }

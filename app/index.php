@@ -121,7 +121,7 @@ include_once('php-templates/css/black-bg-remover.php');
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
         <div class="card-body ">
-          <h4 class="title text-center mt-4" style="color: #808080;">
+          <h4 class="title text-center mt-4">
             Login 
           </h4>
             <form class="form form-box px-3" id="login" action="" method="post">
@@ -132,16 +132,17 @@ include_once('php-templates/css/black-bg-remover.php');
             ?> 
             </div>
              <div class="form-input-group mb-3">
-              <input type="email"  class="rounded form-control form-control-md pb-2 pt-2" id="exampleInputEmail1" name="usermail" autofocus placeholder="Email Address" tabindex="10" required>
+              <input type="email"  class=" form-control form-control-md pb-2 pt-2" name="usermail" autofocus placeholder="Email Address" tabindex="10" required>
             </div>
             <div class="form-input-group">
-              <input type="password" name="password" id="id_password"  autocomplete="current-password" class="rounded form-control form-control-md pb-2 pt-2" placeholder="Password" required>
+              <input type="password" name="password" id="id_password"  autocomplete="current-password" class=" form-control form-control-md pb-2 pt-2" placeholder="Password" required>
               <i class="bi bi-eye-slash" id="togglePassword" style="position:relative;bottom:34px;margin-top: 220px;margin-left: 360px; cursor: pointer;"></i>
            </div>
             <div class="mt-1">
-              <button type="submit" name="submit"  style="position:relative;bottom: 20px;" class="btn btn-primary w-100 btn text-capitalize btn-primary-md">
+              <button type="submit" name="submit"  style="position:relative;bottom: 20px;" class="btn btn-primary btn-lg text-capitalize w-100  ">
                 Log In
               </button>
+              
 </div> 
             <div class="text-center">
               <a href="reset-password.php" class=" text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;">

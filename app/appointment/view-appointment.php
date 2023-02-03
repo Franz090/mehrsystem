@@ -114,25 +114,17 @@ include_once('../php-templates/admin-navigation-head.php');
 <!-- End Modal -->
 
     <div class="container-fluid default">
-      <div class="background-head row m-2 my-4">
-      <div class="d-flex">
-        <div >
-          <br>
-          <h4 class="fw-bolder ">Appointments</h4>
-          <br>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12 text-end mb-3" style="position:relative;top: 65px;">
-              <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
-            </div>
-          </div>
-        </div>
-        </div>
+      <div class="background-head row m-2 my-4"><br>    
+          <h4 class="fw-bolder ">Appointments</h4><br>
+      <div class="d-flex justify-content-between">
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
+    
+              <button class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
+           
+    </div>
         <div class="table-padding table-responsive mt-1 px-2">
-          <div class="col-md-8 col-lg-12" id="table-position">
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+          <div class="col-md-8 col-lg-12 pagination-sm" id="table-position">
+            <table class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
               <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-1">#</th>

@@ -78,15 +78,16 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title fs-5" id="exampleModalLabel">Add Barangay</h4>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Barangay</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
         <form class="m-3" action="" method="POST" id="add_barangay_form">
             
-          <div class="form-floating">
+          <div >
+             <label>Barangay Health Center</label>
             <input type="text" class="form-control" name="health_center"  placeholder="Barangay Health Center" id="floatingPassword"  >
-             <label for="floatingPassword">Barangay Health Center</label>
+            
           </div> 
         </form>
       </div>
@@ -100,22 +101,19 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-12 text-end mb-3">
-            <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
-          </div>
+   
+  <div class="d-flex align-items-start">
+            <button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
         </div>
-      </div>
     
-      <div style="position:relative;bottom: 35px;" class="table-padding table-responsive mt-1 px-2">
+      <div  class="table-padding table-responsive mt-1 px-2">
           <div class="col-md-8 col-lg-12 " id="table-position">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-            <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <table  class="text-center  table mt-5  table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>

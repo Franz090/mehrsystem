@@ -1,21 +1,21 @@
 .container {
 
-	font-family: 'Open Sans',
-		sans-serif;
+	font-family: "Roboto",
+			sans-serif;
 	min-height: 800px;
 
 }
 
 .container-fluid {
-	font-family: 'Open Sans',
+	font-family: "Roboto",
 		sans-serif;
 
 
 }
 
 body {
-	font-family: 'Open Sans',
-		sans-serif;
+	font-family: "Roboto",
+			sans-serif;
 	--color-error: #cc3333;
 	--color-primary: #2a8ad8;
 	--color-white: #FBFDFC;
@@ -143,8 +143,8 @@ body {
 	text-align: center;
 } */
 form {
-	font-family: 'Open Sans',
-		sans-serif;
+	font-family: "Roboto",
+			sans-serif;
 	color: var(--text-primary-color);
 	position: relative;
 	bottom: 10px;
@@ -154,9 +154,8 @@ form {
 .form-input {
 	position: relative;
 
-	font-family: 'Open Sans',
-		sans-serif;
-
+	font-family: "Roboto",
+			sans-serif;
 }
 
 .form-input input {
@@ -235,26 +234,27 @@ textarea:focus::placeholder {
 	outline: none;
 	background: #FBFDFC;
 	transition: -1s ease-in;
-	font-family: 'Open Sans',
-		sans-serif;
+	font-family: "Roboto",
+			sans-serif;
 }
 
 .form-select select:focus {
 	background: #fafcfb;
-	font-family: 'Open Sans', sans-serif;
+font-family: "Roboto",
+		sans-serif;
 	font-size: 16px;
 }
 
 .form-select select::placeholder {
 	/* color: black; */
 	padding-left: 0px;
-	font-family: 'Open Sans',
+font-family: "Roboto",
 		sans-serif;
 }
 
 .form_select-group .form_input-group .form_textarea-group {
 	margin-bottom: 1rem;
-	font-family: 'Open Sans',
+font-family: "Roboto",
 		sans-serif;
 }
 
@@ -310,16 +310,17 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-	width: 15px;
-	height: 15px;
+	width: 15px!important;
+	height: 15px!important;
 }
 
 input[type="date"]:focus {
-	color: var(--text-primary-color);
+	color: var(--text-primary-color)!important;
 }
 
 input[type="date"] {
 	color: #757575;
+	padding-left: 19px!important;
 }
 
 #page-content-wrapper {
@@ -330,7 +331,8 @@ td {
 	font-weight: 500;
 	font-size: 15px;
 	line-height: 2;
-	font-family: "Open Sans", sans-serif;
+font-family: "Roboto",
+		sans-serif;
 }
 
 
@@ -354,7 +356,8 @@ h3 {
 }
 
 label {
-	font-family: "Open Sans",sans-serif
+	font-family: "Roboto",
+			sans-serif;
 }
 
 .sidebar {
@@ -363,8 +366,9 @@ label {
 
 #weight-height {
 	background: var(--main-bg-success);
-	font-family: 'Open Sans',
-		sans-serif;
+	font-family: "Roboto",
+			sans-serif;
+	
 	height: 100%;
 	font-weight: 400;
 }

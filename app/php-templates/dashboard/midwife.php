@@ -135,11 +135,12 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
         <div class="container-fluid" id="page-container">
             <div class="row" style="width:100%;">
                 <div class="calendarBox"> 
-                    <h2 class="text-main">Appointment Schedule</h2>
+                 
                     <div class="box">
-                        <h6 class="text-center">Calendar</h6>
+                        <h6 class="text-center"> Appointment Schedule Calendar</h6><br>
                         <div id="calendar"></div>
-                    </div> 
+                        
+             
                     <!-- <div class="col-md-3">
                         <div class="cardt rounded-0 shadow">
                             <div class="card-header bg-gradient bg-primary text-light">
@@ -189,23 +190,23 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content rounded-0">
                         <div class="modal-header rounded-0">
-                            <h5 class="modal-title">Appointment</h5> 
+                            <h5 class="modal-title fs-5">Appointment</h5> 
                         </div>
                         <div class="modal-body rounded-0">
                             <div class="container-fluid">
                                 <dl>
-                                    <dt class="text-muted">Name</dt>
-                                    <dd id="title" class="fw-bold text-md-start fs-6"></dd>
+                                    <dt >Name</dt>
+                                    <dd id="title" class="text-md-start fs-6"></dd>
                                     <!-- <dt class="text-muted">Description</dt> -->
                                     <!-- <dd id="description" class=""></dd> -->
-                                    <dt class="text-muted">Appointment Date and Time</dt>
-                                    <dd id="start" class=""></dd> 
+                                    <dt >Appointment Date and Time</dt>
+                                    <dd id="start" class="text-md-start fs-6"></dd> 
                                 </dl>
                         </div>
                     </div>
                 <div class="modal-footer rounded-0">
                     <div class="text-end">
-                        <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-sm " data-bs-dismiss="modal">Close</button>
                     </div>
 
                 </div>

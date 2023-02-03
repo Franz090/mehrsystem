@@ -110,10 +110,10 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4">
-        <h6 class="pb-3 m-3 fw-bolder">Vaccinations of <em><?php echo $infant_name ?></em></h6>
+        <h4 class="pb-3 m-3 fw-bolder">Vaccinations of <em ><?php echo $infant_name ?></em></h4>
         <div class="table-padding table-responsive">
           <div class="col-md-8 col-lg-12" id="table-position">
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <table class="text-center  table mt-5  table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3"> 
                 <tr>
                     <th scope="col" class="col-sm-1">#</th>

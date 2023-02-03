@@ -15,7 +15,7 @@ table.dataTable td.dt-control:before {
 	box-sizing: content-box;
 	text-align: center;
 	text-indent: 0 !important;
-	font-family: "Open Sans",sans-serif;
+	font-family: "Roboto",sans-serif;
 	line-height: 1em;
 	content: "+";
 	background-color: #31b131;
@@ -242,7 +242,7 @@ table.dataTable th.dt-center,
 table.dataTable td.dt-center,
 table.dataTable td.dataTables_empty { 
 	text-align: center;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Roboto", sans-serif;
  
 }
 
@@ -351,7 +351,7 @@ table.dataTable th {
 table.dataTable td.dataTables_empty,
 table.dataTable th.dataTables_empty { 
 	text-align: center;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Roboto", sans-serif;
 	color: #302f34; 
 }
 
@@ -393,7 +393,7 @@ div.dataTables_wrapper div.dataTables_length label {
 	font-weight: 200;
 	text-align: left;
 	white-space: nowrap;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Roboto", sans-serif;
 	color: #352e35!important;
 	font-size: 15px;
 	clear: both; 
@@ -412,7 +412,7 @@ div.dataTables_length:focus {
 div.dataTables_wrapper div.dataTables_length select {
 	width: auto;
 	display: inline-block;
-	font-family: 'Open Sans',
+	font-family:"Roboto",
 		sans-serif;
     padding-top: 3px!important;
 	padding-bottom: 3px !important;
@@ -432,7 +432,7 @@ div.dataTables_wrapper div.dataTables_info {
 	clear: both;
 	float: left;
 	padding-top: 0.755em;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-weight: 200;
 	font-size: 16px;
 	color: #352e35; 

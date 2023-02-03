@@ -99,7 +99,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient</h4>
         <div class="table-padding table-responsive">
           <div class="pagination-sm col-md-8 col-lg-12" id="table-position">
-           <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+           <table class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                 <th scope="col" >#</th>
@@ -136,7 +136,7 @@ include_once('../php-templates/admin-navigation-head.php');
                                   <button type="button" class="mb-2 btn btn-primary btn-sm btn-inverse">
                                     Approve</button></a>  
                                <a href="reject-patient.php?id=<?php echo $value['id'] ?>" onclick="return confirm('Are you sure? Do you want to reject this patient?')">  
-                                  <button type="button" class="mb-2 btn btn-danger btn-sm btn-inverse">
+                                  <button type="button" class="mb-2 btn btn-outline-danger btn-sm btn-inverse">
                                     Reject</button></a>  
 
                               <?php } else { ?>
@@ -174,8 +174,8 @@ include_once('../php-templates/admin-navigation-head.php');
         $('#datatables').DataTable({
           "pagingType": "full_numbers",
           "lengthMenu":[
-            [10, 25, 30,50, -1],
-            [10, 25, 30,50, "All"]
+            [30,50, -1],
+            [30,50, "All"]
           ],
           destroy: true,
           fixedColumns: true,

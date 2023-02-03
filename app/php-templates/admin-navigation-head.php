@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
   <!-- calendar  -->
-
+  
   <link rel="icon" href="../img/rhu-logo.png" type="image/icon type" sizes="16x16 32x32">
   <!-- <link rel="stylesheet" href="../../css/main.css"> -->
 <script
@@ -26,6 +26,7 @@
     <script src="../calendar/js/jquery-3.6.0.min.js"></script>
     <script src="../calendar/js/bootstrap.min.js"></script>
     <script src="../calendar/fullcalendar/lib/main.min.js"></script>
+    
   <?php } ?>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="../css/material-design-iconic-font.css">
@@ -55,11 +56,58 @@
  <!-- icon frameworks go to https://ionic.io/ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+
 
   <?php //echo isset($additional_script) ? $additional_script : ''; ?>
   <link rel="stylesheet" href="../css/theme.css"> 
   <!-- for searchable select -->
   <style> 
+  .upload{
+  width: 110px;
+  position: relative;
+  margin: auto;
+}
+.ion-cam{
+  color: #636863;
+}
+.upload img{
+  border-radius: 50%;
+  border: 3px solid #eaeaea;
+
+}
+.upload > img{
+  width: 170px;
+  height: 160px;
+  position:relative;
+  right:20px;
+}
+
+.upload .round{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 1px solid #eaeaea;
+  background: #fefefe;
+  width: 32px;
+  height: 32px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 10%;
+  overflow: hidden;
+   border-radius: 1.5rem;
+}
+
+.upload .round input[type = "file"]{
+  position: absolute;
+  transform: scale(2);
+  opacity: 0;
+}
+
+input[type=file]::-webkit-file-upload-button{
+    cursor: pointer;
+}
+
     /* *{
       margin: 0;
       padding: 0;
@@ -83,14 +131,15 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
+    color: #495057;
+    background-color: #f0eded;
+
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right .75rem center;
     background-size: 16px 12px;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
+    border: none;
+    border-radius: .23rem;
     appearance: none;
     font-family: "Open Sans", sans-serif;
     }
@@ -98,7 +147,7 @@
     .select-btn_ss:active{
     border-color: #81cbb8!important;
     outline: 0!important;
-    box-shadow: 0 0 0 .25rem rgba(2, 150, 112, 0.25)!important;
+   box-shadow: none;
 }
 
  
@@ -278,7 +327,64 @@
     .search_ss1 input::placeholder{
       color: #bfbfbf;
     }
+
+
     
+    /* add infant vaccination */
+    .content_ss2{
+      display: none;
+      position: absolute;
+      z-index: 1;
+      padding: 20px;
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      
+      bottom:120px;
+      border: 1px solid #dee2e6;      
+    }
+    .wrapper_ss.active .content_ss2{
+      display: block;
+      
+    }
+    .content_ss2 .search_ss2{
+      position: relative;
+    }
+     .content_ss2 .options_ss{
+      margin-top: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 7px;
+      font-family: "Open sans",sans-serif;
+      height: 110px;
+      overflow:scroll;
+      scrollbar-width: none;
+     -ms-overflow-style: none;
+    }
+    .content_ss2 .options_ss::-webkit-scrollbar {
+      display: none;
+      overflow: hidden;
+    }
+     .search_ss2 input{
+    
+      outline: none;
+      padding: 0 20px 0 43px;
+      border: 1px solid #dbdcdc;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      padding-right: 10px;
+    }
+    .search_ss2 input:focus{
+      padding-left: 42px;
+      border: 1px solid #B3B3B3;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+    .search_ss2 input::placeholder{
+      color: #bfbfbf;
+    }
     @media only screen and (max-width: 600px) {
   .content_ss1 {
     width: auto;

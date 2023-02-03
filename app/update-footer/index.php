@@ -100,14 +100,7 @@ $conn->close();
 $page = 'update_footer';
 include_once('../php-templates/admin-navigation-head.php');
 ?>
-<style>
-    .text_area {
-        width: 100%;
-        height: 100px;
-        border-radius: 5px;
-        padding: 1rem;
-    }
-</style>
+
 <?php if (isset($_GET['updated']) && $_GET['updated'] && (!isset($error) || $error=='')) { echo "<script>alert('Footer Updated!');</script>";}?>
 <div class="container_nu"> 
   <!-- Sidebar -->
@@ -117,7 +110,7 @@ include_once('../php-templates/admin-navigation-head.php');
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
 
     <div class="container-fluid">
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Contact Information:</h4>
+      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Contact Information</h4>
         <div class="container default table-responsive p-4">
           <div class="col-md-8 col-lg-5 ">
         <form class="form form-box px-3" style="padding-top: 100px;position:relative;bottom: 90px;" action="" method="post">
@@ -125,32 +118,34 @@ include_once('../php-templates/admin-navigation-head.php');
                 if(isset($error)) 
                     echo '<span class="form__input-error-message">'.$error.'</span><br/>'; 
             ?> 
-            <div  class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInputInvalid" name="email" value="<?php echo $c_email?>"
+            <label>Email</label>
+            <div  class="mb-3">
+                <input type="email" class="form-control" name="email" value="<?php echo $c_email?>"
                 placeholder="Email" /> 
-                <label for="floatingInput">Email</label>
+                
             </div>
-            Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*<br/>
-            <div class="form-floating mb-3">
+           <label> Mobile Number(s): *Separate each with a nextline and use this format: 09XX-XXX-XXXX*</label><br/>
+            <div class="mb-3">
                 <textarea  class="form-control" placeholder="Mobile Number" id="floatingTextarea2" name="contact"><?php echo ($c_contact_num)?></textarea> 
-                <label for="floatingTextarea2">Mobile Number</label>
+                
             </div>
-            Address:
-            <div class="form-floating mb-3"> 
+            <label >Address</label>
+            <div class="mb-3"> 
                 <textarea name="address" class="form-control" placeholder="Address" id="floatingTextarea2"><?php echo $c_address?></textarea> 
-                 <label for="floatingTextarea2">Address</label>
+                
             </div>
-            Schedule:
-            <div class="form-floating mb-3"> 
+           
+            <label>Schedule</label>
+            <div class="mb-3"> 
                 <textarea name="schedule" class="form-control" placeholder="Schedule" id="floatingTextarea2"><?php echo $c_schedule?></textarea> 
-                 <label for="floatingTextarea2">Schedule</label>
+                 
             </div> 
-            Facebook:
-            <div class="form-floating mb-3"> 
-                <input type="text" class="form-control" id="floatingInputInvalid"  name="fb_link" value="<?php echo $c_fb_link?>" placeholder="Facebook Link" /> 
-                <label for="floatingInput">Facebook</label>
+           <label >Facebook</label>
+            <div class="mb-3"> 
+                <input type="text" class="form-control" name="fb_link" value="<?php echo $c_fb_link?>" placeholder="Facebook Link" /> 
+                
             </div> 
-          <button class="w-100 btn  text-capitalize" type="submit" name="submit">Update Footer</button>
+          <button class="w-40 btn-primary btn  text-capitalize" type="submit" name="submit">Update Footer</button>
         </form> 
       </div>
     </div>

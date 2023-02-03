@@ -18,7 +18,7 @@ $select = "SELECT  u.user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
-  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, profile_picture 
+  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, family_history,profile_picture 
   FROM users as u, user_details as d, barangays as b, patient_details as m
   WHERE u.user_id=$id_from_get AND d.user_id=u.user_id 
     AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id AND b.archived=0 $midwife_sql";
@@ -29,11 +29,11 @@ if($result = mysqli_query($conn, $select))  {
     header('location: ../'); 
   }
   foreach($result as $row)  {
-    $id = $row['user_id'];  
+    $user_id = $row['user_id'];  
     $name = $row['name'];  
     $e = $row['email'];  
     $s = $row['tetanus']; 
-    $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$id AND type=1";
+    $select_c_no = "SELECT mobile_number FROM contacts WHERE owner_id=$user_id AND type=1";
     if ($result_c_no = mysqli_query($conn, $select_c_no)) {
       $c_no = '';
       foreach ($result_c_no as $row2) {
@@ -46,7 +46,8 @@ if($result = mysqli_query($conn, $select))  {
     $height = $row['height'];   
     $weight = $row['weight'];   
     $blood_type = $row['blood_type'];   
-    $diagnosed_condition = $row['diagnosed_condition'];   
+    $diagnosed_condition = $row['diagnosed_condition']; 
+    $c_family_history = $row['family_history']==null?'':$row['family_history']; 
     $allergies = $row['allergies'];  
     $profile_picture = $row['profile_picture']==null?'default.png':$row['profile_picture'];   
   } 
@@ -64,7 +65,7 @@ $appointments_list = [];
 // fetch patient appointments 
 $select2_a = "SELECT a.date a_date, trimester
   FROM appointments a
-  WHERE $id=a.patient_id AND a.status=1 $date
+  WHERE $user_id=a.patient_id AND a.status=1 $date
   ORDER BY a.date $order";
 
 // echo $select2_a;  
@@ -91,7 +92,7 @@ $select2_b = "SELECT c.date, prescription, consultation_id id, gestation, blood_
   height_in, nutritional_status, status_analysis, advice, change_plan, date_return,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
    trimester
-  FROM (SELECT * FROM consultations WHERE $id=patient_id ORDER BY date DESC) c 
+  FROM (SELECT * FROM consultations WHERE $user_id=patient_id ORDER BY date DESC) c 
   LEFT JOIN users u
     ON u.user_id=c.midwife_appointed
   LEFT JOIN user_details d
@@ -147,6 +148,7 @@ else  {
 $conn->close(); 
 
 $page = 'med_patient';
+
 include_once('../php-templates/admin-navigation-head.php');
 ?>
 
@@ -177,10 +179,12 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="default table-responsive">
           <div class="col-md-8 col-lg-12 ">
             <div>
-              <img src="../img/profile/<?php echo $profile_picture; ?>" 
+              <div class="container-fluid d-flex justify-content-center ">
+              <img class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
                 alt="<?php echo $name; ?>" width="500" height="600">
+        </div>
             </div>
-            <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
+            <table class="table mt-4 table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">
                 <tr>
                   <th scope="col">Patient Profile </th>
@@ -212,7 +216,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tr>
               </tbody>
             </table>  
-            <table class="table mt-4 table-striped table-bordered table-responsive table-lg  table-hover display">
+            <table class="table mt-4 table-responsive table-lg  table-hover display">
               <thead class="table-light text-center" colspan="3">
                 <tr>
                   <th scope="col">Patient Medical History </th>
@@ -234,11 +238,13 @@ include_once('../php-templates/admin-navigation-head.php');
                 <tr  class="row col-xs-3 col-md-12 col-centered">
                   <td  class="col-md-3 fw-bold">Blood Type</td>
                   <td class="col-md-3"><?php echo $blood_type ?></td> 
+                    <td  class="col-md-3 fw-bold">Family History</td>
+              <td class="col-md-3"><?php echo $c_family_history ?></td> 
                 <tr>
               </tbody>
             </table> 
             <?php if (!$current_user_is_an_admin) {?>
-              <table class="table mt-4 table-striped table-responsive table-lg  table-hover display">
+              <table class="table mt-4  table-lg  table-hover display">
                 <thead class="table-light text-center" colspan="3">
                   <tr>
                     <th scope="col"><?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?></th>
@@ -321,7 +327,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 </tbody>
               </table> 
            
-              <table class="table mt-4 table-bordered table-striped table-responsive table-lg  table-hover display">
+              <table class="table mt-4  table-responsive table-lg  table-hover display">
                 <thead class="table-light text-center" colspan="3">
                   <tr> <th scope="col">Consultation Records</th> </tr>
                 </thead>
@@ -473,7 +479,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <?php }?> 
             <!-- nag add ako ng print button dito -->
             <div class="col-md-12 text-center">
-            <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
+            <a href='print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
           </div>
           <br>
       <?php
