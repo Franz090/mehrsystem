@@ -74,14 +74,12 @@
       $this->Cell(50,10,"MEHR",0,1);
       $this->SetFont('Arial','',14);
       $this->Cell(50,7,"Sta. Cruz, Laguna",0,1);
-      $this->Cell(50,7,"1003",0,1);
-      $this->Cell(50,7,"PH : 8778731770",0,1);
       
       //Display INVOICE text
       $this->SetY(15);
-      $this->SetX(-40);
+      $this->SetX(-70);
       $this->SetFont('Arial','B',18);
-      $this->Cell(50,10,"INVOICE",0,1);
+      $this->Cell(50,10,"MEDICAL RECEIPT",0,1);
       
       //Display Horizontal line
       $this->Line(0,48,210,48);
@@ -101,15 +99,15 @@
       //Display Invoice no
       
       $this->SetY(55);
-      $this->SetX(-60);
+      $this->SetX(-70);
       $this->SetFont('Arial','B',12);
       $this->Cell(50,7,"Midwife: ".$info["midwife"]);
       
       //Display Invoice date
       $this->SetFont('Arial','',12);
       $this->SetY(63);
-      $this->SetX(-60);
-      $this->Cell(50,7,"Invoice Date : ".$info["invoice_date"]);
+      $this->SetX(-70);
+      $this->Cell(50,7,"Date : ".$info["invoice_date"]);
       
       //Display Table headings
       $this->SetY(85);
