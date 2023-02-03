@@ -157,7 +157,7 @@ if (isset($_POST['submit_profile'])) {
             . ($mid_name=="NULL"?'': (substr($mid_name, 1, 1) . ". ")) 
             . $last_name;
         $conn->close(); 
-        header('location:demographic-profile.php');  
+        header('location:../dashboard');  
       }else {
         $error .= 'Something went wrong updating your account in the database.';
       }    
@@ -285,7 +285,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <form class="form form-box  px-2 text-center" style=""  action="" method="post" enctype="multipart/form-data">
                   <div class="upload">
                     <img src="../img/profile/<?php echo $c_profile_picture; ?>" 
-                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width = 100 height = 100 alt="">
+                    alt="<?php echo "$c_last_name, $c_first_name $c_middle_name"?>" width = "100" height = "100" alt="">
                     <div class="round">
                       <input type="file" name="profile_picture" id="profile_picture" accept="image/png, image/gif, image/jpeg" />
                       <ion-icon name="camera"></ion-icon></ion-icon>
@@ -301,14 +301,15 @@ include_once('../php-templates/admin-navigation-head.php');
 
                  <br> -->
                  <br>
-                 <div class="col-md-12 text-center">
-                    <button class="text-capitalize btn-danger btn" type="submit" name="submit_pic">Update Profile Picture</button>
+                 <div style="position:relative;left: 7px;" class="col-md-12 col-lg-12 text-center">
+                    <button class="text-capitalize btn-outline-danger btn-sm  btn" type="submit" name="submit_pic">Update Profile Picture</button>
              </div>
 
                 </form> 
-          
-                <hr/>
+               
+                <hr>
               <?php } ?>
+               <div class="col-md-12 justify-content-center d-flex ">
               <form class="form form-box px-3 py-5" style=""  action="" method="post">
               
                 <?php if ($current_user_is_a_patient) { ?> <div class="row"> <?php } ?>
@@ -389,11 +390,11 @@ include_once('../php-templates/admin-navigation-head.php');
                       <input type="text" value="<?php echo $c_civil_status?>" class="form-control pt-2 pb-2"  name="civil_status" placeholder="Civil Status*" required/>
                       </div>
                   </div>  
-               </div>
+               </div> <br>
                   <div class="form-input">
-                    <div class="form__text"><label style="font-weight: bold;color:#352e35;">Medical History</label></div>
+                    <div class="form__text mb-3"><label style="font-weight: bold;color:#352e35;">Medical History</label></div>
                   </div>
-
+                 
                   <div class="row">
                     <div class="col-md-4">
                   <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
@@ -455,10 +456,14 @@ include_once('../php-templates/admin-navigation-head.php');
                     </div>
                   </div> 
                 </div>
+                   
                 <?php } ?>
+            
                 <div class="col-md-12 text-center mt-3">
-                <?php if (!$current_user_is_an_admin) { ?>
-                <button class="w-30  btn btn-primary text-capitalize" type="submit" name="submit_profile">Update Profile</button>
+                <?php if (!$current_user_is_an_admin) { ?> 
+                 
+                  
+                <button class="w-30  btn btn-primary text-capitalize" type="submit" name="submit_profile" onclick="showAlerts()">Update Profile</button>
                  <a  style="position:relative;top: 0px;padding:5px;" class=" w-30  btn btn-danger text-capitalize"  href="../dashboard">Cancel</a>
                 </div>
                <?php } ?> 

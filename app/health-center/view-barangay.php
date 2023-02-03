@@ -101,22 +101,19 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-12 text-end mb-3">
-            <button class="btn btn-primary w-10" style="position: relative;padding: 5px;right: 20px;bottom: 20px;" data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
-          </div>
+   
+  <div class="d-flex align-items-start">
+            <button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
         </div>
-      </div>
     
-      <div style="position:relative;bottom: 35px;" class="table-padding table-responsive mt-1 px-2">
+      <div  class="table-padding table-responsive mt-1 px-2">
           <div class="col-md-8 col-lg-12 " id="table-position">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-            <table  class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+            <table  class="text-center  table mt-5  table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>

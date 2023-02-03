@@ -51,11 +51,11 @@
          <div class="container-fluid" id="page-container">
             <div class="row" style="width:100%;">
                 <div class="calendarBox"> 
-                    <h2 class="text-main">Appointment Schedule</h2>
+                   
                     <div class="box">
-                        <h6 class="text-center">Calendar</h6>
+                        <h6 class="text-center">Calendar Appointment Schedule</h6><br>
                         <div id="calendar"></div>
-                    </div> 
+                 
                  
                 </div>
             </div>
@@ -64,7 +64,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0">
             <div class="modal-header rounded-0">
-                <h5 class="modal-title">Appointment</h5>
+                <h5 class="modal-title fs-5">Appointment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body rounded-0">
@@ -74,8 +74,8 @@
                         <dd id="title" class="fw-bold fs-4"></dd> -->
                         <!-- <dt class="text-muted">Description</dt> -->
                         <!-- <dd id="description" class=""></dd> -->
-                        <dt class="text-primary">Appointment Date and Time</dt>
-                        <dd id="start" class=""></dd> 
+                        <dt class="">Appointment Date and Time</dt>
+                        <dd id="start" class="fs-6"></dd> 
                     </dl>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="text-end">
                     <!-- <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button> -->
                     <!-- <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Cancel</button> -->
-                    <button type="button" class="btn btn-primary btn-sm rounded-2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm " data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
           </div>

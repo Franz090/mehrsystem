@@ -56,13 +56,15 @@
  <!-- icon frameworks go to https://ionic.io/ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+
 
   <?php //echo isset($additional_script) ? $additional_script : ''; ?>
   <link rel="stylesheet" href="../css/theme.css"> 
   <!-- for searchable select -->
   <style> 
   .upload{
-  width: 100px;
+  width: 110px;
   position: relative;
   margin: auto;
 }
@@ -71,20 +73,29 @@
 }
 .upload img{
   border-radius: 50%;
-  border: 6px solid #eaeaea;
+  border: 3px solid #eaeaea;
+
+}
+.upload > img{
+  width: 170px;
+  height: 160px;
+  position:relative;
+  right:20px;
 }
 
 .upload .round{
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #f0eded;
+  border: 1px solid #eaeaea;
+  background: #fefefe;
   width: 32px;
   height: 32px;
   line-height: 33px;
   text-align: center;
   border-radius: 10%;
   overflow: hidden;
+   border-radius: 1.5rem;
 }
 
 .upload .round input[type = "file"]{

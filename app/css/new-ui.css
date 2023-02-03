@@ -200,7 +200,7 @@ body {
 	width: 100%;
 	padding: 20px;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 30px;
 }
 .cardBoxs .cards {
@@ -243,7 +243,7 @@ body {
 	width: 100%;
 	padding: 20px;
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: repeat(1, 1fr);
 	grid-gap: 30px;
 	min-height: 200px;
 }
@@ -388,7 +388,7 @@ h6 {
 }
 .calendarBox {
 	position: relative;
-	width: 100%;
+	
 	padding: 20px;
 	display: grid;
 	grid-template-columns: 1fr;
@@ -397,7 +397,9 @@ h6 {
 }
 
 .calendarBox .box {
-	position: relative;
+	position: absolute;
+	left: 12px;
+
 	background: #fff;
 	padding: 20px;
 	width: 100%;

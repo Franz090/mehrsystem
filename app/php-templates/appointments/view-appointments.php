@@ -247,7 +247,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         <?php } else if ($pending) {?>
                           <td>
                             <!-- <a href="approve-appointment.php?id=<?php echo $value['a_id'] ?>"> -->
-                                <button class=" btn btn-success btn-sm btn-inverse approve-appointment col-xs-2 margin-left"
+                                <button class=" btn btn-primary mt-3 btn-sm btn-inverse approve-appointment col-xs-2 margin-left"
                                   data-id="<?php echo $value['a_id'] ?>" 
                                   data-date="<?php echo $value['date']; ?>" 
                                   data-patient="<?php echo $value['id']?>">
@@ -268,7 +268,7 @@ include_once('../php-templates/admin-navigation-head.php');
     margin-left: 5px !important;
 }
  </style>
-                                  <button class="btn btn-outline-danger btn-sm btn-inverse cancel-appointment col-xs-2 margin-left" 
+                                  <button class="btn btn-danger btn-sm btn-inverse mt-3 cancel-appointment col-xs-2 margin-left" 
                                   data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="<?php echo $value['id']?>">
                                   Cancel 
                                   </button> 

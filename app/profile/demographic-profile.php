@@ -16,7 +16,7 @@ $select = "SELECT u.user_id AS id,
                 ' ', last_name) name, 
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
-  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, profile_picture
+  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies,family_history, profile_picture
   FROM users as u, user_details as d, barangays as b, patient_details as m
   WHERE u.user_id=$session_id AND d.user_id=u.user_id AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id";
 // echo $select;
@@ -41,6 +41,7 @@ if ($result = mysqli_query($conn, $select)){
     $height = $row['height'];   
     $weight = $row['weight'];   
     $blood_type = $row['blood_type'];   
+     $c_family_history = $row['family_history']==null?'':$row['family_history'];
     $diagnosed_condition = $row['diagnosed_condition'];   
     $allergies = $row['allergies'];    
     $profile_picture = $row['profile_picture']==null?'default.png':$row['profile_picture']; 
@@ -152,15 +153,13 @@ include_once('../php-templates/admin-navigation-head.php');
             <tr  class="row col-xs-3 col-md-12 col-centered">
               <td  class="col-md-3 fw-bold">Blood Type</td>
               <td class="col-md-3"><?php echo $blood_type ?></td> 
+               <td  class="col-md-3 fw-bold">Family History</td>
+              <td class="col-md-3"><?php echo $c_family_history ?></td> 
               <tr>
             </tbody>
           </table>
             <!-- nag add ako ng print button dito -->
-            <div class="col-md-12 text-center">
-            <button onclick="window.print();"  class ="btn btn-primary text-centered">Print</button>
-          </div>
-          <br> 
-          
+            
           
             </div> 
           </div>     
