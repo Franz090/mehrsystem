@@ -66,7 +66,7 @@ include_once('php-templates/css/black-bg-remover.php');
                 placeholder="Email" tabindex="10" required>  
         </div> 
    <div class="mb-2 position-relative ">
-        <button class="btn btn-primary btn-lg text-capitalize w-100" style="position:absolute;bottom: -2px;" type="submit" name="submit" >Reset Password</button>
+        <button class="btn btn-primary btn-lg text-capitalize w-100 " style="position:absolute;bottom: -2px;" type="submit" name="submit" >Reset Password</button>
         
         <br>
         <br>
