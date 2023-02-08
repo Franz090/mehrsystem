@@ -1,19 +1,74 @@
 <?php 
-if ($admin==1) { //closing bracket at the end of the file
+function days_diff($datetime1, $datetime2) {
+    return date_diff(
+        date_create($datetime1), date_create($datetime2)
+    )->days;
+}  
+if ($admin==1) { //closing bracket at the end of the file 
+    $consultation_aggr = "SELECT SUBSTRING(date, 1, 10) date_wo_time, 
+        count(consultation_id) c FROM `consultations` 
+    GROUP BY date_wo_time
+    HAVING date_wo_time";
+    // echo $select_initial_consultations_data;
+    $initial_consultations_data = [];
+    $str_range = "";
+    // print_r($initial_consultations_data);
+
+    if (isset($_POST['custom_range_consultations'])) {
+        $date_from = $_POST['date_from'];
+        $date_to = $_POST['date_to'];
+        $_POST['custom_range_consultations'] = null;
+        $select_initial_consultations_data = "$consultation_aggr
+            BETWEEN '$date_from' AND '$date_to';";
+        $days = days_diff($date_from, $date_to);  
+        for ($d_i = $days; $d_i >= 0; $d_i--) { 
+            $date_to_push = date("Y-m-d", strtotime("-$d_i days"));
+            $initial_consultations_data["$date_to_push"] = 0;
+        }
+        
+        if($result_initial_consultations_data = mysqli_query($conn, 
+          $select_initial_consultations_data))  {
+            foreach($result_initial_consultations_data as $row) 
+                $initial_consultations_data[$row['date_wo_time']] = $row['c'];
+            $str_range = "$date_from to $date_to ";
+            mysqli_free_result($result_initial_consultations_data); 
+        } 
+        else  
+            $error = 'Something went wrong fetching data from the database.';  
+    } else { // initial chart data for custom range consultations  
+        $_1mo_ago = date("Y-m-d", strtotime("-1 months"));
+        $select_initial_consultations_data = "$consultation_aggr
+            BETWEEN '$_1mo_ago' AND '$curr_date';";
+        // set data to array 
+        $days = days_diff($curr_date, $_1mo_ago); 
+        // echo $days;
+        for ($d_i = $days; $d_i >= 0; $d_i--) { 
+            $date_to_push = date("Y-m-d", strtotime("-$d_i days"));
+            $initial_consultations_data["$date_to_push"] = 0;
+        }
+        
+        if($result_initial_consultations_data = mysqli_query($conn, $select_initial_consultations_data))  {
+            foreach($result_initial_consultations_data as $row) { 
+                $initial_consultations_data[$row['date_wo_time']] = $row['c'];
+            }    
+            $str_range = "$_1mo_ago to $curr_date ";
+            mysqli_free_result($result_initial_consultations_data); 
+        } 
+        else  
+            $error = 'Something went wrong fetching data from the database.';  
+    }
     // tetanus vaccinated
     $select_total_vacc = "SELECT COUNT(u.user_id) c 
     FROM users u, patient_details pd
     WHERE role=-1 AND u.user_id=pd.user_id AND pd.tetanus=1 AND pd.status=1";
     // echo $select_total_vacc;
     if($result_total_vacc = mysqli_query($conn, $select_total_vacc))  {
-        foreach($result_total_vacc as $row)  { 
-            $total_vacc = $row['c'];   
-        } 
+        foreach($result_total_vacc as $row)   
+            $total_vacc = $row['c'];  
         mysqli_free_result($result_total_vacc); 
     } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
+    else  
+        $error = 'Something went wrong fetching data from the database.';  
     $past_6_months = date("Y-m-d", strtotime('-5 months'));
     // $bar_chart_title='Consultation Chart'; 
     // // get consultaitons 
@@ -30,11 +85,9 @@ if ($admin==1) { //closing bracket at the end of the file
         } 
         mysqli_free_result($result_consultations); 
     } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
+    else   
+        $error = 'Something went wrong fetching data from the database.';  
     // structure the chart data  
-    // $labels = '["Months ('.$curr_year.')", "No Trimester", "1st Trimester", "2nd Trimester", "3rd Trimester"],';
 
     $count_consul_list = count($consultations_list)-1;
     $key_jump = -1;
@@ -141,50 +194,47 @@ if ($admin==1) { //closing bracket at the end of the file
     RHU  
     
       <!-- cards -->
-            <div class="cardBoxs">
-                <div class="cards">
-                    <div>
-                        <div class="number"><?php echo $total_patient_count;?></div>
-                        <div class="cardsNames">Total Number of Patients</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                </div>
-                <div class="cards">
-                    <div>
-                        <div class="number"><?php echo $total_vacc ?></div>
-                        <div class="cardsNames">Tetanus Toxoid Vaccinated</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="eyedrop-outline"></ion-icon>
-                    </div>
-                </div>
+    <div class="cardBoxs">
+        <div class="cards">
+            <div>
+                <div class="number"><?php echo $total_patient_count;?></div>
+                <div class="cardsNames">Total Number of Patients</div>
             </div>
+            <div class="iconBx">
+                <ion-icon name="people-outline"></ion-icon>
+            </div>
+        </div>
+        <div class="cards">
+            <div>
+                <div class="number"><?php echo $total_vacc ?></div>
+                <div class="cardsNames">Tetanus Toxoid Vaccinated</div>
+            </div>
+            <div class="iconBx">
+                <ion-icon name="eyedrop-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
 
             <!-- Add Charts --> 
-<div class="graphBox1">
-   <div class="col-md-5 box">
-    <div class="graph">
-            <h6>Number of Patients per Barangay</h6>
-         
-            <canvas id="patients"></canvas>
+    <div class="graphBox1">
+        <div class="col-md-5 box">
+            <div class="graph">
+                <h6>Number of Patients per Barangay</h6>
+            
+                <canvas id="patients"></canvas>
+            </div>
         </div>
-        </div>
-</div>
+    </div>
     <div class="graphBox"> 
          <div class="col-md-7 box">
         <h6 class="text-center">Consultations Chart</h6>
         <canvas height="300" id="trimester"></canvas>
     </div>
-        <div class="col-md-7 box">
-            <h6 class="text-center">Number of Infants Vaccinated</h6>
-            <br>
-            <canvas height="300" id="infant"></canvas>
-        </div>
-       
-    </div> 
-
+    <div class="col-md-7 box">
+        <h6 class="text-center">Number of Infants Vaccinated</h6>
+        <br>
+        <canvas height="300" id="infant"></canvas>
+    </div>  
 
     <!-- Chart of report -->
     <style>
@@ -205,19 +255,21 @@ if ($admin==1) { //closing bracket at the end of the file
         background: white;
       }
     </style>
-  </head>
-  <body>
-    <div class="chartMenu">
-    </div>
-    <div class="chartCard">
+  <!-- </head>
+  <body> -->
+    <!-- <div class="chartMenu"></div> -->
+    <div style="padding-bottom:200px;">
       <div class="chartBox">
         <canvas id="myChart"></canvas>
-        Start : <input type="date"> End: <input type="date">
-        <button onclick="filterDate()">Filter</button> <br>
-        <button onclick="resetDate()">Reset</button> <br>
-        <button onclick="timeFrame(this)" value = "day">Day</button>
-        <button onclick="timeFrame(this)" value = "week">Week</button>
-        <button onclick="timeFrame(this)" value = "month">Month</button>
+        <form method="post" action="#myChart">
+            Start : <input type="date" name="date_from" required max="<?php echo $curr_date?>"> 
+            End: <input type="date" name="date_to" required max="<?php echo $curr_date?>">
+            <button type="submit" name="custom_range_consultations">Filter</button> <br>
+            <button onclick="resetDate()">Reset</button> <br>
+        </form>
+        <!-- <button onclick="timeFrame(this)" value = "day">Day</button> -->
+        <!-- <button onclick="timeFrame(this)" value = "week">Week</button> -->
+        <!-- <button onclick="timeFrame(this)" value = "month">Month</button> -->
       </div>
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js">
@@ -227,54 +279,43 @@ if ($admin==1) { //closing bracket at the end of the file
     <script>
 
     const day = [
-        {x: Date.parse('2021-11-01 00:00:00 GMT+0800'), y: 18 },
-        {x: Date.parse('2021-11-02 00:00:00 GMT+0800'), y: 12 },
-        {x: Date.parse('2021-11-03 00:00:00 GMT+0800'), y: 16 },
-        {x: Date.parse('2021-11-04 00:00:00 GMT+0800'), y: 9 },
-        {x: Date.parse('2021-11-05 00:00:00 GMT+0800'), y: 12 },
-        {x: Date.parse('2021-11-06 00:00:00 GMT+0800'), y: 3 },
-        {x: Date.parse('2021-11-07 00:00:00 GMT+0800'), y: 9 },
+        <?php foreach ($initial_consultations_data as $key => $value) { ?>
+            {x: '<?php echo $key;?>', y: <?php echo $value;?> },
+        <?php } ?> 
     ];
+    // const day = [
+    //     {x: Date.parse('2021-11-01'), y: 18 },
+    //     {x: Date.parse('2021-11-02'), y: 12 },
+    //     {x: Date.parse('2021-11-03'), y: 16 },
+    //     {x: Date.parse('2021-11-04'), y: 9 },
+    //     {x: Date.parse('2021-11-05'), y: 12 },
+    //     {x: Date.parse('2021-11-06'), y: 3 },
+    //     {x: Date.parse('2021-11-07'), y: 9 },
+    // ];
 
-    const week = [
-        {x: Date.parse('2021-10-31 00:00:00 GMT+0800'), y: 50 },
-        {x: Date.parse('2021-11-7 00:00:00 GMT+0800'), y: 70 },
-        {x: Date.parse('2021-11-14 00:00:00 GMT+0800'), y: 100 },
-        {x: Date.parse('2021-11-21 00:00:00 GMT+0800'), y: 60 },
-        {x: Date.parse('2021-11-28 00:00:00 GMT+0800'), y: 30 },
-    ];
+    // const week = [
+    //     {x: Date.parse('2021-10-31 00:00:00 GMT+0800'), y: 50 },
+    //     {x: Date.parse('2021-11-7 00:00:00 GMT+0800'), y: 70 },
+    //     {x: Date.parse('2021-11-14 00:00:00 GMT+0800'), y: 100 },
+    //     {x: Date.parse('2021-11-21 00:00:00 GMT+0800'), y: 60 },
+    //     {x: Date.parse('2021-11-28 00:00:00 GMT+0800'), y: 30 },
+    // ];
 
-    const month = [
-        {x: Date.parse('2021-8-1 00:00:00 GMT+0800'), y: 500 },
-        {x: Date.parse('2021-9-1 00:00:00 GMT+0800'), y: 700 },
-        {x: Date.parse('2021-10-1 00:00:00 GMT+0800'), y: 500 },
-        {x: Date.parse('2021-11-1 00:00:00 GMT+0800'), y: 600 },
-        {x: Date.parse('2021-12-1 00:00:00 GMT+0800'), y: 300 },
-    ];
+    // const month = [
+    //     {x: Date.parse('2022-10'), y: 500 },
+    //     {x: Date.parse('2022-11'), y: 700 },
+    //     {x: Date.parse('2022-12'), y: 500 },
+    //     {x: Date.parse('2023-1'), y: 600 },
+    //     {x: Date.parse('2023-2'), y: 300 },
+    // ];
     // setup 
     const data = {
       // labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       datasets: [{
-        label: 'Monthly Report',
+        label: '<?php echo $str_range;?>Report',
         data: day,
-        backgroundColor: [
-          'rgba(255, 26, 104, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(0, 0, 0, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 26, 104, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(0, 0, 0, 1)'
-        ],
+        backgroundColor: ['rgba(255, 26, 104, 0.2)',],
+        borderColor: ['rgba(255, 26, 104, 1)',],
         borderWidth: 1
       }]
     };
@@ -304,25 +345,25 @@ if ($admin==1) { //closing bracket at the end of the file
       config
     );
 
-    function timeFrame(period){
-        console.log(period.value)
-        if (period.value == 'day'){
-            myChart.config.options.scales.x.time.unit = period.value;
-            myChart.config.data.datasets[0].data = day;
-        }
-        if (period.value == 'week'){
-            myChart.config.options.scales.x.time.unit = period.value;
-            myChart.config.data.datasets[0].data = week;
-        }
-        if (period.value == 'month'){
-            myChart.config.options.scales.x.time.unit = period.value;
-            myChart.config.data.datasets[0].data = month;
-        }
-        myChart.update();
-    }
+    // function timeFrame(period){
+    //     console.log(period.value)
+    //     if (period.value == 'day'){
+    //         myChart.config.options.scales.x.time.unit = period.value;
+    //         myChart.config.data.datasets[0].data = day;
+    //     }
+    //     // if (period.value == 'week'){
+    //     //     myChart.config.options.scales.x.time.unit = period.value;
+    //     //     myChart.config.data.datasets[0].data = week;
+    //     // }
+    //     // if (period.value == 'month'){
+    //     //     myChart.config.options.scales.x.time.unit = period.value;
+    //     //     myChart.config.data.datasets[0].data = month;
+    //     // }
+    //     myChart.update();
+    // }
     </script>
 
-  </body>
+  <!-- </body> -->
     
    
     <!-- chart => https://www.chartjs.org/ -->
