@@ -298,12 +298,18 @@ include_once('../php-templates/admin-navigation-head.php');
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
-          <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
-            <input style="width:80%;"  class=" form-control-md form-control option p-2 search_date" type="date" name="s_date" required/>
+ 
+          <form action="POST" id="search_availability" >
+            <input class="pr-2 pl-2 form-control search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="midwife">
-            <button class="btn btn-primary  btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+             <div id="available_result" style="margin: 18px;"></div>
+ 
           </form>
-          <div id="available_result"></div>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary  btn-submit  pt-1 pb-1 " id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+                </div>
+         
         </div>
     </div>
   </div>

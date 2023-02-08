@@ -140,23 +140,25 @@ include_once('php-templates/css/black-bg-remover.php');
                ?>
                </div>
                <div class="form-input-group mb-3" >
-                  <input type="email"  class="rounded form-control form-control-md pb-2 pt-2" name="usermail" autofocus placeholder="Email Address*"  
+ 
+                  <input type="email"  class="form-control form-control-md pb-2 pt-2" name="usermail" autofocus placeholder="Email Address*"  
+ 
                      tabindex="10" required>
                </div> 
  
                <!-- <div class="form-input"> --> 
                <div class="form-input-group mb-2" > 
-                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="first_name" placeholder="First Name*" 
+                  <input class=" form-control form-control-md pb-2 pt-2 mb-1" type="text" name="first_name" placeholder="First Name*" 
                      tabindex="11" required>
-                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="text" name="mid_name" placeholder="Middle Name" 
+                  <input class="form-control form-control-md pb-2 pt-2 mb-1" type="text" name="mid_name" placeholder="Middle Name" 
                      tabindex="12">
-                  <input type="text" class="rounded form-control form-control-md pb-2 pt-2 mb-1" name="last_name" placeholder="Last Name*" 
+                  <input type="text" class=" form-control form-control-md pb-2 pt-2 mb-1" name="last_name" placeholder="Last Name*" 
                      tabindex="13" required>
                </div>  
                <div class="form-input-group mb-2"> 
-                  <input  class="rounded form-control form-control-md pb-2 pt-2 mb-1" type="password" name="password" 
+                  <input  class=" form-control form-control-md pb-2 pt-2 mb-1" type="password" name="password" 
                      placeholder="Password*" tabindex="14" required>
-                  <input class="rounded form-control form-control-md pb-2 pt-2 mb-2" type="password"  name="cpassword" 
+                  <input class=" form-control form-control-md pb-2 pt-2 mb-2" type="password"  name="cpassword" 
                      placeholder="Confirm password*" tabindex="15" required>
                </div>
                
@@ -220,7 +222,7 @@ include_once('php-templates/css/black-bg-remover.php');
                   
                <?php }?>
 
-               <button  class="btn btn-primary w-100 btn text-capitalize btn-primary-md" 
+               <button  class="btn btn-primary btn-lg text-capitalize w-100 " 
                   value="register now" type="submit" name="submit">
                   Register <?php echo $page_for_midwife?"Midwife":"Patient"; ?></button> 
 

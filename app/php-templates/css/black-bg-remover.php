@@ -5,51 +5,7 @@
    }
 </style> -->
 <style>
-.form_select_focus:focus,
-.form_select_focus:invalid {
-  border: 1px solid #ebecf0;
-  box-shadow: 0 0 5px #60e9d5;
-  -webkit-transition: all 0.30s ease-in-out;
-  -moz-transition: all 0.30s ease-in-out;
-  -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
-
-}
-
-.form_select select {
-  width: 100%;
-  height: 45px;
-  padding-left: 11px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  box-shadow: none;
-  border: 1px solid #00000020;
-  border-radius: 10px;
-  outline: none;
-  background: #FBFDFC;
-  transition: -1s ease-in;
-  font-family: 'Roboto',
-    sans-serif;
-}
-
-.form-select select:focus {
-  background: #fafcfb;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-}
-
-.form-select select::placeholder {
-  /* color: black; */
-  padding-left: 0px;
-  font-family: 'Roboto',
-    sans-serif;
-}
-
-.form_select-group .form_input-group .form_textarea-group {
-  margin-bottom: 1rem;
-  font-family: 'Roboto',
-    sans-serif;
-}
+ 
 
 
 .form-control {
@@ -217,82 +173,7 @@
     margin: -.5rem -1rem!important;
     margin-inline-end: 1rem!important;
 }
-select {
-  color: #757575;
-}
-
-select:focus {
-  color: var(--text-primary-color);
-}
-.form_select_focus:focus, .form_select_focus:invalid {
-    border: 1px solid #ebecf0;
-	box-shadow: 0 0 5px #60e9d5;
-	-webkit-transition: all 0.30s ease-in-out;
-    -moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-   -o-transition: all 0.30s ease-in-out;
-   
-}
-
-.form_select select{
-	    width: 100%!important;
-		height: 45px!important;
-		padding-left:11px;
-		margin-bottom: 20px;
-		box-sizing: border-box;
-		box-shadow: none;
-		border: 1px solid #00000020;
-		border-radius: 10px;
-		outline: none;
-		background: #FBFDFC;
-		transition: -1s ease-in;
-		font-family: 'Roboto',
-				sans-serif;		
-}
-.form-select select:focus {
-	background: #fafcfb;
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-}
-
-.form-select select::placeholder {
-	/* color: black; */
-	padding-left: 0px;
-	font-family:'Roboto',
-		sans-serif;	
-}
-
-.form_select-group .form_input-group .form_textarea-group{
-	margin-bottom: 1rem;
-	font-family: 'Roboto',
-			sans-serif;		
-}
-select{
-	color: #757575;
-}
-select:focus{
-	color: var(--text-primary-color);
-}
-   select:required:invalid {
-        color: #666;
-      }
-      option[value=""][disabled] {
-        display: none;
-      }
-      option {
-        color: #000;
-      }
-      /* .option{
-        position: relative;
-        left: 550px;
-      } */
-      #selectCenter {
-  
  
-    padding-left: 16px;
-   position: relative;
-    
-}
 
 .btn-primary {
     color: whitesmoke;
@@ -315,6 +196,7 @@ select:focus{
     background-color: #28a685!important;
     border-color: #1ba17e!important;
     box-shadow: none!important;
+ 
 }
 
 .btn-check:checked+.btn-primary,
@@ -347,6 +229,7 @@ select:focus{
    
 }
 
+ 
 .btn-sm,
 .btn-group-sm>.btn {
     padding: .25rem .5rem;
@@ -381,6 +264,70 @@ select:focus{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
 }
 
+.form-select {
+    display: block;
+    width: 100%;
+     padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #f0eded;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: none;
+    border-radius: .18rem;
+    appearance: none;
+    font-family: "Roboto", sans-serif;
+}
+.option{
+    font-family: "Roboto", sans-serif!important;
+}
+.form-select>option {
+    background-color: #ffffff!important;
+    font-weight: 100!important;
+}
+.form-select:focus {
+    color: #495158;
+        background-color: #e9e9eb;
+    outline: 0!important;
+    box-shadow:none;
+    
+}
+
+.form-select[multiple],
+.form-select[size]:not([size="1"]) {
+    padding-right: .75rem;
+    background-image: none
+}
+
+.form-select:disabled {
+    background-color: #e9ecef
+}
+
+.form-select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #212529
+}
+
+.form-select-sm {
+    padding-top: .28rem;
+    padding-bottom: .28rem;
+    padding-left: .9rem;
+    font-size: .875rem;
+    
+}
+
+.form-select-lg {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    font-size: 1.25rem
+}
+
+ 
 @media (prefers-reduced-motion: reduce) {
     .btn {
         transition: none

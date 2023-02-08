@@ -195,7 +195,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <td class="col-md-3 fw-bold">Patient Name</td>
                   <td class="col-md-3"><?php echo $name ?></td>
                   <td  class="col-md-3 fw-bold">Patient ID</td>
-                  <td  class="col-md-3"><?php echo $id ?></td>
+                  <td  class="col-md-3"><?php echo $user_id ?></td>
                 </tr> 
                 <tr class="row col-xs-3 col-md-12 col-centered">
                   <td  class="col-md-3 fw-bold">Barangay</td>

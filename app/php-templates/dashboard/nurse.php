@@ -278,6 +278,7 @@ if ($admin==1) { //closing bracket at the end of the file
 
     <script>
 
+ 
     const day = [
         <?php foreach ($initial_consultations_data as $key => $value) { ?>
             {x: '<?php echo $key;?>', y: <?php echo $value;?> },
@@ -308,14 +309,16 @@ if ($admin==1) { //closing bracket at the end of the file
     //     {x: Date.parse('2023-1'), y: 600 },
     //     {x: Date.parse('2023-2'), y: 300 },
     // ];
+ 
     // setup 
     const data = {
       // labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       datasets: [{
+ 
         label: '<?php echo $str_range;?>Report',
         data: day,
         backgroundColor: ['rgba(255, 26, 104, 0.2)',],
-        borderColor: ['rgba(255, 26, 104, 1)',],
+        borderColor: ['rgba(255, 26, 104, 1)',], 
         borderWidth: 1
       }]
     };
@@ -345,6 +348,7 @@ if ($admin==1) { //closing bracket at the end of the file
       config
     );
 
+ 
     // function timeFrame(period){
     //     console.log(period.value)
     //     if (period.value == 'day'){
@@ -364,6 +368,7 @@ if ($admin==1) { //closing bracket at the end of the file
     </script>
 
   <!-- </body> -->
+ 
     
    
     <!-- chart => https://www.chartjs.org/ -->

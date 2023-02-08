@@ -96,7 +96,7 @@ include_once('../php-templates/admin-navigation-head.php');
         
           <div class="table-padding table-responsive">
             <div class="col-md-8 col-lg-12 " id="table-position">
-          <table class="text-center  table mt-5 table-striped table-responsive table-lg  table-hover display" id="datatables">
+          <table class="text-center  table mt-5  table-responsive table-lg  table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
               <tr>
                   <th scope="col">Patient Profile </th>
@@ -131,7 +131,7 @@ include_once('../php-templates/admin-navigation-head.php');
             </tbody>
           </table> 
         
-          <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+          <table class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
             <tr>
                 <th scope="col">Patient Medical History </th>

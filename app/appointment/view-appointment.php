@@ -153,7 +153,7 @@ include_once('../php-templates/admin-navigation-head.php');
                           <!-- <td><?php // echo $value['contact_no']; ?></td> -->
                           <td>  
                               <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
-                              <button type="button" type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
+                              <button type="button" type="button" class=" btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
                               <?php if ($value['status']==0)  { ?> 
                                   <button type="button" class=" btn btn-danger btn-sm btn-inverse cancel-appointment" 
                                   data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="0">
@@ -163,12 +163,12 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td>
                             <?php 
                               if($value['status'] == -1) {
-                                echo '<span class="badge bg-danger">Cancelled</span>';
+                                echo '<span class="badge bg-danger p-2 rounded">Cancelled</span>';
                               }
                               else if($value['status'] == 0) {
-                                echo '<span class="badge bg-warning">Pending</span>';
+                                echo '<span class="badge bg-warning p-2 rounded">Pending</span>';
                               } else {
-                                echo '<span class="badge bg-info">Approved</span>';
+                                echo '<span class="badge bg-info p-2 rounded">Approved</span>';
                               }
                                
                             ?>
@@ -195,14 +195,20 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="modal-header">
         <h1 class="modal-title fs-5">Search Available Schedule</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+      </div><br>
         <div class="modal-body">
-          <form action="POST" id="search_availability" style="display:flex; justify-content: space-between; margin:10px 0;">
-            <input class="form-control option pt-2 pb-2 search_date" type="date" name="s_date" required/>
+          <form action="POST" id="search_availability">
+        
+            <input class="form-control pr-2 pl-2 search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="patient">
-            <button class="btn btn-primary btn-submit" id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+             <div id="available_result" style="margin: 18px;"></div>
           </form>
-          <div id="available_result"></div>
+                  </div> 
+                 
+           <div class="modal-footer">
+          <button class="btn btn-primary btn-sm" id="submit_appointment" type="submit" name="submit_appointment" form="search_availability">Search</button>
+                  </div>
+         
         </div>
     </div>
   </div>

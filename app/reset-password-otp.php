@@ -80,20 +80,20 @@ include_once('php-templates/css/black-bg-remover.php');
             <a class="text-decoration-none text-black fw-bold" style="--bs-text-opacity: .5;" href="reset-password.php"> Don't have an OTP? Request here.</a>
       </div>
         <div class="form-input-group mb-2">
-            <input type="text" autofocus class="rounded form-control form-control-md pb-2 pt-2"  name="email" placeholder="Email" tabindex="10" required>
+            <input type="text" autofocus class="form-control form-control-md pb-2 pt-2"  name="email" placeholder="Email" tabindex="10" required>
         </div>
         <div class="form-input-group mb-2">
-            <input type="password"  class="rounded form-control form-control-md pb-2 pt-2" name="password" autofocus placeholder="New Password" tabindex="10" required>
+            <input type="password"  class=" form-control form-control-md pb-2 pt-2" name="password" autofocus placeholder="New Password" tabindex="10" required>
         </div>
          <div class="form-input-group mb-2">
-            <input type="password"  class="rounded form-control form-control-md pb-2 pt-2" name="cpassword" autofocus placeholder="Confirm New Password" tabindex="10" required>
+            <input type="password"  class=" form-control form-control-md pb-2 pt-2" name="cpassword" autofocus placeholder="Confirm New Password" tabindex="10" required>
             
         </div>
         <div class="form-input-group mb-2">
-            <input type="number" class="rounded form-control form-control-md pb-2 pt-2" autofocus name="otp" placeholder="One Time Pin" tabindex="10" required>
+            <input type="number" class=" form-control form-control-md pb-2 pt-2" autofocus name="otp" placeholder="One Time Pin" tabindex="10" required>
         </div>
     <div class="mb-3 position-relative ">
-        <button class="btn btn-primary w-100 btn text-capitalize btn-primary-md" style="font-family: arial;position:absolute;bottom: -55px;" type="submit" name="submit">Update Password</button>
+        <button class="btn btn-primary btn-lg text-capitalize w-100 " style="font-family: arial;position:absolute;bottom: -55px;" type="submit" name="submit">Update Password</button>
             </div>
      
         <?php    
