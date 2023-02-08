@@ -463,7 +463,9 @@ include_once('../php-templates/admin-navigation-head.php');
                 <?php if (!$current_user_is_an_admin) { ?> 
                  
                   
-                <button class="w-30  btn  btn-primary text-capitalize" type="submit" name="submit_profile" onclick="showAlerts()">Update Profile</button>
+ 
+                <button class="w-30  btn btn-primary text-capitalize" type="submit" name="submit_profile" onclick="showAlerts()">Update Profile</button>
+ 
                  <a  style="position:relative;top: 0px;padding:5px;" class=" w-30  btn btn-danger text-capitalize"  href="../dashboard">Cancel</a>
                 </div>
                <?php } ?> 

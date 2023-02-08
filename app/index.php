@@ -121,7 +121,9 @@ include_once('php-templates/css/black-bg-remover.php');
         <div class="img-left d-none col-sm-7 d-md-flex"></div>
 
         <div class="card-body ">
+ 
           <h4 class="title text-center mt-4" style="color:#808080;">
+ 
             Login 
           </h4>
             <form class="form form-box px-3" id="login" action="" method="post">

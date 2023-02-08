@@ -298,10 +298,12 @@ include_once('../php-templates/admin-navigation-head.php');
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
+ 
           <form action="POST" id="search_availability" >
             <input class="pr-2 pl-2 form-control search_date" type="date" name="s_date" required/>
             <input type="hidden" name="role" value="midwife">
              <div id="available_result" style="margin: 18px;"></div>
+ 
           </form>
                 </div>
                 <div class="modal-footer">
