@@ -5,7 +5,7 @@
    }
 </style> -->
 <style>
-
+ 
 
 
 .form-control {
@@ -173,6 +173,7 @@
     margin: -.5rem -1rem!important;
     margin-inline-end: 1rem!important;
 }
+ 
 
 .btn-primary {
     color: whitesmoke;
@@ -195,6 +196,7 @@
     background-color: #28a685!important;
     border-color: #1ba17e!important;
     box-shadow: none!important;
+ 
 }
 
 .btn-check:checked+.btn-primary,
@@ -227,6 +229,7 @@
    
 }
 
+ 
 .btn-sm,
 .btn-group-sm>.btn {
     padding: .25rem .5rem;
@@ -324,7 +327,7 @@
     font-size: 1.25rem
 }
 
-
+ 
 @media (prefers-reduced-motion: reduce) {
     .btn {
         transition: none

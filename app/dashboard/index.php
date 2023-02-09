@@ -12,6 +12,7 @@ $title = ''; // pie chart title
 $curr_date = date("Y-m-d");
 $curr_year = substr($curr_date,0,4);
 // echo "curr yewar: $curr_year";
+// echo "curr date: $curr_date";
 // $complete_shots_of_vaccines = 15;
 
 $session_id = $_SESSION['id'];
