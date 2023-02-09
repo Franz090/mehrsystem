@@ -302,7 +302,7 @@ include_once('../php-templates/admin-navigation-head.php');
                  <br> -->
                  <br>
                  <div style="position:relative;left: 7px;" class="col-md-12 col-lg-12 text-center">
-                    <button class="text-capitalize btn-outline-danger btn-sm  btn" type="submit" name="submit_pic">Update Profile Picture</button>
+                    <button class="text-capitalize btn-outline-default btn-sm  btn" type="submit" name="submit_pic">Update Profile Picture</button>
              </div>
 
                 </form> 

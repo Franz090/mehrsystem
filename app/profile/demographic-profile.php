@@ -84,7 +84,7 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4> <br/>
           <div>
             <div class="container-fluid d-flex justify-content-center ">
-            <img  style="border: 1px solid #e5e5e5;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
+            <img  style="border: 1px solid #e5e5e5;width:20%;height:60%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
               alt="<?php echo $name; ?>" width="500" height="600">
         </div>
           </div>
