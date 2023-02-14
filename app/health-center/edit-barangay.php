@@ -93,7 +93,7 @@ include_once('../php-templates/admin-navigation-head.php');
               </select>
           </div>   -->
         <div class="col-md-12 text-center pt-4">
-          <button class="w-50 btn  btn-primary btn-sm text-capitalize" value="register now" type="submit" name="submit">Update Barangay Record</button> </div>
+          <button class="w-80 btn  btn-primary btn-sm text-capitalize" value="register now" type="submit" name="submit">Update Barangay Record</button> </div>
         </form>  
         <?php
           }

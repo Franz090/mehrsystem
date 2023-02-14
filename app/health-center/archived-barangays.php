@@ -56,15 +56,18 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Archived Barangays</h4>
+      <div class="d-flex flex-row-reverse">
+            <a href="view-barangay.php"><button class="btn btn-outline-default btn-sm" > View Barangay</button></a>
+        </div>
 
         <div class="table-padding table-responsive">
-          <div class="col-md-8 col-lg-12 " id="table-position">
+          <div class="pagination-sm col-md-8 col-lg-12 " id="table-position">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
             
           ?> 
-            <table class="text-center  table mt-5 table-striped table-responsive table-lg table-hover display" id="datatables">
+            <table class="text-center  table mt-5 table-responsive table-lg table-hover display" id="datatables">
             <thead class="table-light" colspan="3">
                 <tr>
                   <th scope="col" class="col-sm-2">#</th>

@@ -101,13 +101,16 @@ include_once('../php-templates/admin-navigation-head.php');
 
     <div class="container-fluid default">
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Barangay</h4>
-   
+ <div class="d-flex justify-content-between"> 
   <div class="d-flex align-items-start">
             <button class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#add"> Add Barangay </button>
         </div>
-    
+          <div class="d-flex align-items-end">
+            <a href="archived-barangays.php"><button class="btn btn-outline-default btn-sm" >  See Archived Barangays</button></a>
+        </div>
+     </div>
       <div  class="table-padding table-responsive mt-1 px-2">
-          <div class="col-md-8 col-lg-12 " id="table-position">
+          <div class="col-md-8 col-lg-12 pagination-sm " id="table-position">
           <?php
             if (isset($_GET['error']))  
               echo '<span class="form__input-error-message">'.$_GET['error'].'</span>';
@@ -150,7 +153,7 @@ include_once('../php-templates/admin-navigation-head.php');
 
       </div>
     </div>
-    <a href="archived-barangays.php">See Archived Barangays</a>
+   
 
   </div>
 </div>

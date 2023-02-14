@@ -248,7 +248,7 @@ input[type=file]::-webkit-file-upload-button{
       width: 7px;
     }
     .options_ss::-webkit-scrollbar-track{
-      background: #f1f1f1;
+      background: #f0eded;
       border-radius: 25px;
     }
     .options_ss::-webkit-scrollbar-thumb{
@@ -264,8 +264,8 @@ input[type=file]::-webkit-file-upload-button{
     }
     .options_ss li:hover, li.selected{
       border-radius: 5px;
-      background: #029670;
-      color: white;
+      background: #f5f5f5;
+      color: #495057;
       font-family: "Open sans",sans-serif;
     }
 

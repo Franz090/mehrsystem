@@ -230,7 +230,7 @@ label{
               '</span> '.
               ($add_barangay_button?
               "<a href='../health-center/add-barangay.php'>
-              <button type='button' style=\"color:whitesmoke;\" class=\"form__button btn bg-primary\">
+              <button type='button' style=\"color:whitesmoke;text-align:center;\" class=\"btn-sm btn btn-primary\">
               Add a barangay</button></a>":''); 
             }
             else { 
