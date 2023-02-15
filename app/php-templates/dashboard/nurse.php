@@ -282,7 +282,7 @@ if ($admin==1) { //closing bracket at the end of the file
         <div class="col-md-5 box">
             <div class="graph">
                 <h6>Number of Patients per Barangay</h6>
-            
+            <br>
                 <canvas id="patients"></canvas>
             </div>
         </div>
@@ -297,9 +297,72 @@ if ($admin==1) { //closing bracket at the end of the file
         <br>
         <canvas height="300" id="infant"></canvas>
     </div>  
+</div>
+   <div class="graphBox1">
+        <div class="col-md-5 box">
+     
+                <h6>Monthy Consultation Chart</h6>
+                <br>           
+      <div class="chartBox">
+       
+        <form method="post" action="#myChart">
+            <div class="d-flex justify-content-start m-3">
+            <label class="text-bold pt-1 ">Start</label>
+            <input type="date" class="form-control-md " name="date_from" required max="<?php echo $curr_date?>"> 
+          
 
+            <label  class="text-bold pt-1 ">End</label> 
+            <input class="form-control-md" type="date" name="date_to" required max="<?php echo $curr_date?>">
+           
+            <button  type="submit" class="btn btn-primary btn-sm" style="margin-right: 5px;" name="custom_range_consultations">Filter</button> 
+            <button type="reset" class="btn btn-danger btn-sm" >Reset</button> 
+
+         
+        </form>
+    </div>
+      
+      </div>
+    
+               <canvas id="myChart"></canvas>
+<br>
+  <a href="./?consultations=days#myChart"><button class="btn-primary outline" type="button">Day</button></a>
+        <a href="./?consultations=weeks#myChart"><button class="btn-primary outline"  type="button">Week</button></a>
+        <a href="./?consultations=months#myChart"><button class="btn-primary outline"  type="button">Month</button></a>
+      <br>
+        </div>
+    </div>
+   <style>
+    input{
+   
+    padding: 4px;
+    margin-right: 12px;
+    border: 1px solid #aaa5a5;
+    border-bottom-right-radius: 6px;
+     border-top-right-radius: 6px;
+    outline:none;
+    border-left: none;
+}
+label{
+    padding-right: 8px;
+    padding-left: 8px;
+    background-color: #169e76;
+    color: #fff;
+     border-bottom-left-radius: 6px;
+     border-top-left-radius: 6px;
+     border-right: none;
+     font-family: "Roboto", sans-serif;
+     font-size: 15px;
+     font-weight: 100;
+    
+}
+.outline:hover{
+    background-color: #ffff!important;
+    color: #352e35;
+}
+
+   </style>
     <!-- Chart of report -->
-    <style>
+    <!-- <style>
       * {
         margin: 0;
         padding: 0;
@@ -316,24 +379,12 @@ if ($admin==1) { //closing bracket at the end of the file
         border: solid 3px rgba(54, 162, 235, 1);
         background: white;
       }
-    </style>
+    </style> -->
   <!-- </head>
   <body> -->
     <!-- <div class="chartMenu"></div> -->
-    <div style="padding-bottom:200px;">
-      <div class="chartBox">
-        <canvas id="myChart"></canvas>
-        <form method="post" action="#myChart">
-            Start : <input type="date" name="date_from" required max="<?php echo $curr_date?>"> 
-            End: <input type="date" name="date_to" required max="<?php echo $curr_date?>">
-            <button type="submit" name="custom_range_consultations">Filter</button> <br>
-            <button type="reset">Reset</button> <br>
-        </form>
-        <a href="./?consultations=days#myChart"><button type="button">Day</button></a>
-        <a href="./?consultations=weeks#myChart"><button type="button">Week</button></a>
-        <a href="./?consultations=months#myChart"><button type="button">Month</button></a>
-      </div>
-    </div>
+   
+   
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -379,8 +430,9 @@ if ($admin==1) { //closing bracket at the end of the file
  
         label: '<?php echo $str_range;?>Report',
         data: day,
-        backgroundColor: ['rgba(255, 26, 104, 0.2)',],
-        borderColor: ['rgba(255, 26, 104, 1)',], 
+        backgroundColor: ['rgba(68, 201, 167, 1)',],
+       
+
         borderWidth: 1
       }]
     };

@@ -1070,10 +1070,24 @@ textarea.form-control {
     min-height: calc(2.5em + 1.75rem + 6px)!important;
 }
 
-textarea.form-control-sm {
-    min-height: calc(1.5em + .5rem + 2px)
+textarea.form-control-md {
+    min-height: calc(1.5em + .5rem + 2px)!important;
+}
+.form-control-md {
+    padding-right: 0!important;
+    padding-left: 0!important;
 }
 
+.form-control-md {
+    padding-top: .28rem!important;
+    padding-bottom: .28rem!important;
+    padding-left: .10rem!important;
+    padding-right: .15rem !important;
+    font-size: .875rem!important;
+    
+   
+
+}
 textarea.form-control-lg {
     min-height: calc(1.5em + 1rem + 2px)
 }
