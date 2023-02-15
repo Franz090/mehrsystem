@@ -289,7 +289,7 @@ if ($admin==1) { //closing bracket at the end of the file
     </div>
     <div class="graphBox"> 
          <div class="col-md-7 box">
-        <h6 class="text-center">Consultations Chart</h6>
+        <h6 class="text-center">Trimester Consultations Chart</h6>
         <canvas height="300" id="trimester"></canvas>
     </div>
     <div class="col-md-7 box">
