@@ -4,6 +4,10 @@ function days_diff($datetime1, $datetime2) {
         date_create($datetime1), date_create($datetime2)
     )->days;
 }  
+if (!isset($_GET['consultations'])) {
+    $_GET['consultations'] = 'days';
+}
+
 if ($admin==1) { //closing bracket at the end of the file 
     $consultation_aggr = "SELECT SUBSTRING(date, 1, 10) date_wo_time, 
         count(consultation_id) c FROM `consultations` 
@@ -18,6 +22,7 @@ if ($admin==1) { //closing bracket at the end of the file
         $date_from = $_POST['date_from'];
         $date_to = $_POST['date_to'];
         $_POST['custom_range_consultations'] = null;
+
         $select_initial_consultations_data = "$consultation_aggr
             BETWEEN '$date_from' AND '$date_to';";
         $days = days_diff($date_from, $date_to);  
@@ -37,25 +42,82 @@ if ($admin==1) { //closing bracket at the end of the file
             $error = 'Something went wrong fetching data from the database.';  
     } else { // initial chart data for custom range consultations  
         $_1mo_ago = date("Y-m-d", strtotime("-1 months"));
-        $select_initial_consultations_data = "$consultation_aggr
-            BETWEEN '$_1mo_ago' AND '$curr_date';";
-        // set data to array 
-        $days = days_diff($curr_date, $_1mo_ago); 
-        // echo $days;
-        for ($d_i = $days; $d_i >= 0; $d_i--) { 
-            $date_to_push = date("Y-m-d", strtotime("-$d_i days"));
-            $initial_consultations_data["$date_to_push"] = 0;
-        }
+        if ($_GET['consultations'] === 'days') { 
+            $select_initial_consultations_data = "$consultation_aggr
+                BETWEEN '$_1mo_ago' AND '$curr_date';";
+            // set data to array 
+            $days = days_diff($curr_date, $_1mo_ago); 
+            // echo $days;
+            for ($d_i = $days; $d_i >= 0; $d_i--) { 
+                $date_to_push = date("Y-m-d", strtotime("-$d_i days"));
+                $initial_consultations_data["$date_to_push"] = 0;
+            }
+            
+            if($result_initial_consultations_data = mysqli_query($conn, $select_initial_consultations_data))  {
+                foreach($result_initial_consultations_data as $row) { 
+                    $initial_consultations_data[$row['date_wo_time']] = $row['c'];
+                }    
+                $str_range = "$_1mo_ago to $curr_date ";
+                mysqli_free_result($result_initial_consultations_data); 
+            } 
+            else  
+                $error = 'Something went wrong fetching data from the database.';  
+        }  
         
-        if($result_initial_consultations_data = mysqli_query($conn, $select_initial_consultations_data))  {
-            foreach($result_initial_consultations_data as $row) { 
-                $initial_consultations_data[$row['date_wo_time']] = $row['c'];
-            }    
-            $str_range = "$_1mo_ago to $curr_date ";
-            mysqli_free_result($result_initial_consultations_data); 
-        } 
-        else  
-            $error = 'Something went wrong fetching data from the database.';  
+        if ($_GET['consultations'] === 'weeks') {
+            $initial_consultations_data = [];
+            $w_d = $curr_date;
+            $to_d = $curr_date;
+            $str_range = "Weekly - $_1mo_ago to $curr_date ";
+            for ($d2l = 7; $w_d >= $_1mo_ago; $d2l+=7) { 
+                $w_d = date("Y-m-d", strtotime("-$d2l days")); 
+                $select_initial_consultations_data = 
+                    "SELECT count(cons.date) c FROM (SELECT date FROM `consultations` WHERE date BETWEEN '$w_d' AND '$to_d') cons;";
+                if($result_initial_consultations_data = mysqli_query($conn, $select_initial_consultations_data))  {
+                    foreach($result_initial_consultations_data as $row) { 
+                        $initial_consultations_data[(substr($w_d, 5) . " to " . substr($to_d, 5))] = ($row['c']>0 ? $row['c'] : 0);
+                    }     
+                    mysqli_free_result($result_initial_consultations_data); 
+                } 
+                else  
+                    $error = 'Something went wrong fetching data from the database.';  
+                // echo $select_initial_consultations_data . "<br/>" . $initial_consultations_data[(substr($w_d, 5) ." to " . substr($to_d, 5))] . "<br/>";
+                // echo substr($w_d, 5) ." to " . substr($to_d, 5) ."<br/>";
+                $d2l2 = $d2l + 1;
+                $to_d = date("Y-m-d", strtotime("-$d2l2 days"));
+            } 
+            // reverse array 
+            // print_r($initial_consultations_data);
+            $initial_consultations_data = array_reverse($initial_consultations_data);
+            // print_r($initial_consultations_data);
+        }
+        if ($_GET['consultations'] === 'months') {
+            $_6mos_ago = date("Y-m-d", strtotime("-6 months"));
+            $initial_consultations_data = [];
+            $w_d = $curr_date;
+            $to_d = $curr_date;
+            $str_range = "Monthly - $_6mos_ago to $curr_date ";
+            for ($d2l = 1; $w_d >= $_6mos_ago; $d2l++) { 
+                $w_d = date("Y-m-d", strtotime("-$d2l months")); 
+                $select_initial_consultations_data = 
+                    "SELECT count(cons.date) c FROM (SELECT date FROM `consultations` WHERE date BETWEEN '$w_d' AND '$to_d') cons;";
+                if($result_initial_consultations_data = mysqli_query($conn, $select_initial_consultations_data))  {
+                    foreach($result_initial_consultations_data as $row) { 
+                        $initial_consultations_data[(substr($w_d, 5) . " to " . substr($to_d, 5))] = ($row['c']>0 ? $row['c'] : 0);
+                    }     
+                    mysqli_free_result($result_initial_consultations_data); 
+                } 
+                else  
+                    $error = 'Something went wrong fetching data from the database.';  
+                // echo $select_initial_consultations_data . "<br/>" . $initial_consultations_data[(substr($w_d, 5) ." to " . substr($to_d, 5))] . "<br/>";
+                // echo substr($w_d, 5) ." to " . substr($to_d, 5) ."<br/>";
+                $to_d = date("Y-m-d", strtotime("-1 days", strtotime($w_d)));
+            } 
+            // reverse array 
+            // print_r($initial_consultations_data);
+            $initial_consultations_data = array_reverse($initial_consultations_data);
+            // print_r($initial_consultations_data);
+        }
     }
     // tetanus vaccinated
     $select_total_vacc = "SELECT COUNT(u.user_id) c 
@@ -265,11 +327,11 @@ if ($admin==1) { //closing bracket at the end of the file
             Start : <input type="date" name="date_from" required max="<?php echo $curr_date?>"> 
             End: <input type="date" name="date_to" required max="<?php echo $curr_date?>">
             <button type="submit" name="custom_range_consultations">Filter</button> <br>
-            <button onclick="resetDate()">Reset</button> <br>
+            <button type="reset">Reset</button> <br>
         </form>
-        <!-- <button onclick="timeFrame(this)" value = "day">Day</button> -->
-        <!-- <button onclick="timeFrame(this)" value = "week">Week</button> -->
-        <!-- <button onclick="timeFrame(this)" value = "month">Month</button> -->
+        <a href="./?consultations=days#myChart"><button type="button">Day</button></a>
+        <a href="./?consultations=weeks#myChart"><button type="button">Week</button></a>
+        <a href="./?consultations=months#myChart"><button type="button">Month</button></a>
       </div>
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js">
@@ -329,12 +391,12 @@ if ($admin==1) { //closing bracket at the end of the file
       data,
       options: {
         scales: {
-            x: {
-                type: 'time',
-                time: {
-                    unit: 'day'
-                }
-            },
+            // x: {
+            //     type: 'time',
+            //     time: {
+            //         unit: 'day'
+            //     }
+            // },
           y: {
             beginAtZero: true
           }
