@@ -175,147 +175,155 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-      <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">View Patient Report</h4> 
-        <div class="default table-responsive">
-          <div class="col-md-8 col-lg-12 ">
-            <div>
-              <div class="container-fluid d-flex justify-content-center ">
-              <img style="border: 1px solid #e5e5e5;width:20%;height:60%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
+      <div class=" row m-2 my-4">
+       
+              
+        
+           <div class="row">
+            <!-- Patient Profile -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col-md-6">
+    <div class="card px-3">
+     
+        <div class="container-fluid d-flex justify-content-center mb-1">
+              <img style="border: 1px solid #e5e5e5;width:50%;height:40%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
                 alt="<?php echo $name; ?>" width="500" height="600">
         </div>
-            </div>
-            <table class="table mt-4 table-responsive table-lg  table-hover display">
-              <thead class="table-light text-center" colspan="3">
-                <tr>
-                  <th scope="col">Patient Profile </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="row col-xs-3 col-md-12 col-centered">
-                  <td class="col-md-3 fw-bold">Patient Name</td>
-                  <td class="col-md-3"><?php echo $name ?></td>
-                  <td  class="col-md-3 fw-bold">Patient ID</td>
-                  <td  class="col-md-3"><?php echo $user_id ?></td>
-                </tr> 
-                <tr class="row col-xs-3 col-md-12 col-centered">
-                  <td  class="col-md-3 fw-bold">Barangay</td>
-                  <td class="col-md-3"><?php echo $bgy ?></td>
-                  <td  class="col-md-3 fw-bold">Tetanus Toxoid</td>
-                  <td  class="col-md-3"><?php echo $s ?></td>
-                </tr> 
-                <tr class="row col-xs-3 col-md-12 col-centered">
-                  <td  class="col-md-3 fw-bold">Contact Number</td>
-                  <td  class="col-md-3"><?php echo $c_no ?></td>
-                  <td  class="col-md-3 fw-bold">Date of Birth</td>
-                  <td class="col-md-3">
-                    <?php  
+      <div class="card-body">
+        <h5 class="card-title fw-bold text-center  mb-4 mt-2">Patient Profile </h5> 
+         <div class="row">
+          <div class="col">
+        <p  class="card-text mr-3"><strong> Patient Name</strong></p>
+        <p class=""><?php echo $name ?></p>
+        </div>
+        <div class="col">
+        <p   class="card-text mr-3"><strong>  Patient ID</strong></p>
+        <p> <?php echo $user_id ?></p>
+        </div>
+      </div>
+       <div class="row">
+         <div class="col">
+         <p   class="card-text mr-3"><strong>Barangay</strong></p>
+        <p> <?php echo $bgy ?></p>
+        </div>
+         <div class="col">
+         <p   class="card-text mr-3"><strong> Tetanus Toxoid</strong></p>
+        <p>  <?php echo $s ?></p>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col">
+         <p   class="card-text mr-3"><strong>Contact Number</strong></p>
+        <p>  <?php echo $c_no ?></p>
+        </div>
+        <div class="col">
+          <p   class="card-text mr-3"><strong> Date of Birth</strong></p>
+        <p>  <?php  
                       $dtf1 = date_create($b_date); 
                       echo $b_date?date_format($dtf1,"F d, Y"):"No Data";  
-                    ?>
-                  </td>
-                </tr>
-              </tbody>
-            </table>  
-            <table class="table mt-4 table-responsive table-lg  table-hover display">
-              <thead class="table-light text-center" colspan="3">
-                <tr>
-                  <th scope="col">Patient Medical History </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="row col-xs-3 col-md-12 col-centered">
-                  <td  class="col-md-3 fw-bold">Height</td>
-                  <td class="col-md-3"><?php echo $height ?></td>
-                  <td  class="col-md-3 fw-bold">Diagnosed Condition</td>
-                  <td class="col-md-3"><?php echo $diagnosed_condition ?></td>
-                </tr>
-                <tr class="row col-xs-3 col-md-12 col-centered">
-                  <td  class="col-md-3 fw-bold">Weight</td>
-                  <td  class="col-md-3"><?php echo $weight ?> kg</td>
-                  <td  class="col-md-3 fw-bold">Allergies</td>
-                  <td  class="col-md-3"><?php echo $allergies ?></td>
-                </tr >
-                <tr  class="row col-xs-3 col-md-12 col-centered">
-                  <td  class="col-md-3 fw-bold">Blood Type</td>
-                  <td class="col-md-3"><?php echo $blood_type ?></td> 
-                    <td  class="col-md-3 fw-bold">Family History</td>
-              <td class="col-md-3"><?php echo $c_family_history ?></td> 
-                <tr>
-              </tbody>
-            </table> 
+                    ?></p>
+        
+                    </div>
+            </div>
             <?php if (!$current_user_is_an_admin) {?>
-              <table class="table mt-4  table-lg  table-hover display">
-                <thead class="table-light text-center" colspan="3">
-                  <tr>
-                    <th scope="col"><?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?></th>
-                  </tr>
-                </thead>
-                <tbody>
+            <div class="col mb-3" style="border-bottom: 1px solid #c8c9ca;">
+            </div>
+            <h5 class="card-title fw-bold text-center ">Patient Medical History </h5> 
+             <div class="row">
+          <div class="col">
+        <p class="card-text  mr-3"><strong>Height</strong></p>
+          <p><?php echo $height ?></p> 
+         </div> 
+         <div class="col">
+           <p class="card-text  mr-3"><strong>Weight</strong></p>
+          <p><?php echo $weight ?> kg</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+         <p class="card-text  mr-3"><strong> Family History</strong></p>
+          <p><?php echo $c_family_history ?> </p> 
+        </div>
+        <div class="col">
+          <p class="card-text  mr-3"><strong> Diagnosed Condition</strong></p>
+          <p><?php echo $diagnosed_condition ?></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          <p class="card-text  mr-3"><strong>  Allergies</strong></p>
+          <p><?php echo $allergies ?></p>
+        </div>
+        <div class="col">
+          <p class="card-text  mr-3"><strong>  Blood Type</strong></p>
+          <p><?php echo $blood_type ?> </p>
+      </div>
+    </div>
+     <?php if ($current_user_is_a_patient) {?>
+                  
+            <div class="col-md-12 text-center">
+            <a href='../profile/update-account.php' class="btn btn-outline-default mb-5 ">Update Profile</a>
+          </div>
+          <?php }?>
+      <div class="col mb-3" style="border-bottom: 1px solid #c8c9ca;">
+            </div>
+            <?php }?>
+    <h5 class="card-title fw-bold text-center"> <?php if (!$current_user_is_an_admin) {?>
+              
+                    <?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?>
+                 </h5>
                   <?php if (count($appointments_list) > 0) {
                     // if (FALSE) {
                     if ($admin_b) {
                       foreach ($appointments_list as $key => $value) { 
                   ?> 
-                        <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-6 fw-bold">
-                            Appointment Date
-                          </td>
-                          <td class="col-md-6">
+    <p class="card-text  mr-3"><strong> Appointment Date</strong></p>
+      Appointment Date
+                          
                             
                             <?php
                               $dtf2 = date_create($value['date']); 
                               echo date_format($dtf2,"F d, Y");  
                             ?>  
-                          </td>
-                          <td class="col-md-6 fw-bold">
+                        
                             Appointment Date
-                          </td>
-                          <td  class="col-md-6">
+                        
                             <?php
                               echo date_format($dtf2,"h:i A");  
                             ?>  
-                          </td>
-                          <td class="col-md-6 fw-bold">
+                         
                             Trimester
-                          </td>
-                          <td  class="col-md-6">
+                         
                             <?php
                               echo $value['trimester'];  
                             ?>  
-                          </td>
-                        </tr>   
+                         
                   <?php 
                       } //foreach
                     } else if (date($appointments_list[0]['date']) > $yester_date) { 
                   ?> 
-                      <tr  class="row col-xs-3 col-md-12 col-centered">
-                        <td class="col-md-6 fw-bold">
-                          Appointment Date
-                        </td>
-                        <td class="col-md-6">
-                          
+                      
+                          <p class="card-text  mr-3 "><strong>   Appointment Date</strong></p>
+                        
+                          <p class="mr-3 ">
                           <?php
                             $dtf2 = date_create($appointments_list[0]['date']); 
                             echo date_format($dtf2,"F d, Y");  
                           ?>  
-                        </td>
-                        <td class="col-md-6 fw-bold">
-                          Appointment Time
-                        </td>
-                        <td  class="col-md-6">
+                        </p>
+                          <p class="card-text  mr-3 "><strong> Appointment Time</strong></p>
+                        <p class="mr-3 ">
                           <?php
                             echo date_format($dtf2,"h:i A");  
                           ?>  
-                        </td>
-                        <td class="col-md-6 fw-bold">
-                          Trimester
-                        </td>
-                        <td  class="col-md-6">
+                          </p>
+                      <p class="card-text  mr-3 "><strong>
+                          Trimester</strong></p>
+                       <p class="">
                           <?php
                             echo $appointments_list[0]['trimester'];  
                           ?>  
-                        </td>
-                      </tr>  
+                        </p>
                   <?php  
                     } else { ?>
                       No Appointment
@@ -323,44 +331,86 @@ include_once('../php-templates/admin-navigation-head.php');
                   } else { ?> 
                       No Appointments
                   <?php } ?>
-                    </tr>
-                </tbody>
-              </table> 
+                  
+                 
            
-              <table class="table mt-4  table-responsive table-lg  table-hover display">
-                <thead class="table-light text-center" colspan="3">
-                  <tr> <th scope="col">Consultation Records</th> </tr>
-                </thead>
-                <tbody>
-                  <?php if (count($consultations_list) > 0) { 
+            
+            <?php }?> 
+  
+
+      </div>
+    </div>
+  </div>
+  <!-- Patient Medical History Admin Only -->
+  <?php if ($current_user_is_an_admin) {?>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Patient Medical History</h5>
+        <div class="row">
+          <div class="col">
+        <p class="card-text  mr-3"><strong>Height</strong></p>
+          <p><?php echo $height ?></p> 
+         </div> 
+         <div class="col">
+           <p class="card-text  mr-3"><strong>Weight</strong></p>
+          <p><?php echo $weight ?> kg</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+         <p class="card-text  mr-3"><strong> Family History</strong></p>
+          <p><?php echo $c_family_history ?> </p> 
+        </div>
+        <div class="col">
+          <p class="card-text  mr-3"><strong> Diagnosed Condition</strong></p>
+          <p><?php echo $diagnosed_condition ?></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          <p class="card-text  mr-3"><strong>  Allergies</strong></p>
+          <p><?php echo $allergies ?></p>
+        </div>
+        <div class="col">
+          <p class="card-text  mr-3"><strong>  Blood Type</strong></p>
+          <p><?php echo $blood_type ?> </p>
+      </div>
+    </div> 
+    
+      </div>
+    </div>
+  </div>
+  <?php }?>
+ <!-- Upcoming Appointment -->
+           
+                        
+   <?php if (!$current_user_is_an_admin) {?>                     
+  <div class="col-md-6">
+    <div class="card px-5">
+      <div class="card-body">
+        <h5 class="card-title fw-bold text-center mb-5 mt-5">Consultation Records</h5>
+         <?php if (count($consultations_list) > 0) { 
                       foreach ($consultations_list as $key => $value) { 
                   ?> 
-                        <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-3 fw-bold">
-                            Consultation Date
-                          </td>
-                          <td class="col-md-3 "> 
-                            <?php
+        <div class="row">
+          <div class="col">
+        <p class="card-text"><strong>Consultation Date</strong></p>
+         <p>  <?php
                               $dtf2 = date_create($value['date']); 
                               echo date_format($dtf2,"F d, Y");  
                             ?>  
-                          </td>
-                          <td class="col-md-3  fw-bold">
-                            Consultation Time
-                          </td>
-                    
-                      
-                          <td  class="col-md-3 ">
-                            <?php echo date_format($dtf2,"h:i A"); ?>  
-                          </td>  
-                        </tr> 
-                        <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-3  fw-bold">
-                            Trimester
-                          </td>
-                          <td  class="col-md-3 ">
-                            <?php echo $value['trimester']; ?>  
-                          </td> 
+                          </p>
+                        </div>
+           <div class="col">
+         <p class="card-text"><strong>Consultation Time</strong></p>  
+          <p> <?php echo date_format($dtf2,"h:i A"); ?>  </p>
+         </div> 
+        </div>
+        <div class="row">
+          <div class="col">
+          <p class="card-text"><strong>Trimester</strong></p>  
+          <p><?php echo $value['trimester']; ?>   
                           <?php //if ($value['treatment']!='') {?>
                             <!-- <td class="col-md-6 fw-bold">
                               Treatment
@@ -383,82 +433,71 @@ include_once('../php-templates/admin-navigation-head.php');
 
                             <?php //} ?>
                           
-                          <?php //}?>
-                          <?php if ($value['prescription']!='') {?>
-                            <td class="col-md-3 fw-bold">
-                              Prescription
-                            </td>
-                         
-                         
-                            <td  class="col-md-3 ">
+                          <?php //}?></p>
+                        </div>
+                        <div class="col">
+                <p class="card-text"><strong>Prescription</strong></p>  
+                <p> <?php if ($value['prescription']!='') {?>
                               <?php
                                 echo $value['prescription'];  
                               ?>  
-                            </td> 
-                          <?php }?>
-                          </tr> 
-                        <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-3  fw-bold">Gestation</td>
-                          <td  class="col-md-3"><?php echo $value['gestation']; ?></td> 
-                          <td class="col-md-3  fw-bold">Blood Pressure</td>
-                          <td  class="col-md-3"><?php echo $value['blood_pressure']; ?></td> 
-                        </tr>
-                        <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-3 fw-bold">
-                            Weight
-                          </td>
-                          <td  class="col-md-3">
-                            <?php echo $value['weight']; ?> kg  
-                          </td> 
-                          <td class="col-md-3 fw-bold">
-                            Height
-                          </td>
-                          <td  class="col-md-3">
-                            <?php echo $value['height_ft']."'".$value['height_in']."\""; ?>   
-                          </td> 
-                          </tr>
-                          <tr  class="row col-xs-3 col-md-12 col-centered">
-                          <td class="col-md-3 fw-bold">Nutritional Status</td>
-                          <td  class="col-md-3 "><?php echo $value['nutritional_status']; ?></td> 
-                          <td class="col-md-3  fw-bold">Status Analysis</td>
-                          <td  class="col-md-3 "><?php echo $value['status_analysis']; ?></td>
-                        </tr>
-                          <tr  class="row col-xs-3 col-md-12 col-centered"> 
-                          <td class="col-md-3  fw-bold">
-                            Advice
-                          </td>
-                          <td  class="col-md-3 ">
-                            <?php echo $value['advice']; ?>   
-                          </td> 
-                          <td class="col-md-3  fw-bold">
-                            Change Plan
-                          </td>
-                          <td  class="col-md-3">
-                            <?php echo $value['change_plan']; ?>   
-                          </td>  
-                        </tr>
-                        
-                        <tr  class="row col-xs-3 col-md-12 col-centered" style="padding-bottom: 60px;">
-                       
-                          <td class="col-md-3 fw-bold">
-                            Return Date
-                          </td>
-                          <td class="col-md-3 "> 
-                            <?php
-                              $dtf2 = date_create($value['date_return']); 
-                              echo date_format($dtf2,"F d, Y");  
-                            ?>  
-                          </td>
-                          <td class="col-md-3  fw-bold">
-                            Return Time
-                          </td>
-                         
-                         
-                          <td  class="col-md-3 " >
-                            <?php echo date_format($dtf2,"h:i A"); ?>  
-                          </td>
                           
-                          <?php if ($current_user_is_a_midwife) { ?>
+                          <?php }?>
+                        </p> 
+                      </div>
+                      </div>
+                  <div class="row">
+                    <div class="col">
+                <p class="card-text"><strong>Gestation</strong></p>  
+                <p><?php echo $value['gestation']; ?> </p>
+              </div>
+              <div class="col">
+                 <p class="card-text"><strong>Blood Pressure</strong></p>  
+                <p> <?php echo $value['blood_pressure']; ?>  </p>
+              </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                 <p class="card-text"><strong>Weight</strong></p>  
+                <p><?php echo $value['weight']; ?> kg   </p>
+              </div>
+              <div class="col">
+                 <p class="card-text"><strong>Height</strong></p>  
+                <p>   <?php echo $value['height_ft']."'".$value['height_in']."\""; ?></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="card-text"><strong> Nutritional Status</strong></p>  
+                <p> <?php echo $value['nutritional_status']; ?> </p>
+              </div>
+              <div class="col">
+                <p class="card-text"><strong> Status Analysis</strong></p>  
+                <p><?php echo $value['status_analysis']; ?> </p>
+               </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="card-text"><strong> Advice</strong></p>  
+                <p> <?php echo $value['advice']; ?>   </p>
+              </div>
+              <div class="col">
+                <p class="card-text"><strong> Change Plan</strong></p>  
+                <p><?php echo $value['change_plan']; ?>   </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                 <p class="card-text"><strong> Return Date</strong></p>  
+                <p><?php $dtf2 = date_create($value['date_return']); echo date_format($dtf2,"F d, Y");  ?></p>
+              </div>
+              <div class="col">
+                <p class="card-text"><strong> Return Time</strong></p> 
+                <p><?php echo date_format($dtf2,"h:i A"); ?> </p>
+              </div>
+            </div>
+             
+ <?php if ($current_user_is_a_midwife) { ?>
                             
                            <!-- tinanggal ko yung add consultation dito -->
                             <!-- <td class="col-md-12 fw-bold">
@@ -466,27 +505,34 @@ include_once('../php-templates/admin-navigation-head.php');
                             </td> -->
                           <?php } ?>
                         </tr> 
-                        
+                   
                   <?php 
                       } //foreach 
                   } else { ?> 
                       No Consultations
                   <?php } ?>
-                </tbody>
-              </table>
-            
-            
-            <?php }?> 
-            <!-- nag add ako ng print button dito -->
-              <?php if (!$current_user_is_an_admin) {?>
+                <?php }?>
+         <!-- nag add ako ng print button dito -->
+           <?php if (!$current_user_is_an_admin) {?>
             <div class="col-md-12 text-center">
             <a href='print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
           </div>
           <?php }?>
+             
           <br>
       <?php
           }
       ?>  
+      </div>
+    </div>
+  </div>
+  
+ 
+                  <!-- End -->
+             
+           
+           
+           
   
     </div>
   </div>
