@@ -78,7 +78,8 @@
         </a>
       </li>
       <li <?php echo $page == 'view_consultations' ? "class='hovered'":""?>>
-        <a <?php echo $page == 'view_consultations' ? "type='button'":'href="../consultations/view-consultations.php"'?>>
+        <a <?php echo $page == 'view_consultations' ? "type='button'":
+          ($current_user_is_a_midwife? 'href="../consultations/view-consultations.php"': 'href="../consultations/list.php"')?>>
             <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
             <span class="title">Consultations</span>
         </a>
