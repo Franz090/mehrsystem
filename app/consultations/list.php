@@ -60,6 +60,9 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
         'date' => $date,
       ));
     } 
+    if (!$name) {
+      header('location: ./view-consultations.php'); 
+    } 
     mysqli_free_result($result);
   } 
   else  { 

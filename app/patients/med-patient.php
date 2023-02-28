@@ -503,17 +503,21 @@ include_once('../php-templates/admin-navigation-head.php');
                    
                   <?php 
                       } //foreach 
+                  
+                  ?>
+                  <a href="../consultations/list.php<?php echo "?id=$id_from_get"?>">Go to List of Consultations</a>
+                   <!-- nag add ako ng print button dito -->
+                  <?php if (!$current_user_is_an_admin) {?>
+                    <div class="col-md-12 text-center">
+                      <a href='print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
+                    </div>
+                  <?php }?>
+                  <?php
                   } else { ?> 
                       No Consultations
-                  <?php } ?>
-                  <a href="../consultations/list.php<?php echo "?id=$id_from_get"?>">Go to List of Consultations</a>
+                  <?php } ?>  
                 <?php }?>
-         <!-- nag add ako ng print button dito -->
-           <?php if (!$current_user_is_an_admin) {?>
-            <div class="col-md-12 text-center">
-            <a href='print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
-          </div>
-          <?php }?>
+         
              
           <br>
       <?php
