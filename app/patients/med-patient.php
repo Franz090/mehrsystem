@@ -503,10 +503,13 @@ include_once('../php-templates/admin-navigation-head.php');
                    
                   <?php 
                       } //foreach 
+                  
+                  ?>
+                  <a href="../consultations/list.php<?php echo "?id=$id_from_get"?>">Go to List of Consultations</a>
+                  <?php
                   } else { ?> 
                       No Consultations
                   <?php } ?>
-                  <a href="../consultations/list.php<?php echo "?id=$id_from_get"?>">Go to List of Consultations</a>
                 <?php }?>
          <!-- nag add ako ng print button dito -->
            <?php if (!$current_user_is_an_admin) {?>
