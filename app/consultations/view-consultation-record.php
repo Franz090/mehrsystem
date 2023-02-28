@@ -5,23 +5,25 @@
 session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
-@include '../php-templates/redirect/not-for-patient.php';
 
-$id_from_get = $_GET['id'];
+// $id_from_get = $_GET['id'];
+$c_id_from_get = $_GET['c_id'];
+$session_id = $_SESSION['id'];
 // $redirect_condition = "not-for-patient"; 
 
 $admin_b = $admin==1;
 
 $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
-$midwife_sql = $admin==-1?'':($admin_b?'':"AND b.assigned_midwife=".$_SESSION['id']);
+$midwife_sql = $admin==-1?'':($admin_b?'':"AND b.assigned_midwife=$session_id");
+$sql_patient_id = $admin==-1?$session_id:'c.patient_id';
 // fetch patient
 $select = "SELECT  u.user_id,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS name,
   u.email,  
   IF(m.tetanus=0, 'Unvaccinated', 'Vaccinated') AS tetanus, m.b_date,  health_center,
-  CONCAT(height_ft, '\'', height_in, '\"') as height, weight, blood_type, diagnosed_condition, allergies, family_history,profile_picture 
-  FROM users as u, user_details as d, barangays as b, patient_details as m
-  WHERE u.user_id=$id_from_get AND d.user_id=u.user_id 
+  CONCAT(m.height_ft, '\'', m.height_in, '\"') as height, m.weight, blood_type, diagnosed_condition, allergies, family_history,profile_picture 
+  FROM users as u, user_details as d, barangays as b, patient_details as m, consultations as c
+  WHERE u.user_id=$sql_patient_id AND d.user_id=u.user_id AND c.consultation_id=$c_id_from_get
     AND m.barangay_id=b.barangay_id AND m.user_id=u.user_id AND b.archived=0 $midwife_sql";
 // echo $select; 
 if($result = mysqli_query($conn, $select))  {
@@ -58,32 +60,7 @@ else  {
   $error = 'Something went wrong fetching data from the database.'; 
 }  
 
-// all appointments
-
-$order = $admin_b?'DESC':'ASC';
-$date = $admin_b?'':"AND a.date>'$yester_date' ";
-$appointments_list = [];
-// fetch patient appointments 
-$select2_a = "SELECT a.date a_date, trimester
-  FROM appointments a
-  WHERE $user_id=a.patient_id AND a.status=1 $date
-  ORDER BY a.date $order";
-
-// echo $select2_a;  
-if($result2_a = mysqli_query($conn, $select2_a))  {
-  foreach($result2_a as $row)  {
-    $a_date = $row['a_date'];  
-    $trimester = $row['trimester'];  
-    array_push($appointments_list, array(
-      'date' => $a_date,
-      'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A'))
-    ));
-  } 
-  mysqli_free_result($result2_a);
-} 
-else  { 
-  $error = 'Something went wrong fetching data from the database.'; 
-}  
+ 
 
 // all consultations
 // $yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
@@ -93,11 +70,11 @@ $select2_b = "SELECT c.date, prescription, consultation_id id, gestation, blood_
   height_in, nutritional_status, status_analysis, advice, change_plan, date_return,
   CONCAT(d.first_name,IF(d.middle_name='' OR d.middle_name IS NULL, '', CONCAT(' ',SUBSTRING(d.middle_name,1,1),'.')),' ',d.last_name) AS midwife,
    trimester
-  FROM (SELECT * FROM consultations WHERE $user_id=patient_id ORDER BY date DESC) c 
+  FROM (SELECT * FROM consultations WHERE $user_id=patient_id AND $c_id_from_get=consultation_id ORDER BY date DESC) c 
   LEFT JOIN users u
     ON u.user_id=c.midwife_appointed
   LEFT JOIN user_details d
-    USING(user_id) LIMIT 1;";
+    USING(user_id);";
 
 // echo $select2_b;  
 if($result2_b = mysqli_query($conn, $select2_b))  {
@@ -148,7 +125,7 @@ else  {
 
 $conn->close(); 
 
-$page = 'med_patient';
+$page = 'view_consultation_record';
 
 include_once('../php-templates/admin-navigation-head.php');
 ?>
@@ -184,7 +161,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <!-- Patient Profile -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col-md-6">
-    <div class="card px-5">
+    <div class="card px-3">
      
         <div class="container-fluid d-flex justify-content-center mb-1">
               <img style="border: 1px solid #e5e5e5;width:50%;height:40%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
@@ -268,74 +245,6 @@ include_once('../php-templates/admin-navigation-head.php');
           <?php }?>
       <div class="col mb-3" style="border-bottom: 1px solid #c8c9ca;">
             </div>
-            <?php }?>
-    <h5 class="card-title fw-bold text-center"> <?php if (!$current_user_is_an_admin) {?>
-              
-                    <?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?>
-                 </h5>
-                  <?php if (count($appointments_list) > 0) {
-                    // if (FALSE) {
-                    if ($admin_b) {
-                      foreach ($appointments_list as $key => $value) { 
-                  ?> 
-    <p class="card-text  mr-3"><strong> Appointment Date</strong></p>
-      Appointment Date
-                          
-                            
-                            <?php
-                              $dtf2 = date_create($value['date']); 
-                              echo date_format($dtf2,"F d, Y");  
-                            ?>  
-                        
-                            Appointment Date
-                        
-                            <?php
-                              echo date_format($dtf2,"h:i A");  
-                            ?>  
-                         
-                            Trimester
-                         
-                            <?php
-                              echo $value['trimester'];  
-                            ?>  
-                         
-                  <?php 
-                      } //foreach
-                    } else if (date($appointments_list[0]['date']) > $yester_date) { 
-                  ?> 
-                      
-                          <p class="card-text  mr-3 "><strong>   Appointment Date</strong></p>
-                        
-                          <p class="mr-3 ">
-                          <?php
-                            $dtf2 = date_create($appointments_list[0]['date']); 
-                            echo date_format($dtf2,"F d, Y");  
-                          ?>  
-                        </p>
-                          <p class="card-text  mr-3 "><strong> Appointment Time</strong></p>
-                        <p class="mr-3 ">
-                          <?php
-                            echo date_format($dtf2,"h:i A");  
-                          ?>  
-                          </p>
-                      <p class="card-text  mr-3 "><strong>
-                          Trimester</strong></p>
-                       <p class="">
-                          <?php
-                            echo $appointments_list[0]['trimester'];  
-                          ?>  
-                        </p>
-                  <?php  
-                    } else { ?>
-                      No Appointment
-                    <?php }
-                  } else { ?> 
-                      No Appointments
-                  <?php } ?>
-                  
-                 
-           
-            
             <?php }?> 
   
 
@@ -346,9 +255,9 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php if ($current_user_is_an_admin) {?>
   <div class="col-md-6">
     <div class="card h-100">
-      <div class="card-body px-5">
-        <h5 class="card-title fw-bold px-5 text-center mt-4 mb-5">Patient Medical History</h5>
-        <div class="row ">
+      <div class="card-body">
+        <h5 class="card-title">Patient Medical History</h5>
+        <div class="row">
           <div class="col">
         <p class="card-text  mr-3"><strong>Height</strong></p>
           <p><?php echo $height ?></p> 
@@ -390,7 +299,7 @@ include_once('../php-templates/admin-navigation-head.php');
   <div class="col-md-6">
     <div class="card px-5">
       <div class="card-body">
-        <h5 class="card-title fw-bold text-center mb-5 mt-5">Consultation Records</h5>
+        <h5 class="card-title fw-bold text-center mb-5 mt-5">Consultation</h5>
          <?php if (count($consultations_list) > 0) { 
                       foreach ($consultations_list as $key => $value) { 
                   ?> 
@@ -498,7 +407,13 @@ include_once('../php-templates/admin-navigation-head.php');
               </div>
             </div>
              
- 
+ <?php if ($current_user_is_a_midwife) { ?>
+                            
+                           <!-- tinanggal ko yung add consultation dito -->
+                            <!-- <td class="col-md-12 fw-bold">
+                              <a href="../consultations/edit-consultation-record.php?id=<?php echo $value['id']?>">Update Consultation</a>
+                            </td> -->
+                          <?php } ?>
                         </tr> 
                    
                   <?php 
@@ -506,7 +421,6 @@ include_once('../php-templates/admin-navigation-head.php');
                   } else { ?> 
                       No Consultations
                   <?php } ?>
-                  <a href="../consultations/list.php<?php echo "?id=$id_from_get"?>">Go to List of Consultations</a>
                 <?php }?>
          <!-- nag add ako ng print button dito -->
            <?php if (!$current_user_is_an_admin) {?>

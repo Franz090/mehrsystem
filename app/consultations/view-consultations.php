@@ -8,7 +8,7 @@ session_start();
 
 @include '../php-templates/redirect/admin-page-setter.php';
 @include '../php-templates/redirect/patient-status-checker.php';
-@include '../php-templates/redirect/not-for-nurse.php';
+@include '../php-templates/redirect/midwife-only.php';
  
 // get assigned barangay of midwife
  
@@ -18,7 +18,7 @@ $session_id = $_SESSION['id'];
 
 $patient_list = []; 
 $consultation_list = [];
-if (count($_barangay_list)>0 && $admin==0 || $admin==-1) { 
+if (count($_barangay_list)>0) {// && $admin==0 || $admin==-1) { 
   // $yester_date = date("Y-m-d", strtotime('-1 day'));
   // fetch consultations 
   $barangay_select = '';
@@ -35,19 +35,19 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
       $barangay_select .= ") AND";
     }
   } 
-  $patient_str = $admin==-1?"AND $session_id=d.user_id":"";
   $select = "SELECT c.patient_id id, consultation_id c_id, CONCAT(d.first_name, 
   IF(d.middle_name IS NULL OR d.middle_name='', '', 
       CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
   ' ', d.last_name) name, health_center, date
   FROM consultations c, user_details d, barangays b, patient_details p
   WHERE c.patient_id=d.user_id AND b.barangay_id=p.barangay_id 
-    AND $barangay_select p.user_id=d.user_id $patient_str;";
-  
-  // echo $yester_date; 
+    AND $barangay_select p.user_id=d.user_id";
+  $final_select = "SELECT id, name, health_center, count(c_id) cons FROM ($select) con_list GROUP BY name;";
+  // echo $final_select;
+  // echo $yester_date;
 
   // echo $select;
-  if($result = mysqli_query($conn, $select))  {
+  if($result = mysqli_query($conn, $final_select))  {
     foreach($result as $row)  {
       $id = $row['id']; 
       $contact_num_select = "SELECT mobile_number FROM contacts WHERE type=1 AND owner_id=$id";
@@ -60,19 +60,15 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
         }
       }
       $c_no = $_contact_num;  
-      $c_id = $row['c_id'];  
       $name = $row['name'];   
-      // $treatment_file = $row['treatment_file']==null?"":substr($row['treatment_file'],15);   
-      $date = $row['date'];  
       $bgy = $row['health_center'];  
+      $cons = $row['cons'];  
       array_push($consultation_list, array(
         'id' => $id,
-        // 'treatment_file' => $treatment_file,
-        'c_id' => $c_id,
         'name' => $name,  
         'contact' => $c_no,
-        'date' => $date,
         'barangay' => $bgy,
+        'cons' => $cons,
       ));
     } 
     mysqli_free_result($result);
@@ -168,309 +164,272 @@ include_once('../php-templates/admin-navigation-head.php');
   <!-- Page Content -->
   <div class="main_nu">
     <?php include_once('../php-templates/admin-navigation-right.php'); ?>
-<style>
-  
-</style>
-<!-- modal -->
-<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-     <div class="modal-body">
-        <form class="m-5" action="" method="POST" id="new_consultation">
-          <?php
-            if (count($_barangay_list)==0) {
-          ?> 
-            You can't give consultations because you are not assigned to any barangay.
-          <?php
-            } else  if (count($patient_list)>0) { 
-              if(isset($error)) 
-                echo '<span class="form__input-error-message">'.$error.'</span>'; 
-            ?>
-            
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-            <div class="form__input-group">
-              <div class="mb-3"> <!-- patient -->
-                <label>Patient</label>
-
-                <!-- <select class="form-select" name="patient_id">]
-                  <?php
-                    //if (count($patient_list)>0) {
-                      //foreach ($patient_list as $key => $value) { 
-                  ?> 
-                    <option value="<?php //echo $value['id'];?>AND<?php //echo $value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
-                      <?php//echo $value['name'];?></option>
-                  <?php  
-                    //  }    
-                    //}
-                  ?>  
-                </select> -->
-                <!-- searchable select  -->
-                <div class="wrapper_ss">
-                  <div class="select-btn_ss">
-                    <span>Select A Patient</span>
-                    <i class="uil uil-angle-down"></i>
-                  </div>
-                  <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
-                  <div class="content_ss1">
-                    <div class="search_ss1">
-                     <ion-icon class="search-logo" name="search-outline"></ion-icon>
-                      <input spellcheck="false" type="text" placeholder="Search" class="ss" >
-                    </div>
-                    <ul class="options_ss"></ul>
-                  </div>
-                </div> 
-                </div>
-                </div>
-                <!-- end searchable select  --> 
-              </div> 
-              <div class="col-lg-6 col-md-6">
-              <div class=" mb-3" > <!-- trimester -->
-                <label>Nth Trimester</label>
-                <select class="form-select" name="trimester">
-                  <option  class="option" value="0">N/A</option>
-                  <option  class="option" value="1">1st (0-13 weeks)</option>
-                  <option  class="option" value="2">2nd (14-27 weeks)</option>
-                  <option  class="option" value="3">3rd (28-42 weeks)</option>
-                </select>
-              </div> 
+    <!-- modal -->
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Consultation</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
-
-
-           <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <div class=" mb-3"> <!-- gestation -->
-              <label>Age of Gestation*</label>
-                <input type="text" 
-                     class="form-control mt-2 mb-2"  name="gestation" required/>    
+          <div class="modal-body">
+            <form class="m-5" action="" method="POST" id="new_consultation">
+              <?php
+                if (count($_barangay_list)==0) {
+              ?> 
+                You can't give consultations because you are not assigned to any barangay.
+              <?php
+                } else  if (count($patient_list)>0) { 
+                  if(isset($error)) 
+                    echo '<span class="form__input-error-message">'.$error.'</span>'; 
+                ?>
                 
-                <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
-              </div>
-              </div>
-              <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- blood_pressure -->      
-                <label>Blood Pressure*</label>
-                <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
-              </div>
-              </div>
-            </div>
-              <!-- start -->
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
-                    <!-- Height -->
-                    <label>Height*</label>
-                  <div class="d-flex input-group">
-                    <input  min='0' type="number" 
-                      class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
-                       <div class="input-group-postpend">
-
-                        <div id="weight-height" class="input-group-text form__input text-white">
-                         ft</div>
-                    </div>
-      
-                    <input  min='0' max='11' type="number" 
-                       class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
-                       <div class="input-group-postpend">
-                  <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
-                  </div>
-                </div>
-              </div>
-                      </div>
-              <div class="col-lg-6 col-md-6">
-              <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
-                    <label>Weight*</label>
-                <div class="d-flex input-group">   
-                    <input type="number" class="form__input form-control" id="weight" name="weight" 
-                      placeholder="Weight*" required min='0'/>
-                      <div class="input-group-postpend">
-                    <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
-                  </div>
-                  </div>
-                      </div>
-                      </div>
-                      </div>
-                   <!-- end -->
                 <div class="row">
                   <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- date -->
-                <label>Consultation Date and Time*</label> 
-                <div class="input-group date" id="datepicker">
-                  <input class="form-control option" type="datetime-local" name="date" required /></div> 
-              </div>  
+                <div class="form__input-group">
+                  <div class="mb-3"> <!-- patient -->
+                    <label>Patient</label>
+
+                    <!-- <select class="form-select" name="patient_id">]
+                      <?php
+                        //if (count($patient_list)>0) {
+                          //foreach ($patient_list as $key => $value) { 
+                      ?> 
+                        <option value="<?php //echo $value['id'];?>AND<?php //echo $value['trimester'];?>" <?php //echo $key===0?'selected':'';?>>
+                          <?php//echo $value['name'];?></option>
+                      <?php  
+                        //  }    
+                        //}
+                      ?>  
+                    </select> -->
+                    <!-- searchable select  -->
+                    <div class="wrapper_ss">
+                      <div class="select-btn_ss">
+                        <span>Select A Patient</span>
+                        <i class="uil uil-angle-down"></i>
+                      </div>
+                      <input type="text" style="display:none;" name="patient_id" class="patient_id_trimester"/>
+                      <div class="content_ss1">
+                        <div class="search_ss1">
+                        <ion-icon class="search-logo" name="search-outline"></ion-icon>
+                          <input spellcheck="false" type="text" placeholder="Search" class="ss" >
+                        </div>
+                        <ul class="options_ss"></ul>
+                      </div>
+                    </div> 
+                    </div>
+                    </div>
+                    <!-- end searchable select  --> 
+                  </div> 
+                  <div class="col-lg-6 col-md-6">
+                  <div class=" mb-3" > <!-- trimester -->
+                    <label>Nth Trimester</label>
+                    <select class="form-select" name="trimester">
+                      <option  class="option" value="0">N/A</option>
+                      <option  class="option" value="1">1st (0-13 weeks)</option>
+                      <option  class="option" value="2">2nd (14-27 weeks)</option>
+                      <option  class="option" value="3">3rd (28-42 weeks)</option>
+                    </select>
+                  </div> 
               </div>
-              <div class="col-lg-6 col-md-6">
-              <div class=" mb-3"> <!-- nutritional_status -->
-                <label>Nutritional Status*</label>
-                <select class="form-select" name="nutritional_status">
-                  <option  class="option" value="Normal">Normal</option>
-                  <option  class="option" value="Underweight">Underweight</option>
-                  <option  class="option" value="Overweight">Overweight</option>
-                </select>
-              </div>
-            </div> 
-            </div>
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- status_analysis -->     
-                <label for="status_analysis">Status Analysis</label>
-                <textarea id="status_analysis" name="status_analysis" 
-                  class="form-control form-control-md w-100"></textarea> 
-              </div>
-              </div>
-              <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- advice -->     
-                <label for="advice">Advice</label>
-                <textarea id="advice" name="advice" 
-                  class="form-control form-control-md w-100"></textarea> 
-              </div>
-                </div>
             </div>
 
-             <div class="row">
-              <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- change_plan -->     
-                <label for="change_plan">Changes in Birth Plan</label>
-                <textarea id="change_plan" name="change_plan" 
-                  class="form-control form-control-md w-100"></textarea> 
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- prescription -->     
-                <label for="prescription">Prescription</label>
-                <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"> 
-                </textarea> 
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <div class=" mb-3"> <!-- gestation -->
+                  <label>Age of Gestation*</label>
+                    <input type="text" 
+                        class="form-control mt-2 mb-2"  name="gestation" required/>    
+                    
+                    <!-- <input id="gestation" name="gestation" class="" type="text" required/>  -->
+                  </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- blood_pressure -->      
+                    <label>Blood Pressure*</label>
+                    <input  name="blood_pressure" class="form-control mt-2 mb-2" type="text" required/> 
+                  </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <div class="mb-3"> <!-- date_return -->
-                <label>Date of Return*</label> 
-                <div class="input-group date" id="datepicker_return">
-                  <input class="form-control option" type="datetime-local" name="date_return" required/> 
-                </div>
+                  <!-- start -->
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                    <div class="form_input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">
+                        <!-- Height -->
+                        <label>Height*</label>
+                      <div class="d-flex input-group">
+                        <input  min='0' type="number" 
+                          class="form__input form-control" id="height_ft" name="height_ft" placeholder="Height*" required/>
+                          <div class="input-group-postpend">
+
+                            <div id="weight-height" class="input-group-text form__input text-white">
+                            ft</div>
+                        </div>
+          
+                        <input  min='0' max='11' type="number" 
+                          class="form__input form-control" id="height_in" name="height_in" placeholder="Inches*" required/> 
+                          <div class="input-group-postpend">
+                      <div id="weight-height" class=" input-group-text form__input text-white">inch(es) </div>
+                      </div>
+                    </div>
+                  </div>
+                          </div>
+                  <div class="col-lg-6 col-md-6">
+                  <div class="form__input-group" style="font-family:  'Open Sans', sans-serif;margin-bottom: 1rem;">  
+                        <label>Weight*</label>
+                    <div class="d-flex input-group">   
+                        <input type="number" class="form__input form-control" id="weight" name="weight" 
+                          placeholder="Weight*" required min='0'/>
+                          <div class="input-group-postpend">
+                        <div id="weight-height" class="w-100 input-group-text form__input text-white"> kg</div>
+                      </div>
+                      </div>
+                          </div>
+                          </div>
+                          </div>
+                      <!-- end -->
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- date -->
+                    <label>Consultation Date and Time*</label> 
+                    <div class="input-group date" id="datepicker">
+                      <input class="form-control option" type="datetime-local" name="date" required /></div> 
+                  </div>  
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                  <div class=" mb-3"> <!-- nutritional_status -->
+                    <label>Nutritional Status*</label>
+                    <select class="form-select" name="nutritional_status">
+                      <option  class="option" value="Normal">Normal</option>
+                      <option  class="option" value="Underweight">Underweight</option>
+                      <option  class="option" value="Overweight">Overweight</option>
+                    </select>
+                  </div>
                 </div> 
-              </div>
-              </div>  
-             
-          
-          <?php
-            } else {
-              ?>
-              There should be at least one patient (under your assigned barangay) available in the database.
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- status_analysis -->     
+                    <label for="status_analysis">Status Analysis</label>
+                    <textarea id="status_analysis" name="status_analysis" 
+                      class="form-control form-control-md w-100"></textarea> 
+                  </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- advice -->     
+                    <label for="advice">Advice</label>
+                    <textarea id="advice" name="advice" 
+                      class="form-control form-control-md w-100"></textarea> 
+                  </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- change_plan -->     
+                    <label for="change_plan">Changes in Birth Plan</label>
+                    <textarea id="change_plan" name="change_plan" 
+                      class="form-control form-control-md w-100"></textarea> 
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- prescription -->     
+                    <label for="prescription">Prescription</label>
+                    <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"> 
+                    </textarea> 
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <div class="mb-3"> <!-- date_return -->
+                    <label>Date of Return*</label> 
+                    <div class="input-group date" id="datepicker_return">
+                      <input class="form-control option" type="datetime-local" name="date_return" required/> 
+                    </div>
+                    </div> 
+                  </div>
+                  </div>  
+                
+              
               <?php
-            }
-          
-          
-          ?>
-        
-        </form>
-           </div>
-      <div class="modal-footer"> 
-        <button class="btn btn-primary" id="submit" type="submit" 
-          name="submit_consultation" form="new_consultation">Add Consultation</button>
+                } else {
+                  ?>
+                  There should be at least one patient (under your assigned barangay) available in the database.
+                  <?php
+                }
+              
+              
+              ?>
+            
+            </form>
+              </div>
+          <div class="modal-footer"> 
+            <button class="btn btn-primary" id="submit" type="submit" 
+              name="submit_consultation" form="new_consultation">Add Consultation</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- end modal -->
-
-
-    <div class="container-fluid default">
-
+    <!-- end modal --> 
+    <div class="container-fluid default"> 
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Consultations</h4>
-      <?php if ($current_user_is_a_midwife) { ?>
+      <?php 
+      if ($current_user_is_a_midwife) { ?>
         <div class="card-body">
           <div class="row">
             <div class="d-flex p-1 justify-content-between">
               <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add">Add Consultation</button>
-            </div>
-
+            </div> 
           </div>
         </div> 
-        <?php } ?>
-        <div class="table-padding table-responsive">
-      <?php if (count($_barangay_list)==0 && $admin==0){
-        echo '<span class="">There are no barangays assigned to you.</span>';
-      } else { ?> 
-         <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
-          <table  class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
-            <thead class="table-light" colspan="3">
-              <tr>
-                <th scope="col"  >#</th>
-                <?php if ($admin==0) { ?>  
+      <?php 
+      } ?>
+      <div class="table-padding table-responsive">
+        <?php 
+        if (count($_barangay_list)==0 && $admin==0){
+          echo '<span class="">There are no barangays assigned to you.</span>';
+        } else { ?> 
+          <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
+            <table  class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
+              <thead class="table-light" colspan="3">
+                <tr>
+                  <th scope="col"  >#</th>
                   <th scope="col" class="col-sm-2">Patient Name</th> 
-                <?php } ?>  
-                <!-- <th scope="col">Treatment File</th>   -->
-                <th scope="col">Barangay</th>  
-                <th scope="col" >Date and Time</th>
-                <?php if ($admin==0) { ?>  
+                  <th scope="col">Barangay</th>  
                   <th scope="col" class="col-sm-2">Contact Number(s)</th>
-                <?php } ?>  
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-                <?php 
-                  if (isset($error)) {
-                    echo '<span class="">'.$error.'</span>'; 
-                  } 
-                  else { 
-                    foreach ($consultation_list as $key => $value) {
-                ?>    
-                    <tr>
-                        <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
-                        <?php if ($admin==0) { ?>  
+                  <th scope="col" class="col-sm-2">Consultations</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <?php 
+                    if (isset($error)) {
+                      echo '<span class="">'.$error.'</span>'; 
+                    } 
+                    else { 
+                      foreach ($consultation_list as $key => $value) {
+                  ?>    
+                      <tr onclick="window.location='list.php?id=<?php echo $value['id']; ?>';"> 
+                          <th scope="row" class="th-number"><span><?php echo $key+1; ?></span></th>
                           <td class="td-bold"><?php echo $value['name']; ?></td>
-                        <?php } ?> 
-                        <?php //if ($value['treatment_file']=='') { ?>  
-                          <!-- <td>No File</td>  -->
-                        <?php //} else {?>  
-                          <!-- <td> <a target="_blank" style="color:#000;"
-                              href="./view-treatment-file.php?id=<?php //echo $value['treatment_file']?>">
-                              View Photo</a> 
-                          </td>  -->
-                        <?php //} ?> 
-                        <td><?php echo $value['barangay']; ?></td>
-                        <td><?php $dtf = date_create($value['date']); 
-                            echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                        <?php if ($admin==0) { ?>  
+                          <td><?php echo $value['barangay']; ?></td>
                           <td><?php echo $value['contact']; ?></td> 
-                        <?php } ?> 
-                        <td>
-                          <div class="p-1">
-                            <?php if ($current_user_is_a_midwife) {?>
-                              <a href="edit-consultation-record.php?id=<?php echo $value['c_id'] ?>"> 
-                              <!-- ginawa kong comment yung update-->
-                                <button class=" btn btn-success btn-sm btn-inverse">
-                                  Edit
-                                </button>
-                              </a>
-                            <?php }?>
-                            <a href="../patients/med-patient.php?id=<?php echo $value['id'] ?>">
-                              <button type="button" class="text-center btn btn-primary btn-sm btn-inverse ">View Report</button></a>
-                              <!-- <a href="cancel-appointment.php?id=<?php //echo $value['c_id'] ?>">
-                                <button class="btn btn-danger btn-sm btn-inverse">Cancel</button></a>  -->
-                          </div>
-                        </td>
-                    </tr>
-                <?php 
+                          <td><?php echo $value['cons']; ?></td>  
+                      </tr>
+                  <?php 
+                      }
                     }
-                  }
-                ?> 
-            </tbody>
-          </table>
-        </div>    
-      <?php } ?> 
-        </div>              
+                  ?> 
+              </tbody>
+            </table>
+          </div>    
+        <?php 
+        } ?> 
+      </div>              
       </div>
     </div>
+
   </div>
 </div>
 <script>
