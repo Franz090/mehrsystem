@@ -417,18 +417,19 @@ include_once('../php-templates/admin-navigation-head.php');
                         </tr> 
                    
                   <?php 
-                      } //foreach 
+                    } //foreach  
+                    // nag add ako ng print button dito
+                    if (!$current_user_is_an_admin) {?>
+                      <div class="col-md-12 text-center">
+                        <a href='../patients/print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
+                      </div>
+                    <?php 
+                    } 
                   } else { ?> 
                       No Consultations
                   <?php } ?>
                 <?php }?>
-         <!-- nag add ako ng print button dito -->
-           <?php if (!$current_user_is_an_admin) {?>
-            <div class="col-md-12 text-center">
-            <a href='print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
-          </div>
-          <?php }?>
-             
+      
           <br>
       <?php
           }
