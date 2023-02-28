@@ -183,7 +183,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <!-- Patient Profile -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col-md-6">
-    <div class="card px-3">
+    <div class="card px-5">
      
         <div class="container-fluid d-flex justify-content-center mb-1">
               <img style="border: 1px solid #e5e5e5;width:50%;height:40%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
@@ -345,9 +345,9 @@ include_once('../php-templates/admin-navigation-head.php');
   <?php if ($current_user_is_an_admin) {?>
   <div class="col-md-6">
     <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Patient Medical History</h5>
-        <div class="row">
+      <div class="card-body px-5">
+        <h5 class="card-title fw-bold px-5 text-center mt-4 mb-5">Patient Medical History</h5>
+        <div class="row ">
           <div class="col">
         <p class="card-text  mr-3"><strong>Height</strong></p>
           <p><?php echo $height ?></p> 
