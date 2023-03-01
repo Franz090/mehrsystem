@@ -1,6 +1,12 @@
-<?php 
-if ($current_user_is_a_midwife) { //closing bracket at the end of the file
-    
+<!-- Add style in calendar -->
+<style>
+    <?php include '../custom-calendar/calendar.css'; ?>
+</style>
+
+<!-- Add style in calendar -->
+<?php
+if ($current_user_is_a_midwife) {
+
     $midwife_condition_string = "role=-1 AND u.user_id=pd.user_id
     AND b.barangay_id=pd.barangay_id AND b.assigned_midwife=$session_id AND pd.status=1
     AND b.archived=0";
@@ -13,57 +19,54 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
 
     $select_appointments = "SELECT * 
         FROM appointments a, ($select_patients) p 
-            WHERE a.status=1 AND p.patient_id=a.patient_id";  
+            WHERE a.status=1 AND p.patient_id=a.patient_id";
     // echo $select_appointments;
     $sched_res = [];
-    if($result_appointments = mysqli_query($conn, $select_appointments))  { 
-        foreach($result_appointments as $row)  { 
-            $row['appointment_date'] = date("F d, Y h:i A",strtotime($row['date']));
-            $sched_res[$row['appointment_id']] = $row;   
-        } 
-        mysqli_free_result($result_appointments); 
-    } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
+    if ($result_appointments = mysqli_query($conn, $select_appointments)) {
+        foreach ($result_appointments as $row) {
+            $row['appointment_date'] = date("F d, Y h:i A", strtotime($row['date']));
+            $sched_res[$row['appointment_id']] = $row;
+        }
+        mysqli_free_result($result_appointments);
+    } else {
+        $error = 'Something went wrong fetching data from the database.';
+    }
 
     // total patients 
     $select_total_patients = "SELECT COUNT(u.user_id) c 
         FROM users u, patient_details pd, barangays b 
-        WHERE $midwife_condition_string" ;
+        WHERE $midwife_condition_string";
     $total_patients = 0;
-    if($result_total_patients = mysqli_query($conn, $select_total_patients))  { 
-        foreach($result_total_patients as $row)  { 
-            $total_patients = $row['c'];   
-        } 
-        mysqli_free_result($result_total_patients); 
-    } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
+    if ($result_total_patients = mysqli_query($conn, $select_total_patients)) {
+        foreach ($result_total_patients as $row) {
+            $total_patients = $row['c'];
+        }
+        mysqli_free_result($result_total_patients);
+    } else {
+        $error = 'Something went wrong fetching data from the database.';
+    }
     // appointments today 
     $select_appointments_today = "SELECT COUNT(a.appointment_id) c 
     FROM users u, patient_details pd, barangays b, appointments a 
     WHERE (a.date BETWEEN '$curr_date 00:00:00' AND '$curr_date 23:59:59') AND a.patient_id=u.user_id AND a.status=1 
         AND $midwife_condition_string";
     // echo $select_appointments_today;
-    if($result_appointments_today = mysqli_query($conn, $select_appointments_today))  {
-        foreach($result_appointments_today as $row)  { 
-            $appointments_today = $row['c'];   
-        } 
-        mysqli_free_result($result_appointments_today); 
-    } 
-    else  { 
-        $error = 'Something went wrong fetching data from the database.'; 
-    }   
+    if ($result_appointments_today = mysqli_query($conn, $select_appointments_today)) {
+        foreach ($result_appointments_today as $row) {
+            $appointments_today = $row['c'];
+        }
+        mysqli_free_result($result_appointments_today);
+    } else {
+        $error = 'Something went wrong fetching data from the database.';
+    }
 
     // get patients 
-    $patient_list = [];  
-    @include '../php-templates/midwife/get-assigned-barangays.php'; 
-    if (count($_barangay_list)>0) {
+    $patient_list = [];
+    @include '../php-templates/midwife/get-assigned-barangays.php';
+    if (count($_barangay_list) > 0) {
         $barangay_select = '';
-        $barangay_list_length_minus_1 = count($_barangay_list)-1;
-        foreach ($_barangay_list as $key => $value) { 
+        $barangay_list_length_minus_1 = count($_barangay_list) - 1;
+        foreach ($_barangay_list as $key => $value) {
             $barangay_select .= "p.barangay_id=$value ";
             if ($key < $barangay_list_length_minus_1) {
                 $barangay_select .= "OR ";
@@ -77,47 +80,42 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
             FROM users u, patient_details p, user_details ud
             WHERE role=-1 AND ($barangay_select) AND p.user_id=u.user_id AND ud.user_id=u.user_id";
         // fetch patients  
-        
+
         $result_patient = mysqli_query($conn, $select1);
-        
+
         if (mysqli_num_rows($result_patient)) {
-            foreach($result_patient as $row) {
-                $id = $row['user_id'];  
-                $name = $row['name'];  
-                $trimester = $row['trimester'];  
-                array_push($patient_list, array('id' => $id,'name' => $name,'trimester'=>$trimester));
-            } 
+            foreach ($result_patient as $row) {
+                $id = $row['user_id'];
+                $name = $row['name'];
+                $trimester = $row['trimester'];
+                array_push($patient_list, array('id' => $id, 'name' => $name, 'trimester' => $trimester));
+            }
             mysqli_free_result($result_patient);
             // print_r($result_barangay); 
-        } 
-        else  { 
+        } else {
             mysqli_free_result($result_patient);
-            $error = 'Something went wrong fetching data from the database.'; 
-        }    
-    } 
+            $error = 'Something went wrong fetching data from the database.';
+        }
+    }
     // submit add appointment
     @include '../php-templates/appointments/submit-add-appointment.php';
 
-    $conn->close();  
-?> 
-<style>
-    .text-main {
-        color: var(--green);
-    }
-</style>
-<div class="container-fluid default"> 
-    Midwife  <!-- cards -->
-    <div class="cardBoxs">
-                
-        <div class="cards">
-            <div>
-                <div class="number"><?php echo $total_patients ?> </div>
-                <div class="cardsNames">Total Number of Patients</div>
-            </div>
+    $conn->close();
+?>
 
-            <div class="iconBx">
-                <ion-icon name="people-outline"></ion-icon>
-            </div>
+    <div class="container-fluid default">
+        Midwife <!-- cards -->
+        <div class="cardBoxs">
+
+            <div class="cards">
+                <div>
+                    <div class="number"><?php echo $total_patients ?> </div>
+                    <div class="cardsNames">Total Number of Patients</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="people-outline"></ion-icon>
+                </div>
 
             </div>
             <div class="cards">
@@ -130,28 +128,56 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                 </div>
             </div>
 
-        </div> 
+        </div>
 
         <div class="container-fluid" id="page-container">
             <div class="row" style="width:100%;">
-                <div class="calendarBox"> 
-                 
+                <div class="calendarBox">
                     <div class="box">
-                        <h6 class="text-center"> Appointment Schedule Calendar</h6><br>
-                        <div id="calendar"></div>
-                        
-             
-                    <!-- <div class="col-md-3">
+                        <h6 class="text-center">Calendar Appointment Schedule</h6>
+                        <!-- <div id="calendar"></div> -->
+                        <?php
+                        include '../custom-calendar/calendar.php';
+                        $calendar = new Calendar(); // instance of calendar
+
+                        $yester_date = date('Y-m-d', strtotime('-1 days')); // get yesterday date
+                        $cur_date = date('Y-m-d'); // get current date
+
+                        // adding events
+                        // $calendar->add_event('Add Appointment', $cur_date, 1, 'green');
+                        // $calendar->add_event('Add Appointment', $cur_date, 1, 'green');
+                        // adding events
+
+                        echo $calendar; // displaying calendar
+                        ?>
+                    </div>
+                    <div class="col-md-3">
                         <div class="cardt rounded-0 shadow">
                             <div class="card-header bg-gradient bg-primary text-light">
                                 <h5 class="card-title">Add an Appointment</h5>
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
-                                    <form method="post" id="schedule-form">
+                                    <!-- <form method="post" id="schedule-form">
                                         <div class="form-group mb-2">
                                             <label for="patient" class="control-label">Patient</label>
-                                           
+                                            <select  class="form-select"  name="patient_id_trimester" id="patient">
+                                                <?php
+                                                // if (count($patient_list)>0) {
+                                                // foreach ($patient_list as $key => $value) { 
+                                                ?> 
+                                                    <option class="option" value="<?php // echo $value['id']."AND".$value['trimester'];
+                                                                                    ?>" <?php //echo $key===0?'selected':'';
+                                                                                        ?>>
+                                                        <?php // echo $value['name'];
+                                                        ?></option>
+                                                <?php
+                                                // }    
+                                                // }
+                                                ?>  
+                                            </select>
+                                            
+                                            searchable select 
                                             <div class="wrapper_ss">
                                                 <div class="select-btn_ss">
                                                     <span>Select A Patient</span>
@@ -170,19 +196,17 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                                             <input type="datetime-local" class="form-control form-control-sm rounded-0" 
                                                 name="date" id="start_datetime" required>
                                         </div>   
-                                    </form>
+                                    </form> -->
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="text-center">
-                                    <button class="btn btn-primary btn-sm rounded-0" 
-                                        type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
-                                    <button class="btn btn-default border btn-sm rounded-0" 
-                                        type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                                    <button class="btn btn-primary btn-sm rounded-0" type="submit" name="submit_appointment" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                                    <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <!-- Event Details Modal -->
@@ -190,39 +214,41 @@ if ($current_user_is_a_midwife) { //closing bracket at the end of the file
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content rounded-0">
                         <div class="modal-header rounded-0">
-                            <h5 class="modal-title fs-5">Appointment</h5> 
+                            <h5 class="modal-title">Appointment</h5>
                         </div>
                         <div class="modal-body rounded-0">
                             <div class="container-fluid">
                                 <dl>
-                                    <dt >Name</dt>
-                                    <dd id="title" class="text-md-start fs-6"></dd>
+                                    <dt class="text-muted">Name</dt>
+                                    <dd id="title" class="fw-bold text-md-start fs-6"></dd>
                                     <!-- <dt class="text-muted">Description</dt> -->
                                     <!-- <dd id="description" class=""></dd> -->
-                                    <dt >Appointment Date and Time</dt>
-                                    <dd id="start" class="text-md-start fs-6"></dd> 
+                                    <dt class="text-muted">Appointment Date and Time</dt>
+                                    <dd id="start" class=""></dd>
                                 </dl>
+                            </div>
+                        </div>
+                        <div class="modal-footer rounded-0">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-primary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                            </div>
+
                         </div>
                     </div>
-                <div class="modal-footer rounded-0">
-                    <div class="text-end">
-                        <button type="button" class="btn btn-primary btn-sm " data-bs-dismiss="modal">Close</button>
-                    </div>
-
                 </div>
+
             </div>
         </div>
 
-    </div>  
-</div> 
+
+        <script>
+            var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+            //   console.log(scheds)
+        </script>
 
 
-<script>
-    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
-//   console.log(scheds)
-</script>
- 
 
-<?php 
+
+    <?php
 }
-?>
+    ?>

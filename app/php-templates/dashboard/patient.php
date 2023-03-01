@@ -52,9 +52,24 @@
             <div class="row" style="width:100%;">
                 <div class="calendarBox"> 
                    
-                    <div class="box">
-                        <h6 class="text-center">Calendar Appointment Schedule</h6><br>
-                        <div id="calendar"></div>
+                <div class="box">
+                        <h6 class="text-center">Calendar Appointment Schedule</h6>
+                        <!-- <div id="calendar"></div> -->
+                        <?php
+                        include '../custom-calendar/calendar.php';
+                        $calendar = new Calendar(); // instance of calendar
+
+                        $yester_date = date('Y-m-d', strtotime('-1 days')); // get yesterday date
+                        $cur_date = date('Y-m-d'); // get current date
+
+                        // adding events
+                        // $calendar->add_event('Add Appointment', $cur_date, 1, 'green');
+                        // $calendar->add_event('Add Appointment', $cur_date, 1, 'green');
+                        // adding events
+
+                        echo $calendar; // displaying calendar
+                        ?>
+                    </div>
                  
                  
                 </div>
