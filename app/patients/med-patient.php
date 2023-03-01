@@ -97,7 +97,7 @@ $select2_b = "SELECT c.date, prescription, consultation_id id, gestation, blood_
   LEFT JOIN users u
     ON u.user_id=c.midwife_appointed
   LEFT JOIN user_details d
-    USING(user_id) LIMIT 1;";
+    USING(user_id) ORDER BY c.date DESC LIMIT 1;";
 
 // echo $select2_b;  
 if($result2_b = mysqli_query($conn, $select2_b))  {

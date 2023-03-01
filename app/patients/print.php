@@ -4,10 +4,16 @@
   @include '../includes/config.php';
 
   $user_id = $_GET['user_details_id'];
+  $c_id_str = "";
+  if (isset($_GET['c_id'])) { 
+    $c_id_str = "AND consultations.consultation_id=".$_GET['c_id']; 
+  }
 
+  $sql_select = "SELECT *, user_details.first_name, user_details.last_name FROM consultations 
+  INNER JOIN user_details ON consultations.patient_id = user_details.user_id WHERE user_details.user_id = $user_id $c_id_str";
+  // echo $sql_select;
   // query for selecting consultation and user details
-  $query = mysqli_query($conn,"SELECT *, user_details.first_name, user_details.last_name FROM consultations 
-                        INNER JOIN user_details ON consultations.patient_id = user_details.user_id WHERE user_details.user_id = $user_id");
+  $query = mysqli_query($conn, $sql_select);
 
   $cons_list = []; // array container for consultatio details
 
