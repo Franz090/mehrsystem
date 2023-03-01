@@ -89,7 +89,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <div class="mb-3">
                 <label>Appointment Date and Time*</label>
                 <div class="input-group date" id="datepicker">
-                  <input class="form-control option" type="datetime-local" name="date" id="date_picker" />
+                  <input class="form-control option" type="datetime-local" name="date" id="date" />
                 </div>
               </div>
             </form>
