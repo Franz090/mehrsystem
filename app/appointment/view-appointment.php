@@ -132,8 +132,8 @@ include_once('../php-templates/admin-navigation-head.php');
                   <!-- <th scope="col">Barangay</th>   -->
                   <th scope="col">Date and Time</th>
                   <!-- <th scope="col">Contact Number</th> -->
-                  <th scope="col">Actions</th>
                   <th scope="col">Status</th> 
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -150,16 +150,7 @@ include_once('../php-templates/admin-navigation-head.php');
                           <!-- <td><?php //echo $value['barangay']; ?></td> -->
                           <td><?php $dtf = date_create($value['a_date']); 
                               echo date_format($dtf,'F d, Y h:i A'); ?></td>
-                          <!-- <td><?php // echo $value['contact_no']; ?></td> -->
-                          <td>  
-                              <a href="../patients/med-patient.php?id=<?php echo $value['u_id'] ?>">
-                              <button type="button" type="button" class=" btn btn-primary btn-sm btn-inverse ">View Report</button></a> 
-                              <?php if ($value['status']==0)  { ?> 
-                                  <button type="button" class=" btn btn-danger btn-sm btn-inverse cancel-appointment" 
-                                  data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="0">
-                                    Cancel </button>
-                              <?php } ?> 
-                          </td>   
+                          <!-- <td><?php // echo $value['contact_no']; ?></td> --> 
                           <td>
                             <?php 
                               if($value['status'] == -1) {
@@ -173,6 +164,17 @@ include_once('../php-templates/admin-navigation-head.php');
                                
                             ?>
                           </td>
+                          <td>  
+                              <!-- <a href="../patients/med-patient.php?id=<?php //echo $value['u_id'] ?>">
+                              <button type="button" type="button" class=" btn btn-primary btn-sm btn-inverse ">View Report</button></a>  -->
+                              <?php if ($value['status']==0)  { ?> 
+                                  <button type="button" class=" btn btn-danger btn-sm btn-inverse cancel-appointment" 
+                                  data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf,'F d, Y h:i A'); ?>" data-patient="0">
+                                    Cancel </button>
+                              <?php } else {?> 
+                                No Actions
+                              <?php } ?> 
+                          </td>  
                       </tr>
                   <?php 
                       }

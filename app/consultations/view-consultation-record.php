@@ -421,7 +421,7 @@ include_once('../php-templates/admin-navigation-head.php');
                     // nag add ako ng print button dito
                     if (!$current_user_is_an_admin) {?>
                       <div class="col-md-12 text-center">
-                        <a href='../patients/print.php?user_details_id=<?php echo $user_id?>' class="btn btn-primary">Print</a>
+                        <a href='../patients/print.php?user_details_id=<?php echo $user_id?>&c_id=<?php echo $c_id_from_get?>' class="btn btn-primary">Print</a>
                       </div>
                     <?php 
                     } 
