@@ -170,7 +170,7 @@ include_once('../php-templates/admin-navigation-head.php');
                         ?>
                       </td>
                       <td>
-                        <--<a href="../patients/med-patient.php?id=<?php //echo $value['u_id'] ?>">
+                        <!-- <a href="../patients/med-patient.php?id=<?php //echo $value['u_id'] ?>">
                           <button type="button" type="button" class=" btn btn-primary btn-sm btn-inverse ">View Report</button></a> -->
                         <?php if ($value['status'] == 0) { ?>
                           <button type="button" class=" btn btn-danger btn-sm btn-inverse cancel-appointment" data-id="<?php echo $value['a_id'] ?>" data-date="<?php echo date_format($dtf, 'F d, Y h:i A'); ?>" data-patient="0">
