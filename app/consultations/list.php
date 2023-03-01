@@ -50,6 +50,7 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
 
   // echo $select;
   if($result = mysqli_query($conn, $select))  {
+    $name = false;
     foreach($result as $row) { 
       $c_id = $row['c_id'];   
       $name = $row['name'];   
@@ -60,7 +61,7 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
         'date' => $date,
       ));
     } 
-    if (!$name) {
+    if (!$name && $current_user_is_a_midwife) {
       header('location: ./view-consultations.php'); 
     } 
     mysqli_free_result($result);
