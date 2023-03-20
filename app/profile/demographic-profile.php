@@ -81,85 +81,115 @@ include_once('../php-templates/admin-navigation-head.php');
             echo '<span class="">'.$error.'</span>'; 
         else {
       ?>   
-        <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">Profile</h4> <br/>
-          <div>
-            <div class="container-fluid d-flex justify-content-center ">
-            <img  style="border: 1px solid #e5e5e5;width:20%;height:60%;" class="rounded-circle" src="../img/profile/<?php echo $profile_picture; ?>" 
-              alt="<?php echo $name; ?>" width="500" height="600">
-        </div>
-          </div>
+        
+         
           <!-- <button type="button" style="width: 20%;padding:2px;font-size:14px;color: white;" class="btn btn-primary text-right"> 
             <a href="./update-account.php" class="text-light" style=""> 
               Update Account Information
             </a>
           </button> -->
-        
-          <div class="table-padding table-responsive">
-            <div class="col-md-8 col-lg-12 " id="table-position">
-          <table class="text-center  table mt-5  table-responsive table-lg  table-hover display" id="datatables">
-            <thead class="table-light" colspan="3">
-              <tr>
-                  <th scope="col">Patient Profile </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="row col-xs-3 col-md-12 col-centered">
-                <td class="col-md-3 fw-bold">Patient Name</td>
-                <td class="col-md-3"><?php echo $name ?></td>
-                <td  class="col-md-3 fw-bold">Patient ID</td>
-                <td  class="col-md-3"><?php echo $id ?></td>
-              </tr>
-        
-        
-              <tr class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-3 fw-bold">Barangay</td>
-                <td class="col-md-3"><?php echo $bgy ?></td>
-                <td  class="col-md-3 fw-bold">Tetanus Toxoid</td>
-                <td  class="col-md-3"><?php echo $s ?></td>
-              </tr>
-      
-        
-              <tr class="row col-xs-3 col-md-12 col-centered">
-                <td  class="col-md-3 fw-bold">Contact Number</td>
-                <td  class="col-md-3"><?php echo $c_no ?></td>
-                <td  class="col-md-3 fw-bold">Date of Birth</td>
-                <td class="col-md-3"><?php  
+  <div class=" row m-2 my-4">
+          <div class="row ">
+  <div class="col-sm-6">
+    <div class="card px-3">
+      <div class="card-body">
+            <div class="container-fluid d-flex justify-content-center ">
+            <img  style="border: 1px solid #e5e5e5;width:50%;height:40%;" class="rounded-circle mb-2" src="../img/profile/<?php echo $profile_picture; ?>" 
+              alt="<?php echo $name; ?>" width="500" height="600">
+        </div>
+        <h5 class="card-title  fw-bold text-center  mb-4 mt-2">Patient Profile</h5>
+        <div class="row mb-2">
+          <div class="col-md-6">
+        <p class="card-text mr-3"> <strong>Patient Name</strong></p>
+         <p class="card-text"> <?php echo $name ?></p>
+        </div>
+        <div class="col-md-6">
+           <p class="card-text"> <strong> Patient ID</strong> </p>
+         <p class="card-text">  <?php echo $id ?></p>
+        </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+           <p class="card-text"><strong> Barangay</strong> </p>
+         <p class="card-text"> <?php echo $bgy ?></p>
+        </div>
+        <div class="col">
+           <p class="card-text"><strong> Tetanus Toxoid</strong></p>
+         <p class="card-text"> <?php echo $s ?></p>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <p class="card-text"><strong>  Contact Number</strong> </p>
+         <p class="card-text">   <?php echo $c_no ?></p>
+        </div>
+        <div class="col">
+          <p class="card-text"><strong>  Date of Birth</strong> </p>
+         <p class="card-text">  <?php  
                   $dtf1 = date_create($b_date); 
                   echo $b_date?date_format($dtf1,"F d, Y"):"No Data";  
-                ?></td>
-              </tr>
-            </tbody>
-          </table> 
+                ?></p>
+          </div>
+       </div>  
+      </div>
+    </div>
+  </div>
+
+
+  <!-- patient medical history -->
+
+  <div class="col-sm-6 ">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title fw-bold text-center  mb-4 mt-2">Patient Medical History </h5>
+        <!-- paragraphp text -->
+        <div class="row mb-2">
+          <div class="col">
+         <p class="card-text"><strong> Height</strong> </p>
+          <p class="card-text"><?php echo $height ?></p>
+        </div>
+
+         <div class="col">
+          <p class="card-text"><strong>    Weight</strong> </p>
+          <p class="card-text"> <?php echo $weight ?> kg</p>
+        </div>
+      </div>
+      <div class="row  mb-2">
+        <div class="col">
+           <p class="card-text"><strong>Diagnosed Condition</strong> </p>
+          <p class="card-text"> <?php echo $diagnosed_condition ?></p>
+        </div>
+        <div class="col">
+           <p class="card-text"><strong>  Allergies</strong> </p>
+          <p class="card-text">  <?php echo $allergies ?></p>
+        </div>
+      </div>
+      <div class="row  mb-2">
+      <div class="col">
+           <p class="card-text"><strong> Blood Type</strong> </p>
+          <p class="card-text"> <?php echo $blood_type ?></p>
+        </div>
+        <div class="col">
+           <p class="card-text"><strong>  Family History</strong> </p>
+          <p class="card-text"> <?php echo $c_family_history ?></p>
+           </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
         
-          <table class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
-            <thead class="table-light" colspan="3">
-            <tr>
-                <th scope="col">Patient Medical History </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3 fw-bold">Height</td>
-              <td class="col-md-3"><?php echo $height ?></td>
-              <td  class="col-md-3 fw-bold">Diagnosed Condition</td>
-              <td class="col-md-3"><?php echo $diagnosed_condition ?></td>
-            </tr>
-            <tr class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3 fw-bold">Weight</td>
-              <td  class="col-md-3"><?php echo $weight ?> kg</td>
-              <td  class="col-md-3 fw-bold">Allergies</td>
-              <td  class="col-md-3"><?php echo $allergies ?></td>
-            </tr >
-            <tr  class="row col-xs-3 col-md-12 col-centered">
-              <td  class="col-md-3 fw-bold">Blood Type</td>
-              <td class="col-md-3"><?php echo $blood_type ?></td> 
-               <td  class="col-md-3 fw-bold">Family History</td>
-              <td class="col-md-3"><?php echo $c_family_history ?></td> 
-              <tr>
-            </tbody>
-          </table>
-            <!-- nag add ako ng print button dito -->
-            
+
+      
+           
+             
+
+
+  
+         
+
+
+
           
             </div> 
           </div>     
@@ -168,7 +198,7 @@ include_once('../php-templates/admin-navigation-head.php');
             }
       ?>   
     </div>
- 
+          </div>
   </div>
 </div>   <!-- wrapper --> 
  

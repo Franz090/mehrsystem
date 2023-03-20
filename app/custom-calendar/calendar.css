@@ -1,10 +1,10 @@
-* {
+/* * {
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+} */
 body {
     background-color: #FFFFFF;
     margin: 0;
@@ -64,7 +64,7 @@ body {
 .calendar .header .month-year {
     font-size: 20px;
     font-weight: bold;
-    color: #176b93;
+    color: #352e35;
 }
 .calendar .days {
     display: flex;
@@ -72,14 +72,14 @@ body {
 }
 .calendar .days .day_name {
     width: calc(100% / 7);
-    border-right: 1px solid #349e82;
+    border-right: 1px solid #e6e9ea;
     padding: 20px;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
-    color: #818589;
-    color: #fff;
-    background-color: #039b72;
+    color: #817b81;
+
+    background-color: #ffffff;
 }
 .calendar .days .day_name:nth-child(7) {
     border: none;
@@ -130,7 +130,7 @@ body {
     border-left: 1px solid #e6e9ea;
 }
 .calendar .days .day_num:hover {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
 }
 .calendar .days .day_num.ignore {
     background-color: #fdfdfd;
@@ -143,9 +143,19 @@ body {
 }
 
 .months-locator #prev_month, .months-locator #next_month {
-    background-color: #039b72;
-    color: #fff;
+    background-color: #f0f0f0;
+    color: #4e474e;
     padding: 5px 10px;
     align-self: center;
     font-weight: bold;
+    border: 1px solid #ecf0f1;
 }
+.months-locator #next_month{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.months-locator #prev_month{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+

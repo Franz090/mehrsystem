@@ -243,7 +243,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <a href='../profile/update-account.php' class="btn btn-outline-default mb-5 ">Update Profile</a>
           </div>
           <?php }?>
-      <div class="col mb-3" style="border-bottom: 1px solid #c8c9ca;">
+      <div class="col mb-2" style="border-bottom: 1px solid none;">
             </div>
             <?php }?> 
   

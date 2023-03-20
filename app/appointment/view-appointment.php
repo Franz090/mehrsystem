@@ -12,6 +12,12 @@ $session_id = $_SESSION['id'];
 $appointment_list = [];
 $yester_date = date("Y-m-d", strtotime('-1 day'));
 
+
+$admin_b = $admin==1;
+$u_id = $yester_date;
+$yester_date = date("Y-m-d H:i:s", strtotime('-1 day'));
+$midwife_sql = $admin==-1?'':($admin_b?'':"AND b.assigned_midwife=".$_SESSION['id']);
+
 $select = "SELECT CONCAT(d.first_name, 
   IF(d.middle_name IS NULL OR d.middle_name='', '', 
       CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
@@ -42,7 +48,33 @@ if ($result = mysqli_query($conn, $select)) {
       'barangay' => $bgy
     ));
   }
-  mysqli_free_result($result);
+    mysqli_free_result($result);
+} 
+else  { 
+  $error = 'Something went wrong fetching data from the database.'; 
+}  
+
+// all appointments
+
+$order = $admin_b?'DESC':'ASC';
+$date = $admin_b?'':"AND a.date>'$yester_date' ";
+$appointments_list = [];
+// fetch patient appointments 
+$select2_a = "SELECT a.date a_date, trimester
+  FROM appointments a
+  WHERE $u_id=a.patient_id AND a.status=1 $date
+  ORDER BY a.date $order";
+
+// echo $select2_a;  
+if($result2_a = mysqli_query($conn, $select2_a))  {
+  foreach($result2_a as $row)  {
+    $a_date = $row['a_date'];  
+    $trimester = $row['trimester'];  
+    array_push($appointments_list, array(
+      'date' => $a_date,
+      'trimester' => $trimester==1?'1st Trimester':($trimester==2?'2nd Trimester':($trimester==3?'3rd Trimester':'N/A'))
+    ));
+  } 
 } else {
   mysqli_free_result($result);
   $error = 'Something went wrong fetching data from the database.';
@@ -119,7 +151,10 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><br>
         <h4 class="fw-bolder ">Appointments</h4><br>
         <div class="d-flex justify-content-between">
+          <div class=" align-items-start">
           <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#searchSchedule">Search Availability</button>
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#upcomingAppointment">Upcoming Appointment</button>
+    </div>
 
           <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add"> Add Appointment </button>
 
@@ -194,7 +229,90 @@ include_once('../php-templates/admin-navigation-head.php');
 
   </div>
 </div>
-
+<!-- start upcoming appointment modal -->
+<div class="modal fade" id="upcomingAppointment" aria-hidden="true" aria-labelledby="upcomingAppointment" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content px-3 m-5 pb-3 text-center">
+      <div class="modal-header ">
+        <div class="col-md-6 col-lg-12 text-center ">
+        <h1 class="modal-title fs-5 text-center" > <?php echo $admin_b?"Appointment Records":"Upcoming Appointment" ?> </h1></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">     
+                    <?php if (!$current_user_is_an_admin) {?>
+                  <?php if (count($appointments_list) > 0) {
+                    // if (FALSE) {
+                    if ($admin_b) {
+                      foreach ($appointments_list as $key => $value) { 
+                  ?> 
+    <p class="card-text  mr-3 "><strong> Appointment Date</strong></p>
+      Appointment Date
+                          
+                            
+                            <?php
+                              $dtf2 = date_create($value['date']); 
+                              echo date_format($dtf2,"F d, Y");  
+                            ?>  
+                        
+                            Appointment Date
+                        
+                            <?php
+                              echo date_format($dtf2,"h:i A");  
+                            ?>  
+                         
+                            Trimester
+                         
+                            <?php
+                              echo $value['trimester'];  
+                            ?>  
+                         
+                  <?php 
+                      } //foreach
+                    } else if (date($appointments_list[0]['date']) > $yester_date) { 
+                  ?> 
+                      
+                          <p class="card-text  mr-3 "><strong>   Appointment Date</strong></p>
+                        
+                          <p class="mr-3 ">
+                          <?php
+                            $dtf2 = date_create($appointments_list[0]['date']); 
+                            echo date_format($dtf2,"F d, Y");  
+                          ?>  
+                        </p>
+                          <p class="card-text  mr-3 "><strong> Appointment Time</strong></p>
+                        <p class="mr-3 ">
+                          <?php
+                            echo date_format($dtf2,"h:i A");  
+                          ?>  
+                          </p>
+                      <p class="card-text  mr-3 "><strong>
+                          Trimester</strong></p>
+                       <p class="">
+                          <?php
+                            echo $appointments_list[0]['trimester'];  
+                          ?>  
+                        </p>
+                  <?php  
+                    } else { ?>
+                      No Appointment
+                    <?php }
+                  } else { ?> 
+                      No Appointments
+                  <?php } ?>
+                  
+                 
+           
+            
+            <?php }?> 
+  
+      </div>
+      <!-- <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- end upcoming appointment modal -->
 <div class="modal fade" id="searchSchedule" tabindex="-1" aria-labelledby="searchSchedule" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -231,8 +349,8 @@ $date_sched_array = $onloadData->getAppointmentByAssignedMidwife();
     $('#datatables').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [
-        [10, 25, 30, 50, -1],
-        [10, 25, 30, 50, "All"]
+        [ 30, 50, -1],
+        [ 30, 50, "All"]
       ],
       destroy: true,
       fixedColumns: true,

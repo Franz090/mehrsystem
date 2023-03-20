@@ -244,11 +244,11 @@ class Calendar
                 if (strtotime($this->active_year . '-' . $this->active_month . '-' . $i) >= strtotime(date('Y-m-d'))) {
                     // display add button
                     $html .= '<button class="event blue" onclick="showApt(\'' . date('Y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i)) . '\')">';
-                    $html .= "$num_appts / 15 Appointments";
+                    $html .= "$num_appts / 18 Appointments";
                     $html .= '</button>';
 
-                    // //  display add appointment button appointment count is not greater than 15
-                    if($num_appts < 15)
+                    // //  display add appointment button appointment count is not greater than 18
+                    if($num_appts < 18)
                     {
                         $html .= '<button class="event green" onclick="addApt(\'' . date('Y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i)) . '\');">';
                         $html .= "Add Appointment";
@@ -258,7 +258,7 @@ class Calendar
                 else {
                     // display appointment button only
                     $html .= '<button class="event blue" onclick="showApt(\'' . date('Y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i)) . '\')">';
-                    $html .= "$num_appts / 15 Appointments";
+                    $html .= "$num_appts / 18 Appointments";
                     $html .= '</button>';
                 }
             }

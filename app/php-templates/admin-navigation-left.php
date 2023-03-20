@@ -118,9 +118,9 @@
     if (!$current_user_is_an_admin) {?>
 
       <li <?php echo $page == 'notification' ? "class='hovered'":""?>>
-        <a href="../notification">
+        <a href="../log-appointment">
               <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
-              <span class="title">Notification 
+              <span class="title">Appointment Log
                 <?php $notifCount ? print_r("<span style='font-size:10px;position:relative;bottom:8px;right:2px;font-family:'Arial,sans-serif;' class='badge bg-danger ml-1'>".$notifCount."</span>") : "";?>
               </span>
           </a>

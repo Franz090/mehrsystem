@@ -87,7 +87,7 @@ include_once('../php-templates/admin-navigation-head.php');
       <div class="background-head row m-2 my-4"><h4 class="pb-3 m-3 fw-bolder ">
           <?php echo $current_user_is_a_patient?'My ':''?>Consultations<?php echo $current_user_is_a_midwife?" of $name":''?></h4>
           <?php if ($current_user_is_a_midwife) {?> 
-            <p><a href="view-consultations.php">Go to Consultations (List of Patients)</a></p>
+            <p><a href="view-consultations.php" class="fw-bold" style="color:#352e35;"><button class="btn-outline-default btn-sm btn">Go to Consultations (List of Patients)</button></a></p>
           <?php } ?>
         <div class="table-padding table-responsive">
           <?php 

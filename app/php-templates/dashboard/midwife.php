@@ -134,7 +134,7 @@ if ($current_user_is_a_midwife) {
             <div class="row" style="width:100%;">
                 <div class="calendarBox">
                     <div class="box">
-                        <h6 class="text-center">Calendar Appointment Schedule</h6>
+                        <!-- <h6 class="text-center">Calendar Appointment Schedule</h6> -->
                         <!-- <div id="calendar"></div> -->
                         <?php
                         include '../custom-calendar/calendar.php';

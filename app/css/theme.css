@@ -2058,7 +2058,7 @@ fieldset:disabled .btn {
 .btn-check:focus+.btn-danger,
 .btn-danger:focus {
     color: whitesmoke !important;
-    background-color: #1f1313;
+    background-color: #793535!important;
     border-color: #de5052;
    box-shadow: none!important;
 }
@@ -2233,7 +2233,7 @@ fieldset:disabled .btn {
 .btn-outline-default:hover {
     color: #495057!important;
     background-color: #f7f7f7!important;
-    border-color: #d1cbcb !important;
+    border-color: #dfdbdb !important;
 }
 
 .btn-check:focus+.btn-outline-default,
