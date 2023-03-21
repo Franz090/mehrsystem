@@ -133,7 +133,7 @@ body {
     background-color: #ffffff;
 }
 .calendar .days .day_num.ignore {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: #ced2d4;
     cursor: inherit;
 }
