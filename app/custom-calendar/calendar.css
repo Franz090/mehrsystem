@@ -72,7 +72,7 @@ body {
 }
 .calendar .days .day_name {
     width: calc(100% / 7);
-    border-right: 1px solid #e6e9ea;
+   
     padding: 20px;
     text-transform: uppercase;
     font-size: 15px;
@@ -88,8 +88,9 @@ body {
     display: flex;
     flex-flow: column;
     width: calc(100% / 7);
-    border-right: 1px solid #e6e9ea;
-    border-bottom: 1px solid #e6e9ea;
+    border-right: 1px solid #ebf1f3;
+    border-bottom: 1px solid #ebf1f3;
+    border-top: 1px solid #ebf1f3;
     padding: 15px;
     font-weight: bold;
     color: #7c878d;
@@ -127,7 +128,7 @@ body {
     background-color: #ce5151;
 }
 .calendar .days .day_num:nth-child(7n+1) {
-    border-left: 1px solid #e6e9ea;
+    border-left: 1px solid #ebf1f3;
 }
 .calendar .days .day_num:hover {
     background-color: #ffffff;
