@@ -1,6 +1,22 @@
 <?php 
   if ($current_user_is_a_patient) { //closing bracket at the end of the file
     if ($status) {
+      // get assigned midwife id 
+      $select_mw_of_brgy = "SELECT assigned_midwife 
+        FROM (SELECT barangay_id FROM patient_details LEFT JOIN `users` USING (user_id) WHERE user_id = $session_id) p 
+          LEFT JOIN 
+          barangays 
+        USING (barangay_id)";
+      // echo $select_mw_of_brgy;
+      if ($result_mw_of_brgy = mysqli_query($conn, $select_mw_of_brgy)) {
+          foreach ($result_mw_of_brgy as $row) {
+              $m_id = $row['assigned_midwife']; 
+          }
+          mysqli_free_result($result_mw_of_brgy);
+      } else {
+          $error = 'Something went wrong fetching data from the database.';
+          echo $error;
+      } 
   ?>
   <style>
     .text-main {
@@ -57,7 +73,7 @@
                         <!-- <div id="calendar"></div> -->
                         <?php
                         include '../custom-calendar/calendar.php';
-                        $calendar = new Calendar(); // instance of calendar
+                        $calendar = new Calendar(null, $m_id); // instance of calendar
 
                         $yester_date = date('Y-m-d', strtotime('-1 days')); // get yesterday date
                         $cur_date = date('Y-m-d'); // get current date
