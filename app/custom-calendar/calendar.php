@@ -159,12 +159,11 @@
 class Calendar
 {
 
-    private $active_year, $active_month, $active_day;
+    private $active_year, $active_month, $active_day, $_midwife_id;
     private $events = [];
-
-    public function __construct($date = null)
+    public function __construct($date = null, $midwife_id)
     {
-        
+        $this->_midwife_id=$midwife_id;
         // check if it was a custom date in a calendar
         if(isset($_GET["date"])) {
             $date= $_GET["date"];
@@ -191,6 +190,7 @@ class Calendar
 
     public function __toString()
     {
+        $midwife_id = $this->_midwife_id;
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
         $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
         $days = [0 => 'Sun', 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri', 6 => 'Sat'];
@@ -236,7 +236,10 @@ class Calendar
 
                 // query for counting appointment for the day
                 $date_str = $this->active_year . '-' . $this->active_month . '-' . $i;
-                $num_appts_query = "SELECT COUNT(*) AS num_appts FROM appointments WHERE DATE(date) = '$date_str' AND status = 1";
+                $num_appts_query = "SELECT COUNT(*) AS num_appts 
+                    FROM appointments a, barangays b, patient_details p
+                    WHERE DATE(date) = '$date_str' AND a.status = 1 AND a.patient_id = p.user_id
+                        AND p.barangay_id = b.barangay_id AND b.assigned_midwife = $midwife_id";
                 $num_appts_result = mysqli_query($conn, $num_appts_query);
                 $num_appts = mysqli_fetch_assoc($num_appts_result)['num_appts'];
 

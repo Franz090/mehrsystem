@@ -138,7 +138,7 @@ if ($current_user_is_a_midwife) {
                         <!-- <div id="calendar"></div> -->
                         <?php
                         include '../custom-calendar/calendar.php';
-                        $calendar = new Calendar(); // instance of calendar
+                        $calendar = new Calendar(null, $session_id); // instance of calendar
 
                         $yester_date = date('Y-m-d', strtotime('-1 days')); // get yesterday date
                         $cur_date = date('Y-m-d'); // get current date

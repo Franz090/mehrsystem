@@ -43,37 +43,30 @@ if(isset($_POST['submit'])) {
                 $role_from_db = $row['role']; 
                 $profile_pic_from_db = $row['profile_picture']; 
             } 
-            
-            // if ($status_from_db==0) {
-            //     $error = 'Your account is not activated.';
-            //     mysqli_free_result($result);
-            // }
-            // else {
-                $_SESSION['id'] = $id_from_db;
-                $_SESSION['usermail'] = $email;
-                $_SESSION['name'] = $name_from_db;
-                $_SESSION['role'] = $role_from_db;
-                $_SESSION['profile_picture'] = $profile_pic_from_db;
-                // $_SESSION['status'] = $status_from_db;
+            $_SESSION['id'] = $id_from_db;
+            $_SESSION['usermail'] = $email;
+            $_SESSION['name'] = $name_from_db;
+            $_SESSION['role'] = $role_from_db;
+            $_SESSION['profile_picture'] = $profile_pic_from_db;
+            // $_SESSION['status'] = $status_from_db;
               
      
     
-                // if patient, get the barangay 
-                if ($role_from_db==-1) {
-                    mysqli_free_result($result);
-                    $select = "SELECT barangay_id FROM users LEFT JOIN patient_details 
-                        USING (user_id)";  
-                    $result = mysqli_query($conn, $select);
-                    if((mysqli_num_rows($result) > 0)) {  
-                        foreach($result as $row)  { 
-                            $barangay_id_from_db = $row['barangay_id']; 
-                        } 
-                        $_SESSION['barangay_id'] = $barangay_id_from_db;
-                    }
-                }
+            // if patient, get the barangay 
+            if ($role_from_db==-1) {
                 mysqli_free_result($result);
-                header('location: ./dashboard'); 
-            // } 
+                $select = "SELECT barangay_id FROM users LEFT JOIN patient_details 
+                    USING (user_id) WHERE user_id = $id_from_db";  
+                $result = mysqli_query($conn, $select);
+                if((mysqli_num_rows($result) > 0)) {  
+                    foreach($result as $row)  { 
+                        $barangay_id_from_db = $row['barangay_id']; 
+                    } 
+                    $_SESSION['barangay_id'] = $barangay_id_from_db;
+                }
+            }
+            mysqli_free_result($result);
+            header('location: ./dashboard');
         } 
     } 
 } 
