@@ -6,22 +6,29 @@
 
     $date = $_POST["date"]; // get selected date
 
-    // check what select query is going to use
-    if($role == 0)
-        // midwife side query
-        $query = "SELECT appointments.patient_id, appointments.date, CONCAT(user_details.first_name, ' ', user_details.last_name)
-                AS patient_name FROM appointments 
-                INNER JOIN user_details ON appointments.patient_id = user_details.user_id
-                WHERE date LIKE '$date%' AND status = 1
-                ORDER BY appointments.date ASC";
-    else 
-        // patient side query
-        $query = "SELECT appointments.date, CONCAT(user_details.first_name, ' ', user_details.last_name) AS patient_name 
-                FROM appointments 
-                INNER JOIN user_details ON appointments.patient_id = user_details.user_id
-                WHERE date LIKE '$date%' AND patient_id = $_SESSION[id] AND status = 1
-                ORDER BY appointments.date ASC";
-
+    // check what select query is going to use 
+    $query = $role == 0 ? 
+    // midwife side query
+        // "SELECT appointments.patient_id, appointments.date, CONCAT(user_details.first_name, ' ', user_details.last_name)
+        //     AS patient_name FROM appointments 
+        //     INNER JOIN user_details ON appointments.patient_id = user_details.user_id
+        //     WHERE date LIKE '$date%' AND status = 1
+        //     ORDER BY appointments.date ASC" 
+        "SELECT a.patient_id, a.date, p.patient_name
+            FROM appointments a 
+                RIGHT JOIN 
+                    (SELECT ud.user_id, CONCAT(ud.first_name, ' ', ud.last_name) patient_name 
+                    FROM user_details ud, patient_details pd, barangays b 
+                    WHERE b.barangay_id = pd.barangay_id AND b.assigned_midwife = $_SESSION[id] AND pd.user_id = ud.user_id) 
+                p ON a.patient_id = p.user_id
+            WHERE a.date LIKE '$date%' AND a.status = 1 ORDER BY a.date ASC"
+        :
+    // patient side query
+        "SELECT appointments.date, CONCAT(user_details.first_name, ' ', user_details.last_name) AS patient_name 
+            FROM appointments 
+            INNER JOIN user_details ON appointments.patient_id = user_details.user_id
+            WHERE date LIKE '$date%' AND patient_id = $_SESSION[id] AND status = 1
+            ORDER BY appointments.date ASC";
     // get result
     $result = mysqli_query($conn, $query);
 
