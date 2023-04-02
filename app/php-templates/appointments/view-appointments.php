@@ -30,7 +30,7 @@ if (count($_barangay_list) > 0) {
     ' ', i.last_name) name, health_center, date
   FROM appointments a, user_details i, barangays b, patient_details p
   WHERE a.patient_id=i.user_id AND b.barangay_id=p.barangay_id 
-    AND p.user_id=i.user_id AND a.date>='$yester_date 00:00:00'
+    AND p.user_id=i.user_id AND a.date>'$yester_date 00:00:00'
     AND ($barangay_select)  AND b.assigned_midwife=$session_id
     AND a.status=" . ($pending ? 0 : 1) . " ORDER BY a.date DESC;";
 
