@@ -61,8 +61,9 @@ if (count($_barangay_list)>0 && $admin==0 || $admin==-1) {
         array_push($infant_list, array(
         'id' => $id,
         'name' => $name, 
-        'status' => ($c_vaccinations==$complete_shots_of_vaccines
-            ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
+        // 'status' => ($c_vaccinations==$complete_shots_of_vaccines
+        //     ?'Completed':("Incomplete (" . ($c_vaccinations?$c_vaccinations:'0')."/$complete_shots_of_vaccines)"))));
+        'status' => $c_vaccinations?$c_vaccinations:'0'));
     } 
     mysqli_free_result($result_infant_list);
     // print_r($nurse_list);
@@ -141,7 +142,7 @@ include_once('../php-templates/admin-navigation-head.php');
               <tr>
                 <th scope="col" >#</th>
                 <th scope="col">Infant Birth Names</th> 
-                <th scope="col">Vaccination Status</th>
+                <th scope="col">Total Number of Vaccines</th>
             <?php if ($current_user_is_a_midwife) { ?> 
                 <th scope="col">Action</th>
             <?php } ?> 

@@ -103,7 +103,7 @@ if (isset($_POST['submit'])) {
 
         if (mysqli_query($conn, $up))  {
             echo "<script>alert('Vaccination Updated!');</script>";
-            header("Location: ../dashboard");
+            header("Location: ../infant/infant-vacc-record.php?id=$infant_id_from_get");
         }
         else { 
             $error .= 'Something went wrong updating vaccination in the database.';
@@ -142,7 +142,7 @@ include_once('../php-templates/admin-navigation-head.php');
             <div class="mb-3">
                 <label>Vaccination Date*</label> 
                  <div class="input-group date" id="datepicker">
-                    <input class="form-control option pt-2 pb-2" value="<?php echo $m_date?>" type="datetime-local" name="date" required />
+                    <input class="form-control option pt-2 pb-2" value="<?php echo $m_date?>" type="date" name="date" required />
                 </div>
             </div>    
 

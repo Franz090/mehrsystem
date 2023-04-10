@@ -138,7 +138,7 @@ include_once('../php-templates/admin-navigation-head.php');
                 <label>Vaccination Date*</label> 
                   <div class="mb-3">
                     <div class="input-group date" id="datepicker">
-                    <input class="form-control option pt-2 pb-2" type="datetime-local" name="date" required />
+                    <input class="form-control option pt-2 pb-2" type="date" name="date" required />
                 </div>
             </div>    
 
