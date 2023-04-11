@@ -28,7 +28,7 @@ function vaccine_name($num) {
     if ($num==6)
         return "Pnueumococcal Conjugate";
     if ($num==7)
-        return "Measles, Mumps, and Rubelia";
+        return "Measles, Mumps, and Rubella";
     return "Error";
 }
 
