@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2023 at 10:53 AM
+-- Generation Time: Apr 10, 2023 at 03:07 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -173,10 +173,7 @@ INSERT INTO `appointments` (`appointment_id`, `patient_id`, `midwife_id`, `date`
 (159, 17, 2, '2023-04-12 16:07:00', 1, 0),
 (160, 17, 2, '2023-04-25 16:10:00', 0, 0),
 (161, 35, 34, '2023-04-10 16:40:00', 1, 0),
-(162, 18, 2, '2023-04-13 11:17:00', 1, 0),
-(163, 18, 2, '2023-04-11 10:13:00', 1, 1),
-(164, 7, 2, '2023-04-11 16:32:00', 1, 1),
-(165, 7, 2, '2023-04-11 16:34:00', 1, 1);
+(162, 18, 2, '2023-04-13 11:17:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -292,7 +289,9 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUES
+(9, '0908-123-0003', 4, 1),
 (11, '0908-123-0005', 6, 1),
+(12, '0908-123-0006', 10, 1),
 (16, '0908-123-1234', 1, 0),
 (17, '0908-123-4321', 1, 0),
 (39, '0908-123-0322', 2, 1),
@@ -323,9 +322,7 @@ INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUE
 (77, '0905-812-3320', 15, 1),
 (78, '0912-123-1234', 9, 1),
 (79, '0908-123-0004', 5, 1),
-(80, '0948-644-3221', 35, 1),
-(81, '0908-123-0003', 4, 1),
-(82, '0908-123-0006', 10, 1);
+(80, '0948-644-3221', 35, 1);
 
 -- --------------------------------------------------------
 
@@ -380,10 +377,7 @@ INSERT INTO `infants` (`infant_id`, `first_name`, `middle_name`, `last_name`, `n
 (6, 'Right', NULL, 'You', NULL, 'Other', '2022-12-25', 'AB+', 1, 8),
 (7, 'Ivan', 'Perona', 'Oblepias', 'Ivan', 'Male', '2019-02-25', 'O', 1, 15),
 (8, 'Ivana', 'Alawei', 'Nido', 'tutu45', 'Male', '2023-03-03', 'O+', 1, 18),
-(9, 'Renelyn', 'G', 'Bulusan', 'dsadas', 'Male', '2023-03-27', 'O+', 1, 18),
-(10, 'Love', 'Reyes', 'Oblepias', 'Love', 'Female', '2023-02-13', 'O+', 1, 35),
-(11, 'Pamela', 'Ibara', 'Crisostomo', 'tutu45', 'Female', '2023-04-10', 'O+', 1, 35),
-(12, 'Rica Mae', 'Moreno', 'Perez', 'rica123', 'Female', '2023-01-17', 'O+', 1, 7);
+(9, 'Renelyn', 'G', 'Bulusan', 'dsadas', 'Male', '2023-03-27', 'O+', 1, 18);
 
 -- --------------------------------------------------------
 
@@ -417,11 +411,7 @@ INSERT INTO `infant_vac_records` (`infant_vac_rec_id`, `infant_id`, `date`, `typ
 (12, 3, '2023-04-10', 1),
 (13, 2, '2023-04-10', 6),
 (14, 9, '2023-04-10', 3),
-(15, 2, '2023-04-10', 3),
-(16, 2, '2023-04-10', 3),
-(17, 2, '2023-04-10', 4),
-(18, 11, '2023-04-10', 1),
-(19, 12, '2023-04-11', 1);
+(15, 2, '2023-04-10', 3);
 
 -- --------------------------------------------------------
 
@@ -706,11 +696,11 @@ INSERT INTO `notifications` (`id`, `user_id`, `message`, `status`, `created_date
 (262, 15, 'Kathryn Bulasan(Midwife) cancelled your appointment that set on April 04, 2023 09:06 AM.', 0, '2023-04-04 02:04:42'),
 (263, 28, 'Angela Oblepias(Midwife) cancelled your appointment that set on April 04, 2023 09:06 AM.', 0, '2023-04-04 01:33:21'),
 (264, 16, 'You have appointed to Kathryn Bulasan(Midwife) on April 05, 2023 11:58 AM.', 0, '2023-04-04 03:58:32'),
-(265, 2, 'You have appointed Angela Nido(Patient) on April 05, 2023 11:58 AM.', 0, '2023-04-04 03:58:32'),
+(265, 2, 'You have appointed Angela Nido(Patient) on April 05, 2023 11:58 AM.', 1, '2023-04-04 03:58:32'),
 (266, 27, 'You have appointed to Kathryn Bulasan(Midwife) on April 28, 2023 11:58 AM.', 0, '2023-04-04 03:59:09'),
-(267, 2, 'You have appointed Derek Ramse(Patient) on April 28, 2023 11:58 AM.', 0, '2023-04-04 03:59:09'),
-(268, 2, 'Angela Nido(Patient) requested an Appointment on April 05, 2023 2:47 PM.', 0, '2023-04-04 16:47:54'),
-(269, 2, 'Angela Nido(Patient) requested an Appointment on April 12, 2023 2:47 PM.', 0, '2023-04-04 16:48:13'),
+(267, 2, 'You have appointed Derek Ramse(Patient) on April 28, 2023 11:58 AM.', 1, '2023-04-04 03:59:09'),
+(268, 2, 'Angela Nido(Patient) requested an Appointment on April 05, 2023 2:47 PM.', 1, '2023-04-04 16:47:54'),
+(269, 2, 'Angela Nido(Patient) requested an Appointment on April 12, 2023 2:47 PM.', 1, '2023-04-04 16:48:13'),
 (270, 2, 'Angela Nido(Patient) cancelled Appointment set on April 12, 2023 02:47 PM.', 0, '2023-04-04 16:48:52'),
 (271, 16, 'Kathryn Bulasan(Midwife) Approved your appointment that set on April 05, 2023 2:47 PM.', 0, '2023-04-04 16:49:26'),
 (272, 12, 'You have appointed to Kathryn Bulasan(Midwife) on April 10, 2023 3:09 PM.', 0, '2023-04-10 06:09:30'),
@@ -722,13 +712,7 @@ INSERT INTO `notifications` (`id`, `user_id`, `message`, `status`, `created_date
 (278, 2, 'Rose Anne Rico(Patient) requested an Appointment on April 25, 2023 4:10 PM.', 0, '2023-04-10 08:10:11'),
 (279, 35, 'You have appointed to Romella Guzman(Midwife) on April 10, 2023 4:40 PM.', 0, '2023-04-10 08:39:13'),
 (280, 34, 'You have appointed Janice Samonte(Patient) on April 10, 2023 4:40 PM.', 0, '2023-04-10 08:39:13'),
-(281, 2, 'Ivan Oblepias(Patient) requested an Appointment on April 13, 2023 11:17 AM.', 0, '2023-04-10 10:17:43'),
-(282, 18, 'Kathryn Bulasan(Midwife) Approved your appointment that set on April 13, 2023 11:17 AM.', 0, '2023-04-10 13:16:39'),
-(283, 18, 'Kathryn Bulasan(Midwife) Approved your appointment that set on April 11, 2023 10:13 AM.', 0, '2023-04-10 13:17:05'),
-(284, 7, 'You have appointed to Kathryn Bulasan(Midwife) on April 11, 2023 4:32 PM.', 0, '2023-04-11 08:31:23'),
-(285, 2, 'You have appointed Rica Sanchez(Patient) on April 11, 2023 4:32 PM.', 0, '2023-04-11 08:31:23'),
-(286, 7, 'You have appointed to Kathryn Bulasan(Midwife) on April 11, 2023 4:34 PM.', 0, '2023-04-11 08:31:57'),
-(287, 2, 'You have appointed Rica Sanchez(Patient) on April 11, 2023 4:34 PM.', 0, '2023-04-11 08:31:57');
+(281, 2, 'Ivan Oblepias(Patient) requested an Appointment on April 13, 2023 11:17 AM.', 0, '2023-04-10 10:17:43');
 
 -- --------------------------------------------------------
 
@@ -808,15 +792,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `otp`, `role`) VALUES
 (1, 'rhuadmin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 1),
-(2, 'katherinebulusan39@gmail.com', '202cb962ac59075b964b07152d234b70', '0801a457294fafbd8fe3116176252636', 0),
-(3, 'djanette888@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
-(4, 'gracefernandez@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
+(2, 'francisoblepias13@gmail.com', '202cb962ac59075b964b07152d234b70', '0801a457294fafbd8fe3116176252636', 0),
+(3, 'janettedeleon@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
+(4, 'francisoblepias@gmaill.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (5, 'violetagama@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (6, 'angela1@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (7, 'rica@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (8, 'bea@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (9, 'angel@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
-(10, 'clairedelosreyes@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
+(10, 'mw@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (11, 'angela12@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (12, 'alona@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (13, 'robin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
@@ -865,13 +849,13 @@ CREATE TABLE `user_details` (
 INSERT INTO `user_details` (`user_details_id`, `first_name`, `middle_name`, `last_name`, `profile_picture`, `user_id`) VALUES
 (1, 'Kathryn', 'S', 'Bulasan', NULL, 2),
 (2, 'Janette', 'Reyes', 'De Leon', NULL, 3),
-(3, 'Grace', 'Romblon', 'Fernandez', NULL, 4),
+(3, 'Francis', 'Ra', 'Oblepias', NULL, 4),
 (4, 'Violeta', 'P', 'Gama', NULL, 5),
 (5, 'Angela', 'Herradura', 'Oblepias', NULL, 6),
 (6, 'Rica', 'Mendez', 'Sanchez', NULL, 7),
 (7, 'Bea', 'Edo', 'Facundo', NULL, 8),
 (8, 'Angel', 'Aga', 'Riva', NULL, 9),
-(9, 'Claire', 'Goma', 'Delos Reyes', NULL, 10),
+(9, 'Rey', NULL, 'Bana', NULL, 10),
 (10, 'Angela', 'Rena', 'Aguila', NULL, 11),
 (11, 'Alona', 'Perona', 'Oblepias', NULL, 12),
 (12, 'Robin', 'Andrew', 'Morales', NULL, 13),
@@ -985,7 +969,7 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `appointment_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `barangays`
@@ -1003,7 +987,7 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `footer`
@@ -1015,19 +999,19 @@ ALTER TABLE `footer`
 -- AUTO_INCREMENT for table `infants`
 --
 ALTER TABLE `infants`
-  MODIFY `infant_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `infant_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `infant_vac_records`
 --
 ALTER TABLE `infant_vac_records`
-  MODIFY `infant_vac_rec_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `infant_vac_rec_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
 -- AUTO_INCREMENT for table `patient_details`

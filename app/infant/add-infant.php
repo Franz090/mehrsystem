@@ -74,7 +74,7 @@ if(isset($_POST['submit'])) {
     // echo $insert;
     
     if (mysqli_query($conn, $insert))  {
-      echo "<script>alert('Infant Added!');window.location.href='./add-infant.php';</script>";
+      echo "<script>alert('Infant Added!');window.location.href='./infant-vaccinations.php';</script>";
     }
     else { 
         $error .= 'Something went wrong inserting into the database.';
