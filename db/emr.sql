@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2023 at 10:53 AM
+-- Generation Time: Apr 11, 2023 at 02:44 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -171,12 +171,19 @@ INSERT INTO `appointments` (`appointment_id`, `patient_id`, `midwife_id`, `date`
 (157, 7, 2, '2023-04-10 14:18:00', 1, 1),
 (158, 7, 2, '2023-04-10 16:18:00', 1, 1),
 (159, 17, 2, '2023-04-12 16:07:00', 1, 0),
-(160, 17, 2, '2023-04-25 16:10:00', 0, 0),
+(160, 17, 2, '2023-04-25 16:10:00', 1, 0),
 (161, 35, 34, '2023-04-10 16:40:00', 1, 0),
 (162, 18, 2, '2023-04-13 11:17:00', 1, 0),
 (163, 18, 2, '2023-04-11 10:13:00', 1, 1),
 (164, 7, 2, '2023-04-11 16:32:00', 1, 1),
-(165, 7, 2, '2023-04-11 16:34:00', 1, 1);
+(165, 7, 2, '2023-04-11 16:34:00', 1, 1),
+(166, 36, 2, '2023-04-12 11:28:00', -1, 0),
+(167, 36, 2, '2023-04-24 10:32:00', 1, 1),
+(169, 36, 2, '2023-04-18 09:02:00', 0, 0),
+(170, 36, 2, '2023-04-12 11:04:00', 1, 1),
+(171, 38, 3, '2023-04-25 08:27:00', 1, 0),
+(172, 33, 2, '2023-04-12 13:32:00', 1, 0),
+(173, 36, 2, '2023-06-12 08:34:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -272,7 +279,8 @@ INSERT INTO `consultations` (`consultation_id`, `prescription`, `patient_id`, `m
 (11, ' asd\r\n                    ', 23, 2, '2023-03-10 12:28:00', 3, '2 weeks pregnant', '12/100mhgg', 45, 5, 3, 'Normal', 'das', 'dsa', 'dsa', '2023-03-21 12:28:00'),
 (12, ' s\r\n                   ', 21, 2, '2023-03-10 12:39:00', 2, '2 weeks pregnant', '12/100mhgg', 45, 5, 5, 'Normal', 's', 's', 's', '2023-03-10 12:39:00'),
 (13, ' \r\n                    dasda', 21, 2, '2023-03-28 12:40:00', 3, '2 weeks pregnant', '12/100mhgg', 45, 5, 5, 'Normal', 'dsadsa', 'dasdad', 'sadsa', '2023-04-28 12:40:00'),
-(14, ' dsadsa\r\n                    ', 18, 2, '2023-04-05 18:24:00', 1, '2 weeks pregnant', '12/100mhgg', 34, 5, 5, 'Normal', 'dsad', 'dsadsa', 'Tutu@321', '2023-04-19 18:25:00');
+(14, ' dsadsa\r\n                    ', 18, 2, '2023-04-05 18:24:00', 1, '2 weeks pregnant', '12/100mhgg', 34, 5, 5, 'Normal', 'dsad', 'dsadsa', 'Tutu@321', '2023-04-19 18:25:00'),
+(15, ' Promethazine 2x a day \r\n                    ', 36, 2, '2023-04-12 09:31:00', 1, '2 weeks pregnant', '12/100mhgg', 56, 5, 5, 'Normal', '', 'Consume foods and beverages rich in folate, iron, calcium, and protein.', 'Normal Physical changes\r\n', '2023-04-24 10:32:00');
 
 -- --------------------------------------------------------
 
@@ -300,7 +308,6 @@ INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUE
 (48, '0932-804-4242', 7, 1),
 (51, '0945-404-5613', 12, 1),
 (52, '0948-305-2000', 11, 1),
-(53, '0905-815-3480', 13, 1),
 (54, '0915-300-0423', 14, 1),
 (57, '0948-200-0314', 16, 1),
 (59, '0939-302-1520', 33, 1),
@@ -310,7 +317,6 @@ INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUE
 (63, '0948-449-1520', 28, 1),
 (64, '0948-623-3093 0951-112-0592', 27, 1),
 (65, '0965-430-2120', 17, 1),
-(66, '0951-602-3323', 18, 1),
 (67, '0948-900-0368', 19, 1),
 (68, '0981-300-0231', 20, 1),
 (69, '0939-423-0003', 21, 1),
@@ -325,7 +331,12 @@ INSERT INTO `contacts` (`contact_id`, `mobile_number`, `owner_id`, `type`) VALUE
 (79, '0908-123-0004', 5, 1),
 (80, '0948-644-3221', 35, 1),
 (81, '0908-123-0003', 4, 1),
-(82, '0908-123-0006', 10, 1);
+(82, '0908-123-0006', 10, 1),
+(83, '0905-815-3480', 13, 1),
+(84, '0939-319-0031', 36, 1),
+(86, '0961-351-0421', 37, 1),
+(87, '0951-602-3323', 18, 1),
+(88, '0938-951-3410', 38, 1);
 
 -- --------------------------------------------------------
 
@@ -372,7 +383,7 @@ CREATE TABLE `infants` (
 --
 
 INSERT INTO `infants` (`infant_id`, `first_name`, `middle_name`, `last_name`, `nickname`, `sex`, `b_date`, `blood_type`, `legitimacy`, `user_id`) VALUES
-(1, 'Be', 'Aga  fg', 'Riva', NULL, 'Male', '2021-01-23', 'O+', 0, 8),
+(1, 'Bea', NULL, 'Riva', NULL, 'Male', '2021-01-23', 'O+', 0, 8),
 (2, 'Reina', NULL, 'Bana', NULL, 'Female', '2021-01-23', 'O+', 1, 9),
 (3, 'Bang', 'Cruz', 'Dana', 'Tri', 'Male', '2021-01-23', 'O+', 1, 7),
 (4, 'Love', NULL, 'Respect', NULL, 'Female', '2022-12-25', 'O+', 1, 8),
@@ -383,7 +394,8 @@ INSERT INTO `infants` (`infant_id`, `first_name`, `middle_name`, `last_name`, `n
 (9, 'Renelyn', 'G', 'Bulusan', 'dsadas', 'Male', '2023-03-27', 'O+', 1, 18),
 (10, 'Love', 'Reyes', 'Oblepias', 'Love', 'Female', '2023-02-13', 'O+', 1, 35),
 (11, 'Pamela', 'Ibara', 'Crisostomo', 'tutu45', 'Female', '2023-04-10', 'O+', 1, 35),
-(12, 'Rica Mae', 'Moreno', 'Perez', 'rica123', 'Female', '2023-01-17', 'O+', 1, 7);
+(12, 'Rica Mae', 'Moreno', 'Perez', 'rica123', 'Female', '2023-01-17', 'O+', 1, 7),
+(13, 'Akeziah', 'H', 'Durano', 'akez', 'Female', '2023-03-31', 'AB+', 1, 36);
 
 -- --------------------------------------------------------
 
@@ -421,7 +433,8 @@ INSERT INTO `infant_vac_records` (`infant_vac_rec_id`, `infant_id`, `date`, `typ
 (16, 2, '2023-04-10', 3),
 (17, 2, '2023-04-10', 4),
 (18, 11, '2023-04-10', 1),
-(19, 12, '2023-04-11', 1);
+(19, 12, '2023-04-11', 1),
+(20, 13, '2023-04-11', 1);
 
 -- --------------------------------------------------------
 
@@ -728,7 +741,24 @@ INSERT INTO `notifications` (`id`, `user_id`, `message`, `status`, `created_date
 (284, 7, 'You have appointed to Kathryn Bulasan(Midwife) on April 11, 2023 4:32 PM.', 0, '2023-04-11 08:31:23'),
 (285, 2, 'You have appointed Rica Sanchez(Patient) on April 11, 2023 4:32 PM.', 0, '2023-04-11 08:31:23'),
 (286, 7, 'You have appointed to Kathryn Bulasan(Midwife) on April 11, 2023 4:34 PM.', 0, '2023-04-11 08:31:57'),
-(287, 2, 'You have appointed Rica Sanchez(Patient) on April 11, 2023 4:34 PM.', 0, '2023-04-11 08:31:57');
+(287, 2, 'You have appointed Rica Sanchez(Patient) on April 11, 2023 4:34 PM.', 0, '2023-04-11 08:31:57'),
+(288, 2, 'Maricar Durano(Patient) requested an Appointment on April 12, 2023 11:28 AM.', 0, '2023-04-11 10:28:35'),
+(289, 17, 'Kathryn Bulasan(Midwife) Approved your appointment that set on April 25, 2023 4:10 PM.', 0, '2023-04-11 10:29:54'),
+(290, 36, 'Kathryn Bulasan(Midwife) Approved your appointment that set on April 12, 2023 11:28 AM.', 0, '2023-04-11 10:29:59'),
+(291, 36, 'You have appointed to Kathryn Bulasan(Midwife) on April 24, 2023 10:32 AM.', 0, '2023-04-11 10:59:58'),
+(292, 2, 'You have appointed Maricar Durano(Patient) on April 24, 2023 10:32 AM.', 0, '2023-04-11 10:59:58'),
+(293, 2, 'Maricar Durano(Patient) requested an Appointment on April 18, 2023 9:02 AM.', 0, '2023-04-11 11:02:29'),
+(294, 2, 'Maricar Durano(Patient) cancelled Appointment set on April 18, 2023 09:02 AM.', 0, '2023-04-11 11:02:49'),
+(295, 2, 'Maricar Durano(Patient) requested an Appointment on April 18, 2023 9:02 AM.', 0, '2023-04-11 11:03:00'),
+(296, 36, 'Kathryn Bulasan(Midwife) cancelled your appointment that set on April 12, 2023 11:28 AM.', 0, '2023-04-11 11:04:23'),
+(297, 36, 'You have appointed to Kathryn Bulasan(Midwife) on April 12, 2023 11:04 AM.', 0, '2023-04-11 11:04:42'),
+(298, 2, 'You have appointed Maricar Durano(Patient) on April 12, 2023 11:04 AM.', 0, '2023-04-11 11:04:42'),
+(299, 38, 'You have appointed to Janette De Leon(Midwife) on April 25, 2023 8:27 AM.', 0, '2023-04-11 12:28:03'),
+(300, 3, 'You have appointed Gynel Dionglay(Patient) on April 25, 2023 8:27 AM.', 0, '2023-04-11 12:28:03'),
+(301, 33, 'You have appointed to Kathryn Bulasan(Midwife) on April 12, 2023 1:32 PM.', 0, '2023-04-11 12:32:33'),
+(302, 2, 'You have appointed Ramona Munoz(Patient) on April 12, 2023 1:32 PM.', 0, '2023-04-11 12:32:33'),
+(303, 36, 'You have appointed to Kathryn Bulasan(Midwife) on June 12, 2023 8:34 AM.', 0, '2023-04-11 12:34:14'),
+(304, 2, 'You have appointed Maricar Durano(Patient) on June 12, 2023 8:34 AM.', 0, '2023-04-11 12:34:14');
 
 -- --------------------------------------------------------
 
@@ -786,7 +816,10 @@ INSERT INTO `patient_details` (`patient_details_id`, `nickname`, `barangay_id`, 
 (27, 'Kiana', 11, '2000-06-27', 'Santo Angel Sur, Santa Cruz Laguna', 'Single', 0, 0, 'High Blood', 'Sakit sa puso ', 'Fish', 'O+', 34, 5, 5, 31, 1),
 (28, 'ibon', 11, '1998-07-25', 'ZAMORA STREET 3760 SANTO ANGEL SUR ,SANTA CRUZ LAGU', 'Married', 0, 0, 'High Blood', 'N/A', 'Fish', 'O+', 33, 5, 5, 32, 1),
 (29, 'Ramona', 1, '1988-07-27', 'Barangay Oogong Santa Cruz Laguna', 'Married', 0, 0, 'High Blood, Puso', 'Sakit sa baga', 'Fish', 'O+', 55, 5, 2, 33, 1),
-(30, 'Janjan', 28, '1994-11-17', 'Zamora St. Santo Angel Sur, Santa Cruz Laguna', 'Married', 0, 0, 'High Blood', 'Sakit sa puso', 'Hipon', 'O+', 66, 5, 5, 35, 1);
+(30, 'Janjan', 28, '1994-11-17', 'Zamora St. Santo Angel Sur, Santa Cruz Laguna', 'Married', 0, 0, 'High Blood', 'Sakit sa puso', 'Hipon', 'O+', 66, 5, 5, 35, 1),
+(31, 'Mari', 1, '1982-10-12', 'Santo Angel Sur ,Santa Cruz Laguna', 'Married', 1, 0, 'High Blood', 'Sakit sa puso', 'Hipon', 'O+', 56, 5, 5, 36, 1),
+(32, 'Sopsop', 1, '1992-10-13', '3231 Barangay Alipit , Santa Cruz Laguna', 'Married', 0, 0, 'High Blood', 'Sakit sa puso', 'Hipon', 'O+', 52, 4, 9, 37, 1),
+(33, 'Gynel', 2, '1990-07-19', '3214 Brgy.Bagumbayan ,Santa Cruz Laguna', 'Married', 0, 0, 'High Blood, Puso', 'Sakit sa puso', 'Hipon', 'AB+', 54, 5, 5, 38, 1);
 
 -- --------------------------------------------------------
 
@@ -807,9 +840,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `otp`, `role`) VALUES
-(1, 'rhuadmin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 1),
-(2, 'katherinebulusan39@gmail.com', '202cb962ac59075b964b07152d234b70', '0801a457294fafbd8fe3116176252636', 0),
-(3, 'djanette888@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
+(1, 'emrsystem0123@gmail.com', 'c97fb3941e7298343e1388c5e764bff7', NULL, 1),
+(2, 'katherinebulusan39@gmail.com', '1f501d5750358edd1626b196c8eef201', '0801a457294fafbd8fe3116176252636', 0),
+(3, 'djanette888@gmail.com', '5e097e8e20ba4aa850421f1326b69fc2', NULL, 0),
 (4, 'gracefernandez@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (5, 'violetagama@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (6, 'angela1@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
@@ -819,12 +852,12 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `otp`, `role`) VALUES
 (10, 'clairedelosreyes@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
 (11, 'angela12@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (12, 'alona@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
-(13, 'robin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(13, 'robina@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (14, 'daniel@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (15, 'chesca@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', NULL, -1),
 (16, 'angelamarienido@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (17, 'roseanne1@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
-(18, 'oblepiasperfectoivan@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(18, 'roseannegonzales@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (19, 'kath33@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (20, 'patriciaong@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (21, 'janine.deleon@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
@@ -841,7 +874,10 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `otp`, `role`) VALUES
 (32, 'yvonne.mercado12@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (33, 'ramona12@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
 (34, 'romellaguzman@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 0),
-(35, 'janicesamonte@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1);
+(35, 'janicesamonte@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(36, 'maricar.durano12@gmail.com', 'cfcc4a2e918efaf76a83b7a027495901', NULL, -1),
+(37, 'chloegonzales@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1),
+(38, 'gyneldionglay@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, -1);
 
 -- --------------------------------------------------------
 
@@ -874,12 +910,12 @@ INSERT INTO `user_details` (`user_details_id`, `first_name`, `middle_name`, `las
 (9, 'Claire', 'Goma', 'Delos Reyes', NULL, 10),
 (10, 'Angela', 'Rena', 'Aguila', NULL, 11),
 (11, 'Alona', 'Perona', 'Oblepias', NULL, 12),
-(12, 'Robin', 'Andrew', 'Morales', NULL, 13),
+(12, 'Robina', 'Andrew', 'Morales', NULL, 13),
 (13, 'Daniela', 'Aguado', 'Lim', NULL, 14),
 (14, 'Ramona', 'Punzalan', 'Obmerga', NULL, 15),
 (15, 'Angela', 'H', 'Nido', '16.jpg', 16),
 (20, 'Rose Anne', 'Ena', 'Rico', NULL, 17),
-(21, 'Ivan', 'P.', 'Oblepias', '18.png', 18),
+(21, 'Rose Anne', 'P.', 'De leon ', '18.png', 18),
 (22, 'Kathryn', 'Guanzon', 'Reyes', NULL, 19),
 (23, 'Patricia', 'De Leon', 'Ong', NULL, 20),
 (24, 'Janine', 'Mercado', 'Deleon', NULL, 21),
@@ -896,7 +932,10 @@ INSERT INTO `user_details` (`user_details_id`, `first_name`, `middle_name`, `las
 (35, 'Yvonone', 'Reba', 'Mercado', NULL, 32),
 (36, 'Ramona', 'Gil', 'Munoz', NULL, 33),
 (37, 'Romella', 'Dorano', 'Guzman', NULL, 34),
-(38, 'Janice', 'Ronoa', 'Samonte', NULL, 35);
+(38, 'Janice', 'Ronoa', 'Samonte', NULL, 35),
+(39, 'Maricar', 'Hernandez', 'Durano', NULL, 36),
+(40, 'Chloe Sophia', 'Gomez', 'Gonzales', NULL, 37),
+(41, 'Gynel', 'Arsenio', 'Dionglay', NULL, 38);
 
 --
 -- Indexes for dumped tables
@@ -985,7 +1024,7 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `appointment_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT for table `barangays`
@@ -997,13 +1036,13 @@ ALTER TABLE `barangays`
 -- AUTO_INCREMENT for table `consultations`
 --
 ALTER TABLE `consultations`
-  MODIFY `consultation_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `consultation_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `contact_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `footer`
@@ -1015,37 +1054,37 @@ ALTER TABLE `footer`
 -- AUTO_INCREMENT for table `infants`
 --
 ALTER TABLE `infants`
-  MODIFY `infant_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `infant_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `infant_vac_records`
 --
 ALTER TABLE `infant_vac_records`
-  MODIFY `infant_vac_rec_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `infant_vac_rec_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- AUTO_INCREMENT for table `patient_details`
 --
 ALTER TABLE `patient_details`
-  MODIFY `patient_details_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `patient_details_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `user_details_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `user_details_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Constraints for dumped tables

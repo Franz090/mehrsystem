@@ -313,14 +313,14 @@ include_once('../php-templates/admin-navigation-head.php');
                   <div class="mb-3"> <!-- status_analysis -->     
                     <label for="status_analysis">Status Analysis</label>
                     <textarea id="status_analysis" name="status_analysis" 
-                      class="form-control form-control-md w-100"></textarea> 
+                      class="form-control form-control-md w-100"  required></textarea> 
                   </div>
                   </div>
                   <div class="col-lg-6 col-md-6">
                   <div class="mb-3"> <!-- advice -->     
                     <label for="advice">Advice</label>
                     <textarea id="advice" name="advice" 
-                      class="form-control form-control-md w-100"></textarea> 
+                      class="form-control form-control-md w-100"  required></textarea> 
                   </div>
                     </div>
                 </div>
@@ -330,13 +330,13 @@ include_once('../php-templates/admin-navigation-head.php');
                   <div class="mb-3"> <!-- change_plan -->     
                     <label for="change_plan">Changes in Birth Plan</label>
                     <textarea id="change_plan" name="change_plan" 
-                      class="form-control form-control-md w-100"></textarea> 
+                      class="form-control form-control-md w-100"  required></textarea> 
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="mb-3"> <!-- prescription -->     
                     <label for="prescription">Prescription</label>
-                    <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"> 
+                    <textarea id="prescription" name="prescription" class="form-control form-control-md w-100"  required/> 
                     </textarea> 
                     </div>
                   </div>
