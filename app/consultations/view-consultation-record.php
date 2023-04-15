@@ -358,7 +358,7 @@ include_once('../php-templates/admin-navigation-head.php');
                       </div>
                   <div class="row">
                     <div class="col">
-                <p class="card-text"><strong>Gestation</strong></p>  
+                <p class="card-text"><strong>Age of Gestation</strong></p>  
                 <p><?php echo $value['gestation']; ?> </p>
               </div>
               <div class="col">

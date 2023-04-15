@@ -24,10 +24,10 @@
         text-align: left !important;
     }
   </style>
-  <div class="p-4">
+  <!-- <div class="p-4">
     Patient <br/>
     BMI: <?php echo round($bmi,2). " ($bmi_desc)"?> 
-  </div>
+  </div> -->
 
     
     
