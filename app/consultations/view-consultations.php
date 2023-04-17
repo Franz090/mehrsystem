@@ -415,7 +415,7 @@ include_once('../php-templates/admin-navigation-head.php');
                           <td class="td-bold"><?php echo $value['name']; ?></td>
                           <td><?php echo $value['barangay']; ?></td>
                           <td><?php echo $value['contact']; ?></td> 
-                          <td><?php echo $value['cons']; ?></td>  
+                          <td class="fw-bold">( <?php echo $value['cons']; ?> )</td>  
                       </tr>
                   <?php 
                       }

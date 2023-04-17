@@ -59,5 +59,5 @@ else {
             </div> 
         </div> 
     <?php }?>
-    <div class="credit"> All rights reserved|<span>2022</span></div>
+    <div class="credit" style="font-size: 18px;"> All rights reserved|<span>2023</span></div>
 </section>

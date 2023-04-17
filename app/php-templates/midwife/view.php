@@ -39,7 +39,8 @@ if(mysqli_num_rows($result))  {
       // 'status' => $s,
       // 'contact' => $c_no,
       // 'b_date' => $b_date,
-      'barangay' => $bgy,
+      // 'barangay' => $bgy,
+      'barangay' => $bgy?$bgy:'None',
       // 'details_id' => $det_id
     ));
   } 
