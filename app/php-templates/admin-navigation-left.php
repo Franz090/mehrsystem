@@ -60,6 +60,12 @@
             <span class="title">Health Center</span>
         </a>
       </li>
+      <li <?php echo $page == 'view_consultations' ? "class='hovered'":""?>>
+        <a <?php echo $page == 'view_consultations' ? "type='button'":'href="../consultations/rhulist.php"'?>>
+            <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+            <span class="title">Consultations</span>
+        </a>
+      </li>
       
     <?php 
  
