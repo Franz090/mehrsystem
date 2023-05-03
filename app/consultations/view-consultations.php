@@ -52,8 +52,8 @@ if (count($_barangay_list)>0) {// && $admin==0 || $admin==-1) {
       $id = $row['id']; 
       $contact_num_select = "SELECT mobile_number FROM contacts WHERE type=1 AND owner_id=$id";
       if ($result_contact_num_select = mysqli_query($conn, $contact_num_select)) {
+        $_contact_num = "";
         if (mysqli_num_rows($result_contact_num_select)>0) {
-          $_contact_num = "";
           foreach ($result_contact_num_select as $_key=>$__row) {
               $_contact_num .= ("(".$__row['mobile_number'].") "); 
           }
