@@ -14,17 +14,24 @@ session_start();
 
 $patient_list = []; 
 $consultation_list = [];
- 
- 
+$curr_date = date("Y-m-d");
+
 $select = "SELECT consultation_id c_id, CONCAT(d.first_name, 
 IF(d.middle_name IS NULL OR d.middle_name='', '', 
     CONCAT(' ', SUBSTRING(d.middle_name, 1, 1), '.')), 
 ' ', d.last_name) name, health_center, date
 FROM consultations c, user_details d, barangays b, patient_details p
 WHERE c.patient_id=d.user_id AND b.barangay_id=p.barangay_id 
-AND p.user_id=d.user_id;";
+AND p.user_id=d.user_id";
+if (isset($_POST['custom_range_consultations'])) {
 
-// echo $select;
+  $from = $_POST['date_from'];
+  $to = $_POST['date_to'];
+  $_POST['custom_range_consultations'] = null;
+  $select = "$select AND (date BETWEEN '$from 00:00:00' AND '$to 23:59:59');";
+  // echo $select;
+}
+
 if($result = mysqli_query($conn, $select))  {
     foreach($result as $row) { 
         $c_id = $row['c_id'];   
@@ -59,6 +66,16 @@ include_once('../php-templates/admin-navigation-head.php');
           Consultations</h4> 
         <div class="table-padding table-responsive"> 
             <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
+              <form method="post">
+                <label class="text-bold pt-1 ">Start</label>
+                <input type="date" class="form-control-md " name="date_from" required max="<?php echo $curr_date?>" > 
+
+                <label  class="text-bold pt-1 ">End</label> 
+                <input class="form-control-md" type="date" name="date_to" required max="<?php echo $curr_date?>">
+              
+                <button  type="submit" class="btn btn-primary btn-sm" style="margin-right: 5px;" name="custom_range_consultations">Filter</button> 
+                <button type="reset" class="btn btn-danger btn-sm" >Reset</button> 
+              </form>
               <table  class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
                 <thead class="table-light" colspan="3">
                   <tr>
