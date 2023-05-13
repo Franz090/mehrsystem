@@ -67,14 +67,15 @@ include_once('../php-templates/admin-navigation-head.php');
         <div class="table-padding table-responsive"> 
             <div class="pagination-sm  col-md-8 col-lg-12" id="table-position">
               <form method="post">
+       
                 <label class="text-bold pt-1 ">Start</label>
                 <input type="date" class="form-control-md " name="date_from" required max="<?php echo $curr_date?>" > 
 
                 <label  class="text-bold pt-1 ">End</label> 
                 <input class="form-control-md" type="date" name="date_to" required max="<?php echo $curr_date?>">
               
-                <button  type="submit" class="btn btn-primary btn-sm" style="margin-right: 5px;" name="custom_range_consultations">Filter</button> 
-                <button type="reset" class="btn btn-danger btn-sm" >Reset</button> 
+                <button  type="submit" class="btn btn-primary btn-sm mt-2" style="margin-right: 5px;" name="custom_range_consultations" >Filter</button> 
+                <button type="reset" class="btn btn-danger btn-sm mt-2" >Reset</button> 
               </form>
               <table  class="text-center  table mt-5  table-responsive table-lg table-hover display" id="datatables">
                 <thead class="table-light" colspan="3">

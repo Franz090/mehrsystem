@@ -203,7 +203,7 @@ include_once('../php-templates/admin-navigation-head.php');
         
                     </div>
             </div>
-            <?php if (!$current_user_is_an_admin) {?>
+            <?php  {?>
             <div class="col mb-3" style="border-bottom: 1px solid #c8c9ca;">
             </div>
             <h5 class="card-title fw-bold text-center ">Patient Medical History </h5> 
@@ -252,50 +252,13 @@ include_once('../php-templates/admin-navigation-head.php');
     </div>
   </div>
   <!-- Patient Medical History Admin Only -->
-  <?php if ($current_user_is_an_admin) {?>
-  <div class="col-md-6">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Patient Medical History</h5>
-        <div class="row">
-          <div class="col">
-        <p class="card-text  mr-3"><strong>Height</strong></p>
-          <p><?php echo $height ?></p> 
-         </div> 
-         <div class="col">
-           <p class="card-text  mr-3"><strong>Weight</strong></p>
-          <p><?php echo $weight ?> kg</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-         <p class="card-text  mr-3"><strong> Family History</strong></p>
-          <p><?php echo $c_family_history ?> </p> 
-        </div>
-        <div class="col">
-          <p class="card-text  mr-3"><strong> Diagnosed Condition</strong></p>
-          <p><?php echo $diagnosed_condition ?></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-          <p class="card-text  mr-3"><strong>  Allergies</strong></p>
-          <p><?php echo $allergies ?></p>
-        </div>
-        <div class="col">
-          <p class="card-text  mr-3"><strong>  Blood Type</strong></p>
-          <p><?php echo $blood_type ?> </p>
-      </div>
-    </div> 
-    
-      </div>
-    </div>
-  </div>
+  <?php  {?>
+  
   <?php }?>
  <!-- Upcoming Appointment -->
            
                         
-   <?php if (!$current_user_is_an_admin) {?>                     
+   <?php  {?>                     
   <div class="col-md-6">
     <div class="card px-5">
       <div class="card-body">
@@ -419,7 +382,7 @@ include_once('../php-templates/admin-navigation-head.php');
                   <?php 
                     } //foreach  
                     // nag add ako ng print button dito
-                    if (!$current_user_is_an_admin) {?>
+                    {?>
                       <div class="col-md-12 text-center">
                         <a href='../patients/print.php?user_details_id=<?php echo $user_id?>&c_id=<?php echo $c_id_from_get?>' class="btn btn-primary">Print</a>
                       </div>
